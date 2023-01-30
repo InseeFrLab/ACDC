@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: acdc
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: acdc
@@ -14,5 +14,8 @@ spec:
     spec:
       containers:
         - name: acdc
-          image: inseefrlab/acdc:develop
-          imagePullPolicy: Always
+          image: acdc
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always

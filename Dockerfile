@@ -1,15 +1,7 @@
-FROM node:lts-alpine as builder
-
+FROM node
 WORKDIR /app
-
-COPY ./package.json ./
-RUN npm install
-
+COPY package.json yarn.lock ./
+RUN yarn
 COPY . .
-RUN npm run build
-
-FROM nginx:stable-alpine
-
-EXPOSE 80
-
-COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 3000
+CMD ["yarn", "run", "dev"]
