@@ -1,11 +1,15 @@
-FROM node
+FROM node:lts-alpine as builder
 
 WORKDIR /app
 
-COPY package.json .
-RUN npm i
+COPY ./package.json ./
+RUN npm install
 
 COPY . .
-EXPOSE 3000
+RUN npm run build
 
-CMD ["npm", "run", "preview"]
+FROM nginx:stable-alpine
+
+EXPOSE 80
+
+COPY --from=builder /app/dist /usr/share/nginx/html
