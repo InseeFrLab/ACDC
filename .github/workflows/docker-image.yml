@@ -29,6 +29,8 @@ jobs:
       - name: build
         run: |
           npm run build
+        env:
+          VITE_API_BASE_URL: 'https://acdc-back-office.demo.insee.io/'
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4
         with:
