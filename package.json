@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "predeploy": "yarn run build",
+    "predeploy": "npm build",
     "deploy": "gh-pages -d dist",
     "preview": "vite preview",
     "eslint:fix": "eslint --fix",
