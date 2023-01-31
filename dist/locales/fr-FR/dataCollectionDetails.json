@@ -21,5 +21,7 @@
   "deleteDataCollection": "Suppression de collecte",
   "loading": "Traitement en cours...",
   "error": "Une erreur est survenue",
-  "successEvent": "Le lot a été supprimé avec succès"
+  "successEvent": "Le lot a été supprimé avec succès",
+  "saveDataCollection": "Mise à jour de la campagne",
+  "successDataCollection": "La campagne a été mise à jour avec succès"
 }

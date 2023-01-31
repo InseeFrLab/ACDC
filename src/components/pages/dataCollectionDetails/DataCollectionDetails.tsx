@@ -45,6 +45,7 @@ const DataCollectionDetails = () => {
   };
   const handleCloseSave = () => {
     setOpenSave(false);
+    navigate('/');
   };
 
   const handleDeleteCollectionEvent = (id: string) => {
@@ -77,8 +78,7 @@ const DataCollectionDetails = () => {
 
     console.log('Updated Data Collection: ', updatedDataCollection);
     mutate(updatedDataCollection);
-    setOpenSave(false);
-    window.location.reload();
+    setOpenSave(true);
   };
 
   return (
@@ -144,7 +144,7 @@ const DataCollectionDetails = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {isSuccess ? t('successEvent') : ''}
+            {isSuccess ? t('successDataCollection') : ''}
             {isLoading ? t('loading') : ''}
             {isError ? t('error') : ''}
           </DialogContentText>

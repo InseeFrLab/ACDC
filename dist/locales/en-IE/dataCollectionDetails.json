@@ -21,5 +21,7 @@
   "deleteDataCollection": "Delete Data Collection",
   "loading": "Request is being processed...",
   "error": "An error occurred",
-  "successEvent": "Collection Event deleted successfully"
+  "successEvent": "Collection Event deleted successfully",
+  "saveDataCollection": "Save Data Collection",
+  "successDataCollection": "Data Collection saved successfully"
 }
