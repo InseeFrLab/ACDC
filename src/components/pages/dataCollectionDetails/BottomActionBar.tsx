@@ -6,6 +6,7 @@ import BottomBar from '../../shared/layout/BottomBar';
 
 interface BottomActionBarProps {
   dataCollection: DataCollection;
+  handleSave: () => void;
 }
 const BottomActionBar = (props: BottomActionBarProps) => {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ const BottomActionBar = (props: BottomActionBarProps) => {
     navigate(`/collection/new/${dataCollection.id}`, {
       state: { dataCollection },
     });
+  };
+  const handleClickSave = () => {
+    props.handleSave();
   };
   return (
     <BottomBar>
@@ -29,9 +33,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       </Button>
       <Button
         variant="contained"
-        onClick={() => {
-          console.log('Save Button');
-        }}
+        onClick={handleClickSave}
         sx={{
           mx: 1,
         }}

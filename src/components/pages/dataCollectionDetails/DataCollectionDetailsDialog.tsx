@@ -8,6 +8,8 @@ import {
   DialogActions,
   Typography,
   Box,
+  TextField,
+  FormControl,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
@@ -18,14 +20,16 @@ import { DataCollection } from '../../../lib/model/dataCollection';
 interface DataCollectionDetailsDialogProps {
   open: boolean;
   handleClose: () => void;
-  dataCollection: DataCollection;
+  dataCollectionState: DataCollection;
+  setDataCollectionState: (dataCollection: DataCollection) => void;
 }
 const DataCollectionDetailsDialog = (
   props: DataCollectionDetailsDialogProps
 ) => {
   const { t, i18n } = useTranslation(['dataCollectionDetails']);
   const navigate = useNavigate();
-  const { open, handleClose, dataCollection } = props;
+  const { open, handleClose, dataCollectionState } = props;
+  console.log('DataCollectionState: ', dataCollectionState);
   const [openDelete, setOpenDelete] = useState(false);
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(deleteDataCollection);
@@ -39,15 +43,36 @@ const DataCollectionDetailsDialog = (
     mutate(id);
     setOpenDelete(true);
   };
+
+  const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    props.setDataCollectionState({
+      ...dataCollectionState,
+      label: {
+        ...dataCollectionState.label,
+        [i18n.language]: event.target.value,
+      },
+    });
+  };
+
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.preventDefault();
+    props.setDataCollectionState({
+      ...dataCollectionState,
+      label: {
+        ...dataCollectionState.description,
+        [i18n.language]: event.target.value,
+      },
+    });
+  };
   return (
     <>
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>
           <Typography variant="h5" color="text.secondary">
             {t('dataCollectionDetails')}
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            (Editable ?)
           </Typography>
         </DialogTitle>
         <DialogContent>
@@ -65,12 +90,13 @@ const DataCollectionDetailsDialog = (
               >
                 ID:{' '}
               </Typography>
-              <Typography variant="body1">{dataCollection.id}</Typography>
+              <Typography variant="body1">{dataCollectionState.id}</Typography>
             </Box>
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
+                marginTop: 1,
               }}
             >
               <Typography
@@ -80,27 +106,47 @@ const DataCollectionDetailsDialog = (
               >
                 {t('label')}:{' '}
               </Typography>
-              <Typography variant="body1">
-                {dataCollection.label[i18n.language]}
-              </Typography>
+              <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
+                <TextField
+                  required
+                  size="small"
+                  label={t('label')}
+                  value={dataCollectionState.label[i18n.language]}
+                  sx={{ marginRight: 2, width: '100%' }}
+                  onChange={handleLabelChange}
+                  id={dataCollectionState.label[i18n.language]}
+                />
+              </FormControl>
             </Box>
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
+                marginTop: 1,
               }}
             >
               <Typography variant="body1" fontWeight="bold">
                 {t('description')}:{' '}
               </Typography>
-              <Typography variant="body1">
-                {dataCollection.description[i18n.language]}
-              </Typography>
+              <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
+                <TextField
+                  required
+                  size="small"
+                  label={t('description')}
+                  multiline
+                  maxRows={4}
+                  value={dataCollectionState.description[i18n.language]}
+                  sx={{ marginRight: 2, width: '100%' }}
+                  onChange={handleDescriptionChange}
+                  id={dataCollectionState.description[i18n.language]}
+                />
+              </FormControl>
             </Box>
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
+                marginTop: 1,
               }}
             >
               <Typography
@@ -110,12 +156,15 @@ const DataCollectionDetailsDialog = (
               >
                 {t('version')}:{' '}
               </Typography>
-              <Typography variant="body1">{dataCollection.version}</Typography>
+              <Typography variant="body1">
+                {dataCollectionState.version}
+              </Typography>
             </Box>
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
+                marginTop: 1,
               }}
             >
               <Typography
@@ -126,7 +175,7 @@ const DataCollectionDetailsDialog = (
                 {t('lastUpdate')}:{' '}
               </Typography>
               <Typography variant="body1">
-                {dataCollection.versionDate}
+                {dataCollectionState.versionDate}
               </Typography>
             </Box>
           </DialogContentText>
@@ -134,7 +183,7 @@ const DataCollectionDetailsDialog = (
         <DialogActions>
           <Button
             onClick={() => {
-              handleDelete(dataCollection.id);
+              handleDelete(dataCollectionState.id);
             }}
             variant="outlined"
             sx={{ marginLeft: 2 }}

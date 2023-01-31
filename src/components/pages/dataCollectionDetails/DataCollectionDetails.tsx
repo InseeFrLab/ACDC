@@ -24,9 +24,11 @@ const DataCollectionDetails = () => {
   const { t, i18n } = useTranslation(['dataCollectionDetails']);
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
-  console.log('Data Collection Details Page:', dataCollection);
+  const [dataCollectionState, setDataCollectionState] =
+    useState(dataCollection);
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openSave, setOpenSave] = useState(false);
 
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
@@ -40,6 +42,9 @@ const DataCollectionDetails = () => {
   };
   const handleCloseDelete = () => {
     setOpenDelete(false);
+  };
+  const handleCloseSave = () => {
+    setOpenSave(false);
   };
 
   const handleDeleteCollectionEvent = (id: string) => {
@@ -58,6 +63,21 @@ const DataCollectionDetails = () => {
     );
     mutate(updatedDataCollection);
     setOpenDelete(true);
+  };
+
+  const handleSave = () => {
+    const updatedDataCollection: DataCollectionApi = {
+      id: dataCollection?.id,
+      json: dataCollectionState,
+    };
+    updatedDataCollection.json.version += 1;
+    const now = Date.now();
+    const today: string = new Date(now).toISOString();
+    updatedDataCollection.json.versionDate = today;
+
+    console.log('Updated Data Collection: ', updatedDataCollection);
+    mutate(updatedDataCollection);
+    setOpenSave(false);
   };
 
   return (
@@ -86,7 +106,8 @@ const DataCollectionDetails = () => {
       <DataCollectionDetailsDialog
         open={open}
         handleClose={handleClose}
-        dataCollection={dataCollection}
+        dataCollectionState={dataCollectionState}
+        setDataCollectionState={setDataCollectionState}
       />
       <Box>
         {dataCollection.collectionEvents.map((event) => {
@@ -116,7 +137,27 @@ const DataCollectionDetails = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <BottomActionBar dataCollection={dataCollection} />
+      <Dialog open={openSave} onClose={handleCloseSave}>
+        <DialogTitle>
+          <Typography variant="h5">{t('saveDataCollection')}</Typography>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {isSuccess ? t('successEvent') : ''}
+            {isLoading ? t('loading') : ''}
+            {isError ? t('error') : ''}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" onClick={handleCloseSave} autoFocus>
+            {t('close')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <BottomActionBar
+        dataCollection={dataCollection}
+        handleSave={handleSave}
+      />
     </Main>
   );
 };
