@@ -7,9 +7,9 @@ metadata:
 spec:
   tls:
     - hosts:
-        - acdc.demo.insee.io
+        - acdc-ui.demo.insee.io
   rules:
-    - host: acdc.demo.insee.io
+    - host: acdc-ui.demo.insee.io
       http:
         paths:
           - path: /

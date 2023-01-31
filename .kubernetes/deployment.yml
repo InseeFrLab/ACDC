@@ -15,7 +15,5 @@ spec:
       containers:
         - name: acdc
           image: inseefrlab/acdc:develop
-          imagePullPolicy: Never
-          ports:
-            - containerPort: 3000
+          imagePullPolicy: Always
       restartPolicy: Always
