@@ -24,11 +24,11 @@ jobs:
       # install applicaion dependencies (force for MUI)
       - name: Install dependencies
         run: |
-          npm install
+          npm install --force
       # build and test the apps
       - name: build
         run: |
-          npm build
+          npm run build
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4
         with:
