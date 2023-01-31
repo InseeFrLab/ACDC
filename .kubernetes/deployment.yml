@@ -16,4 +16,7 @@ spec:
         - name: acdc
           image: inseefrlab/acdc:develop
           imagePullPolicy: Always
+          env:
+            - name: VITE_API_BASE_URL
+              value: 'https://acdc-back-office.demo.insee.io/'
       restartPolicy: Always
