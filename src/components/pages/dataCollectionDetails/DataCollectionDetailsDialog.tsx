@@ -61,7 +61,7 @@ const DataCollectionDetailsDialog = (
     event.preventDefault();
     props.setDataCollectionState({
       ...dataCollectionState,
-      label: {
+      description: {
         ...dataCollectionState.description,
         [i18n.language]: event.target.value,
       },

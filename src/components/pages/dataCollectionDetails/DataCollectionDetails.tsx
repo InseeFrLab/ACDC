@@ -78,6 +78,7 @@ const DataCollectionDetails = () => {
     console.log('Updated Data Collection: ', updatedDataCollection);
     mutate(updatedDataCollection);
     setOpenSave(false);
+    window.location.reload();
   };
 
   return (
