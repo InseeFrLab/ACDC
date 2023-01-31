@@ -8,6 +8,6 @@ spec:
     - port: 3000
       targetPort: 3000
       protocol: TCP
-      nodePort: 31000
+      nodePort: 30004
   selector:
     app: acdc
