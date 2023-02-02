@@ -14,8 +14,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { deleteDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
-import { DataCollection } from '../../../lib/model/dataCollection';
+import { deleteDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
+import { DataCollection } from '../../../../lib/model/dataCollection';
 
 interface DataCollectionDetailsDialogProps {
   open: boolean;

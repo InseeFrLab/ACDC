@@ -30,6 +30,11 @@ const CollectionForm = () => {
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 1,
       language: 'en-IE',
       value: '',
     },
@@ -37,6 +42,11 @@ const CollectionForm = () => {
   const [descriptionArray, setDescriptionArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 2,
       language: 'en-IE',
       value: '',
     },

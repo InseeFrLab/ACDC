@@ -21,10 +21,16 @@ import {
   Box,
   DialogTitle,
   SelectChangeEvent,
+  OutlinedInput,
+  InputLabel,
 } from '@mui/material';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionEvent from '../../../lib/model/collectionEvents';
-import TypeOfModeOfCollection from '../../../lib/model/typeOfModeOfCollection';
+import {
+  TypeOfModeOfCollection,
+  typeMode,
+} from '../../../lib/model/typeOfModeOfCollection';
+
 import InstrumentReference from '../../../lib/model/instrumentReference';
 
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -41,15 +47,15 @@ const EventForm = (props: DataCollectionProps) => {
     useMutation(updateDataCollection);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const [modeCollection, setModeCollection] = useState([
-    {
-      id: 1,
-      type: 'CAPI',
-    },
-  ]);
+  const [modeCollection, setModeCollection] = useState<string[]>([]);
   const [collectionEventNameArray, setCollectionEventNameArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 2,
       language: 'en-IE',
       value: '',
     },
@@ -57,6 +63,11 @@ const EventForm = (props: DataCollectionProps) => {
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 2,
       language: 'en-IE',
       value: '',
     },
@@ -64,30 +75,23 @@ const EventForm = (props: DataCollectionProps) => {
   const [descriptionArray, setDescriptionArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 2,
       language: 'en-IE',
       value: '',
     },
   ]);
   const [open, setOpen] = useState(false);
+  const [textError, setTextError] = useState(false);
 
-  const addModeCollection = () => {
-    const lastModeCollectionId = modeCollection[modeCollection.length - 1].id;
-    return setModeCollection([
-      ...modeCollection,
-      {
-        id: lastModeCollectionId + 1,
-        type: 'CAPI',
-      },
-    ]);
-  };
-
-  const handleModeCollectionChange = (e: SelectChangeEvent, index: number) => {
-    e.preventDefault();
-    setModeCollection((s) => {
-      const newLabel = s.slice();
-      newLabel[index].type = e.target.value;
-      return newLabel;
-    });
+  const handleModeCollectionChange = (event: SelectChangeEvent) => {
+    const {
+      target: { value },
+    } = event;
+    setModeCollection(typeof value === 'string' ? value.split(',') : value);
   };
 
   const handleClickOpen = () => {
@@ -112,7 +116,7 @@ const EventForm = (props: DataCollectionProps) => {
     const modeOfCollection: TypeOfModeOfCollection[] = [];
     modeCollection.forEach((mode) => {
       modeOfCollection.push({
-        type: mode.type,
+        type: mode,
       });
     });
     const collectionEventName: Record<'fr-FR' | 'en-IE' | string, string> =
@@ -140,9 +144,6 @@ const EventForm = (props: DataCollectionProps) => {
         {}
       );
 
-    const dates: Map<string, string> = new Map();
-    dates.set('startDate', formatISO(startDate) || '');
-    dates.set('endDate', formatISO(endDate) || '');
     const data: CollectionEvent = {
       id: uuidv4(),
       agency: 'fr.insee',
@@ -152,7 +153,10 @@ const EventForm = (props: DataCollectionProps) => {
       description,
       instrumentReference: instrument,
       typeOfModeOfCollection: modeOfCollection,
-      dataCollectionDate: dates,
+      dataCollectionDate: {
+        startDate: formatISO(startDate),
+        endDate: formatISO(endDate),
+      },
     };
     const now = Date.now();
     const today: string = new Date(now).toISOString();
@@ -191,6 +195,36 @@ const EventForm = (props: DataCollectionProps) => {
             textArray={collectionEventNameArray}
             setTextArray={setCollectionEventNameArray}
           />
+          <Box
+            sx={{
+              paddingTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">{t('modeOfCollection')}:</Typography>
+          </Box>
+          <Select
+            labelId="multiple-mode-label"
+            sx={{
+              width: 200,
+              '& legend': { display: 'none' },
+              '& fieldset': { top: 0 },
+            }}
+            notched
+            multiple
+            value={modeCollection}
+            onChange={handleModeCollectionChange}
+            input={<OutlinedInput label="Name" />}
+          >
+            {typeMode.map((mode) => (
+              <MenuItem key={mode.type} value={mode.type}>
+                {mode.type}
+              </MenuItem>
+            ))}
+          </Select>
           <Box
             sx={{
               display: 'flex',
@@ -245,63 +279,6 @@ const EventForm = (props: DataCollectionProps) => {
               renderInput={(params) => <TextField {...params} />}
             />
           </Stack>
-
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">{t('modeOfCollection')}:</Typography>
-          </Box>
-
-          {modeCollection.map((mode, index) => {
-            return (
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'flex-start',
-                }}
-                key={mode.id}
-              >
-                <Select
-                  color="primary"
-                  labelId="select-mode-collection"
-                  label={t('modeOfCollection')}
-                  displayEmpty
-                  value={mode.type}
-                  onChange={(e) => handleModeCollectionChange(e, index)}
-                  sx={{
-                    '& legend': { display: 'none' },
-                    '& fieldset': { top: 0 },
-                  }}
-                  notched
-                >
-                  <MenuItem value="CAPI">CAPI</MenuItem>
-                  <MenuItem value="CATI">CATI</MenuItem>
-                  <MenuItem value="CAWI">CAWI</MenuItem>
-                  <MenuItem value="PAPI">PAPI</MenuItem>
-                </Select>
-              </Box>
-            );
-          })}
-
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-            }}
-          >
-            <Button variant="outlined" size="small" onClick={addModeCollection}>
-              <Typography>{t('addModeCollection')}</Typography>
-            </Button>
-          </Box>
 
           <Box
             sx={{

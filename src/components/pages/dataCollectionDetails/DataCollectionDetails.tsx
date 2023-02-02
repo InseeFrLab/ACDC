@@ -15,7 +15,7 @@ import {
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import DataCollectionDetailsDialog from './DataCollectionDetailsDialog';
+import DataCollectionDetailsDialog from './updateData/DataCollectionDetailsDialog';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';

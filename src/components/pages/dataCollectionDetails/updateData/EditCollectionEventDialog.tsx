@@ -20,8 +20,8 @@ import {
   Stack,
 } from '@mui/material';
 
-import CollectionEvent from '../../../lib/model/collectionEvents';
-import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
+import CollectionEvent from '../../../../lib/model/collectionEvents';
+import { updateDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
 
 interface EditCollectionEventDialogProps {
   open: boolean;
@@ -35,8 +35,12 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   const navigate = useNavigate();
   const { open, handleClose, collectionEventState } = props;
 
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(
+    new Date(collectionEventState.dataCollectionDate.startDate)
+  );
+  const [endDate, setEndDate] = useState<Date | null>(
+    new Date(collectionEventState.dataCollectionDate.endDate)
+  );
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
 

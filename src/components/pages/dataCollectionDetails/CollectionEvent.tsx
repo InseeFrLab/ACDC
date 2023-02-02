@@ -15,7 +15,7 @@ import {
 import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import CollectionEvent from '../../../lib/model/collectionEvents';
-import EditCollectionEventDialog from './EditCollectionEventDialog';
+import EditCollectionEventDialog from './updateData/EditCollectionEventDialog';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;
