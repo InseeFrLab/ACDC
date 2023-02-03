@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import HeaderComponent from '../layout/Header';
 
 const Header = () => {
-  const { t, i18n } = useTranslation(['header']);
+  const { t, i18n, ready } = useTranslation(['header']);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 

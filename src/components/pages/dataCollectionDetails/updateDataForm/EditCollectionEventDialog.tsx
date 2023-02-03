@@ -40,8 +40,7 @@ interface EditCollectionEventDialogProps {
 }
 
 const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
-  const { t, i18n } = useTranslation(['dataCollectionDetails']);
-  const navigate = useNavigate();
+  const { t, i18n, ready } = useTranslation(['dataCollectionDetails']);
   const { open, handleClose, collectionEventState } = props;
 
   const [startDate, setStartDate] = useState<Date | null>(
@@ -53,8 +52,6 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   const [modeCollection, setModeCollection] = useState<string[]>(
     collectionEventState.typeOfModeOfCollection.map((mode) => mode.type)
   );
-  const { isLoading, isError, isSuccess, mutate } =
-    useMutation(updateDataCollection);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -97,6 +94,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   };
 
   const handleSave = () => {
+    console.log('Translation: ', ready);
     console.log('Update CollectionEvent: ', collectionEventState);
     const modeOfCollection: TypeOfModeOfCollection[] = [];
     modeCollection.forEach((mode) => {
@@ -173,20 +171,17 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               marginTop: 1,
             }}
           >
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              sx={{ marginRight: 1 }}
-            >
-              {t('label')}:{' '}
-            </Typography>
             <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
               <TextField
                 required
                 size="small"
-                label={t('label')}
                 value={collectionEventState.collectionEventName[i18n.language]}
-                sx={{ marginRight: 2, width: '100%' }}
+                sx={{
+                  marginRight: 2,
+                  width: '100%',
+                  '& legend': { display: 'none' },
+                  '& fieldset': { top: 0 },
+                }}
                 onChange={handleNameChange}
                 id={collectionEventState.collectionEventName[i18n.language]}
               />

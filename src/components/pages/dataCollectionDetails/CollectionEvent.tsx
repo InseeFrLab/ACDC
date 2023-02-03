@@ -38,7 +38,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
-  const { t, i18n } = useTranslation(['dataCollectionDetails']);
+  const { t, i18n, ready } = useTranslation(['dataCollectionDetails']);
   const { collectionEvent, dataCollectionState, setDataCollectionState } =
     props;
   const [collectionEventState, setCollectionEventState] =

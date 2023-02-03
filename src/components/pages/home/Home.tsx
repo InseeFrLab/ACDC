@@ -12,7 +12,7 @@ import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { getAllDataCollections } from '../../../lib/api/remote/dataCollectionApiFetch';
 
 const Home = () => {
-  const { t, i18n } = useTranslation(['home']);
+  const { t, i18n, ready } = useTranslation(['home']);
   const navigate = useNavigate();
 
   const handleClick = () => {

@@ -21,7 +21,7 @@ import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 
 const DataCollectionDetails = () => {
-  const { t, i18n } = useTranslation(['dataCollectionDetails']);
+  const { t, i18n, ready } = useTranslation(['dataCollectionDetails']);
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
