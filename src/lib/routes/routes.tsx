@@ -3,7 +3,7 @@ import Home from '../../components/pages/home/Home';
 import Header from '../../components/shared/header/Header';
 import CreateDataCollection from '../../components/pages/dataCollectionForm/CreateDataCollection';
 import CreateCollectionEvent from '../../components/pages/collectionEventForm/CreateCollectionEvent';
-import DataCollectionDetails from '../../components/pages/dataCollectionDetails/DataCollectionDetails';
+import DataCollectionDetails from '../../components/pages/dataCollectionDetails/DataCollectionDetailsPage';
 
 const RoutesWebs = () => {
   return (

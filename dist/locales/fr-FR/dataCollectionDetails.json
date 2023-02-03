@@ -23,5 +23,8 @@
   "error": "Une erreur est survenue",
   "successEvent": "Le lot a été supprimé avec succès",
   "saveDataCollection": "Mise à jour de la campagne",
-  "successDataCollection": "La campagne a été mise à jour avec succès"
+  "successDataCollection": "La campagne a été mise à jour avec succès",
+  "dataCollectionDate": "Date de collecte",
+  "collectionStartDate": "Date de début de collecte",
+  "collectionEndDate": "Date de fin de collecte"
 }

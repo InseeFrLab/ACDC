@@ -206,25 +206,27 @@ const EventForm = (props: DataCollectionProps) => {
           >
             <Typography variant="h6">{t('modeOfCollection')}:</Typography>
           </Box>
-          <Select
-            labelId="multiple-mode-label"
-            sx={{
-              width: 200,
-              '& legend': { display: 'none' },
-              '& fieldset': { top: 0 },
-            }}
-            notched
-            multiple
-            value={modeCollection}
-            onChange={handleModeCollectionChange}
-            input={<OutlinedInput label="Name" />}
-          >
-            {typeMode.map((mode) => (
-              <MenuItem key={mode.type} value={mode.type}>
-                {mode.type}
-              </MenuItem>
-            ))}
-          </Select>
+          <FormControl size="small" fullWidth>
+            <Select
+              labelId="multiple-mode-label"
+              sx={{
+                width: 200,
+                '& legend': { display: 'none' },
+                '& fieldset': { top: 0 },
+              }}
+              notched
+              multiple
+              value={modeCollection}
+              onChange={handleModeCollectionChange}
+              input={<OutlinedInput label="Name" />}
+            >
+              {typeMode.map((mode) => (
+                <MenuItem key={mode.type} value={mode.type}>
+                  {mode.type}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Box
             sx={{
               display: 'flex',

@@ -23,5 +23,8 @@
   "error": "An error occurred",
   "successEvent": "Collection Event deleted successfully",
   "saveDataCollection": "Save Data Collection",
-  "successDataCollection": "Data Collection saved successfully"
+  "successDataCollection": "Data Collection saved successfully",
+  "dataCollectionDate": "Date de collecte",
+  "collectionStartDate": "Collection start date",
+  "collectionEndDate": "Collection end date"
 }

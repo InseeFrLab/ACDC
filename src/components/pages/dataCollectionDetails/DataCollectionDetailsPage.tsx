@@ -15,7 +15,7 @@ import {
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import DataCollectionDetailsDialog from './updateData/DataCollectionDetailsDialog';
+import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -111,12 +111,14 @@ const DataCollectionDetails = () => {
         setDataCollectionState={setDataCollectionState}
       />
       <Box>
-        {dataCollection.collectionEvents.map((event) => {
+        {dataCollectionState.collectionEvents.map((event) => {
           return (
             <CollectionEventDisplay
               key={event.id}
               collectionEvent={event}
               handleDeleteCollectionEvent={handleDeleteCollectionEvent}
+              dataCollectionState={dataCollectionState}
+              setDataCollectionState={setDataCollectionState}
             />
           );
         })}

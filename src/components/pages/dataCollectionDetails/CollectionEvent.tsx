@@ -15,11 +15,14 @@ import {
 import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import CollectionEvent from '../../../lib/model/collectionEvents';
-import EditCollectionEventDialog from './updateData/EditCollectionEventDialog';
+import { DataCollection } from '../../../lib/model/dataCollection';
+import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;
   handleDeleteCollectionEvent: (id: string) => void;
+  dataCollectionState: DataCollection;
+  setDataCollectionState: (dataCollection: DataCollection) => void;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -36,7 +39,8 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   const { t, i18n } = useTranslation(['dataCollectionDetails']);
-  const { collectionEvent } = props;
+  const { collectionEvent, dataCollectionState, setDataCollectionState } =
+    props;
   const [collectionEventState, setCollectionEventState] =
     useState(collectionEvent);
   const [expanded, setExpanded] = useState(false);
@@ -253,6 +257,8 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
         handleClose={handleClose}
         collectionEventState={collectionEventState}
         setCollectionEventState={setCollectionEventState}
+        dataCollectionState={dataCollectionState}
+        setDataCollectionState={setDataCollectionState}
       />
     </>
   );

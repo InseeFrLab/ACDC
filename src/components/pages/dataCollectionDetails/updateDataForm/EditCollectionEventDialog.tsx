@@ -18,16 +18,25 @@ import {
   Select,
   MenuItem,
   Stack,
+  OutlinedInput,
+  SelectChangeEvent,
 } from '@mui/material';
 
 import CollectionEvent from '../../../../lib/model/collectionEvents';
+import { DataCollection } from '../../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
+import {
+  TypeOfModeOfCollection,
+  typeMode,
+} from '../../../../lib/model/typeOfModeOfCollection';
 
 interface EditCollectionEventDialogProps {
   open: boolean;
   handleClose: () => void;
   collectionEventState: CollectionEvent;
   setCollectionEventState: (collectionEvent: CollectionEvent) => void;
+  dataCollectionState: DataCollection;
+  setDataCollectionState: (dataCollection: DataCollection) => void;
 }
 
 const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
@@ -41,9 +50,22 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   const [endDate, setEndDate] = useState<Date | null>(
     new Date(collectionEventState.dataCollectionDate.endDate)
   );
+  const [modeCollection, setModeCollection] = useState<string[]>(
+    collectionEventState.typeOfModeOfCollection.map((mode) => mode.type)
+  );
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
 
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    props.setCollectionEventState({
+      ...collectionEventState,
+      collectionEventName: {
+        ...collectionEventState.collectionEventName,
+        [i18n.language]: event.target.value,
+      },
+    });
+  };
   const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     props.setCollectionEventState({
@@ -54,22 +76,71 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       },
     });
   };
-
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.preventDefault();
     props.setCollectionEventState({
       ...collectionEventState,
-      label: {
+      description: {
         ...collectionEventState.description,
         [i18n.language]: event.target.value,
       },
     });
   };
 
+  const handleModeCollectionChange = (event: SelectChangeEvent) => {
+    const {
+      target: { value },
+    } = event;
+    setModeCollection(typeof value === 'string' ? value.split(',') : value);
+  };
+
   const handleSave = () => {
     console.log('Update CollectionEvent: ', collectionEventState);
+    const modeOfCollection: TypeOfModeOfCollection[] = [];
+    modeCollection.forEach((mode) => {
+      modeOfCollection.push({
+        type: mode,
+      });
+    });
+    props.setCollectionEventState({
+      ...collectionEventState,
+      typeOfModeOfCollection: modeOfCollection,
+    });
+    props.setCollectionEventState({
+      ...collectionEventState,
+      dataCollectionDate: {
+        startDate: formatISO(startDate),
+        endDate: formatISO(endDate),
+      },
+    });
+    props.setCollectionEventState({
+      ...collectionEventState,
+      version: collectionEventState.version + 1,
+    });
+    const now = Date.now();
+    const today: string = new Date(now).toISOString();
+    const index = props.dataCollectionState.collectionEvents.findIndex(
+      (x) => x.id === collectionEventState.id
+    );
+    props.setDataCollectionState({
+      ...props.dataCollectionState,
+      versionDate: today,
+      collectionEvents: [
+        ...props.dataCollectionState.collectionEvents.filter(
+          (event) => event.id !== collectionEventState.id
+        ),
+        (props.dataCollectionState.collectionEvents[index] =
+          collectionEventState),
+      ],
+    });
+    console.log(
+      'Updated Data Collection with new Collection Event: ',
+      props.dataCollectionState
+    );
+
+    handleClose();
   };
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>
@@ -94,6 +165,32 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               ID:{' '}
             </Typography>
             <Typography variant="body1">{collectionEventState.id}</Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              marginTop: 1,
+            }}
+          >
+            <Typography
+              variant="body1"
+              fontWeight="bold"
+              sx={{ marginRight: 1 }}
+            >
+              {t('label')}:{' '}
+            </Typography>
+            <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
+              <TextField
+                required
+                size="small"
+                label={t('label')}
+                value={collectionEventState.collectionEventName[i18n.language]}
+                sx={{ marginRight: 2, width: '100%' }}
+                onChange={handleNameChange}
+                id={collectionEventState.collectionEventName[i18n.language]}
+              />
+            </FormControl>
           </Box>
           <Box
             sx={{
@@ -187,6 +284,27 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               {t('modeOfCollection')}:{' '}
             </Typography>
           </Box>
+          <FormControl size="small" fullWidth>
+            <Select
+              labelId="multiple-mode-label"
+              sx={{
+                width: 200,
+                '& legend': { display: 'none' },
+                '& fieldset': { top: 0 },
+              }}
+              notched
+              multiple
+              value={modeCollection}
+              onChange={handleModeCollectionChange}
+              input={<OutlinedInput label="Name" />}
+            >
+              {typeMode.map((mode) => (
+                <MenuItem key={mode.type} value={mode.type}>
+                  {mode.type}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Box
             sx={{
               display: 'flex',
@@ -208,19 +326,17 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
+        <Button variant="outlined" onClick={handleClose} autoFocus>
+          {t('close')}
+        </Button>
         <Button
           onClick={() => {
             handleSave();
           }}
-          variant="outlined"
+          variant="contained"
           sx={{ marginLeft: 2 }}
         >
-          <Typography variant="body1" fontWeight="xl">
-            {t('save')}
-          </Typography>
-        </Button>
-        <Button variant="contained" onClick={handleClose} autoFocus>
-          {t('close')}
+          {t('save')}
         </Button>
       </DialogActions>
     </Dialog>
