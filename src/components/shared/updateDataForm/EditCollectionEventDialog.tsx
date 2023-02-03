@@ -20,12 +20,12 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 
-import CollectionEvent from '../../../../lib/model/collectionEvents';
-import { DataCollection } from '../../../../lib/model/dataCollection';
+import CollectionEvent from '../../../lib/model/collectionEvents';
+import { DataCollection } from '../../../lib/model/dataCollection';
 import {
   TypeOfModeOfCollection,
   typeMode,
-} from '../../../../lib/model/typeOfModeOfCollection';
+} from '../../../lib/model/typeOfModeOfCollection';
 
 interface EditCollectionEventDialogProps {
   open: boolean;
@@ -37,7 +37,7 @@ interface EditCollectionEventDialogProps {
 }
 
 const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
-  const { t, i18n, ready } = useTranslation([
+  const { t, i18n } = useTranslation([
     'dataCollectionDetails',
     'collectionEvent',
     'form',
@@ -95,7 +95,6 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   };
 
   const handleSave = () => {
-    console.log('Translation: ', ready);
     console.log('Update CollectionEvent: ', collectionEventState);
     const modeOfCollection: TypeOfModeOfCollection[] = [];
     modeCollection.forEach((mode) => {

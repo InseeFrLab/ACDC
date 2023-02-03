@@ -4,6 +4,7 @@ import Header from '../../components/shared/header/Header';
 import CreateDataCollection from '../../components/pages/dataCollectionForm/CreateDataCollection';
 import CreateCollectionEvent from '../../components/pages/collectionEventForm/CreateCollectionEvent';
 import DataCollectionDetails from '../../components/pages/dataCollectionDetails/DataCollectionDetailsPage';
+import CreateUserAttribute from '../../components/pages/userAttributeForm/CreateUserAttribute';
 
 const RoutesWebs = () => {
   return (
@@ -15,6 +16,10 @@ const RoutesWebs = () => {
         <Route path="/new" element={<CreateDataCollection />} />
         <Route path="collection/new/:id" element={<CreateCollectionEvent />} />
         <Route path="collection/:id" element={<DataCollectionDetails />} />
+        <Route
+          path="collection/:id/attribute/new"
+          element={<CreateUserAttribute />}
+        />
       </Routes>
     </Router>
   );

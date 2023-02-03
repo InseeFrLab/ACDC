@@ -15,13 +15,13 @@ import {
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
+import DataCollectionDetailsDialog from '../../shared/updateDataForm/DataCollectionDetailsDialog';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 
 const DataCollectionDetails = () => {
-  const { t, i18n, ready } = useTranslation(['dataCollectionDetails', 'form']);
+  const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =

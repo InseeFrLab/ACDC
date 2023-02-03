@@ -16,7 +16,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
+import EditCollectionEventDialog from '../../shared/updateDataForm/EditCollectionEventDialog';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;
@@ -38,7 +38,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
-  const { t, i18n, ready } = useTranslation([
+  const { t, i18n } = useTranslation([
     'dataCollectionDetails',
     'collectionEvent',
     'form',

@@ -17,6 +17,11 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       state: { dataCollection },
     });
   };
+  const handleClickUserAttribute = () => {
+    navigate(`/collection/${dataCollection.id}/attribute/new`, {
+      state: { dataCollection },
+    });
+  };
   const handleClickSave = () => {
     props.handleSave();
   };
@@ -30,6 +35,15 @@ const BottomActionBar = (props: BottomActionBarProps) => {
         }}
       >
         <Typography variant="subtitle1">{t('createButton')}</Typography>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={handleClickUserAttribute}
+        sx={{
+          mx: 1,
+        }}
+      >
+        <Typography variant="subtitle1">{t('createUserAttribute')}</Typography>
       </Button>
       <Button
         variant="contained"

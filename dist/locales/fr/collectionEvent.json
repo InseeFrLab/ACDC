@@ -1,0 +1,11 @@
+{
+  "title": "Lot",
+  "descriptionForm": "Créer un nouveau lot",
+  "successForm": "Le lot a été créé avec succès",
+  "dataCollectionDate": "Date de collecte des données",
+  "collectionStartDate": "Date de début de collecte",
+  "collectionEndDate": "Date de fin de collecte",
+  "modeOfCollection": "Mode de collecte",
+  "instrumentReference": "Instrument",
+  "addModeCollection": "Ajouter un mode de collecte"
+}

@@ -14,8 +14,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { deleteDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
-import { DataCollection } from '../../../../lib/model/dataCollection';
+import { deleteDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
+import { DataCollection } from '../../../lib/model/dataCollection';
 
 interface DataCollectionDetailsDialogProps {
   open: boolean;
@@ -26,7 +26,7 @@ interface DataCollectionDetailsDialogProps {
 const DataCollectionDetailsDialog = (
   props: DataCollectionDetailsDialogProps
 ) => {
-  const { t, i18n, ready } = useTranslation(['dataCollectionDetails']);
+  const { t, i18n } = useTranslation(['dataCollectionDetails']);
   const navigate = useNavigate();
   const { open, handleClose, dataCollectionState } = props;
   console.log('DataCollectionState: ', dataCollectionState);
