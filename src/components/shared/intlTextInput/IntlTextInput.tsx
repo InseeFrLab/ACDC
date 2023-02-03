@@ -10,7 +10,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 const IntlTextInput = (props: any) => {
-  const { t } = useTranslation(['dataCollectionForm']);
+  const { t } = useTranslation(['dataCollectionForm', 'form']);
   const { textArray } = props;
   const addTextLabel = () => {
     const lastTextId: number = textArray[textArray.length - 1].id;
@@ -94,7 +94,7 @@ const IntlTextInput = (props: any) => {
         }}
       >
         <Button variant="outlined" size="small" onClick={addTextLabel}>
-          <Typography>{t('addLanguage')}</Typography>
+          <Typography>{t('addLanguage', { ns: 'form' })}</Typography>
         </Button>
       </Box>
     </>

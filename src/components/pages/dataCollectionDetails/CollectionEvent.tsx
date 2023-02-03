@@ -38,7 +38,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
-  const { t, i18n, ready } = useTranslation(['dataCollectionDetails']);
+  const { t, i18n, ready } = useTranslation([
+    'dataCollectionDetails',
+    'collectionEvent',
+    'form',
+  ]);
   const { collectionEvent, dataCollectionState, setDataCollectionState } =
     props;
   const [collectionEventState, setCollectionEventState] =
@@ -57,10 +61,6 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
-  const handleEditClick = () => {
-    console.log('edit');
-    setEdit(!edit);
   };
 
   const handleDeleteClick = () => {
@@ -144,7 +144,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('label')}:{' '}
+                {t('label', { ns: 'form' })}:{' '}
               </Typography>
               <Typography variant="body1">
                 {collectionEvent.label[i18n.language]}
@@ -161,7 +161,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('description')}:{' '}
+                {t('description', { ns: 'form' })}:{' '}
               </Typography>
               <Typography variant="body1">
                 {collectionEvent.description[i18n.language]}
@@ -178,7 +178,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('version')}:{' '}
+                {t('version', { ns: 'form' })}:{' '}
               </Typography>
               <Typography variant="body1">{collectionEvent.version}</Typography>
             </Box>
@@ -193,7 +193,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('modeOfCollection')}:{' '}
+                {t('modeOfCollection', { ns: 'collectionEvent' })}:{' '}
               </Typography>
 
               {collectionEvent.typeOfModeOfCollection.map((mode) => {
@@ -215,7 +215,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('instrumentReference')}:{' '}
+                {t('instrumentReference', { ns: 'collectionEvent' })}:{' '}
               </Typography>
               <Typography variant="body1">
                 {collectionEvent.instrumentReference.typeOfObject}
@@ -235,7 +235,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 sx={{ marginLeft: 2 }}
               >
                 <Typography variant="body1" fontWeight="xl">
-                  {t('edit')}
+                  {t('edit', { ns: 'dataCollectionDetails' })}
                 </Typography>
               </Button>
               <Button
@@ -245,7 +245,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 sx={{ marginLeft: 2 }}
               >
                 <Typography variant="body1" fontWeight="xl">
-                  {t('delete')}
+                  {t('delete', { ns: 'form' })}
                 </Typography>
               </Button>
             </Box>

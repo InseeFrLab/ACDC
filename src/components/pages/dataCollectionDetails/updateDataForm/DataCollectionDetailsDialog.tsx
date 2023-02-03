@@ -126,13 +126,13 @@ const DataCollectionDetailsDialog = (
               }}
             >
               <Typography variant="body1" fontWeight="bold">
-                {t('description')}:{' '}
+                {t('description', { ns: 'form' })}:{' '}
               </Typography>
               <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
                 <TextField
                   required
                   size="small"
-                  label={t('description')}
+                  label={t('description', { ns: 'form' })}
                   multiline
                   maxRows={4}
                   value={dataCollectionState.description[i18n.language]}
@@ -154,7 +154,7 @@ const DataCollectionDetailsDialog = (
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('version')}:{' '}
+                {t('version', { ns: 'form' })}:{' '}
               </Typography>
               <Typography variant="body1">
                 {dataCollectionState.version}
@@ -193,7 +193,7 @@ const DataCollectionDetailsDialog = (
             </Typography>
           </Button>
           <Button variant="contained" onClick={handleClose} autoFocus>
-            {t('close')}
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>
@@ -210,7 +210,7 @@ const DataCollectionDetailsDialog = (
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={handleCloseDelete} autoFocus>
-            {t('close')}
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>

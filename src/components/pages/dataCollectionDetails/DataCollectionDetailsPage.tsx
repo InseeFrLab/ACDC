@@ -21,7 +21,7 @@ import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 
 const DataCollectionDetails = () => {
-  const { t, i18n, ready } = useTranslation(['dataCollectionDetails']);
+  const { t, i18n, ready } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
@@ -99,7 +99,7 @@ const DataCollectionDetails = () => {
           sx={{ marginLeft: 2 }}
         >
           <Typography variant="body1" fontWeight="xl">
-            {t('showDetails')}
+            {t('showDetails', { ns: 'dataCollectionDetails' })}
           </Typography>
         </Button>
       </Box>
@@ -125,18 +125,22 @@ const DataCollectionDetails = () => {
       </Box>
       <Dialog open={openDelete} onClose={handleCloseDelete}>
         <DialogTitle>
-          <Typography variant="h5">{t('deleteCollectionEvent')}</Typography>
+          <Typography variant="h5">
+            {t('deleteCollectionEvent', { ns: 'dataCollectionDetails' })}
+          </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {isSuccess ? t('successEvent') : ''}
-            {isLoading ? t('loading') : ''}
-            {isError ? t('error') : ''}
+            {isSuccess
+              ? t('successEvent', { ns: 'dataCollectionDetails' })
+              : ''}
+            {isLoading ? t('loading', { ns: 'form' }) : ''}
+            {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={handleCloseDelete} autoFocus>
-            {t('close')}
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>
@@ -153,7 +157,7 @@ const DataCollectionDetails = () => {
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={handleCloseSave} autoFocus>
-            {t('close')}
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>

@@ -41,7 +41,7 @@ interface DataCollectionProps {
 }
 const EventForm = (props: DataCollectionProps) => {
   // TODO: Refactor tout ça pour que ce soit plus propre
-  const { t } = useTranslation(['collectionEventForm']);
+  const { t } = useTranslation(['collectionEvent', 'form']);
   const navigate = useNavigate();
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
@@ -214,7 +214,7 @@ const EventForm = (props: DataCollectionProps) => {
               justifyContent: 'flex-start',
             }}
           >
-            <Typography variant="h6">{t('name')}:</Typography>
+            <Typography variant="h6">{t('name', { ns: 'form' })}:</Typography>
           </Box>
           <IntlTextInput
             textArray={collectionEventNameArray}
@@ -229,7 +229,9 @@ const EventForm = (props: DataCollectionProps) => {
               borderColor: 'divider',
             }}
           >
-            <Typography variant="h6">{t('modeOfCollection')}:</Typography>
+            <Typography variant="h6">
+              {t('modeOfCollection', { ns: 'collectionEvent' })}:
+            </Typography>
           </Box>
           <FormControl size="small" fullWidth>
             <Select
@@ -261,7 +263,7 @@ const EventForm = (props: DataCollectionProps) => {
               borderColor: 'divider',
             }}
           >
-            <Typography variant="h6">{t('label')}:</Typography>
+            <Typography variant="h6">{t('label', { ns: 'form' })}:</Typography>
           </Box>
           <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
           <Box
@@ -273,7 +275,9 @@ const EventForm = (props: DataCollectionProps) => {
               borderColor: 'divider',
             }}
           >
-            <Typography variant="h6">{t('descriptionField')}:</Typography>
+            <Typography variant="h6">
+              {t('descriptionField', { ns: 'form' })}:
+            </Typography>
           </Box>
 
           <IntlTextInput
@@ -290,17 +294,19 @@ const EventForm = (props: DataCollectionProps) => {
               borderColor: 'divider',
             }}
           >
-            <Typography variant="h6">{t('dataCollectionDate')}:</Typography>
+            <Typography variant="h6">
+              {t('dataCollectionDate', { ns: 'collectionEvent' })}:
+            </Typography>
           </Box>
           <Stack spacing={2} direction="row">
             <DatePicker
-              label={t('collectionStartDate')}
+              label={t('collectionStartDate', { ns: 'collectionEvent' })}
               value={startDate}
               onChange={(date) => date && setStartDate(date)}
               renderInput={(params) => <TextField {...params} />}
             />
             <DatePicker
-              label={t('collectionEndDate')}
+              label={t('collectionEndDate', { ns: 'collectionEvent' })}
               value={endDate}
               minDate={startDate}
               onChange={(date) => date && setEndDate(date)}
@@ -323,11 +329,25 @@ const EventForm = (props: DataCollectionProps) => {
               sx={{ marginRight: 2 }}
               onClick={handleClose}
             >
-              <Typography variant="subtitle1">{t('cancel')}</Typography>
+              <Typography variant="subtitle1">
+                {t('cancel', { ns: 'form' })}
+              </Typography>
             </Button>
             <Button variant="contained" onClick={handleSubmit}>
-              <Typography variant="subtitle1">{t('submit')}</Typography>
+              <Typography variant="subtitle1">
+                {t('submit', { ns: 'form' })}
+              </Typography>
             </Button>
+            {textError && (
+              <Typography
+                variant="subtitle1"
+                marginLeft={2}
+                fontWeight="bold"
+                color="error"
+              >
+                {t('textFieldError', { ns: 'form' })}
+              </Typography>
+            )}
           </Box>
         </Stack>
       </FormControl>
@@ -338,14 +358,14 @@ const EventForm = (props: DataCollectionProps) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {isSuccess ? t('success') : ''}
-            {isLoading ? t('loading') : ''}
-            {isError ? t('error') : ''}
+            {isSuccess ? t('successForm', { ns: 'collectionEvent' }) : ''}
+            {isLoading ? t('loading', { ns: 'form' }) : ''}
+            {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={handleClose} autoFocus>
-            {t('close')}
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>

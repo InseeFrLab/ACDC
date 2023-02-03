@@ -10,7 +10,9 @@ const CreateDataCollection = () => {
       <Typography variant="h2" fontWeight="xl">
         {t('title')}
       </Typography>
-      <Typography variant="subtitle1">{t('description')}</Typography>
+      <Typography variant="subtitle1">
+        {t('description', { ns: 'form' })}
+      </Typography>
       <CollectionForm />
     </Main>
   );

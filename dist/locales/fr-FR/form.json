@@ -1,0 +1,13 @@
+{
+  "submit": "Envoyer",
+  "cancel": "Annuler",
+  "close": "Fermer",
+  "label": "Label",
+  "name": "Nom",
+  "descriptionField": "Description",
+  "loading": "Chargement de la requête...",
+  "error": "Une erreur est survenue",
+  "addLanguage": "Ajouter une langue",
+  "textFieldError": "Veuillez remplir l'intégralité des champs",
+  "delete": "Supprimer"
+}

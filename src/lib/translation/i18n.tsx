@@ -22,8 +22,9 @@ i18next
       'home',
       'header',
       'dataCollectionForm',
-      'collectionEventForm',
+      'collectionEvent',
       'dataCollectionDetails',
+      'form',
     ],
 
     interpolation: {

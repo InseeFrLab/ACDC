@@ -22,7 +22,7 @@ import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 
 const CollectionForm = () => {
-  const { t } = useTranslation(['dataCollectionForm']);
+  const { t } = useTranslation(['dataCollectionForm', 'form']);
   const navigate = useNavigate();
 
   const { isLoading, isError, isSuccess, mutate } =
@@ -137,7 +137,7 @@ const CollectionForm = () => {
               paddingTop: 2,
             }}
           >
-            <Typography variant="h6">{t('label')}:</Typography>
+            <Typography variant="h6">{t('label', { ns: 'form' })}:</Typography>
           </Box>
           <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
           <Box
@@ -151,7 +151,9 @@ const CollectionForm = () => {
               borderColor: 'divider',
             }}
           >
-            <Typography variant="h6">{t('descriptionField')}:</Typography>
+            <Typography variant="h6">
+              {t('descriptionField', { ns: 'form' })}:
+            </Typography>
           </Box>
 
           <IntlTextInput
@@ -176,10 +178,14 @@ const CollectionForm = () => {
               sx={{ marginRight: 2 }}
               onClick={handleClose}
             >
-              <Typography variant="subtitle1">{t('cancel')}</Typography>
+              <Typography variant="subtitle1">
+                {t('cancel', { ns: 'form' })}
+              </Typography>
             </Button>
             <Button variant="contained" onClick={handleSubmit}>
-              <Typography variant="subtitle1">{t('submit')}</Typography>
+              <Typography variant="subtitle1">
+                {t('submit', { ns: 'form' })}
+              </Typography>
             </Button>
             {textError && (
               <Typography
@@ -188,7 +194,7 @@ const CollectionForm = () => {
                 fontWeight="bold"
                 color="error"
               >
-                {t('textFieldError')}
+                {t('textFieldError', { ns: 'form' })}
               </Typography>
             )}
           </Box>
@@ -201,14 +207,14 @@ const CollectionForm = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {isSuccess ? t('success') : ''}
-            {isLoading ? t('loading') : ''}
-            {isError ? t('error') : ''}
+            {isSuccess ? t('successForm', { ns: 'dataCollectionForm' }) : ''}
+            {isLoading ? t('loading', { ns: 'form' }) : ''}
+            {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={handleClose} autoFocus>
-            {t('close')}
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>

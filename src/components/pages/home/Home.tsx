@@ -37,7 +37,7 @@ const Home = () => {
           {t('title')}
         </Typography>
         <Typography variant="subtitle1" fontWeight="xl">
-          {t('description')}
+          {t('description', { ns: 'form' })}
         </Typography>
         <Typography variant="h2" fontWeight="xl">
           Loading...
@@ -76,7 +76,7 @@ const Home = () => {
           {t('title')}
         </Typography>
         <Typography variant="subtitle1" fontWeight="xl">
-          {t('description')}
+          {t('description', { ns: 'form' })}
         </Typography>
         <DataGridHomePage rows={rows} heightTable={400} />
         <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>
@@ -93,7 +93,7 @@ const Home = () => {
         {t('title')}
       </Typography>
       <Typography variant="subtitle1" fontWeight="xl">
-        {t('description')}
+        {t('description', { ns: 'form' })}
       </Typography>
       <Typography variant="h2" fontWeight="xl">
         Request Failed

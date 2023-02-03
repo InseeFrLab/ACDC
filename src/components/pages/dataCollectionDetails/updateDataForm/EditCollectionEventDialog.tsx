@@ -37,7 +37,11 @@ interface EditCollectionEventDialogProps {
 }
 
 const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
-  const { t, i18n, ready } = useTranslation(['dataCollectionDetails']);
+  const { t, i18n, ready } = useTranslation([
+    'dataCollectionDetails',
+    'collectionEvent',
+    'form',
+  ]);
   const { open, handleClose, collectionEventState } = props;
 
   const [startDate, setStartDate] = useState<Date | null>(
@@ -141,7 +145,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
     <Dialog open={open} onClose={handleClose} fullWidth>
       <DialogTitle>
         <Typography variant="h5" color="text.secondary">
-          {t('editEvent')}
+          {t('editEvent', { ns: 'dataCollectionDetails' })}
         </Typography>
       </DialogTitle>
       <DialogContent>
@@ -196,13 +200,13 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               fontWeight="bold"
               sx={{ marginRight: 1 }}
             >
-              {t('label')}:{' '}
+              {t('label', { ns: 'form' })}:{' '}
             </Typography>
             <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
               <TextField
                 required
                 size="small"
-                label={t('label')}
+                label={t('label', { ns: 'form' })}
                 value={collectionEventState.label[i18n.language]}
                 sx={{ marginRight: 2, width: '100%' }}
                 onChange={handleLabelChange}
@@ -218,13 +222,13 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
             }}
           >
             <Typography variant="body1" fontWeight="bold">
-              {t('description')}:{' '}
+              {t('description', { ns: 'form' })}:{' '}
             </Typography>
             <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
               <TextField
                 required
                 size="small"
-                label={t('description')}
+                label={t('description', { ns: 'form' })}
                 multiline
                 maxRows={4}
                 value={collectionEventState.description[i18n.language]}
@@ -242,18 +246,18 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
             }}
           >
             <Typography variant="body1" fontWeight="bold">
-              {t('dataCollectionDate')}:
+              {t('dataCollectionDate', { ns: 'collectionEvent' })}:
             </Typography>
           </Box>
           <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
             <DatePicker
-              label={t('collectionStartDate')}
+              label={t('collectionStartDate', { ns: 'collectionEvent' })}
               value={startDate}
               onChange={(date) => date && setStartDate(date)}
               renderInput={(params) => <TextField {...params} />}
             />
             <DatePicker
-              label={t('collectionEndDate')}
+              label={t('collectionEndDate', { ns: 'collectionEvent' })}
               value={endDate}
               minDate={startDate}
               onChange={(date) => date && setEndDate(date)}
@@ -310,7 +314,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               fontWeight="bold"
               sx={{ marginRight: 1 }}
             >
-              {t('version')}:{' '}
+              {t('version', { ns: 'form' })}:{' '}
             </Typography>
             <Typography variant="body1">
               {collectionEventState.version}
@@ -320,7 +324,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" onClick={handleClose} autoFocus>
-          {t('close')}
+          {t('close', { ns: 'form' })}
         </Button>
         <Button
           onClick={() => {
@@ -329,7 +333,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
           variant="contained"
           sx={{ marginLeft: 2 }}
         >
-          {t('save')}
+          {t('save', { ns: 'dataCollectionDetails' })}
         </Button>
       </DialogActions>
     </Dialog>
