@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
 import { DatePicker } from '@mui/x-date-pickers';
 import { formatISO } from 'date-fns';
 import {
@@ -24,7 +22,6 @@ import {
 
 import CollectionEvent from '../../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../../lib/model/dataCollection';
-import { updateDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
 import {
   TypeOfModeOfCollection,
   typeMode,
@@ -289,6 +286,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               }}
               notched
               multiple
+              // @ts-expect-error mui types are wrong for multiple select
               value={modeCollection}
               onChange={handleModeCollectionChange}
               input={<OutlinedInput label="Name" />}

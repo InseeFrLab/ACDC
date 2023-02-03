@@ -17,5 +17,6 @@
   "collectionEndDate": "Collection end date",
   "modeOfCollection": "Collection mode",
   "instrumentReference": "Instrument reference",
-  "addModeCollection": "Add collection mode"
+  "addModeCollection": "Add collection mode",
+  "textFieldError": "All fields are required"
 }

@@ -17,5 +17,6 @@
   "collectionEndDate": "Date de fin de collecte",
   "modeOfCollection": "Mode de collecte",
   "instrumentReference": "Intrument (?)",
-  "addModeCollection": "Ajouter un mode de collecte"
+  "addModeCollection": "Ajouter un mode de collecte",
+  "textFieldError": "Tous les champs sont requis"
 }

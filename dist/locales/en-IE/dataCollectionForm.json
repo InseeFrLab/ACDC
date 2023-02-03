@@ -12,5 +12,6 @@
   "label": "Label",
   "descriptionField": "Description",
   "submitmessage": "New Data Collection",
-  "addLanguage": "Add language"
+  "addLanguage": "Add language",
+  "textFieldError": "All fields are required"
 }

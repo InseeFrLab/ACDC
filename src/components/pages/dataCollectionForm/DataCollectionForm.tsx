@@ -51,6 +51,7 @@ const CollectionForm = () => {
       value: '',
     },
   ]);
+  const [textError, setTextError] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -62,19 +63,34 @@ const CollectionForm = () => {
     navigate('/');
   };
 
-  const handleSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const checkValidation = () => {
+    const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
+    const descriptionArrayFiltered = descriptionArray.filter(
+      (obj) => obj.value !== ''
+    );
+    if (
+      labelArrayFiltered.length === 2 &&
+      descriptionArrayFiltered.length === 2
+    ) {
+      setTextError(false);
+      return true;
+    }
+    setTextError(true);
+    return false;
+  };
+
+  const createDataCollectionObject = () => {
     const now = Date.now();
     const today = new Date(now);
     const id = uuidv4();
-    const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
+    const label: Record<'fr-FR' & 'en-IE', string> = labelArray.reduce(
       (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
         map[obj.language] = obj.value;
         return map;
       },
       {}
     );
-    const description: Record<'fr-FR' | 'en-IE' | string, string> =
+    const description: Record<('fr-FR' & 'en-IE') | string, string> =
       descriptionArray.reduce(
         (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
           map[obj.language] = obj.value;
@@ -99,6 +115,13 @@ const CollectionForm = () => {
     };
     mutate(dataCollection);
     handleClickOpen();
+  };
+
+  const handleSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    checkValidation()
+      ? createDataCollectionObject()
+      : console.log('Field Validation Error');
   };
 
   return (
@@ -145,6 +168,7 @@ const CollectionForm = () => {
               borderTop: '1px solid',
               paddingTop: 2,
               borderColor: 'divider',
+              alignItems: 'center',
             }}
           >
             <Button
@@ -157,6 +181,16 @@ const CollectionForm = () => {
             <Button variant="contained" onClick={handleSubmit}>
               <Typography variant="subtitle1">{t('submit')}</Typography>
             </Button>
+            {textError && (
+              <Typography
+                variant="subtitle1"
+                marginLeft={2}
+                fontWeight="bold"
+                color="error"
+              >
+                {t('textFieldError')}
+              </Typography>
+            )}
           </Box>
         </Stack>
       </FormControl>

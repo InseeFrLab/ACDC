@@ -44,6 +44,7 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     '@typescript-eslint/restrict-template-expressions': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
     'react/function-component-definition': [
       'error',
       { namedComponents: 'arrow-function' },

@@ -104,8 +104,27 @@ const EventForm = (props: DataCollectionProps) => {
     navigate(-1);
   };
 
-  const handleSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const checkValidation = () => {
+    const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
+    const descriptionArrayFiltered = descriptionArray.filter(
+      (obj) => obj.value !== ''
+    );
+    const collectionEventNameArrayFiltered = collectionEventNameArray.filter(
+      (obj) => obj.value !== ''
+    );
+    if (
+      labelArrayFiltered.length === 2 &&
+      descriptionArrayFiltered.length === 2 &&
+      collectionEventNameArrayFiltered.length === 2
+    ) {
+      setTextError(false);
+      return true;
+    }
+    setTextError(true);
+    return false;
+  };
+
+  const createCollectionEventObject = () => {
     const instrument: InstrumentReference = {
       id: '493f8b38-1198-4e45-99d2-531ac8a48a48',
       agency: 'fr.insee',
@@ -178,6 +197,12 @@ const EventForm = (props: DataCollectionProps) => {
 
     handleClickOpen();
   };
+  const handleSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    checkValidation()
+      ? createCollectionEventObject()
+      : console.log('Field Validation Error');
+  };
 
   return (
     <>
@@ -216,6 +241,7 @@ const EventForm = (props: DataCollectionProps) => {
               }}
               notched
               multiple
+              // @ts-expect-error mui types are wrong for multiple select
               value={modeCollection}
               onChange={handleModeCollectionChange}
               input={<OutlinedInput label="Name" />}
