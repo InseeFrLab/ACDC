@@ -6,16 +6,16 @@ import UserAttributeForm from './UserAttributeForm';
 import { DataCollection } from '../../../lib/model/dataCollection';
 
 const CreateUserAttribute = () => {
-  const { t } = useTranslation(['userAttributeForm']);
+  const { t } = useTranslation(['userAttributeForm', 'form']);
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   console.log('Create New UserAttribute for dataCollection:', dataCollection);
   return (
     <Main sx={{ justifyContent: 'flex-start' }}>
       <Typography variant="h2" fontWeight="xl">
-        {t('title')}
+        {t('title', { ns: 'userAttributeForm' })}
       </Typography>
       <Typography variant="subtitle1">
-        {t('description') + dataCollection.id}
+        {t('descriptionForm', { ns: 'userAttributeForm' })}
       </Typography>
       <UserAttributeForm dataCollection={dataCollection} />
     </Main>

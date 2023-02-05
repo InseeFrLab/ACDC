@@ -14,6 +14,7 @@ i18next
     // Remove resources from here
     fallbackLng: {
       'en-IE': ['en-IE'],
+      'en-US': ['en-IE'],
       'fr-FR': ['fr-FR'],
       default: ['en-IE'],
     },

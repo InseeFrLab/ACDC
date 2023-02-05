@@ -105,6 +105,10 @@ const EventForm = (props: DataCollectionProps) => {
   };
 
   const checkValidation = () => {
+    console.log('Check validation');
+    console.log('labelArray: ', labelArray);
+    console.log('descriptionArray: ', descriptionArray);
+    console.log('collectionEventNameArray: ', collectionEventNameArray);
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
     const descriptionArrayFiltered = descriptionArray.filter(
       (obj) => obj.value !== ''

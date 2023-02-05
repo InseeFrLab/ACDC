@@ -60,7 +60,7 @@ const IntlTextInput = (props: any) => {
               <TextField
                 required
                 size="small"
-                label={t('label')}
+                // label={t('label')}
                 value={label.value}
                 sx={{ marginRight: 2, width: '100%' }}
                 onChange={handleTextChange}
@@ -84,7 +84,7 @@ const IntlTextInput = (props: any) => {
           );
         }
       )}
-
+      {/*
       <Box
         component="form"
         className="CollectionForm"
@@ -96,7 +96,7 @@ const IntlTextInput = (props: any) => {
         <Button variant="outlined" size="small" onClick={addTextLabel}>
           <Typography>{t('addLanguage', { ns: 'form' })}</Typography>
         </Button>
-      </Box>
+      </Box> */}
     </>
   );
 };

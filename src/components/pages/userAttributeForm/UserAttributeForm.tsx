@@ -19,16 +19,20 @@ import { useMutation } from '@tanstack/react-query';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
+import DragDropCollectionEvent from './DragDropCollectionEvent';
 
 interface UserAttributeFormProps {
   dataCollection: DataCollection;
 }
 
 const UserAttributeForm = (props: UserAttributeFormProps) => {
-  const { t } = useTranslation(['dataCollectionForm', 'form']);
+  const { t } = useTranslation(['userAttributeForm', 'form']);
   const navigate = useNavigate();
   const { dataCollection } = props;
-  const { collectionEvents } = dataCollection;
+  const [collectionEvents, setCollectionEvents] = useState(
+    dataCollection.collectionEvents
+  );
+  console.log('collectionEvents', collectionEvents);
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
   const [labelArray, setLabelArray] = useState([
@@ -102,6 +106,24 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
             <Typography variant="h6">{t('label', { ns: 'form' })}:</Typography>
           </Box>
           <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
+          <Box
+            sx={{
+              paddingTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">
+              {t('collectionEventReference', { ns: 'userAttributeForm' })}:
+            </Typography>
+          </Box>
+
+          <DragDropCollectionEvent
+            collectionEvents={collectionEvents}
+            setCollectionEvents={setCollectionEvents}
+          />
           <Box
             component="form"
             className="AttributeForm"
