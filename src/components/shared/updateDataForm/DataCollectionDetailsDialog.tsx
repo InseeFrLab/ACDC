@@ -26,7 +26,7 @@ interface DataCollectionDetailsDialogProps {
 const DataCollectionDetailsDialog = (
   props: DataCollectionDetailsDialogProps
 ) => {
-  const { t, i18n } = useTranslation(['dataCollectionDetails']);
+  const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
   const { open, handleClose, dataCollectionState } = props;
   console.log('DataCollectionState: ', dataCollectionState);
@@ -104,7 +104,7 @@ const DataCollectionDetailsDialog = (
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('label')}:{' '}
+                {t('label', { ns: 'form' })}:{' '}
               </Typography>
               <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
                 <TextField
@@ -172,7 +172,7 @@ const DataCollectionDetailsDialog = (
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('lastUpdate')}:{' '}
+                {t('lastUpdate', { ns: 'form' })}:{' '}
               </Typography>
               <Typography variant="body1">
                 {dataCollectionState.versionDate}

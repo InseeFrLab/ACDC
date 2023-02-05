@@ -101,7 +101,7 @@ const EventForm = (props: DataCollectionProps) => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate(-1);
+    navigate('/');
   };
 
   const checkValidation = () => {
@@ -358,7 +358,7 @@ const EventForm = (props: DataCollectionProps) => {
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-          <Typography variant="h5">{t('submitmessage')}</Typography>
+          <Typography variant="h5">{t('descriptionForm')}</Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>

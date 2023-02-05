@@ -276,7 +276,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               fontWeight="bold"
               sx={{ marginRight: 1 }}
             >
-              {t('modeOfCollection')}:{' '}
+              {t('modeOfCollection', { ns: 'collectionEvent' })}:{' '}
             </Typography>
           </Box>
           <FormControl size="small" fullWidth>

@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import {
   Typography,
   FormControl,
@@ -19,7 +18,12 @@ import { useMutation } from '@tanstack/react-query';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
-import DragDropCollectionEvent from './DragDropCollectionEvent';
+import CollectionEventCheckBox from './CollectionEventCheckbox';
+import DataCollectionApi from '../../../lib/model/dataCollectionApi';
+import {
+  UserAttributePair,
+  UserAttributePairValue,
+} from '../../../lib/model/userAttributePair';
 
 interface UserAttributeFormProps {
   dataCollection: DataCollection;
@@ -33,6 +37,12 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
     dataCollection.collectionEvents
   );
   console.log('collectionEvents', collectionEvents);
+
+  const [collectionEventCheck, setCollectionEventCheck] = useState(
+    collectionEvents.map((item) => {
+      return { [item.id]: false };
+    })
+  );
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
   const [labelArray, setLabelArray] = useState([
@@ -80,7 +90,40 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
       },
       {}
     );
-    // handleClickOpen();
+    const collectionEventsChecked = collectionEventCheck.filter(
+      (obj) => Object.values(obj)[0] === true
+    );
+
+    const collectionEventReference: Record<'id', string>[] =
+      collectionEventsChecked.map((obj) => {
+        return { id: Object.keys(obj)[0] };
+      });
+
+    console.log('collectionEventReferences', collectionEventReference);
+
+    const userAttributePairValue: UserAttributePairValue = {
+      label,
+      collectionEventReference,
+    };
+
+    const userAttributePair: UserAttributePair = {
+      attributeKey: 'extension:CollectionEventGroup',
+      attributeValue: [userAttributePairValue],
+    };
+
+    const dataCollectionUpdated: DataCollection = {
+      version: dataCollection.version + 1,
+      versionDate: today.toISOString(),
+      ...dataCollection,
+    };
+    dataCollectionUpdated.userAttributePair.push(userAttributePair);
+    console.log('dataCollectionUpdated', dataCollectionUpdated);
+    const updatedDataCollection: DataCollectionApi = {
+      id: dataCollection.id,
+      json: dataCollectionUpdated,
+    };
+    mutate(updatedDataCollection);
+    handleClickOpen();
   };
 
   const handleSubmit = (e: React.MouseEvent) => {
@@ -120,9 +163,10 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
             </Typography>
           </Box>
 
-          <DragDropCollectionEvent
+          <CollectionEventCheckBox
             collectionEvents={collectionEvents}
-            setCollectionEvents={setCollectionEvents}
+            collectionEventCheck={collectionEventCheck}
+            setCollectionEventCheck={setCollectionEventCheck}
           />
           <Box
             component="form"
@@ -171,7 +215,7 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {isSuccess ? t('successForm', { ns: 'dataCollectionForm' }) : ''}
+            {isSuccess ? t('successForm', { ns: 'userAttributeForm' }) : ''}
             {isLoading ? t('loading', { ns: 'form' }) : ''}
             {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>

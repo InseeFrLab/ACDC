@@ -107,6 +107,7 @@ const CollectionForm = () => {
       label,
       description,
       collectionEvents: [],
+      userAttributePair: [],
     };
 
     const dataCollection: DataCollectionApi = {

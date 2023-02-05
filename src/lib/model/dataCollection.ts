@@ -1,4 +1,5 @@
 import CollectionEvent from './collectionEvents';
+import { UserAttributePair } from './userAttributePair';
 
 export interface DataCollection {
   id: string;
@@ -8,6 +9,7 @@ export interface DataCollection {
   label: Record<'fr-FR' | 'en-IE' | string, string>;
   description: Record<'fr-FR' | 'en-IE' | string, string>;
   collectionEvents?: CollectionEvent[];
+  userAttributePair?: UserAttributePair[];
 }
 
 export interface DataCollectionRow {

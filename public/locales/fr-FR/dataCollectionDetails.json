@@ -11,5 +11,6 @@
   "successEvent": "Lot supprimé avec succès",
   "saveDataCollection": "Sauvegarder la campagne",
   "successDataCollection": "Campagne sauvegardée avec succès",
-  "createUserAttribute": "Nouveau Groupe"
+  "createUserAttribute": "Nouveau Groupe",
+  "editEvent": "Modifier le lot"
 }

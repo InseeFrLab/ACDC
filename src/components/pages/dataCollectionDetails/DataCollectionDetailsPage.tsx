@@ -16,12 +16,18 @@ import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import DataCollectionDetailsDialog from '../../shared/updateDataForm/DataCollectionDetailsDialog';
-import CollectionEventDisplay from './CollectionEvent';
+import CollectionEventDisplay from './CollectionEventDisplay';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
+import UserAttributeDisplay from './UserAttributeDisplay';
 
 const DataCollectionDetails = () => {
-  const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
+  const { t, i18n } = useTranslation([
+    'DataCollectionDetails',
+    'Form',
+    'UserAttributeForm',
+    'CollectionEvent',
+  ]);
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
@@ -90,7 +96,7 @@ const DataCollectionDetails = () => {
           justifyContent: 'space-between',
         }}
       >
-        <Typography variant="h6" fontWeight="xl">
+        <Typography variant="h3" fontWeight="xl">
           {dataCollection.label[i18n.language]}
         </Typography>
         <Button
@@ -110,6 +116,20 @@ const DataCollectionDetails = () => {
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
       />
+      <Box
+        sx={{
+          paddingTop: 2,
+          marginTop: 2,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          borderTop: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Typography variant="h5">
+          {t('title', { ns: 'collectionEvent' })}:
+        </Typography>
+      </Box>
       <Box>
         {dataCollectionState.collectionEvents.map((event) => {
           return (
@@ -119,6 +139,35 @@ const DataCollectionDetails = () => {
               handleDeleteCollectionEvent={handleDeleteCollectionEvent}
               dataCollectionState={dataCollectionState}
               setDataCollectionState={setDataCollectionState}
+            />
+          );
+        })}
+      </Box>
+      <Box
+        sx={{
+          paddingTop: 2,
+          marginTop: 2,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          borderTop: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Typography variant="h5">
+          {t('title', { ns: 'userAttributeForm' })}:
+        </Typography>
+      </Box>
+      <Box>
+        {dataCollectionState.userAttributePair.map((attribute) => {
+          return (
+            <UserAttributeDisplay
+              key={attribute.attributeKey}
+              userAttribute={attribute}
+              dataCollectionState={dataCollectionState}
+              setDataCollectionState={setDataCollectionState}
+              handleDeleteUserAttribute={() => {
+                console.log('Delete');
+              }}
             />
           );
         })}
@@ -146,13 +195,17 @@ const DataCollectionDetails = () => {
       </Dialog>
       <Dialog open={openSave} onClose={handleCloseSave}>
         <DialogTitle>
-          <Typography variant="h5">{t('saveDataCollection')}</Typography>
+          <Typography variant="h5">
+            {t('saveDataCollection', { ns: 'DataCollectionDetails' })}
+          </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {isSuccess ? t('successDataCollection') : ''}
-            {isLoading ? t('loading') : ''}
-            {isError ? t('error') : ''}
+            {isSuccess
+              ? t('successDataCollection', { ns: 'DataCollectionDetails' })
+              : ''}
+            {isLoading ? t('loading', { ns: 'form' }) : ''}
+            {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

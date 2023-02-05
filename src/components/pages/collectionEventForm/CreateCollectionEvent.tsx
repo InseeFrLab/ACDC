@@ -7,7 +7,7 @@ import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { DataCollection } from '../../../lib/model/dataCollection';
 
 const CreateCollectionEvent = () => {
-  const { t } = useTranslation(['collectionEventForm']);
+  const { t } = useTranslation(['collectionEvent', 'form']);
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   console.log('Create New collection  for dataCollection:', dataCollection);
   const dataCollectionApi: DataCollectionApi = {
@@ -19,9 +19,7 @@ const CreateCollectionEvent = () => {
       <Typography variant="h2" fontWeight="xl">
         {t('title')}
       </Typography>
-      <Typography variant="subtitle1">
-        {t('description') + dataCollection.id}
-      </Typography>
+      <Typography variant="subtitle1">{t('descriptionForm')}</Typography>
       <EventForm DataCollectionApi={dataCollectionApi} />
     </Main>
   );

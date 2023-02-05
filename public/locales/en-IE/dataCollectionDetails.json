@@ -11,5 +11,6 @@
   "successEvent": "Collection Event deleted successfully",
   "saveDataCollection": "Save Data Collection",
   "successDataCollection": "Data Collection saved successfully",
-  "createUserAttribute": "Create User Attribute"
+  "createUserAttribute": "Create User Attribute",
+  "editEvent": "Edit Collection Event"
 }
