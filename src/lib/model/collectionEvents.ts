@@ -1,5 +1,6 @@
 import InstrumentReference from './instrumentReference';
 import { TypeOfModeOfCollection } from './typeOfModeOfCollection';
+import { UserAttributePairCollection } from './userAttributePairCollection';
 
 export default interface CollectionEvent {
   id: string;
@@ -11,4 +12,5 @@ export default interface CollectionEvent {
   dataCollectionDate: Record<'startDate' | 'endDate' | string, string>;
   typeOfModeOfCollection: TypeOfModeOfCollection[];
   instrumentReference: InstrumentReference;
+  userReferencePair: UserAttributePairCollection[];
 }

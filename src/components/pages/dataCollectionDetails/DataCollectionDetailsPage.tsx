@@ -12,11 +12,12 @@ import {
   DialogContentText,
   DialogActions,
 } from '@mui/material';
+import { ContactPageSharp } from '@mui/icons-material';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import DataCollectionDetailsDialog from '../../shared/updateDataForm/DataCollectionDetailsDialog';
-import CollectionEventDisplay from './CollectionEventDisplay';
+import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import UserAttributeDisplay from './UserAttributeDisplay';
@@ -29,7 +30,9 @@ const DataCollectionDetails = () => {
     'CollectionEvent',
   ]);
   const navigate = useNavigate();
-  const dataCollection = useLocation().state.dataCollection as DataCollection;
+  console.log('State : ', useLocation().state);
+  const dataCollection = useLocation().state
+    .dataCollectionState as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
     useState(dataCollection);
   const [open, setOpen] = useState(false);

@@ -1,5 +1,5 @@
 {
-  "submit": "Envoyer",
+  "submit": "Valider",
   "cancel": "Annuler",
   "close": "Fermer",
   "label": "Label",
@@ -12,5 +12,6 @@
   "error": "Une erreur est survenue",
   "addLanguage": "Ajouter une langue",
   "textFieldError": "Veuillez remplir l'intégralité des champs",
-  "delete": "Supprimer"
+  "delete": "Supprimer",
+  "addCommunication": "Ajouter une communication"
 }

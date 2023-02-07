@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -25,6 +26,7 @@ import {
   InputLabel,
 } from '@mui/material';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
+import CollectionCommunicationSelect from '../../shared/collectionCommunication/collectionCommunication';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import {
   TypeOfModeOfCollection,
@@ -32,9 +34,10 @@ import {
 } from '../../../lib/model/typeOfModeOfCollection';
 
 import InstrumentReference from '../../../lib/model/instrumentReference';
-
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
+import { DataCollection } from '../../../lib/model/dataCollection';
+import { UserAttributePairCollection } from '../../../lib/model/userAttributePairCollection';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;
@@ -45,9 +48,23 @@ const EventForm = (props: DataCollectionProps) => {
   const navigate = useNavigate();
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
+  const [dataCollectionState, setDataCollectionState] =
+    useState<DataCollectionApi>(props.DataCollectionApi);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [modeCollection, setModeCollection] = useState<string[]>([]);
+  const [userAttributePair, setUserAttributePair] = useState([
+    {
+      id: 1,
+      type: 'Opening',
+      media: 'Email',
+    },
+    {
+      id: 2,
+      type: 'Remind',
+      media: 'Mail',
+    },
+  ]);
   const [collectionEventNameArray, setCollectionEventNameArray] = useState([
     {
       id: 1,
@@ -96,12 +113,15 @@ const EventForm = (props: DataCollectionProps) => {
 
   const handleClickOpen = () => {
     setOpen(true);
-    console.log('Start date: ', startDate);
+    console.log('dataCollectionState: ', dataCollectionState);
   };
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/');
+    const dataCollection = dataCollectionState.json;
+    navigate(`/collection/${dataCollectionState.id}`, {
+      state: { dataCollection },
+    });
   };
 
   const checkValidation = () => {
@@ -166,7 +186,6 @@ const EventForm = (props: DataCollectionProps) => {
         },
         {}
       );
-
     const data: CollectionEvent = {
       id: uuidv4(),
       agency: 'fr.insee',
@@ -180,6 +199,7 @@ const EventForm = (props: DataCollectionProps) => {
         startDate: formatISO(startDate),
         endDate: formatISO(endDate),
       },
+      userAttributePair: [],
     };
     const now = Date.now();
     const today: string = new Date(now).toISOString();
@@ -198,7 +218,7 @@ const EventForm = (props: DataCollectionProps) => {
     );
 
     mutate(updatedDataCollection);
-
+    setDataCollectionState(updatedDataCollection);
     handleClickOpen();
   };
   const handleSubmit = (e: React.MouseEvent) => {
@@ -287,6 +307,23 @@ const EventForm = (props: DataCollectionProps) => {
           <IntlTextInput
             textArray={descriptionArray}
             setTextArray={setDescriptionArray}
+          />
+          <Box
+            sx={{
+              paddingTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">
+              {t('collectionCommunication', { ns: 'collectionEvent' })}:
+            </Typography>
+          </Box>
+          <CollectionCommunicationSelect
+            userAttributePair={userAttributePair}
+            setUserAttributePair={setUserAttributePair}
           />
 
           <Box

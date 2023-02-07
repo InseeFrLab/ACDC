@@ -3,5 +3,9 @@
   "descriptionForm": "Create a new user attribute",
   "successForm": "User attribute created successfully",
   "errorForm": "Error creating user attribute",
-  "collectionEventReference": "Collection Event Reference"
+  "collectionEventReference": "Collection Event Reference",
+  "email": "Email",
+  "mail": "Courrier",
+  "opening": "Opening",
+  "remind": "Remind"
 }

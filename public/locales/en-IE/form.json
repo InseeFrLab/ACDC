@@ -12,5 +12,6 @@
   "error": "An error occurred",
   "addLanguage": "Add language",
   "textFieldError": "All fields are required",
-  "delete": "Delete"
+  "delete": "Delete",
+  "addCommunication": "Add communication"
 }

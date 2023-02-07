@@ -7,5 +7,6 @@
   "collectionEndDate": "Date de fin de collecte",
   "modeOfCollection": "Mode de collecte",
   "instrumentReference": "Instrument",
-  "addModeCollection": "Ajouter un mode de collecte"
+  "addModeCollection": "Ajouter un mode de collecte",
+  "collectionCommunication": "Mode de communication"
 }

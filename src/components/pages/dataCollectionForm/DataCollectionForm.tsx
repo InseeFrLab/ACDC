@@ -53,6 +53,8 @@ const CollectionForm = () => {
   ]);
   const [textError, setTextError] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dataCollectionState, setDataCollectionState] =
+    useState<DataCollection>({} as DataCollection);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -60,7 +62,9 @@ const CollectionForm = () => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/');
+    navigate(`/collection/${dataCollectionState.id}`, {
+      state: { dataCollectionState },
+    });
   };
 
   const checkValidation = () => {
@@ -114,6 +118,7 @@ const CollectionForm = () => {
       id,
       json: data,
     };
+    setDataCollectionState(data);
     mutate(dataCollection);
     handleClickOpen();
   };
@@ -204,7 +209,9 @@ const CollectionForm = () => {
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-          <Typography variant="h5">{t('submitmessage')}</Typography>
+          <Typography variant="h5">
+            {t('descriptionCreateForm', { ns: 'dataCollectionForm' })}
+          </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
