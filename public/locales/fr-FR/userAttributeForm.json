@@ -7,5 +7,8 @@
   "email": "Email",
   "mail": "Courrier",
   "opening": "Ouverture",
-  "remind": "Relance"
+  "remind": "Relance",
+  "paperQuestionnaire": "Questionnaire papier",
+  "type": "Type",
+  "media": "Moyen de communication"
 }

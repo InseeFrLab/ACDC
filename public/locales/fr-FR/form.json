@@ -5,7 +5,7 @@
   "label": "Label",
   "description": "Description",
   "version": "Version",
-  "name": "Nom",
+  "name": "Nom court",
   "lastUpdate": "Dernière mise à jour",
   "descriptionField": "Description",
   "loading": "Chargement de la requête...",

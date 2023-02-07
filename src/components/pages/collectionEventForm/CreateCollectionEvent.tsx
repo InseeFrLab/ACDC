@@ -19,7 +19,6 @@ const CreateCollectionEvent = () => {
       <Typography variant="h2" fontWeight="xl">
         {t('title')}
       </Typography>
-      <Typography variant="subtitle1">{t('descriptionForm')}</Typography>
       <EventForm DataCollectionApi={dataCollectionApi} />
     </Main>
   );

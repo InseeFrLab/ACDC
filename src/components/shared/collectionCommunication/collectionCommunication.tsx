@@ -29,6 +29,7 @@ const CollectionCommunicationSelect = (
         id: lastTextId + 1,
         type: 'Opening',
         media: 'Email',
+        paperQuestionnaire: false,
       },
     ]);
   };
@@ -39,7 +40,10 @@ const CollectionCommunicationSelect = (
   ) => {
     e.preventDefault();
     props.setUserAttributePair((s: any) => {
-      const newText: Record<'id' | 'type' | 'media', string>[] = s.slice();
+      const newText: Record<
+        'id' | 'type' | 'media' | 'paperQuestionnaire',
+        string | boolean
+      >[] = s.slice();
       newText[index].type = e.target.value;
       console.log('newText: ', newText);
       return newText;
@@ -52,9 +56,26 @@ const CollectionCommunicationSelect = (
   ) => {
     e.preventDefault();
     props.setUserAttributePair((s: any) => {
-      const newText: Record<'id' | 'type' | 'media', string>[] = s.slice();
+      const newText: Record<
+        'id' | 'type' | 'media' | 'paperQuestionnaire',
+        string | boolean
+      >[] = s.slice();
       newText[index].media = e.target.value;
-      console.log('newText: ', newText);
+      return newText;
+    });
+  };
+
+  const handleUserAttributePaperChange = (
+    e: SelectChangeEvent<boolean>,
+    index: number
+  ) => {
+    e.preventDefault();
+    props.setUserAttributePair((s: any) => {
+      const newText: Record<
+        'id' | 'type' | 'media' | 'paperQuestionnaire',
+        string | boolean
+      >[] = s.slice();
+      newText[index].paperQuestionnaire = e.target.value;
       return newText;
     });
   };
@@ -62,7 +83,15 @@ const CollectionCommunicationSelect = (
   return (
     <>
       {userAttributePair.map(
-        (label: { id: number; type: string; media: string }, index: number) => {
+        (
+          label: {
+            id: number;
+            type: string;
+            media: string;
+            paperQuestionnaire: boolean;
+          },
+          index: number
+        ) => {
           return (
             <Box
               sx={{
@@ -113,6 +142,23 @@ const CollectionCommunicationSelect = (
                   <MenuItem value="Remind">
                     {t('remind', { ns: 'userAttributeForm' })}
                   </MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl size="small" fullWidth>
+                <Select
+                  color="primary"
+                  value={label.paperQuestionnaire}
+                  onChange={(e) => handleUserAttributePaperChange(e, index)}
+                  id={index.toString()}
+                  sx={{
+                    '& legend': { display: 'none' },
+                    '& fieldset': { top: 0 },
+                    marginLeft: 1,
+                  }}
+                  notched
+                >
+                  <MenuItem value="true">True</MenuItem>
+                  <MenuItem value="false">False</MenuItem>
                 </Select>
               </FormControl>
             </Box>

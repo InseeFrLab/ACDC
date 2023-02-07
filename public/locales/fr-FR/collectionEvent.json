@@ -1,5 +1,5 @@
 {
-  "title": "Lot",
+  "title": "Nouveau lot",
   "descriptionForm": "Créer un nouveau lot",
   "successForm": "Le lot a été créé avec succès",
   "dataCollectionDate": "Date de collecte des données",
@@ -8,5 +8,7 @@
   "modeOfCollection": "Mode de collecte",
   "instrumentReference": "Instrument",
   "addModeCollection": "Ajouter un mode de collecte",
-  "collectionCommunication": "Mode de communication"
+  "collectionCommunication": "Stratégie de communication",
+  "textFieldError": "Veuillez renseigner les champs obligatoires",
+  "questionnaireModel": "Modèle de questionnaire"
 }

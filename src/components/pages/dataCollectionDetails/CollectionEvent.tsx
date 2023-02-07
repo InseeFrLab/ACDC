@@ -11,6 +11,7 @@ import {
   IconButtonProps,
   Collapse,
   CardContent,
+  Stack,
 } from '@mui/material';
 import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
@@ -44,7 +45,6 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     'form',
     'userAttributeForm',
   ]);
-  console.log('props CollectionEventDisplay: ', props);
   const { collectionEvent, dataCollectionState, setDataCollectionState } =
     props;
   const [collectionEventState, setCollectionEventState] =
@@ -218,19 +218,22 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               >
                 {t('title', { ns: 'userAttributeForm' })}:
               </Typography>
-
+            </Box>
+            <Stack sx={{ alignItems: 'flex-start' }}>
               {collectionEvent.userAttributePair.map((pair) => {
                 return pair.attributeValue.map((value) => {
                   return (
                     <Typography variant="body1" key={value.id} sx={{ ml: 0.5 }}>
-                      {value.type}
-                      {' - '}
-                      {value.media}.
+                      • {t('type', { ns: 'userAttributeForm' })} : {value.type}{' '}
+                      - {t('media', { ns: 'userAttributeForm' })} :{' '}
+                      {value.media} -{' '}
+                      {t('paperQuestionnaire', { ns: 'userAttributeForm' })} :{' '}
+                      {value.paperQuestionnaire.toString()}
                     </Typography>
                   );
                 });
               })}
-            </Box>
+            </Stack>
             <Box
               sx={{
                 display: 'flex',

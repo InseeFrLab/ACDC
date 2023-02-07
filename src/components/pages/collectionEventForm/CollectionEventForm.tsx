@@ -60,11 +60,7 @@ const EventForm = (props: DataCollectionProps) => {
       id: 1,
       type: 'Opening',
       media: 'Email',
-    },
-    {
-      id: 2,
-      type: 'Remind',
-      media: 'Mail',
+      paperQuestionnaire: 'false',
     },
   ]);
   const [collectionEventNameArray, setCollectionEventNameArray] = useState([
@@ -132,15 +128,12 @@ const EventForm = (props: DataCollectionProps) => {
     console.log('descriptionArray: ', descriptionArray);
     console.log('collectionEventNameArray: ', collectionEventNameArray);
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
-    const descriptionArrayFiltered = descriptionArray.filter(
-      (obj) => obj.value !== ''
-    );
+
     const collectionEventNameArrayFiltered = collectionEventNameArray.filter(
       (obj) => obj.value !== ''
     );
     if (
       labelArrayFiltered.length === 2 &&
-      descriptionArrayFiltered.length === 2 &&
       collectionEventNameArrayFiltered.length === 2
     ) {
       setTextError(false);
@@ -198,7 +191,7 @@ const EventForm = (props: DataCollectionProps) => {
         id: uuidv4(),
         type: obj.type,
         media: obj.media,
-        paperQuestionnaire: false,
+        paperQuestionnaire: JSON.parse(obj.paperQuestionnaire),
       });
     });
     const userAttributePairCollection: UserAttributePairCollection = {
@@ -264,6 +257,38 @@ const EventForm = (props: DataCollectionProps) => {
         <IntlTextInput
           textArray={collectionEventNameArray}
           setTextArray={setCollectionEventNameArray}
+          multiline={false}
+        />
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
+        </Box>
+        <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('descriptionField', { ns: 'form' })}:
+          </Typography>
+        </Box>
+
+        <IntlTextInput
+          textArray={descriptionArray}
+          setTextArray={setDescriptionArray}
+          multiline
         />
         <Box
           sx={{
@@ -302,17 +327,6 @@ const EventForm = (props: DataCollectionProps) => {
         </FormControl>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
-        </Box>
-        <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
-        <Box
-          sx={{
             paddingTop: 2,
             display: 'flex',
             justifyContent: 'flex-start',
@@ -321,32 +335,10 @@ const EventForm = (props: DataCollectionProps) => {
           }}
         >
           <Typography variant="h6">
-            {t('descriptionField', { ns: 'form' })}*:
+            {t('questionnaireModel', { ns: 'collectionEvent' })} (TODO : Lien à
+            faire avec Pogues):
           </Typography>
         </Box>
-
-        <IntlTextInput
-          textArray={descriptionArray}
-          setTextArray={setDescriptionArray}
-        />
-        <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('collectionCommunication', { ns: 'collectionEvent' })}:
-          </Typography>
-        </Box>
-        <CollectionCommunicationSelect
-          userAttributePair={userAttributePairArray}
-          setUserAttributePair={setUserAttributePairArray}
-        />
-
         <Box
           sx={{
             paddingTop: 2,
@@ -379,6 +371,24 @@ const EventForm = (props: DataCollectionProps) => {
             />
           </FormControl>
         </Stack>
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('collectionCommunication', { ns: 'collectionEvent' })}:
+          </Typography>
+        </Box>
+
+        <CollectionCommunicationSelect
+          userAttributePair={userAttributePairArray}
+          setUserAttributePair={setUserAttributePairArray}
+        />
 
         <Box
           sx={{
@@ -411,7 +421,7 @@ const EventForm = (props: DataCollectionProps) => {
               fontWeight="bold"
               color="error"
             >
-              {t('textFieldError', { ns: 'form' })}
+              {t('textFieldError', { ns: 'collectionEvent' })}
             </Typography>
           )}
         </Box>

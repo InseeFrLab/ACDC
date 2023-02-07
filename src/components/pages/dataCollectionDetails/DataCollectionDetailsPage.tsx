@@ -61,7 +61,7 @@ const DataCollectionDetails = () => {
     setOpenSave(false);
     const dataCollectionLink = dataCollectionState;
     navigate(`/collection/${dataCollectionLink.id}`, {
-      state: { dataCollectionLink },
+      state: { dataCollection: dataCollectionLink },
     });
   };
 

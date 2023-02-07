@@ -8,5 +8,7 @@
   "modeOfCollection": "Collection mode",
   "instrumentReference": "Instrument reference",
   "addModeCollection": "Add collection mode",
-  "collectionCommunication": "Mode de communication"
+  "collectionCommunication": "Mode de communication",
+  "textFieldError": "Field Name and Label are required",
+  "questionnaireModel": "Questionnaire model"
 }
