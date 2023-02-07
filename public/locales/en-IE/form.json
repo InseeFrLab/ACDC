@@ -11,7 +11,7 @@
   "loading": "Request is being processed...",
   "error": "An error occurred",
   "addLanguage": "Add language",
-  "textFieldError": "All fields are required",
+  "textFieldError": "Field 'Label' is required",
   "delete": "Delete",
   "addCommunication": "Add communication"
 }
