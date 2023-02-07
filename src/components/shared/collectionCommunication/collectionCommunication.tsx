@@ -18,9 +18,7 @@ const CollectionCommunicationSelect = (
   props: CollectionCommunicationSelectProps
 ) => {
   const { t } = useTranslation(['userAttributeForm', 'form']);
-  console.log('props: ', props);
   const { userAttributePair } = props;
-  console.log('userAttributePair: ', userAttributePair);
   const addCommunicationLabel = () => {
     const lastTextId: number =
       userAttributePair[userAttributePair.length - 1].id;
@@ -65,7 +63,6 @@ const CollectionCommunicationSelect = (
     <>
       {userAttributePair.map(
         (label: { id: number; type: string; media: string }, index: number) => {
-          console.log('label: ', label);
           return (
             <Box
               sx={{
@@ -114,7 +111,7 @@ const CollectionCommunicationSelect = (
                     {t('opening', { ns: 'userAttributeForm' })}
                   </MenuItem>
                   <MenuItem value="Remind">
-                    {t('emind', { ns: 'userAttributeForm' })}
+                    {t('remind', { ns: 'userAttributeForm' })}
                   </MenuItem>
                 </Select>
               </FormControl>

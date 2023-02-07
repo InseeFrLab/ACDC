@@ -36,8 +36,10 @@ import {
 import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import { DataCollection } from '../../../lib/model/dataCollection';
-import { UserAttributePairCollection } from '../../../lib/model/userAttributePairCollection';
+import {
+  UserAttributePairCollection,
+  UserAttributePairCollectionRow,
+} from '../../../lib/model/userAttributePairCollection';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;
@@ -53,7 +55,7 @@ const EventForm = (props: DataCollectionProps) => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [modeCollection, setModeCollection] = useState<string[]>([]);
-  const [userAttributePair, setUserAttributePair] = useState([
+  const [userAttributePairArray, setUserAttributePairArray] = useState([
     {
       id: 1,
       type: 'Opening',
@@ -149,6 +151,9 @@ const EventForm = (props: DataCollectionProps) => {
   };
 
   const createCollectionEventObject = () => {
+    console.log('userAttributePair: ', userAttributePairArray);
+
+    console.log('label: ', labelArray);
     const instrument: InstrumentReference = {
       id: '493f8b38-1198-4e45-99d2-531ac8a48a48',
       agency: 'fr.insee',
@@ -186,6 +191,24 @@ const EventForm = (props: DataCollectionProps) => {
         },
         {}
       );
+    const attributeValue: UserAttributePairCollectionRow[] = [];
+    // TODO: Replace for each
+    userAttributePairArray.forEach((obj) => {
+      attributeValue.push({
+        id: uuidv4(),
+        type: obj.type,
+        media: obj.media,
+        paperQuestionnaire: false,
+      });
+    });
+    const userAttributePairCollection: UserAttributePairCollection = {
+      attributeKey: 'extension:CollectionCommunicationSteps',
+      attributeValue,
+    };
+    const userAttributePairCollectionArray: UserAttributePairCollection[] = [];
+    userAttributePairCollectionArray.push(userAttributePairCollection);
+
+    console.log('attributeValue: ', userAttributePairCollectionArray);
     const data: CollectionEvent = {
       id: uuidv4(),
       agency: 'fr.insee',
@@ -199,12 +222,11 @@ const EventForm = (props: DataCollectionProps) => {
         startDate: formatISO(startDate),
         endDate: formatISO(endDate),
       },
-      userAttributePair: [],
+      userAttributePair: userAttributePairCollectionArray,
     };
     const now = Date.now();
     const today: string = new Date(now).toISOString();
     props.DataCollectionApi.json.collectionEvents.push(data);
-    props.DataCollectionApi.json.version += 1;
     props.DataCollectionApi.json.versionDate = today;
 
     const updatedDataCollection: DataCollectionApi = {
@@ -230,122 +252,124 @@ const EventForm = (props: DataCollectionProps) => {
 
   return (
     <>
-      <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-        <Stack spacing={2}>
-          <Box
+      <Stack spacing={2}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <Typography variant="h6">{t('name', { ns: 'form' })}*:</Typography>
+        </Box>
+        <IntlTextInput
+          textArray={collectionEventNameArray}
+          setTextArray={setCollectionEventNameArray}
+        />
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('modeOfCollection', { ns: 'collectionEvent' })}:
+          </Typography>
+        </Box>
+        <FormControl size="small" fullWidth>
+          <Select
+            labelId="multiple-mode-label"
             sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
+              width: 200,
+              '& legend': { display: 'none' },
+              '& fieldset': { top: 0 },
             }}
+            notched
+            multiple
+            // @ts-expect-error mui types are wrong for multiple select
+            value={modeCollection}
+            onChange={handleModeCollectionChange}
+            input={<OutlinedInput label="Name" />}
           >
-            <Typography variant="h6">{t('name', { ns: 'form' })}:</Typography>
-          </Box>
-          <IntlTextInput
-            textArray={collectionEventNameArray}
-            setTextArray={setCollectionEventNameArray}
-          />
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('modeOfCollection', { ns: 'collectionEvent' })}:
-            </Typography>
-          </Box>
-          <FormControl size="small" fullWidth>
-            <Select
-              labelId="multiple-mode-label"
-              sx={{
-                width: 200,
-                '& legend': { display: 'none' },
-                '& fieldset': { top: 0 },
-              }}
-              notched
-              multiple
-              // @ts-expect-error mui types are wrong for multiple select
-              value={modeCollection}
-              onChange={handleModeCollectionChange}
-              input={<OutlinedInput label="Name" />}
-            >
-              {typeMode.map((mode) => (
-                <MenuItem key={mode.type} value={mode.type}>
-                  {mode.type}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">{t('label', { ns: 'form' })}:</Typography>
-          </Box>
-          <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('descriptionField', { ns: 'form' })}:
-            </Typography>
-          </Box>
+            {typeMode.map((mode) => (
+              <MenuItem key={mode.type} value={mode.type}>
+                {mode.type}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
+        </Box>
+        <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('descriptionField', { ns: 'form' })}*:
+          </Typography>
+        </Box>
 
-          <IntlTextInput
-            textArray={descriptionArray}
-            setTextArray={setDescriptionArray}
-          />
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('collectionCommunication', { ns: 'collectionEvent' })}:
-            </Typography>
-          </Box>
-          <CollectionCommunicationSelect
-            userAttributePair={userAttributePair}
-            setUserAttributePair={setUserAttributePair}
-          />
+        <IntlTextInput
+          textArray={descriptionArray}
+          setTextArray={setDescriptionArray}
+        />
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('collectionCommunication', { ns: 'collectionEvent' })}:
+          </Typography>
+        </Box>
+        <CollectionCommunicationSelect
+          userAttributePair={userAttributePairArray}
+          setUserAttributePair={setUserAttributePairArray}
+        />
 
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('dataCollectionDate', { ns: 'collectionEvent' })}:
-            </Typography>
-          </Box>
-          <Stack spacing={2} direction="row">
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('dataCollectionDate', { ns: 'collectionEvent' })}:
+          </Typography>
+        </Box>
+        <Stack spacing={2} direction="row">
+          <FormControl size="small">
             <DatePicker
               label={t('collectionStartDate', { ns: 'collectionEvent' })}
               value={startDate}
               onChange={(date) => date && setStartDate(date)}
               renderInput={(params) => <TextField {...params} />}
             />
+          </FormControl>
+          <FormControl size="small">
             <DatePicker
               label={t('collectionEndDate', { ns: 'collectionEvent' })}
               value={endDate}
@@ -353,45 +377,45 @@ const EventForm = (props: DataCollectionProps) => {
               onChange={(date) => date && setEndDate(date)}
               renderInput={(params) => <TextField {...params} />}
             />
-          </Stack>
-
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              paddingTop: 2,
-              borderColor: 'divider',
-            }}
-          >
-            <Button
-              variant="outlined"
-              sx={{ marginRight: 2 }}
-              onClick={handleClose}
-            >
-              <Typography variant="subtitle1">
-                {t('cancel', { ns: 'form' })}
-              </Typography>
-            </Button>
-            <Button variant="contained" onClick={handleSubmit}>
-              <Typography variant="subtitle1">
-                {t('submit', { ns: 'form' })}
-              </Typography>
-            </Button>
-            {textError && (
-              <Typography
-                variant="subtitle1"
-                marginLeft={2}
-                fontWeight="bold"
-                color="error"
-              >
-                {t('textFieldError', { ns: 'form' })}
-              </Typography>
-            )}
-          </Box>
+          </FormControl>
         </Stack>
-      </FormControl>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            paddingTop: 2,
+            borderColor: 'divider',
+          }}
+        >
+          <Button
+            variant="outlined"
+            sx={{ marginRight: 2 }}
+            onClick={handleClose}
+          >
+            <Typography variant="subtitle1">
+              {t('cancel', { ns: 'form' })}
+            </Typography>
+          </Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            <Typography variant="subtitle1">
+              {t('submit', { ns: 'form' })}
+            </Typography>
+          </Button>
+          {textError && (
+            <Typography
+              variant="subtitle1"
+              marginLeft={2}
+              fontWeight="bold"
+              color="error"
+            >
+              {t('textFieldError', { ns: 'form' })}
+            </Typography>
+          )}
+        </Box>
+      </Stack>
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>

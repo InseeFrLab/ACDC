@@ -31,13 +31,14 @@ const DataCollectionDetails = () => {
   ]);
   const navigate = useNavigate();
   console.log('State : ', useLocation().state);
-  const dataCollection = useLocation().state
-    .dataCollectionState as DataCollection;
+  const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
     useState(dataCollection);
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
+
+  console.log('Data Collection: ', dataCollectionState);
 
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);

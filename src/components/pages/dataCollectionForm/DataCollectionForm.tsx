@@ -221,7 +221,14 @@ const CollectionForm = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose} autoFocus>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setOpen(false);
+              navigate(-1);
+            }}
+            autoFocus
+          >
             {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
