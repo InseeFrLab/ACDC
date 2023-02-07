@@ -51,7 +51,7 @@ const DataCollectionDetails = () => {
     setOpen(false);
     const dataCollectionLink = dataCollectionState;
     navigate(`/collection/${dataCollectionLink.id}`, {
-      state: { dataCollectionLink },
+      state: { dataCollection: dataCollectionLink },
     });
   };
   const handleCloseDelete = () => {

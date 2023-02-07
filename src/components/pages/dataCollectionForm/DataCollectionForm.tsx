@@ -63,19 +63,13 @@ const CollectionForm = () => {
   const handleClose = () => {
     setOpen(false);
     navigate(`/collection/${dataCollectionState.id}`, {
-      state: { dataCollectionState },
+      state: { dataCollection: dataCollectionState },
     });
   };
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
-    const descriptionArrayFiltered = descriptionArray.filter(
-      (obj) => obj.value !== ''
-    );
-    if (
-      labelArrayFiltered.length === 2 &&
-      descriptionArrayFiltered.length === 2
-    ) {
+    if (labelArrayFiltered.length === 2) {
       setTextError(false);
       return true;
     }
@@ -143,9 +137,15 @@ const CollectionForm = () => {
               paddingTop: 2,
             }}
           >
-            <Typography variant="h6">{t('label', { ns: 'form' })}:</Typography>
+            <Typography variant="h6">
+              {t('label', { ns: 'form' })}* :
+            </Typography>
           </Box>
-          <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
+          <IntlTextInput
+            textArray={labelArray}
+            setTextArray={setLabelArray}
+            multiline={false}
+          />
           <Box
             component="form"
             className="CollectionForm"
@@ -158,13 +158,14 @@ const CollectionForm = () => {
             }}
           >
             <Typography variant="h6">
-              {t('descriptionField', { ns: 'form' })}:
+              {t('descriptionField', { ns: 'form' })}* :
             </Typography>
           </Box>
 
           <IntlTextInput
             textArray={descriptionArray}
             setTextArray={setDescriptionArray}
+            multiline
           />
           <Box
             component="form"
@@ -182,7 +183,7 @@ const CollectionForm = () => {
             <Button
               variant="outlined"
               sx={{ marginRight: 2 }}
-              onClick={handleClose}
+              onClick={() => navigate('/')}
             >
               <Typography variant="subtitle1">
                 {t('cancel', { ns: 'form' })}
@@ -221,14 +222,7 @@ const CollectionForm = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            variant="contained"
-            onClick={() => {
-              setOpen(false);
-              navigate(-1);
-            }}
-            autoFocus
-          >
+          <Button variant="contained" onClick={handleClose} autoFocus>
             {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>

@@ -63,6 +63,7 @@ const IntlTextInput = (props: any) => {
                 <TextField
                   required
                   size="small"
+                  multiline={props.multiline}
                   // label={t('label')}
                   value={label.value}
                   sx={{ paddingRight: 2, width: '99%' }}

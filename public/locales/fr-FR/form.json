@@ -11,7 +11,7 @@
   "loading": "Chargement de la requête...",
   "error": "Une erreur est survenue",
   "addLanguage": "Ajouter une langue",
-  "textFieldError": "Veuillez remplir l'intégralité des champs",
+  "textFieldError": "Veuillez renseigner les champs Label",
   "delete": "Supprimer",
   "addCommunication": "Ajouter une communication"
 }
