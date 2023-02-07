@@ -115,7 +115,6 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
     });
     props.setCollectionEventState({
       ...collectionEventState,
-      version: collectionEventState.version + 1,
     });
     const now = Date.now();
     const today: string = new Date(now).toISOString();

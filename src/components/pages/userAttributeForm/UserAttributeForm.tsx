@@ -112,7 +112,6 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
     };
 
     const dataCollectionUpdated: DataCollection = {
-      version: dataCollection.version + 1,
       versionDate: today.toISOString(),
       ...dataCollection,
     };

@@ -49,13 +49,20 @@ const DataCollectionDetails = () => {
 
   const handleClose = () => {
     setOpen(false);
+    const dataCollectionLink = dataCollectionState;
+    navigate(`/collection/${dataCollectionLink.id}`, {
+      state: { dataCollectionLink },
+    });
   };
   const handleCloseDelete = () => {
     setOpenDelete(false);
   };
   const handleCloseSave = () => {
     setOpenSave(false);
-    navigate('/');
+    const dataCollectionLink = dataCollectionState;
+    navigate(`/collection/${dataCollectionLink.id}`, {
+      state: { dataCollectionLink },
+    });
   };
 
   const handleDeleteCollectionEvent = (id: string) => {
@@ -81,13 +88,13 @@ const DataCollectionDetails = () => {
       id: dataCollection?.id,
       json: dataCollectionState,
     };
-    updatedDataCollection.json.version += 1;
     const now = Date.now();
     const today: string = new Date(now).toISOString();
     updatedDataCollection.json.versionDate = today;
 
     console.log('Updated Data Collection: ', updatedDataCollection);
     mutate(updatedDataCollection);
+    setDataCollectionState(updatedDataCollection.json);
     setOpenSave(true);
   };
 
@@ -200,13 +207,13 @@ const DataCollectionDetails = () => {
       <Dialog open={openSave} onClose={handleCloseSave}>
         <DialogTitle>
           <Typography variant="h5">
-            {t('saveDataCollection', { ns: 'DataCollectionDetails' })}
+            {t('saveDataCollection', { ns: 'dataCollectionDetails' })}
           </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
             {isSuccess
-              ? t('successDataCollection', { ns: 'DataCollectionDetails' })
+              ? t('successDataCollection', { ns: 'dataCollectionDetails' })
               : ''}
             {isLoading ? t('loading', { ns: 'form' }) : ''}
             {isError ? t('error', { ns: 'form' }) : ''}

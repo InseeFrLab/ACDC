@@ -42,13 +42,14 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     'dataCollectionDetails',
     'collectionEvent',
     'form',
+    'userAttributeForm',
   ]);
+  console.log('props CollectionEventDisplay: ', props);
   const { collectionEvent, dataCollectionState, setDataCollectionState } =
     props;
   const [collectionEventState, setCollectionEventState] =
     useState(collectionEvent);
   const [expanded, setExpanded] = useState(false);
-  const [edit, setEdit] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -202,6 +203,32 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                     {mode.type}{' '}
                   </Typography>
                 );
+              })}
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ marginRight: 1 }}
+              >
+                {t('title', { ns: 'userAttributeForm' })}:
+              </Typography>
+
+              {collectionEvent.userAttributePair.map((pair) => {
+                return pair.attributeValue.map((value) => {
+                  return (
+                    <Typography variant="body1" key={value.id} sx={{ ml: 0.5 }}>
+                      {value.type}
+                      {' - '}
+                      {value.media}.
+                    </Typography>
+                  );
+                });
               })}
             </Box>
             <Box
