@@ -14,9 +14,7 @@ const CreateUserAttribute = () => {
       <Typography variant="h2" fontWeight="xl">
         {t('title', { ns: 'userAttributeForm' })}
       </Typography>
-      <Typography variant="subtitle1">
-        {t('descriptionForm', { ns: 'userAttributeForm' })}
-      </Typography>
+
       <UserAttributeForm dataCollection={dataCollection} />
     </Main>
   );

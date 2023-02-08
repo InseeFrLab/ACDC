@@ -11,11 +11,13 @@ import {
   IconButtonProps,
   Collapse,
   CardContent,
+  Stack,
 } from '@mui/material';
 import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { UserAttributePair } from '../../../lib/model/userAttributePair';
+import CollectionEvent from '../../../lib/model/collectionEvents';
 
 interface UserAttributeDisplayProps {
   userAttribute: UserAttributePair;
@@ -49,119 +51,137 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
     handleDeleteUserAttribute,
   } = props;
   const [userAttributeState, setCollectionEventState] = useState(userAttribute);
+  const [collectionEvents, setCollectionEvents] = useState(
+    dataCollectionState.collectionEvents
+  );
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   return (
-    <Card
-      key={userAttribute.attributeKey}
-      sx={{
-        px: 1,
-        my: 1,
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
-        >
-          <Typography
-            variant="h6"
-            fontWeight="bold"
-            color="text.secondary"
-            sx={{ marginLeft: 1 }}
-          >
-            {userAttribute.attributeKey}
-          </Typography>
-          <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
-        </Box>
-        <CardActions disableSpacing>
-          <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <FiChevronDown />
-          </ExpandMore>
-        </CardActions>
-      </Box>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Box
+    <>
+      {userAttribute.attributeValue.map((value) => {
+        return (
+          <Card
+            key={userAttribute.attributeKey}
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
+              px: 1,
+              my: 1,
             }}
           >
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              sx={{ marginRight: 1 }}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
             >
-              {t('label', { ns: 'form' })}:{' '}
-            </Typography>
-
-            {userAttribute.attributeValue.map((value) => {
-              return (
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}
+              >
                 <Typography
-                  variant="body1"
+                  variant="h6"
+                  fontWeight="bold"
+                  color="text.secondary"
                   key={value.label[i18n.language]}
                   sx={{ ml: 0.5 }}
                 >
                   {value.label[i18n.language]}{' '}
                 </Typography>
-              );
-            })}
-          </Box>
+                <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
+              </Box>
+              <CardActions disableSpacing>
+                <ExpandMore
+                  expand={expanded}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <FiChevronDown />
+                </ExpandMore>
+              </CardActions>
+            </Box>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    fontWeight="bold"
+                    sx={{ marginRight: 1 }}
+                  >
+                    {t('collectionEventReference', { ns: 'userAttributeForm' })}
+                    :{' '}
+                  </Typography>
+                </Box>
+                <Stack sx={{ alignItems: 'flex-start' }}>
+                  {value.collectionEventReference.map((event) => {
+                    return (
+                      <Typography
+                        variant="body1"
+                        key={event.id}
+                        sx={{ marginRight: 1 }}
+                      >
+                        •{' '}
+                        {
+                          collectionEvents.find(
+                            (collectionEvent) => collectionEvent.id === event.id
+                          ).collectionEventName[i18n.language]
+                        }
+                      </Typography>
+                    );
+                  })}
+                </Stack>
 
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Button
-              size="small"
-              onClick={() => {
-                console.log('edit');
-              }}
-              variant="contained"
-              sx={{ marginLeft: 2 }}
-            >
-              <Typography variant="body1" fontWeight="xl">
-                {t('edit', { ns: 'dataCollectionDetails' })}
-              </Typography>
-            </Button>
-            <Button
-              size="small"
-              onClick={() => {
-                console.log('delete');
-              }}
-              variant="outlined"
-              sx={{ marginLeft: 2 }}
-            >
-              <Typography variant="body1" fontWeight="xl">
-                {t('delete', { ns: 'form' })}
-              </Typography>
-            </Button>
-          </Box>
-        </CardContent>
-      </Collapse>
-    </Card>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      console.log('edit');
+                    }}
+                    variant="contained"
+                    sx={{ marginLeft: 2 }}
+                  >
+                    <Typography variant="body1" fontWeight="xl">
+                      {t('edit', { ns: 'dataCollectionDetails' })}
+                    </Typography>
+                  </Button>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      console.log('delete');
+                    }}
+                    variant="outlined"
+                    sx={{ marginLeft: 2 }}
+                  >
+                    <Typography variant="body1" fontWeight="xl">
+                      {t('delete', { ns: 'form' })}
+                    </Typography>
+                  </Button>
+                </Box>
+              </CardContent>
+            </Collapse>
+          </Card>
+        );
+      })}
+    </>
   );
 };
 

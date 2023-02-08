@@ -36,6 +36,8 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
   const [collectionEvents, setCollectionEvents] = useState(
     dataCollection.collectionEvents
   );
+  const [dataCollectionState, setDataCollectionState] =
+    useState<DataCollection>(dataCollection);
   console.log('collectionEvents', collectionEvents);
 
   const [collectionEventCheck, setCollectionEventCheck] = useState(
@@ -66,7 +68,9 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
 
   const handleClose = () => {
     setOpen(false);
-    navigate('/');
+    navigate(`/collection/${dataCollectionState.id}`, {
+      state: { dataCollection: dataCollectionState },
+    });
   };
 
   const checkValidation = () => {
@@ -122,6 +126,7 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
       json: dataCollectionUpdated,
     };
     mutate(updatedDataCollection);
+    setDataCollectionState(dataCollectionUpdated);
     handleClickOpen();
   };
 
@@ -145,7 +150,9 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
               paddingTop: 2,
             }}
           >
-            <Typography variant="h6">{t('label', { ns: 'form' })}:</Typography>
+            <Typography variant="h6">
+              {t('label', { ns: 'form' })}* :
+            </Typography>
           </Box>
           <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
           <Box
@@ -210,7 +217,9 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>
-          <Typography variant="h5">{t('submitmessage')}</Typography>
+          <Typography variant="h5">
+            {t('descriptionForm', { ns: 'userAttributeForm' })}
+          </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
