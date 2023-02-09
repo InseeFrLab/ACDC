@@ -1,6 +1,7 @@
 export interface PoguesQuestionnaire {
   id: string;
   label: string;
+  date: string;
 }
 
 export interface PoguesQuestionnaireResponse {

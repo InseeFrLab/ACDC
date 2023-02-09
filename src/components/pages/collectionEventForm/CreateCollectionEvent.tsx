@@ -44,10 +44,12 @@ const CreateCollectionEvent = () => {
   if (isSuccess) {
     const questionnaires: PoguesQuestionnaire[] = [];
     // TODO : Switch to full data set
-    data.slice(0, 50).forEach((questionnaire: PoguesQuestionnaireResponse) => {
+    data.forEach((questionnaire: PoguesQuestionnaireResponse) => {
+      const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
       const dataQuestionnaire: PoguesQuestionnaire = {
         id: questionnaire.id,
         label: questionnaire.Label[0],
+        date: dateQuestionnaire.toLocaleDateString(),
       };
       questionnaires.push(dataQuestionnaire);
     });

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +24,7 @@ import {
   SelectChangeEvent,
   OutlinedInput,
   InputLabel,
+  Autocomplete,
 } from '@mui/material';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionCommunicationSelect from '../../shared/collectionCommunication/collectionCommunication';
@@ -113,14 +114,15 @@ const EventForm = (props: DataCollectionProps) => {
     setModeCollection(typeof value === 'string' ? value.split(',') : value);
   };
 
-  const handleQuestionnaireChange = (event: SelectChangeEvent) => {
+  const handleQuestionnaireChange = (
+    event: any,
+    newValue: PoguesQuestionnaire
+  ) => {
     const {
       target: { value },
     } = event;
-    setQuestionnaire(value);
-    setQuestionnaireLabel(
-      props.questionnaires?.find((q) => q.id === value).label
-    );
+    setQuestionnaire(newValue.id);
+    setQuestionnaireLabel(newValue.label);
   };
 
   const handleClickOpen = () => {
@@ -346,10 +348,32 @@ const EventForm = (props: DataCollectionProps) => {
             </Select>
           </FormControl>
           <FormControl size="small" fullWidth>
-            <InputLabel id="select-questionnaire-label">
-              {t('questionnaireModel', { ns: 'collectionEvent' })}
-            </InputLabel>
-            <Select
+            <Autocomplete
+              disablePortal
+              size="small"
+              id="combo-box-demo"
+              options={props.questionnaires}
+              onChange={handleQuestionnaireChange}
+              getOptionLabel={(option) => option.label}
+              renderOption={(pr, option) => {
+                return (
+                  <Box
+                    component="li"
+                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                    {...pr}
+                  >
+                    {option.label} - ({option.date})
+                  </Box>
+                );
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={t('questionnaireModel', { ns: 'collectionEvent' })}
+                />
+              )}
+            />
+            {/* <Select
               labelId="select-questionnaire-label"
               value={questionnaire}
               onChange={handleQuestionnaireChange}
@@ -365,7 +389,7 @@ const EventForm = (props: DataCollectionProps) => {
                   {q.label}
                 </MenuItem>
               ))}
-            </Select>
+            </Select> */}
           </FormControl>
         </Stack>
         <Box

@@ -216,24 +216,12 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('title', { ns: 'userAttributeForm' })}:
+                {t('instrumentReference', { ns: 'collectionEvent' })}:{' '}
+              </Typography>
+              <Typography variant="body1">
+                {collectionEvent.instrumentReference.label}
               </Typography>
             </Box>
-            <Stack sx={{ alignItems: 'flex-start' }}>
-              {collectionEvent.userAttributePair.map((pair) => {
-                return pair.attributeValue.map((value) => {
-                  return (
-                    <Typography variant="body1" key={value.id} sx={{ ml: 0.5 }}>
-                      • {t('type', { ns: 'userAttributeForm' })} : {value.type}{' '}
-                      - {t('media', { ns: 'userAttributeForm' })} :{' '}
-                      {value.media} -{' '}
-                      {t('paperQuestionnaire', { ns: 'userAttributeForm' })} :{' '}
-                      {value.paperQuestionnaire.toString()}
-                    </Typography>
-                  );
-                });
-              })}
-            </Stack>
             <Box
               sx={{
                 display: 'flex',
@@ -245,12 +233,47 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('instrumentReference', { ns: 'collectionEvent' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {collectionEvent.instrumentReference.label}
+                {t('title', { ns: 'userAttributeForm' })}:
               </Typography>
             </Box>
+            <Stack sx={{ alignItems: 'flex-start' }}>
+              {collectionEvent.userAttributePair.map((pair) => {
+                return pair.attributeValue.map((value) => {
+                  return (
+                    <>
+                      <Typography
+                        variant="body1"
+                        key={value.id}
+                        sx={{ ml: 0.5, alignItems: 'flex-start', mt: 1.5 }}
+                      >
+                        • {t('type', { ns: 'userAttributeForm' })} :{' '}
+                        {value.type}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        key={value.id}
+                        sx={{ ml: 0.5, alignItems: 'flex-start' }}
+                      >
+                        • {t('media', { ns: 'userAttributeForm' })} :{' '}
+                        {value.media}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        key={value.id}
+                        sx={{ ml: 0.5, alignItems: 'flex-start' }}
+                      >
+                        •{' '}
+                        {t('paperQuestionnaire', {
+                          ns: 'userAttributeForm',
+                        })}{' '}
+                        : {value.paperQuestionnaire.toString()}
+                      </Typography>
+                    </>
+                  );
+                });
+              })}
+            </Stack>
+
             <Box
               sx={{
                 display: 'flex',
