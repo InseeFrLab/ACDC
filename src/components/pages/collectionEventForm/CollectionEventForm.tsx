@@ -36,6 +36,7 @@ import {
 import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
+import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 import {
   UserAttributePairCollection,
   UserAttributePairCollectionRow,
@@ -43,6 +44,7 @@ import {
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;
+  questionnaires?: PoguesQuestionnaire[];
 }
 const EventForm = (props: DataCollectionProps) => {
   // TODO: Refactor tout ça pour que ce soit plus propre
@@ -55,6 +57,7 @@ const EventForm = (props: DataCollectionProps) => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [modeCollection, setModeCollection] = useState<string[]>([]);
+  const [questionnaire, setQuestionnaire] = useState<string>('');
   const [userAttributePairArray, setUserAttributePairArray] = useState([
     {
       id: 1,
@@ -107,6 +110,13 @@ const EventForm = (props: DataCollectionProps) => {
       target: { value },
     } = event;
     setModeCollection(typeof value === 'string' ? value.split(',') : value);
+  };
+
+  const handleQuestionnaireChange = (event: SelectChangeEvent) => {
+    const {
+      target: { value },
+    } = event;
+    setQuestionnaire(value);
   };
 
   const handleClickOpen = () => {
@@ -300,45 +310,57 @@ const EventForm = (props: DataCollectionProps) => {
           }}
         >
           <Typography variant="h6">
-            {t('modeOfCollection', { ns: 'collectionEvent' })}:
-          </Typography>
-        </Box>
-        <FormControl size="small" fullWidth>
-          <Select
-            labelId="multiple-mode-label"
-            sx={{
-              width: 200,
-              '& legend': { display: 'none' },
-              '& fieldset': { top: 0 },
-            }}
-            notched
-            multiple
-            // @ts-expect-error mui types are wrong for multiple select
-            value={modeCollection}
-            onChange={handleModeCollectionChange}
-            input={<OutlinedInput label="Name" />}
-          >
-            {typeMode.map((mode) => (
-              <MenuItem key={mode.type} value={mode.type}>
-                {mode.type}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
+            {t('modeOfCollection', { ns: 'collectionEvent' })} &{' '}
             {t('questionnaireModel', { ns: 'collectionEvent' })} (TODO : Lien à
             faire avec Pogues):
           </Typography>
         </Box>
+        <Stack spacing={2} direction="row">
+          <FormControl size="small" fullWidth>
+            <InputLabel id="select-mode-label">
+              {t('modeOfCollection', { ns: 'collectionEvent' })}
+            </InputLabel>
+            <Select
+              labelId="select-mode-label"
+              sx={{
+                '& legend': { display: 'none' },
+                '& fieldset': { top: 0 },
+              }}
+              notched
+              multiple
+              // @ts-expect-error mui types are wrong for multiple select
+              value={modeCollection}
+              onChange={handleModeCollectionChange}
+              input={<OutlinedInput label="Name" />}
+            >
+              {typeMode.map((mode) => (
+                <MenuItem key={mode.type} value={mode.type}>
+                  {mode.type}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl size="small" fullWidth>
+            <InputLabel id="select-questionnaire-label">
+              {t('questionnaireModel', { ns: 'collectionEvent' })}
+            </InputLabel>
+            <Select
+              labelId="select-questionnaire-label"
+              value={questionnaire}
+              onChange={handleQuestionnaireChange}
+              sx={{
+                '& legend': { display: 'none' },
+                '& fieldset': { top: 0 },
+              }}
+            >
+              {props.questionnaires.map((q) => (
+                <MenuItem key={q.id} value={q.id}>
+                  {q.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Stack>
         <Box
           sx={{
             paddingTop: 2,

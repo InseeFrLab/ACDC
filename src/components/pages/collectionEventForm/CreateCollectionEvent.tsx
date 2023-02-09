@@ -7,6 +7,10 @@ import EventForm from './CollectionEventForm';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import getQuestionnaires from '../../../lib/api/remote/poguesQuestionnaires';
+import {
+  PoguesQuestionnaire,
+  PoguesQuestionnaireResponse,
+} from '../../../lib/model/poguesQuestionnaire';
 
 const CreateCollectionEvent = () => {
   const { t } = useTranslation(['collectionEvent', 'form']);
@@ -38,13 +42,27 @@ const CreateCollectionEvent = () => {
     );
 
   if (isSuccess) {
-    console.log('Questionnaires:', data);
+    const questionnaires: PoguesQuestionnaire[] = [];
+    // TODO : Switch to full data set
+    data.slice(0, 10).forEach((questionnaire: PoguesQuestionnaireResponse) => {
+      const dataQuestionnaire: PoguesQuestionnaire = {
+        id: questionnaire.id,
+        label: questionnaire.Label[0],
+      };
+      questionnaires.push(dataQuestionnaire);
+    });
+
+    console.log('Questionnaires Select data:', questionnaires);
+
     return (
       <Main sx={{ justifyContent: 'flex-start' }}>
         <Typography variant="h2" fontWeight="xl">
           {t('title')}
         </Typography>
-        <EventForm DataCollectionApi={dataCollectionApi} />
+        <EventForm
+          DataCollectionApi={dataCollectionApi}
+          questionnaires={questionnaires}
+        />
       </Main>
     );
   }

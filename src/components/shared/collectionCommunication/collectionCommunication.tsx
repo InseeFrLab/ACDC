@@ -7,6 +7,7 @@ import {
   Typography,
   SelectChangeEvent,
   FormControl,
+  FormHelperText,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
@@ -103,6 +104,7 @@ const CollectionCommunicationSelect = (
             >
               <FormControl fullWidth size="small">
                 <Select
+                  labelId="select-type-label"
                   color="primary"
                   size="small"
                   // label={t('label')}
@@ -113,7 +115,6 @@ const CollectionCommunicationSelect = (
                     '& legend': { display: 'none' },
                     '& fieldset': { top: 0 },
                   }}
-                  notched
                 >
                   <MenuItem value="Email">
                     {t('email', { ns: 'userAttributeForm' })}
@@ -122,10 +123,13 @@ const CollectionCommunicationSelect = (
                     {t('mail', { ns: 'userAttributeForm' })}
                   </MenuItem>
                 </Select>
+                <FormHelperText>
+                  {t('type', { ns: 'userAttributeFrom' })}
+                </FormHelperText>
               </FormControl>
               <FormControl size="small" fullWidth>
                 <Select
-                  color="primary"
+                  labelId="select-media-label"
                   value={label.media}
                   onChange={(e) => handleUserAttributeTypeChange(e, index)}
                   id={index.toString()}
@@ -134,7 +138,6 @@ const CollectionCommunicationSelect = (
                     '& fieldset': { top: 0 },
                     marginLeft: 1,
                   }}
-                  notched
                 >
                   <MenuItem value="Opening">
                     {t('opening', { ns: 'userAttributeForm' })}
@@ -143,6 +146,9 @@ const CollectionCommunicationSelect = (
                     {t('remind', { ns: 'userAttributeForm' })}
                   </MenuItem>
                 </Select>
+                <FormHelperText>
+                  {t('media', { ns: 'userAttributeFrom' })}
+                </FormHelperText>
               </FormControl>
               <FormControl size="small" fullWidth>
                 <Select
@@ -160,6 +166,9 @@ const CollectionCommunicationSelect = (
                   <MenuItem value="true">True</MenuItem>
                   <MenuItem value="false">False</MenuItem>
                 </Select>
+                <FormHelperText>
+                  {t('paperQuestionnaire', { ns: 'userAttributeFrom' })}
+                </FormHelperText>
               </FormControl>
             </Box>
           );
