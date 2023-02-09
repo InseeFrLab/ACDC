@@ -44,7 +44,7 @@ const CreateCollectionEvent = () => {
   if (isSuccess) {
     const questionnaires: PoguesQuestionnaire[] = [];
     // TODO : Switch to full data set
-    data.slice(0, 10).forEach((questionnaire: PoguesQuestionnaireResponse) => {
+    data.slice(0, 50).forEach((questionnaire: PoguesQuestionnaireResponse) => {
       const dataQuestionnaire: PoguesQuestionnaire = {
         id: questionnaire.id,
         label: questionnaire.Label[0],

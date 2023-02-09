@@ -352,6 +352,8 @@ const EventForm = (props: DataCollectionProps) => {
                 '& legend': { display: 'none' },
                 '& fieldset': { top: 0 },
               }}
+              notched
+              MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
             >
               {props.questionnaires.map((q) => (
                 <MenuItem key={q.id} value={q.id}>
