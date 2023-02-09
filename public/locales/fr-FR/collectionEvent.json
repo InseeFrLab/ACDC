@@ -10,5 +10,6 @@
   "addModeCollection": "Ajouter un mode de collecte",
   "collectionCommunication": "Stratégie de communication",
   "textFieldError": "Veuillez renseigner les champs obligatoires",
-  "questionnaireModel": "Modèle de questionnaire"
+  "questionnaireModel": "Modèle de questionnaire",
+  "retrieveQuestionnaireModelPending": "Récupération des questionnaires ..."
 }

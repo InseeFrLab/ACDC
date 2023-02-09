@@ -12,7 +12,6 @@ import {
   DialogContentText,
   DialogActions,
 } from '@mui/material';
-import { ContactPageSharp } from '@mui/icons-material';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';

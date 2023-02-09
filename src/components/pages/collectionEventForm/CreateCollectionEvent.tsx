@@ -1,10 +1,12 @@
 import { useLocation } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@tanstack/react-query';
 import Main from '../../shared/layout/Main';
 import EventForm from './CollectionEventForm';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { DataCollection } from '../../../lib/model/dataCollection';
+import getQuestionnaires from '../../../lib/api/remote/poguesQuestionnaires';
 
 const CreateCollectionEvent = () => {
   const { t } = useTranslation(['collectionEvent', 'form']);
@@ -14,13 +16,42 @@ const CreateCollectionEvent = () => {
     id: dataCollection.id,
     json: dataCollection,
   };
-  return (
-    <Main sx={{ justifyContent: 'flex-start' }}>
+
+  const { data, error, isLoading, isSuccess } = useQuery(
+    ['allQuestionnaires'],
+    getQuestionnaires
+  );
+
+  if (error)
+    return (
       <Typography variant="h2" fontWeight="xl">
-        {t('title')}
+        Request Failed
       </Typography>
-      <EventForm DataCollectionApi={dataCollectionApi} />
-    </Main>
+    );
+  if (isLoading)
+    return (
+      <Main>
+        <Typography variant="h2" fontWeight="xl">
+          {t('retrieveQuestionnaireModelPending', { ns: 'collectionEvent' })}
+        </Typography>
+      </Main>
+    );
+
+  if (isSuccess) {
+    console.log('Questionnaires:', data);
+    return (
+      <Main sx={{ justifyContent: 'flex-start' }}>
+        <Typography variant="h2" fontWeight="xl">
+          {t('title')}
+        </Typography>
+        <EventForm DataCollectionApi={dataCollectionApi} />
+      </Main>
+    );
+  }
+  return (
+    <Typography variant="h2" fontWeight="xl">
+      Request Failed
+    </Typography>
   );
 };
 
