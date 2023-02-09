@@ -248,7 +248,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 {t('instrumentReference', { ns: 'collectionEvent' })}:{' '}
               </Typography>
               <Typography variant="body1">
-                {collectionEvent.instrumentReference.typeOfObject}
+                {collectionEvent.instrumentReference.label}
               </Typography>
             </Box>
             <Box

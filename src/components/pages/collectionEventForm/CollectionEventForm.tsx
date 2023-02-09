@@ -58,6 +58,7 @@ const EventForm = (props: DataCollectionProps) => {
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [modeCollection, setModeCollection] = useState<string[]>([]);
   const [questionnaire, setQuestionnaire] = useState<string>('');
+  const [questionnaireLabel, setQuestionnaireLabel] = useState<string>('');
   const [userAttributePairArray, setUserAttributePairArray] = useState([
     {
       id: 1,
@@ -117,6 +118,9 @@ const EventForm = (props: DataCollectionProps) => {
       target: { value },
     } = event;
     setQuestionnaire(value);
+    setQuestionnaireLabel(
+      props.questionnaires?.find((q) => q.id === value).label
+    );
   };
 
   const handleClickOpen = () => {
@@ -158,10 +162,11 @@ const EventForm = (props: DataCollectionProps) => {
 
     console.log('label: ', labelArray);
     const instrument: InstrumentReference = {
-      id: '493f8b38-1198-4e45-99d2-531ac8a48a48',
+      id: questionnaire,
       agency: 'fr.insee',
       version: 1,
       typeOfObject: 'Instrument',
+      label: questionnaireLabel,
     };
 
     const modeOfCollection: TypeOfModeOfCollection[] = [];

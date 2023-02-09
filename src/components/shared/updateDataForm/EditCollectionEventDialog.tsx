@@ -204,7 +204,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               <TextField
                 required
                 size="small"
-                label={t('label', { ns: 'form' })}
+                // label={t('label', { ns: 'form' })}
                 value={collectionEventState.label[i18n.language]}
                 sx={{ marginRight: 2, width: '100%' }}
                 onChange={handleLabelChange}
@@ -226,7 +226,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               <TextField
                 required
                 size="small"
-                label={t('description', { ns: 'form' })}
+                // label={t('description', { ns: 'form' })}
                 multiline
                 maxRows={4}
                 value={collectionEventState.description[i18n.language]}

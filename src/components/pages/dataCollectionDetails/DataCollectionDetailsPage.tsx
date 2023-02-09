@@ -25,7 +25,7 @@ const DataCollectionDetails = () => {
   const { t, i18n } = useTranslation([
     'DataCollectionDetails',
     'Form',
-    'UserAttributeForm',
+    'userAttributeForm',
     'CollectionEvent',
   ]);
   const navigate = useNavigate();

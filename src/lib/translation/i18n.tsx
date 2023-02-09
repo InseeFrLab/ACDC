@@ -26,6 +26,7 @@ i18next
       'collectionEvent',
       'dataCollectionDetails',
       'form',
+      'userAttributeForm',
     ],
 
     interpolation: {

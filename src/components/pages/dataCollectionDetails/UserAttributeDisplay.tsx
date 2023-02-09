@@ -44,6 +44,7 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
     'userAttributeForm',
     'form',
   ]);
+  console.log('Language', i18n.language);
   const {
     userAttribute,
     dataCollectionState,
@@ -54,6 +55,8 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
   const [collectionEvents, setCollectionEvents] = useState(
     dataCollectionState.collectionEvents
   );
+  console.log('userAttributeState', userAttributeState);
+  console.log('collectionEvents', collectionEvents);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
