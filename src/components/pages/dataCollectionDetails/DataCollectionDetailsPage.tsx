@@ -226,6 +226,7 @@ const DataCollectionDetails = () => {
       </Dialog>
       <BottomActionBar
         dataCollection={dataCollection}
+        dataCollectionState={dataCollectionState}
         handleSave={handleSave}
       />
     </Main>

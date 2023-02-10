@@ -6,6 +6,7 @@ import BottomBar from '../../shared/layout/BottomBar';
 
 interface BottomActionBarProps {
   dataCollection: DataCollection;
+  dataCollectionState: DataCollection;
   handleSave: () => void;
 }
 const BottomActionBar = (props: BottomActionBarProps) => {
@@ -47,6 +48,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       </Button>
       <Button
         variant="contained"
+        disabled={props.dataCollectionState === props.dataCollection}
         onClick={handleClickSave}
         sx={{
           mx: 1,

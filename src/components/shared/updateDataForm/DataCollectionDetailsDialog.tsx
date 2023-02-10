@@ -177,7 +177,7 @@ const DataCollectionDetailsDialog = (
               </Typography>
               <Typography variant="body1">
                 {moment(dataCollectionState.versionDate).format(
-                  'DD/MM/YYYYhh:mm'
+                  'DD/MM/YYYYHH:mm'
                 )}
               </Typography>
             </Box>

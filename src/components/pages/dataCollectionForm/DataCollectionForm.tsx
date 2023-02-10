@@ -4,18 +4,16 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   Typography,
   FormControl,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
   Button,
   Stack,
   Box,
-  DialogTitle,
+  TextField,
+  Autocomplete,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import CreateDataCollectionDialog from './CreateDataCollectionDialog';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { createDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
@@ -55,6 +53,32 @@ const CollectionForm = () => {
   const [open, setOpen] = useState(false);
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>({} as DataCollection);
+
+  const statisticalOperationSeries = [
+    {
+      id: 1,
+      label: 'Serie 1',
+    },
+    {
+      id: 2,
+      label: 'Serie 2',
+    },
+    {
+      id: 3,
+      label: 'Serie 3',
+    },
+  ];
+
+  const statisticalOperation = [
+    {
+      id: 1,
+      label: 'Operation 1',
+    },
+    {
+      id: 2,
+      label: 'Operation 2',
+    },
+  ];
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -171,6 +195,99 @@ const CollectionForm = () => {
             component="form"
             className="CollectionForm"
             sx={{
+              paddingTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">
+              {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })} :
+            </Typography>
+          </Box>
+          <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
+            <Autocomplete
+              disablePortal
+              size="small"
+              id="select-statistical-operation-series"
+              options={statisticalOperationSeries}
+              onChange={() =>
+                console.log('Statistical Operation Series Change')
+              }
+              getOptionLabel={(option) => option.label}
+              renderOption={(pr, option) => {
+                return (
+                  <Box
+                    component="li"
+                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                    {...pr}
+                  >
+                    {option.label}
+                  </Box>
+                );
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={t('statisticalOperationSeries', {
+                    ns: 'dataCollectionForm',
+                  })}
+                />
+              )}
+            />
+          </FormControl>
+          <Box
+            component="form"
+            className="CollectionForm"
+            sx={{
+              paddingTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">
+              {t('statisticalOperation', { ns: 'dataCollectionForm' })} :
+            </Typography>
+          </Box>
+          <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
+            <Autocomplete
+              disablePortal
+              disabled
+              size="small"
+              id="select-statistical-operation"
+              options={statisticalOperation}
+              onChange={() =>
+                console.log('Statistical Operation Series Change')
+              }
+              getOptionLabel={(option) => option.label}
+              renderOption={(pr, option) => {
+                return (
+                  <Box
+                    component="li"
+                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                    {...pr}
+                  >
+                    {option.label}
+                  </Box>
+                );
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label={t('statisticalOperation', {
+                    ns: 'dataCollectionForm',
+                  })}
+                />
+              )}
+            />
+          </FormControl>
+          <Box
+            component="form"
+            className="CollectionForm"
+            sx={{
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-start',
@@ -208,25 +325,13 @@ const CollectionForm = () => {
         </Stack>
       </FormControl>
 
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>
-          <Typography variant="h5">
-            {t('descriptionCreateForm', { ns: 'dataCollectionForm' })}
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {isSuccess ? t('successForm', { ns: 'dataCollectionForm' }) : ''}
-            {isLoading ? t('loading', { ns: 'form' }) : ''}
-            {isError ? t('error', { ns: 'form' }) : ''}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="contained" onClick={handleClose} autoFocus>
-            {t('close', { ns: 'form' })}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <CreateDataCollectionDialog
+        open={open}
+        handleClose={handleClose}
+        isError={isError}
+        isSuccess={isSuccess}
+        isLoading={isLoading}
+      />
     </>
   );
 };

@@ -51,7 +51,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       type: 'date',
       valueFormatter: (params) =>
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        moment(params?.value).format('DD/MM/YYYY hh:mm'),
+        moment(params?.value).format('DD/MM/YYYY HH:mm'),
       headerClassName: 'columns--header',
       flex: 0.2,
 

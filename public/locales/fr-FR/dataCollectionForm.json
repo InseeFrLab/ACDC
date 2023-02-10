@@ -1,5 +1,7 @@
 {
   "title": "Nouvelle collecte",
   "descriptionCreateForm": "Creér une nouvelle campagne ",
-  "successForm": "Campagne créée avec succès"
+  "successForm": "Campagne créée avec succès",
+  "statisticalOperation": "Opération statistique",
+  "statisticalOperationSeries": "Série d'opération statistique"
 }
