@@ -13,5 +13,8 @@
   "addLanguage": "Ajouter une langue",
   "textFieldError": "Veuillez renseigner les champs Label",
   "delete": "Supprimer",
-  "addCommunication": "Ajouter une communication"
+  "addCommunication": "Ajouter une communication",
+  "paperQuestionnaire": "Paper Questionnaire",
+  "type": "Type",
+  "media": "Media"
 }

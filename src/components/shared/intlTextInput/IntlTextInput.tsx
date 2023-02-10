@@ -30,6 +30,7 @@ const IntlTextInput = (props: any) => {
   const handleTextChange = (e: any): void => {
     e.preventDefault();
     const index = e.target.id;
+    console.log('texrArray: ', textArray);
     props.setTextArray((s: any) => {
       const newText: Record<'id' | 'language' | 'value', string>[] = s.slice();
       newText[index].value = e.target.value;

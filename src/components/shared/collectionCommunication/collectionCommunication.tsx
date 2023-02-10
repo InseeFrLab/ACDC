@@ -19,17 +19,17 @@ const CollectionCommunicationSelect = (
   props: CollectionCommunicationSelectProps
 ) => {
   const { t } = useTranslation(['userAttributeForm', 'form']);
-  const { userAttributePair } = props;
+  console.log('userAttributePair: ', props.userAttributePair);
   const addCommunicationLabel = () => {
     const lastTextId: number =
-      userAttributePair[userAttributePair.length - 1].id;
+      props.userAttributePair[props.userAttributePair.length - 1].id;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return props.setUserAttributePair([
-      ...userAttributePair,
+      ...props.userAttributePair,
       {
         id: lastTextId + 1,
         type: 'Opening',
-        media: 'Email',
+        media: 'Mail',
         paperQuestionnaire: false,
       },
     ]);
@@ -39,14 +39,12 @@ const CollectionCommunicationSelect = (
     e: SelectChangeEvent,
     index: number
   ) => {
-    e.preventDefault();
     props.setUserAttributePair((s: any) => {
       const newText: Record<
         'id' | 'type' | 'media' | 'paperQuestionnaire',
         string | boolean
       >[] = s.slice();
       newText[index].type = e.target.value;
-      console.log('newText: ', newText);
       return newText;
     });
   };
@@ -55,7 +53,6 @@ const CollectionCommunicationSelect = (
     e: SelectChangeEvent,
     index: number
   ) => {
-    e.preventDefault();
     props.setUserAttributePair((s: any) => {
       const newText: Record<
         'id' | 'type' | 'media' | 'paperQuestionnaire',
@@ -83,97 +80,86 @@ const CollectionCommunicationSelect = (
 
   return (
     <>
-      {userAttributePair.map(
-        (
-          label: {
-            id: number;
-            type: string;
-            media: string;
-            paperQuestionnaire: boolean;
-          },
-          index: number
-        ) => {
-          return (
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-              }}
-              key={label.id}
-            >
-              <FormControl fullWidth size="small">
-                <Select
-                  labelId="select-type-label"
-                  color="primary"
-                  size="small"
-                  // label={t('label')}
-                  value={label.type}
-                  onChange={(e) => handleUserAttributeMediaChange(e, index)}
-                  id={index.toString()}
-                  sx={{
-                    '& legend': { display: 'none' },
-                    '& fieldset': { top: 0 },
-                  }}
-                >
-                  <MenuItem value="Email">
-                    {t('email', { ns: 'userAttributeForm' })}
-                  </MenuItem>
-                  <MenuItem value="Mail">
-                    {t('mail', { ns: 'userAttributeForm' })}
-                  </MenuItem>
-                </Select>
-                <FormHelperText>
-                  {t('type', { ns: 'userAttributeFrom' })}
-                </FormHelperText>
-              </FormControl>
-              <FormControl size="small" fullWidth>
-                <Select
-                  labelId="select-media-label"
-                  value={label.media}
-                  onChange={(e) => handleUserAttributeTypeChange(e, index)}
-                  id={index.toString()}
-                  sx={{
-                    '& legend': { display: 'none' },
-                    '& fieldset': { top: 0 },
-                    marginLeft: 1,
-                  }}
-                >
-                  <MenuItem value="Opening">
-                    {t('opening', { ns: 'userAttributeForm' })}
-                  </MenuItem>
-                  <MenuItem value="Remind">
-                    {t('remind', { ns: 'userAttributeForm' })}
-                  </MenuItem>
-                </Select>
-                <FormHelperText>
-                  {t('media', { ns: 'userAttributeFrom' })}
-                </FormHelperText>
-              </FormControl>
-              <FormControl size="small" fullWidth>
-                <Select
-                  color="primary"
-                  value={label.paperQuestionnaire}
-                  onChange={(e) => handleUserAttributePaperChange(e, index)}
-                  id={index.toString()}
-                  sx={{
-                    '& legend': { display: 'none' },
-                    '& fieldset': { top: 0 },
-                    marginLeft: 1,
-                  }}
-                  notched
-                >
-                  <MenuItem value="true">True</MenuItem>
-                  <MenuItem value="false">False</MenuItem>
-                </Select>
-                <FormHelperText>
-                  {t('paperQuestionnaire', { ns: 'userAttributeFrom' })}
-                </FormHelperText>
-              </FormControl>
-            </Box>
-          );
-        }
-      )}
+      {props.userAttributePair.map((attribute: any, index: number) => {
+        console.log('attribute Type: ', attribute.type);
+        return (
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+            }}
+            key={attribute.id}
+          >
+            <FormControl size="small" fullWidth>
+              <Select
+                labelId="select-media-label"
+                value={attribute.type}
+                onChange={(e) => handleUserAttributeTypeChange(e, index)}
+                id={index.toString()}
+                sx={{
+                  '& legend': { display: 'none' },
+                  '& fieldset': { top: 0 },
+                }}
+                notched
+              >
+                <MenuItem value="Opening">
+                  {t('opening', { ns: 'userAttributeForm' })}
+                </MenuItem>
+                <MenuItem value="Remind">
+                  {t('remind', { ns: 'userAttributeForm' })}
+                </MenuItem>
+              </Select>
+              <FormHelperText>{t('media', { ns: 'form' })}</FormHelperText>
+            </FormControl>
+            <FormControl fullWidth size="small">
+              <Select
+                labelId="select-type-label"
+                color="primary"
+                size="small"
+                // label={t('label')}
+                value={attribute.media}
+                onChange={(e) => handleUserAttributeMediaChange(e, index)}
+                id={index.toString()}
+                sx={{
+                  '& legend': { display: 'none' },
+                  '& fieldset': { top: 0 },
+                  marginLeft: 1,
+                }}
+                notched
+              >
+                <MenuItem value="Email">
+                  {t('email', { ns: 'userAttributeForm' })}
+                </MenuItem>
+                <MenuItem value="Mail">
+                  {t('mail', { ns: 'userAttributeForm' })}
+                </MenuItem>
+              </Select>
+              <FormHelperText>{t('type', { ns: 'form' })}</FormHelperText>
+            </FormControl>
+            <FormControl size="small" fullWidth>
+              <Select
+                color="primary"
+                value={attribute.paperQuestionnaire}
+                onChange={(e) => handleUserAttributePaperChange(e, index)}
+                id={index.toString()}
+                sx={{
+                  '& legend': { display: 'none' },
+                  '& fieldset': { top: 0 },
+                  marginLeft: 1,
+                }}
+                notched
+              >
+                <MenuItem value="true">True</MenuItem>
+                <MenuItem value="false">False</MenuItem>
+              </Select>
+              <FormHelperText>
+                {t('paperQuestionnaire', { ns: 'form' })}
+              </FormHelperText>
+            </FormControl>
+          </Box>
+        );
+      })}
 
       <Box
         component="form"

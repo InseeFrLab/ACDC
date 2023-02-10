@@ -373,23 +373,6 @@ const EventForm = (props: DataCollectionProps) => {
                 />
               )}
             />
-            {/* <Select
-              labelId="select-questionnaire-label"
-              value={questionnaire}
-              onChange={handleQuestionnaireChange}
-              sx={{
-                '& legend': { display: 'none' },
-                '& fieldset': { top: 0 },
-              }}
-              notched
-              MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
-            >
-              {props.questionnaires.map((q) => (
-                <MenuItem key={q.id} value={q.id}>
-                  {q.label}
-                </MenuItem>
-              ))}
-            </Select> */}
           </FormControl>
         </Stack>
         <Box
