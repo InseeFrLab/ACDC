@@ -160,9 +160,6 @@ const EventForm = (props: DataCollectionProps) => {
   };
 
   const createCollectionEventObject = () => {
-    console.log('userAttributePair: ', userAttributePairArray);
-
-    console.log('label: ', labelArray);
     const instrument: InstrumentReference = {
       id: questionnaire,
       agency: 'fr.insee',

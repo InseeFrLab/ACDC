@@ -246,7 +246,10 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                         key={value.id}
                         sx={{ ml: 0.5, alignItems: 'flex-start', mt: 1.5 }}
                       >
-                        • {t('type', { ns: 'userAttributeForm' })} :{' '}
+                        •{' '}
+                        <strong>
+                          {t('type', { ns: 'userAttributeForm' })} :
+                        </strong>{' '}
                         {value.type}
                       </Typography>
                       <Typography
@@ -254,7 +257,10 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                         key={value.id}
                         sx={{ ml: 0.5, alignItems: 'flex-start' }}
                       >
-                        • {t('media', { ns: 'userAttributeForm' })} :{' '}
+                        •{' '}
+                        <strong>
+                          {t('media', { ns: 'userAttributeForm' })} :{' '}
+                        </strong>{' '}
                         {value.media}
                       </Typography>
                       <Typography
@@ -263,9 +269,11 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                         sx={{ ml: 0.5, alignItems: 'flex-start' }}
                       >
                         •{' '}
-                        {t('paperQuestionnaire', {
-                          ns: 'userAttributeForm',
-                        })}{' '}
+                        <strong>
+                          {t('paperQuestionnaire', {
+                            ns: 'userAttributeForm',
+                          })}
+                        </strong>{' '}
                         : {value.paperQuestionnaire.toString()}
                       </Typography>
                     </>

@@ -54,8 +54,6 @@ const CreateCollectionEvent = () => {
       questionnaires.push(dataQuestionnaire);
     });
 
-    console.log('Questionnaires Select data:', questionnaires);
-
     return (
       <Main sx={{ justifyContent: 'flex-start' }}>
         <Typography variant="h2" fontWeight="xl">

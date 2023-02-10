@@ -19,7 +19,6 @@ const CollectionCommunicationSelect = (
   props: CollectionCommunicationSelectProps
 ) => {
   const { t } = useTranslation(['userAttributeForm', 'form']);
-  console.log('userAttributePair: ', props.userAttributePair);
   const addCommunicationLabel = () => {
     const lastTextId: number =
       props.userAttributePair[props.userAttributePair.length - 1].id;
@@ -81,7 +80,6 @@ const CollectionCommunicationSelect = (
   return (
     <>
       {props.userAttributePair.map((attribute: any, index: number) => {
-        console.log('attribute Type: ', attribute.type);
         return (
           <Box
             sx={{

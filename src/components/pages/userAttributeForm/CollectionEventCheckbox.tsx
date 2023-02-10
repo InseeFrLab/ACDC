@@ -52,7 +52,9 @@ const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
                 checked={props.collectionEventCheck[index][item.id]}
                 sx={{ '& .MuiSvgIcon-root': { fontSize: 25 } }}
                 onChange={(e) => {
-                  const newCollectionEventCheck = props.collectionEventCheck;
+                  const newCollectionEventCheck = [
+                    ...props.collectionEventCheck,
+                  ];
                   newCollectionEventCheck[index][item.id] = e.target.checked;
                   props.setCollectionEventCheck(newCollectionEventCheck);
                   console.log(
