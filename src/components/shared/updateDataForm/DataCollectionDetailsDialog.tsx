@@ -14,6 +14,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import { deleteDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import { DataCollection } from '../../../lib/model/dataCollection';
 
@@ -175,7 +176,9 @@ const DataCollectionDetailsDialog = (
                 {t('lastUpdate', { ns: 'form' })}:{' '}
               </Typography>
               <Typography variant="body1">
-                {dataCollectionState.versionDate}
+                {moment(dataCollectionState.versionDate).format(
+                  'DD/MM/YYYYhh:mm'
+                )}
               </Typography>
             </Box>
           </DialogContentText>

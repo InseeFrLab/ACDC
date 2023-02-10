@@ -5,7 +5,7 @@
   "label": "Label",
   "name": "Name",
   "description": "Description",
-  "lastUodated": "Last updated",
+  "lastUpdate": "Last updated",
   "version": "Version",
   "descriptionField": "Description",
   "loading": "Request is being processed...",

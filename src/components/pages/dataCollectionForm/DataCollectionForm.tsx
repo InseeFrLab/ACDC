@@ -158,7 +158,7 @@ const CollectionForm = () => {
             }}
           >
             <Typography variant="h6">
-              {t('descriptionField', { ns: 'form' })}* :
+              {t('descriptionField', { ns: 'form' })} :
             </Typography>
           </Box>
 

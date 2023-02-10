@@ -1,5 +1,5 @@
 {
-  "title": "New UserAttribute",
+  "title": "User Attribute",
   "descriptionForm": "Create a new user attribute",
   "successForm": "User attribute created successfully",
   "errorForm": "Error creating user attribute",

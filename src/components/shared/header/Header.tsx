@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { IconButton, Typography, Menu, MenuItem, Link } from '@mui/material';
+import {
+  IconButton,
+  Typography,
+  Menu,
+  MenuItem,
+  Link,
+  Box,
+} from '@mui/material';
 import { FiFlag } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import HeaderComponent from '../layout/Header';
@@ -22,11 +29,23 @@ const Header = () => {
   };
   return (
     <HeaderComponent>
-      <Typography variant="h5" fontWeight="xl">
-        <Link href="/" underline="none" color="inherit">
-          {t('app_title')}
-        </Link>
-      </Typography>
+      <Link href="/" underline="none" color="inherit">
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+          }}
+        >
+          <Typography variant="h5" fontWeight="xl">
+            {t('app_title')}
+          </Typography>
+          <Typography variant="h6" fontWeight="xl">
+            {t('app_description')}
+          </Typography>
+        </Box>
+      </Link>
       <IconButton
         id="flag-button"
         aria-controls={open ? 'select-language-menu' : undefined}

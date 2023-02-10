@@ -11,6 +11,7 @@ import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiChevronRight } from 'react-icons/fi';
+import moment from 'moment';
 import { DataCollectionRow } from '../../../lib/model/dataCollection';
 
 interface DataGridHomePageProps {
@@ -32,21 +33,25 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
   const columns: GridColDef[] = [
     {
       field: 'id',
-      headerName: t('id').toString(),
       headerClassName: 'columns--header',
       flex: 0.3,
       description: t('id').toString(),
+      renderHeader: () => <strong>{t('id').toString()}</strong>,
     },
     {
       field: 'label',
-      headerName: t('statisticalProgram').toString(),
+      renderHeader: () => <strong>{t('statisticalProgram').toString()}</strong>,
       headerClassName: 'columns--header',
       flex: 0.3,
       description: t('statisticalProgram').toString(),
     },
     {
       field: 'versionDate',
-      headerName: t('lastUpdate').toString(),
+      renderHeader: () => <strong>{t('lastUpdate').toString()}</strong>,
+      type: 'date',
+      valueFormatter: (params) =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        moment(params?.value).format('DD/MM/YYYY hh:mm'),
       headerClassName: 'columns--header',
       flex: 0.2,
 
@@ -54,7 +59,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     },
     {
       field: 'version',
-      headerName: t('version').toString(),
+      renderHeader: () => <strong>{t('version').toString()}</strong>,
       headerClassName: 'columns--header',
       flex: 0.1,
 
