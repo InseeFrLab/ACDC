@@ -17,7 +17,6 @@ import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { UserAttributePair } from '../../../lib/model/userAttributePair';
-import CollectionEvent from '../../../lib/model/collectionEvents';
 
 interface UserAttributeDisplayProps {
   userAttribute: UserAttributePair;
@@ -55,8 +54,6 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
   const [collectionEvents, setCollectionEvents] = useState(
     dataCollectionState.collectionEvents
   );
-  console.log('userAttributeState', userAttributeState);
-  console.log('collectionEvents', collectionEvents);
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {

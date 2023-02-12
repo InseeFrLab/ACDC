@@ -249,7 +249,9 @@ const CollectionForm = () => {
             }}
           >
             <Typography variant="h6">
-              {t('statisticalOperation', { ns: 'dataCollectionForm' })} :
+              {t('statisticalOperation', { ns: 'dataCollectionForm' })} : (TODO:
+              Create a new react-query object to fetch data when the user has
+              chosen a series)
             </Typography>
           </Box>
           <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>

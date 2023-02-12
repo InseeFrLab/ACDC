@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DatePicker } from '@mui/x-date-pickers';
 import { formatISO } from 'date-fns';
 import {
   Button,
@@ -13,19 +12,14 @@ import {
   Box,
   FormControl,
   TextField,
-  Select,
-  MenuItem,
   Stack,
-  OutlinedInput,
-  SelectChangeEvent,
 } from '@mui/material';
-
+import IntlTextInput from '../intlTextInput/IntlTextInput';
+import CollectionDatePicker from '../formComponents/collectionDatePicker/CollectionDatePicker';
+import CollectionModeSelect from '../formComponents/collectionMode/collectionModeSelect';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import {
-  TypeOfModeOfCollection,
-  typeMode,
-} from '../../../lib/model/typeOfModeOfCollection';
+import { TypeOfModeOfCollection } from '../../../lib/model/typeOfModeOfCollection';
 
 interface EditCollectionEventDialogProps {
   open: boolean;
@@ -53,46 +47,31 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   const [modeCollection, setModeCollection] = useState<string[]>(
     collectionEventState.typeOfModeOfCollection.map((mode) => mode.type)
   );
+  const [labelArray, setLabelArray] = useState([
+    {
+      id: 1,
+      language: 'fr-FR',
+      value: collectionEventState.label['fr-FR'],
+    },
+    {
+      id: 2,
+      language: 'en-IE',
+      value: collectionEventState.label['en-IE'],
+    },
+  ]);
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    props.setCollectionEventState({
-      ...collectionEventState,
-      collectionEventName: {
-        ...collectionEventState.collectionEventName,
-        [i18n.language]: event.target.value,
-      },
-    });
-  };
-  const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    props.setCollectionEventState({
-      ...collectionEventState,
-      label: {
-        ...collectionEventState.label,
-        [i18n.language]: event.target.value,
-      },
-    });
-  };
-  const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    event.preventDefault();
-    props.setCollectionEventState({
-      ...collectionEventState,
-      description: {
-        ...collectionEventState.description,
-        [i18n.language]: event.target.value,
-      },
-    });
-  };
-
-  const handleModeCollectionChange = (event: SelectChangeEvent) => {
-    const {
-      target: { value },
-    } = event;
-    setModeCollection(typeof value === 'string' ? value.split(',') : value);
-  };
+  const [descriptionArray, setDescriptionArray] = useState([
+    {
+      id: 1,
+      language: 'fr-FR',
+      value: collectionEventState.description['fr-FR'],
+    },
+    {
+      id: 2,
+      language: 'en-IE',
+      value: collectionEventState.description['en-IE'],
+    },
+  ]);
 
   const handleSave = () => {
     console.log('Update CollectionEvent: ', collectionEventState);
@@ -102,20 +81,36 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         type: mode,
       });
     });
+
+    const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
+      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
+        map[obj.language] = obj.value;
+        return map;
+      },
+      {}
+    );
+
+    const description: Record<'fr-FR' | 'en-IE' | string, string> =
+      descriptionArray.reduce(
+        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
+          map[obj.language] = obj.value;
+          return map;
+        },
+        {}
+      );
+    console.log('label Updated: ', label);
     props.setCollectionEventState({
       ...collectionEventState,
       typeOfModeOfCollection: modeOfCollection,
-    });
-    props.setCollectionEventState({
-      ...collectionEventState,
       dataCollectionDate: {
         startDate: formatISO(startDate),
         endDate: formatISO(endDate),
       },
+      label,
+      description,
     });
-    props.setCollectionEventState({
-      ...collectionEventState,
-    });
+
+    console.log('Updated CollectionEvent: ', collectionEventState);
     const now = Date.now();
     const today: string = new Date(now).toISOString();
     const index = props.dataCollectionState.collectionEvents.findIndex(
@@ -172,7 +167,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
           >
             <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
               <TextField
-                required
+                disabled
                 size="small"
                 value={collectionEventState.collectionEventName[i18n.language]}
                 sx={{
@@ -181,142 +176,87 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
                   '& legend': { display: 'none' },
                   '& fieldset': { top: 0 },
                 }}
-                onChange={handleNameChange}
                 id={collectionEventState.collectionEventName[i18n.language]}
               />
             </FormControl>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginTop: 1,
-            }}
-          >
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              sx={{ marginRight: 1 }}
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                paddingTop: 2,
+              }}
             >
-              {t('label', { ns: 'form' })}:{' '}
-            </Typography>
-            <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
-              <TextField
-                required
-                size="small"
-                // label={t('label', { ns: 'form' })}
-                value={collectionEventState.label[i18n.language]}
-                sx={{ marginRight: 2, width: '100%' }}
-                onChange={handleLabelChange}
-                id={collectionEventState.label[i18n.language]}
-              />
-            </FormControl>
+              <Typography variant="h6" fontWeight="bold">
+                {t('label', { ns: 'form' })}*:
+              </Typography>
+            </Box>
+            <IntlTextInput
+              textArray={labelArray}
+              setTextArray={setLabelArray}
+            />
+            <Box
+              sx={{
+                paddingTop: 2,
+                display: 'flex',
+                justifyContent: 'flex-start',
+              }}
+            >
+              <Typography variant="h6" fontWeight="bold">
+                {t('descriptionField', { ns: 'form' })}:
+              </Typography>
+            </Box>
+
+            <IntlTextInput
+              textArray={descriptionArray}
+              setTextArray={setDescriptionArray}
+              multiline
+            />
           </Box>
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              marginTop: 1,
+              paddingTop: 2,
             }}
           >
-            <Typography variant="body1" fontWeight="bold">
-              {t('description', { ns: 'form' })}:{' '}
-            </Typography>
-            <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
-              <TextField
-                required
-                size="small"
-                // label={t('description', { ns: 'form' })}
-                multiline
-                maxRows={4}
-                value={collectionEventState.description[i18n.language]}
-                sx={{ marginRight: 2, width: '100%' }}
-                onChange={handleDescriptionChange}
-                id={collectionEventState.description[i18n.language]}
-              />
-            </FormControl>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginTop: 1,
-            }}
-          >
-            <Typography variant="body1" fontWeight="bold">
+            <Typography variant="h6" fontWeight="bold">
               {t('dataCollectionDate', { ns: 'collectionEvent' })}:
             </Typography>
           </Box>
           <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
-            <DatePicker
-              label={t('collectionStartDate', { ns: 'collectionEvent' })}
-              value={startDate}
-              onChange={(date) => date && setStartDate(date)}
-              renderInput={(params) => <TextField {...params} />}
-            />
-            <DatePicker
-              label={t('collectionEndDate', { ns: 'collectionEvent' })}
-              value={endDate}
-              minDate={startDate}
-              onChange={(date) => date && setEndDate(date)}
-              renderInput={(params) => <TextField {...params} />}
+            <CollectionDatePicker
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
             />
           </Stack>
-
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'row',
-              marginTop: 1,
+              paddingTop: 2,
             }}
           >
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              sx={{ marginRight: 1 }}
-            >
+            <Typography variant="h6" fontWeight="bold">
               {t('modeOfCollection', { ns: 'collectionEvent' })}:{' '}
             </Typography>
           </Box>
-          <FormControl size="small" fullWidth>
-            <Select
-              labelId="multiple-mode-label"
-              sx={{
-                width: 200,
-                '& legend': { display: 'none' },
-                '& fieldset': { top: 0 },
-              }}
-              notched
-              multiple
-              // @ts-expect-error mui types are wrong for multiple select
-              value={modeCollection}
-              onChange={handleModeCollectionChange}
-              input={<OutlinedInput label="Name" />}
-            >
-              {typeMode.map((mode) => (
-                <MenuItem key={mode.type} value={mode.type}>
-                  {mode.type}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <CollectionModeSelect
+            modeCollection={modeCollection}
+            setModeCollection={setModeCollection}
+          />
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'row',
-              marginTop: 1,
+              paddingTop: 2,
             }}
           >
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              sx={{ marginRight: 1 }}
-            >
+            <Typography variant="h6" fontWeight="bold" sx={{ marginRight: 1 }}>
               {t('version', { ns: 'form' })}:{' '}
             </Typography>
-            <Typography variant="body1">
-              {collectionEventState.version}
-            </Typography>
+            <Typography variant="h6">{collectionEventState.version}</Typography>
           </Box>
         </DialogContentText>
       </DialogContent>

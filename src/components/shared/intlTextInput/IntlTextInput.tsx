@@ -30,7 +30,6 @@ const IntlTextInput = (props: any) => {
   const handleTextChange = (e: any): void => {
     e.preventDefault();
     const index = e.target.id;
-    console.log('texrArray: ', textArray);
     props.setTextArray((s: any) => {
       const newText: Record<'id' | 'language' | 'value', string>[] = s.slice();
       newText[index].value = e.target.value;
@@ -67,7 +66,7 @@ const IntlTextInput = (props: any) => {
                   multiline={props.multiline}
                   // label={t('label')}
                   value={label.value}
-                  sx={{ paddingRight: 2, width: '99%' }}
+                  sx={{ paddingRight: 2, width: '99%', marginTop: 1 }}
                   onChange={handleTextChange}
                   id={index.toString()}
                 />
@@ -83,6 +82,7 @@ const IntlTextInput = (props: any) => {
                     '& fieldset': { top: 0 },
                     width: 70,
                     marginLeft: 1,
+                    marginTop: 1,
                   }}
                   notched
                 >

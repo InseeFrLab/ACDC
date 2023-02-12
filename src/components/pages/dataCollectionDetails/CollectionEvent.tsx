@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
+import moment from 'moment';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from '../../shared/updateDataForm/EditCollectionEventDialog';
@@ -168,21 +169,22 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 {collectionEvent.description[i18n.language]}
               </Typography>
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('version', { ns: 'form' })}:{' '}
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <Typography variant="body1" fontWeight="bold" sx={{ mr: 1 }}>
+                {' '}
+                {t('dataCollectionDate', { ns: 'collectionEvent' })}:
               </Typography>
-              <Typography variant="body1">{collectionEvent.version}</Typography>
+              <Typography variant="body1" sx={{ mr: 1 }}>
+                {moment(collectionEvent.dataCollectionDate.startDate).format(
+                  'DD/MM/YYYY'
+                )}{' '}
+                -{' '}
+                {moment(collectionEvent.dataCollectionDate.endDate).format(
+                  'DD/MM/YYYY'
+                )}
+              </Typography>
             </Box>
+
             <Box
               sx={{
                 display: 'flex',
@@ -244,7 +246,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                       <Typography
                         variant="body1"
                         key={value.id}
-                        sx={{ ml: 0.5, alignItems: 'flex-start', mt: 1.5 }}
+                        sx={{ ml: 1.5, alignItems: 'flex-start' }}
                       >
                         •{' '}
                         <strong>
@@ -255,7 +257,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                       <Typography
                         variant="body1"
                         key={value.id}
-                        sx={{ ml: 0.5, alignItems: 'flex-start' }}
+                        sx={{ ml: 1.5, alignItems: 'flex-start' }}
                       >
                         •{' '}
                         <strong>
@@ -266,7 +268,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                       <Typography
                         variant="body1"
                         key={value.id}
-                        sx={{ ml: 0.5, alignItems: 'flex-start' }}
+                        sx={{ ml: 1.5, alignItems: 'flex-start' }}
                       >
                         •{' '}
                         <strong>
@@ -281,6 +283,21 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 });
               })}
             </Stack>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ marginRight: 1 }}
+              >
+                {t('version', { ns: 'form' })}:{' '}
+              </Typography>
+              <Typography variant="body1">{collectionEvent.version}</Typography>
+            </Box>
 
             <Box
               sx={{

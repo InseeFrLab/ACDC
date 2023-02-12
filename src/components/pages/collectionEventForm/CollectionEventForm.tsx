@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
-import React, { SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { DatePicker } from '@mui/x-date-pickers';
 import { formatISO } from 'date-fns';
 import {
   Typography,
@@ -27,12 +26,11 @@ import {
   Autocomplete,
 } from '@mui/material';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
-import CollectionCommunicationSelect from '../../shared/collectionCommunication/collectionCommunication';
+import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
+import CollectionCommunicationSelect from '../../shared/formComponents/collectionCommunication/collectionCommunication';
+import CollectionModeSelect from '../../shared/formComponents/collectionMode/collectionModeSelect';
 import CollectionEvent from '../../../lib/model/collectionEvents';
-import {
-  TypeOfModeOfCollection,
-  typeMode,
-} from '../../../lib/model/typeOfModeOfCollection';
+import { TypeOfModeOfCollection } from '../../../lib/model/typeOfModeOfCollection';
 
 import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -276,6 +274,7 @@ const EventForm = (props: DataCollectionProps) => {
 
         <Box
           sx={{
+            paddingTop: 2,
             display: 'flex',
             justifyContent: 'flex-start',
             borderTop: '1px solid',
@@ -320,30 +319,10 @@ const EventForm = (props: DataCollectionProps) => {
           </Typography>
         </Box>
         <Stack spacing={2} direction="row">
-          <FormControl size="small" fullWidth>
-            <InputLabel id="select-mode-label">
-              {t('modeOfCollection', { ns: 'collectionEvent' })}
-            </InputLabel>
-            <Select
-              labelId="select-mode-label"
-              sx={{
-                '& legend': { display: 'none' },
-                '& fieldset': { top: 0 },
-              }}
-              notched
-              multiple
-              // @ts-expect-error mui types are wrong for multiple select
-              value={modeCollection}
-              onChange={handleModeCollectionChange}
-              input={<OutlinedInput label="Name" />}
-            >
-              {typeMode.map((mode) => (
-                <MenuItem key={mode.type} value={mode.type}>
-                  {mode.type}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <CollectionModeSelect
+            modeCollection={modeCollection}
+            setModeCollection={setModeCollection}
+          />
           <FormControl size="small" fullWidth>
             <Autocomplete
               disablePortal
@@ -386,23 +365,12 @@ const EventForm = (props: DataCollectionProps) => {
           </Typography>
         </Box>
         <Stack spacing={2} direction="row">
-          <FormControl size="small">
-            <DatePicker
-              label={t('collectionStartDate', { ns: 'collectionEvent' })}
-              value={startDate}
-              onChange={(date) => date && setStartDate(date)}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </FormControl>
-          <FormControl size="small">
-            <DatePicker
-              label={t('collectionEndDate', { ns: 'collectionEvent' })}
-              value={endDate}
-              minDate={startDate}
-              onChange={(date) => date && setEndDate(date)}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </FormControl>
+          <CollectionDatePicker
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+          />
         </Stack>
         <Box
           sx={{
