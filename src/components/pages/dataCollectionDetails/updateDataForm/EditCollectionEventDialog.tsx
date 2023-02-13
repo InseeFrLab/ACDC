@@ -87,7 +87,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
     const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
       .filter((mode) => mode.checked === true)
       .map((mode) => {
-        return { type: mode.label[0] };
+        return { type: mode.label };
       });
 
     const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
@@ -305,6 +305,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         <Button variant="outlined" onClick={props.handleClose} autoFocus>
           {t('close', { ns: 'form' })}
         </Button>
+
         <Button
           onClick={() => {
             handleSave();

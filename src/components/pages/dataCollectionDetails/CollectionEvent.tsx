@@ -13,12 +13,13 @@ import {
   CardContent,
   Stack,
 } from '@mui/material';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
+import { UserAttributePair } from '../../../lib/model/userAttributePair';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;
@@ -53,6 +54,26 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const { userAttributePair } = dataCollectionState;
+  const listOfIds: string[] = [];
+  userAttributePair.forEach((userAttribute) => {
+    userAttribute.attributeValue.forEach((attributeValue) => {
+      attributeValue.collectionEventReference.forEach(
+        (collectionEventReference) => {
+          listOfIds.indexOf(collectionEventReference.id) === -1
+            ? listOfIds.push(collectionEventReference.id)
+            : console.log('Collection already in list');
+        }
+      );
+    });
+  });
+  console.log('List of Ids', listOfIds);
+  console.log('CollectionEvent Id', collectionEvent.id);
+
+  const [deletable, setDeletable] = useState(
+    listOfIds.includes(collectionEvent.id)
+  );
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -67,6 +88,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
 
   const handleDeleteClick = () => {
     console.log('Delete CollectionEvent in Component');
+
     props.handleDeleteCollectionEvent(collectionEvent.id);
   };
   return (
@@ -308,22 +330,24 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
             >
               <Button
                 size="small"
+                onClick={handleDeleteClick}
+                variant="outlined"
+                sx={{ marginLeft: 2 }}
+                disabled={deletable}
+                startIcon={<FiTrash />}
+              >
+                <Typography variant="body1" fontWeight="xl">
+                  {t('delete', { ns: 'form' })}
+                </Typography>
+              </Button>
+              <Button
+                size="small"
                 onClick={handleClickOpen}
                 variant="contained"
                 sx={{ marginLeft: 2 }}
               >
                 <Typography variant="body1" fontWeight="xl">
                   {t('edit', { ns: 'dataCollectionDetails' })}
-                </Typography>
-              </Button>
-              <Button
-                size="small"
-                onClick={handleDeleteClick}
-                variant="outlined"
-                sx={{ marginLeft: 2 }}
-              >
-                <Typography variant="body1" fontWeight="xl">
-                  {t('delete', { ns: 'form' })}
                 </Typography>
               </Button>
             </Box>
