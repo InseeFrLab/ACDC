@@ -26,7 +26,7 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
         <Typography variant="h5">
-          {t('descriptionCreateForm', { ns: 'dataCollectionForm' })}
+          {t('title', { ns: 'dataCollectionForm' })}
         </Typography>
       </DialogTitle>
       <DialogContent>

@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import EditCollectionEventDialog from '../../shared/updateDataForm/EditCollectionEventDialog';
+import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;
@@ -66,7 +66,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   };
 
   const handleDeleteClick = () => {
-    console.log('delete');
+    console.log('Delete CollectionEvent in Component');
     props.handleDeleteCollectionEvent(collectionEvent.id);
   };
   return (

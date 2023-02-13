@@ -38,7 +38,6 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
   );
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>(dataCollection);
-  console.log('collectionEvents', collectionEvents);
 
   const [collectionEventCheck, setCollectionEventCheck] = useState(
     collectionEvents.map((item) => {

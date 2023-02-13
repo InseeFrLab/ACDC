@@ -30,7 +30,10 @@ import CollectionDatePicker from '../../shared/formComponents/collectionDatePick
 import CollectionCommunicationSelect from '../../shared/formComponents/collectionCommunication/collectionCommunication';
 import CollectionModeSelect from '../../shared/formComponents/collectionMode/collectionModeSelect';
 import CollectionEvent from '../../../lib/model/collectionEvents';
-import { TypeOfModeOfCollection } from '../../../lib/model/typeOfModeOfCollection';
+import {
+  TypeOfModeOfCollection,
+  typeMode,
+} from '../../../lib/model/typeOfModeOfCollection';
 
 import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -55,7 +58,11 @@ const EventForm = (props: DataCollectionProps) => {
     useState<DataCollectionApi>(props.DataCollectionApi);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const [modeCollection, setModeCollection] = useState<string[]>([]);
+  const [modeCollectionCheck, setModeCollectionCheck] = useState(
+    typeMode.map((item) => {
+      return { label: item.type, checked: false };
+    })
+  );
   const [questionnaire, setQuestionnaire] = useState<string>('');
   const [questionnaireLabel, setQuestionnaireLabel] = useState<string>('');
   const [userAttributePairArray, setUserAttributePairArray] = useState([
@@ -104,13 +111,6 @@ const EventForm = (props: DataCollectionProps) => {
   ]);
   const [open, setOpen] = useState(false);
   const [textError, setTextError] = useState(false);
-
-  const handleModeCollectionChange = (event: SelectChangeEvent) => {
-    const {
-      target: { value },
-    } = event;
-    setModeCollection(typeof value === 'string' ? value.split(',') : value);
-  };
 
   const handleQuestionnaireChange = (
     event: any,
@@ -166,12 +166,12 @@ const EventForm = (props: DataCollectionProps) => {
       label: questionnaireLabel,
     };
 
-    const modeOfCollection: TypeOfModeOfCollection[] = [];
-    modeCollection.forEach((mode) => {
-      modeOfCollection.push({
-        type: mode,
+    const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
+      .filter((mode) => mode.checked === true)
+      .map((mode) => {
+        return { type: mode.label };
       });
-    });
+
     const collectionEventName: Record<'fr-FR' | 'en-IE' | string, string> =
       collectionEventNameArray.reduce(
         (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
@@ -313,44 +313,56 @@ const EventForm = (props: DataCollectionProps) => {
           }}
         >
           <Typography variant="h6">
-            {t('modeOfCollection', { ns: 'collectionEvent' })} &{' '}
-            {t('questionnaireModel', { ns: 'collectionEvent' })} (TODO : Lien à
-            faire avec Pogues):
+            {t('modeOfCollection', { ns: 'collectionEvent' })}:*
           </Typography>
         </Box>
-        <Stack spacing={2} direction="row">
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
           <CollectionModeSelect
-            modeCollection={modeCollection}
-            setModeCollection={setModeCollection}
+            modeCollectionCheck={modeCollectionCheck}
+            setModeCollectionCheck={setModeCollectionCheck}
+          />{' '}
+        </Box>
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('questionnaireModel', { ns: 'collectionEvent' })}
+          </Typography>
+        </Box>
+        <FormControl size="small" fullWidth>
+          <Autocomplete
+            disablePortal
+            size="small"
+            id="combo-box-demo"
+            options={props.questionnaires}
+            onChange={handleQuestionnaireChange}
+            getOptionLabel={(option) => option.label}
+            renderOption={(pr, option) => {
+              return (
+                <Box
+                  component="li"
+                  sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                  {...pr}
+                >
+                  {option.label} - ({option.date})
+                </Box>
+              );
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label={t('questionnaireModel', { ns: 'collectionEvent' })}
+              />
+            )}
           />
-          <FormControl size="small" fullWidth>
-            <Autocomplete
-              disablePortal
-              size="small"
-              id="combo-box-demo"
-              options={props.questionnaires}
-              onChange={handleQuestionnaireChange}
-              getOptionLabel={(option) => option.label}
-              renderOption={(pr, option) => {
-                return (
-                  <Box
-                    component="li"
-                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                    {...pr}
-                  >
-                    {option.label} - ({option.date})
-                  </Box>
-                );
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label={t('questionnaireModel', { ns: 'collectionEvent' })}
-                />
-              )}
-            />
-          </FormControl>
-        </Stack>
+        </FormControl>
+
         <Box
           sx={{
             paddingTop: 2,

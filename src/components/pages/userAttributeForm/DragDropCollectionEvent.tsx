@@ -6,14 +6,7 @@ import {
   DraggableId,
   DroppableId,
 } from 'react-beautiful-dnd';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  Typography,
-} from '@mui/material';
+import { Box, Card, Divider, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 

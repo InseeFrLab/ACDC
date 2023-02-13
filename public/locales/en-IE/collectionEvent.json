@@ -11,5 +11,5 @@
   "collectionCommunication": "Mode de communication",
   "textFieldError": "Field Name and Label are required",
   "questionnaireModel": "Questionnaire model",
-  "retrieveQuestionnaireModelPending": "Retrieving questionnaire ..."
+  "retrieveQuestionnaireModelPending": "Retrieving questionnaires ..."
 }

@@ -21,7 +21,6 @@ const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
   const { t, i18n } = useTranslation(['userAttributeForm', 'form']);
   const { collectionEvents } = props;
 
-  console.log('collectionEventCheck', props.collectionEventCheck);
   return (
     <>
       {collectionEvents.map((item, index) => (

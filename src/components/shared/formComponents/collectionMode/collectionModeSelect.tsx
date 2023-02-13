@@ -1,55 +1,62 @@
 import { useTranslation } from 'react-i18next';
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  OutlinedInput,
-  MenuItem,
-  SelectChangeEvent,
-} from '@mui/material';
+import { FormControl, Box, Checkbox, Typography, Card } from '@mui/material';
 import { typeMode } from '../../../../lib/model/typeOfModeOfCollection';
 
 interface CollectionModeSelectProps {
-  modeCollection: string[];
-  setModeCollection: (modeCollection: string[]) => void;
+  modeCollectionCheck: any[];
+  setModeCollectionCheck: (modeCollectionCheck: any[]) => void;
+  width?: string;
 }
 
 const CollectionModeSelect = (props: CollectionModeSelectProps) => {
-  const { t } = useTranslation(['collectionEvent']);
-  const handleModeCollectionChange = (event: SelectChangeEvent) => {
-    const {
-      target: { value },
-    } = event;
-    props.setModeCollection(
-      typeof value === 'string' ? value.split(',') : value
-    );
-  };
-
   return (
-    <FormControl size="small" fullWidth>
-      <InputLabel id="select-mode-label">
-        {t('modeOfCollection', { ns: 'collectionEvent' })}
-      </InputLabel>
-      <Select
-        labelId="select-mode-label"
-        sx={{
-          '& legend': { display: 'none' },
-          '& fieldset': { top: 0 },
-        }}
-        notched
-        multiple
-        // @ts-expect-error mui types are wrong for multiple select
-        value={props.modeCollection}
-        onChange={handleModeCollectionChange}
-        input={<OutlinedInput label="Name" />}
-      >
-        {typeMode.map((mode) => (
-          <MenuItem key={mode.type} value={mode.type}>
-            {mode.type}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <>
+      {typeMode.map((item, index) => (
+        <Card
+          key={item.type}
+          sx={{
+            mx: 1,
+            width: props.width ? props.width : '45%',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <Checkbox
+                checked={props.modeCollectionCheck[index].checked}
+                sx={{ '& .MuiSvgIcon-root': { fontSize: 25 } }}
+                onChange={(e) => {
+                  const newModeCollectionCheck = [...props.modeCollectionCheck];
+                  newModeCollectionCheck[index].checked = e.target.checked;
+                  props.setModeCollectionCheck(newModeCollectionCheck);
+                  console.log('ModeCollectionCheck', props.modeCollectionCheck);
+                }}
+              />
+              <Typography
+                variant="subtitle1"
+                fontWeight="bold"
+                color="text.secondary"
+                sx={{ marginLeft: 1 }}
+              >
+                {`${props.modeCollectionCheck[index].label} `}
+              </Typography>
+            </Box>
+          </Box>
+        </Card>
+      ))}
+    </>
   );
 };
 

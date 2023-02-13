@@ -15,7 +15,7 @@ import {
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import DataCollectionDetailsDialog from '../../shared/updateDataForm/DataCollectionDetailsDialog';
+import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -29,7 +29,6 @@ const DataCollectionDetails = () => {
     'CollectionEvent',
   ]);
   const navigate = useNavigate();
-  console.log('State : ', useLocation().state);
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
     useState(dataCollection);
@@ -66,13 +65,16 @@ const DataCollectionDetails = () => {
 
   const handleDeleteCollectionEvent = (id: string) => {
     console.log('Delete Collection Event: ', id);
-    const updatedCollectionEvents = dataCollection.collectionEvents.filter(
+    const updatedCollectionEvents = dataCollectionState.collectionEvents.filter(
       (event) => event.id !== id
     );
-    dataCollection.collectionEvents = updatedCollectionEvents;
+    setDataCollectionState({
+      ...dataCollectionState,
+      collectionEvents: updatedCollectionEvents,
+    });
     const updatedDataCollection: DataCollectionApi = {
-      id: dataCollection?.id,
-      json: dataCollection,
+      id: dataCollectionState?.id,
+      json: dataCollectionState,
     };
     console.log(
       'Updated Data Collection deleting Collection Event: ',
