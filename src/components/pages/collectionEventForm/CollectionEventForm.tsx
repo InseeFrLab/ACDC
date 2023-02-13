@@ -16,13 +16,8 @@ import {
   Button,
   Stack,
   TextField,
-  Select,
-  MenuItem,
   Box,
   DialogTitle,
-  SelectChangeEvent,
-  OutlinedInput,
-  InputLabel,
   Autocomplete,
 } from '@mui/material';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';

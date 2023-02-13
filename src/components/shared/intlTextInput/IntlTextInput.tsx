@@ -4,15 +4,11 @@ import {
   TextField,
   Select,
   MenuItem,
-  Button,
-  Typography,
   SelectChangeEvent,
   FormControl,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 const IntlTextInput = (props: any) => {
-  const { t } = useTranslation(['dataCollectionForm', 'form']);
   const { textArray } = props;
   // const addTextLabel = () => {
   //   const lastTextId: number = textArray[textArray.length - 1].id;

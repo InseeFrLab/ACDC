@@ -1,13 +1,4 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Card,
-  Checkbox,
-  CardContent,
-  CardHeader,
-  Divider,
-  Typography,
-} from '@mui/material';
+import { Box, Card, Checkbox, Divider, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 
@@ -18,7 +9,7 @@ interface CollectionEventCheckBoxProps {
 }
 
 const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
-  const { t, i18n } = useTranslation(['userAttributeForm', 'form']);
+  const { i18n } = useTranslation(['userAttributeForm', 'form']);
   const { collectionEvents } = props;
 
   return (

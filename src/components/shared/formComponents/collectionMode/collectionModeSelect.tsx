@@ -1,5 +1,4 @@
-import { useTranslation } from 'react-i18next';
-import { FormControl, Box, Checkbox, Typography, Card } from '@mui/material';
+import { Box, Checkbox, Typography, Card } from '@mui/material';
 import { typeMode } from '../../../../lib/model/typeOfModeOfCollection';
 
 interface CollectionModeSelectProps {

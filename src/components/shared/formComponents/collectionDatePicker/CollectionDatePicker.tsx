@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormControl, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { formatISO } from 'date-fns';
 
 interface CollectionDatePickerProps {
   startDate: Date | null;
