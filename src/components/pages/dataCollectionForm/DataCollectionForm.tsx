@@ -156,24 +156,6 @@ const CollectionForm = () => {
             component="form"
             className="CollectionForm"
             sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              paddingTop: 2,
-            }}
-          >
-            <Typography variant="h6">
-              {t('label', { ns: 'form' })}* :
-            </Typography>
-          </Box>
-          <IntlTextInput
-            textArray={labelArray}
-            setTextArray={setLabelArray}
-            multiline={false}
-          />
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
               paddingTop: 2,
               display: 'flex',
               justifyContent: 'flex-start',
@@ -182,28 +164,7 @@ const CollectionForm = () => {
             }}
           >
             <Typography variant="h6">
-              {t('descriptionField', { ns: 'form' })} :
-            </Typography>
-          </Box>
-
-          <IntlTextInput
-            textArray={descriptionArray}
-            setTextArray={setDescriptionArray}
-            multiline
-          />
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })} :
+              {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}* :
             </Typography>
           </Box>
           <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
@@ -249,9 +210,9 @@ const CollectionForm = () => {
             }}
           >
             <Typography variant="h6">
-              {t('statisticalOperation', { ns: 'dataCollectionForm' })} : (TODO:
-              Create a new react-query object to fetch data when the user has
-              chosen a series)
+              {t('statisticalOperation', { ns: 'dataCollectionForm' })}* :
+              (TODO: Create a new react-query object to fetch data when the user
+              has chosen a series)
             </Typography>
           </Box>
           <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
@@ -291,6 +252,46 @@ const CollectionForm = () => {
             className="CollectionForm"
             sx={{
               display: 'flex',
+              justifyContent: 'flex-start',
+              paddingTop: 2,
+            }}
+          >
+            <Typography variant="h6">
+              {t('label', { ns: 'form' })}* :
+            </Typography>
+          </Box>
+          <IntlTextInput
+            textArray={labelArray}
+            setTextArray={setLabelArray}
+            multiline={false}
+          />
+          <Box
+            component="form"
+            className="CollectionForm"
+            sx={{
+              paddingTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">
+              {t('descriptionField', { ns: 'form' })} :
+            </Typography>
+          </Box>
+
+          <IntlTextInput
+            textArray={descriptionArray}
+            setTextArray={setDescriptionArray}
+            multiline
+          />
+
+          <Box
+            component="form"
+            className="CollectionForm"
+            sx={{
+              display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-start',
               borderTop: '1px solid',
@@ -320,7 +321,7 @@ const CollectionForm = () => {
                 fontWeight="bold"
                 color="error"
               >
-                {t('textFieldError', { ns: 'form' })}
+                {t('generalFieldErrorMessage', { ns: 'form' })}
               </Typography>
             )}
           </Box>

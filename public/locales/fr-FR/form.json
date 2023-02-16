@@ -12,6 +12,7 @@
   "error": "Une erreur est survenue",
   "addLanguage": "Ajouter une langue",
   "textFieldError": "Veuillez renseigner les champs Label",
+  "generalFieldErrorMessage": "Veuillez renseigner les champs obligatoires",
   "delete": "Supprimer",
   "addCommunication": "Ajouter une communication",
   "paperQuestionnaire": "Paper Questionnaire",
