@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,9 +19,11 @@ import { DataCollection } from '../../../lib/model/dataCollection';
 import { createDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
+import jsonData from '../../../lib/api/mock/mockSeries';
+import { GroupReference } from '../../../lib/model/studyUnitReference';
 
 const CollectionForm = () => {
-  const { t } = useTranslation(['dataCollectionForm', 'form']);
+  const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
   const navigate = useNavigate();
 
   const { isLoading, isError, isSuccess, mutate } =
@@ -53,21 +56,24 @@ const CollectionForm = () => {
   const [open, setOpen] = useState(false);
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>({} as DataCollection);
+  const [groupReference, setGroupReference] = useState<GroupReference>(
+    {} as GroupReference
+  );
 
-  const statisticalOperationSeries = [
-    {
-      id: 1,
-      label: 'Serie 1',
-    },
-    {
-      id: 2,
-      label: 'Serie 2',
-    },
-    {
-      id: 3,
-      label: 'Serie 3',
-    },
-  ];
+  const handleGroupReferenceChange = (event: any, newValue: any) => {
+    const {
+      target: { value },
+    } = event;
+    console.log('newValue', newValue);
+    setGroupReference({
+      id: newValue.id,
+      label: {
+        'fr-FR': newValue.label[0],
+        'en-IE': newValue.label[1],
+      },
+      typeOfObject: 'Group',
+    });
+  };
 
   const statisticalOperation = [
     {
@@ -172,11 +178,11 @@ const CollectionForm = () => {
               disablePortal
               size="small"
               id="select-statistical-operation-series"
-              options={statisticalOperationSeries}
-              onChange={() =>
-                console.log('Statistical Operation Series Change')
-              }
-              getOptionLabel={(option) => option.label}
+              options={jsonData}
+              onChange={handleGroupReferenceChange}
+              getOptionLabel={(option) => {
+                return `${option.label[0].contenu} - (${option.label[1].contenu})`;
+              }}
               renderOption={(pr, option) => {
                 return (
                   <Box
@@ -184,7 +190,7 @@ const CollectionForm = () => {
                     sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                     {...pr}
                   >
-                    {option.label}
+                    {option.label[0].contenu} - ({option.label[1].contenu})
                   </Box>
                 );
               }}

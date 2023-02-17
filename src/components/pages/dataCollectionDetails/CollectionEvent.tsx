@@ -19,7 +19,6 @@ import moment from 'moment';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
-import { UserAttributePair } from '../../../lib/model/userAttributePair';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;

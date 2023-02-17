@@ -27,4 +27,7 @@ yarn-error.log*
 config.json
 .env
 /.vscode
+
+/public/mock
+/src/assets/mockData
 ```
