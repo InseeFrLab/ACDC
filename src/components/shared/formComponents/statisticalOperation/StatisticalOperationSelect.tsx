@@ -9,6 +9,10 @@ import {
 import { useTranslation } from 'react-i18next';
 import jsonData from '../../../../lib/api/mock/mockSeries';
 import {
+  getSeriesOperation,
+  SeriesId,
+} from '../../../../lib/api/mock/serieOperation';
+import {
   GroupReference,
   StudyUnitReference,
 } from '../../../../lib/model/studyUnitReference';
@@ -18,20 +22,14 @@ interface StatisticalOperationSelectProps {
   setGroupReference: (groupReference: GroupReference) => void;
   studyUnitReference: StudyUnitReference;
   setStudyUnitReference: (studyUnitReference: StudyUnitReference) => void;
+  statisticalOperationsList: any[];
+  setStatisticalOperationsList: (statisticalOperationsList: any[]) => void;
+  operationDisabled: boolean;
+  setOperationDisabled: (operationDisabled: boolean) => void;
 }
 
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   const { t } = useTranslation(['dataCollectionForm', 'form']);
-  const statisticalOperation = [
-    {
-      id: 1,
-      label: 'Operation 1',
-    },
-    {
-      id: 2,
-      label: 'Operation 2',
-    },
-  ];
 
   const handleGroupReferenceChange = (event: any, newValue: any) => {
     const {
@@ -46,7 +44,15 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       },
       typeOfObject: 'Group',
     } as GroupReference);
-    console.log('Updated groupReference: ', props.groupReference.id);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    props.setStatisticalOperationsList(getSeriesOperation(newValue.id));
+    console.log(
+      'Associated series Operations: ',
+      props.statisticalOperationsList
+    );
+    setTimeout(() => {
+      props.setOperationDisabled(false);
+    });
   };
 
   return (
@@ -115,12 +121,14 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
         <Autocomplete
           disablePortal
-          disabled
+          disabled={props.operationDisabled}
           size="small"
           id="select-statistical-operation"
-          options={statisticalOperation}
+          options={props.statisticalOperationsList}
           onChange={() => console.log('Statistical Operation Series Change')}
-          getOptionLabel={(option) => option.label}
+          getOptionLabel={(option) => {
+            return `${option.label[0].contenu} - (${option.label[1].contenu})`;
+          }}
           renderOption={(pr, option) => {
             return (
               <Box
@@ -128,7 +136,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
                 sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                 {...pr}
               >
-                {option.label}
+                {option.label[0].contenu} - ({option.label[1].contenu})
               </Box>
             );
           }}

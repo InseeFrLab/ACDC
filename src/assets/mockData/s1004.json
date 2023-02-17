@@ -1,0 +1,110 @@
+[
+  {
+    "altLabel": [
+      {
+        "langue": "fr"
+      },
+      {
+        "langue": "en"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête Logement Mayotte 2013"
+      },
+      {
+        "langue": "en",
+        "contenu": "Mayotte Housing Survey 2013"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1448",
+    "serie": {
+      "id": "s1004",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête Logement"
+        },
+        {
+          "langue": "en",
+          "contenu": "Housing survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1004"
+    },
+    "id": "s1448"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr"
+      },
+      {
+        "langue": "en"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête Logement en 2013"
+      },
+      {
+        "langue": "en",
+        "contenu": "Housing survey in 2013"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1251",
+    "serie": {
+      "id": "s1004",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête Logement"
+        },
+        {
+          "langue": "en",
+          "contenu": "Housing survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1004"
+    },
+    "id": "s1251"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr"
+      },
+      {
+        "langue": "en"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête Logement en 2006"
+      },
+      {
+        "langue": "en",
+        "contenu": "Housing survey in 2006"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1250",
+    "serie": {
+      "id": "s1004",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête Logement"
+        },
+        {
+          "langue": "en",
+          "contenu": "Housing survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1004"
+    },
+    "id": "s1250"
+  }
+]

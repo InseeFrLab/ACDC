@@ -57,6 +57,46 @@ const CollectionForm = () => {
   const [studyUnitReference, setStudyUnitReference] =
     useState<StudyUnitReference>({} as StudyUnitReference);
 
+  const [statisticalOperationsList, setStatisticalOperationsList] = useState([
+    {
+      altLabel: [
+        {
+          langue: 'fr',
+        },
+        {
+          langue: 'en',
+        },
+      ],
+      label: [
+        {
+          langue: 'fr',
+          contenu: 'Enquête Logement Mayotte 2013',
+        },
+        {
+          langue: 'en',
+          contenu: 'Mayotte Housing Survey 2013',
+        },
+      ],
+      uri: 'http://bauhaus/operations/operation/s1448',
+      serie: {
+        id: 's1004',
+        label: [
+          {
+            langue: 'fr',
+            contenu: 'Enquête Logement',
+          },
+          {
+            langue: 'en',
+            contenu: 'Housing survey',
+          },
+        ],
+        uri: 'http://bauhaus/operations/serie/s1004',
+      },
+      id: 's1448',
+    },
+  ]);
+
+  const [operationDisabled, setOperationDisabled] = useState(true);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -134,6 +174,10 @@ const CollectionForm = () => {
           setGroupReference={setGroupReference}
           studyUnitReference={studyUnitReference}
           setStudyUnitReference={setStudyUnitReference}
+          statisticalOperationsList={statisticalOperationsList}
+          setStatisticalOperationsList={setStatisticalOperationsList}
+          operationDisabled={operationDisabled}
+          setOperationDisabled={setOperationDisabled}
         />
         <Box
           component="form"

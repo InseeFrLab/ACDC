@@ -125,24 +125,15 @@
     }
   },
   {
-    "altLabel": [
-      {
-        "langue": "fr",
-        "contenu": "CPI"
-      },
-      {
-        "langue": "en",
-        "contenu": "CPI"
-      }
-    ],
+    "altLabel": [],
     "label": [
       {
         "langue": "fr",
-        "contenu": "Enquête sur les compétences pour innover"
+        "contenu": "Enquête Patrimoine"
       },
       {
         "langue": "en",
-        "contenu": "Innovative skills survey"
+        "contenu": "Household Wealth Survey"
       }
     ],
     "type": {
@@ -159,36 +150,36 @@
       ],
       "uri": "http://bauhaus/codes/categorieSource/S"
     },
-    "series": "http://bauhaus/operations/serie/s1010",
-    "id": "s1010",
+    "series": "http://bauhaus/operations/serie/s1005",
+    "id": "s1005",
     "frequence": {
-      "id": "P",
+      "id": "T",
       "label": [
         {
           "langue": "fr",
-          "contenu": "Ponctuelle ou apériodique"
+          "contenu": "Bimestrielle"
         },
         {
           "langue": "en",
-          "contenu": "Punctual or aperiodic"
+          "contenu": "Bimonthly"
         }
       ],
-      "uri": "http://bauhaus/codes/frequence/P"
+      "uri": "http://bauhaus/codes/frequence/T"
     },
-    "nbOperation": "0",
+    "nbOperation": "4",
     "famille": {
-      "id": "s15",
+      "id": "s64",
       "label": [
         {
           "langue": "fr",
-          "contenu": "Innovation"
+          "contenu": "Patrimoine"
         },
         {
           "langue": "en",
-          "contenu": "Innovation"
+          "contenu": "Household wealth"
         }
       ],
-      "uri": "http://bauhaus/operations/famille/s15"
+      "uri": "http://bauhaus/operations/famille/s64"
     }
   }
 ]

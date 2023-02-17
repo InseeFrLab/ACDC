@@ -1,0 +1,230 @@
+[
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "CIS 2020"
+      },
+      {
+        "langue": "en",
+        "contenu": "CIS 2020"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête capacité à innover et stratégie 2020"
+      },
+      {
+        "langue": "en",
+        "contenu": "Community Innovation Survey 2020"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1558",
+    "serie": {
+      "id": "s1001",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête innovation"
+        },
+        {
+          "langue": "en",
+          "contenu": "Innovation survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1001"
+    },
+    "id": "s1558"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "CIS 2018"
+      },
+      {
+        "langue": "en",
+        "contenu": "CIS 2018"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête capacité à innover et stratégie 2018"
+      },
+      {
+        "langue": "en",
+        "contenu": "Community innovation survey 2018"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1477",
+    "serie": {
+      "id": "s1001",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête innovation"
+        },
+        {
+          "langue": "en",
+          "contenu": "Innovation survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1001"
+    },
+    "id": "s1477"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "CIS 2016"
+      },
+      {
+        "langue": "en",
+        "contenu": "CIS 2016"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête communautaire sur l'innovation 2016"
+      },
+      {
+        "langue": "en",
+        "contenu": "Community innovation survey 2016"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1361",
+    "serie": {
+      "id": "s1001",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête innovation"
+        },
+        {
+          "langue": "en",
+          "contenu": "Innovation survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1001"
+    },
+    "id": "s1361"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "CIS 2014"
+      },
+      {
+        "langue": "en",
+        "contenu": "CIS 2014"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête communautaire sur l'innovation 2014"
+      },
+      {
+        "langue": "en",
+        "contenu": "Community innovation survey 2014"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1199",
+    "serie": {
+      "id": "s1001",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête innovation"
+        },
+        {
+          "langue": "en",
+          "contenu": "Innovation survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1001"
+    },
+    "id": "s1199"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "CIS 2012"
+      },
+      {
+        "langue": "en",
+        "contenu": "CIS 2012"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête communautaire sur l'innovation 2012"
+      },
+      {
+        "langue": "en",
+        "contenu": "Community innovation survey 2012"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1198",
+    "serie": {
+      "id": "s1001",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête innovation"
+        },
+        {
+          "langue": "en",
+          "contenu": "Innovation survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1001"
+    },
+    "id": "s1198"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "CIS 2010"
+      },
+      {
+        "langue": "en",
+        "contenu": "CIS 2010"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête communautaire sur l'innovation 2010"
+      },
+      {
+        "langue": "en",
+        "contenu": "Community innovation survey 2010"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1197",
+    "serie": {
+      "id": "s1001",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête innovation"
+        },
+        {
+          "langue": "en",
+          "contenu": "Innovation survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1001"
+    },
+    "id": "s1197"
+  }
+]

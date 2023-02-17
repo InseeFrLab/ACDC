@@ -254,7 +254,6 @@ const EventForm = (props: DataCollectionProps) => {
           setTextArray={setCollectionEventNameArray}
           multiline={false}
         />
-
         <Box
           sx={{
             paddingTop: 2,
@@ -280,31 +279,15 @@ const EventForm = (props: DataCollectionProps) => {
             {t('descriptionField', { ns: 'form' })}:
           </Typography>
         </Box>
-
         <IntlTextInput
           textArray={descriptionArray}
           setTextArray={setDescriptionArray}
           multiline
         />
-        <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('modeOfCollection', { ns: 'collectionEvent' })}:*
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-          <CollectionModeSelect
-            modeCollectionCheck={modeCollectionCheck}
-            setModeCollectionCheck={setModeCollectionCheck}
-          />{' '}
-        </Box>
+        <CollectionModeSelect
+          modeCollectionCheck={modeCollectionCheck}
+          setModeCollectionCheck={setModeCollectionCheck}
+        />{' '}
         <Box
           sx={{
             paddingTop: 2,
@@ -323,28 +306,12 @@ const EventForm = (props: DataCollectionProps) => {
           setQuestionnaire={setQuestionnaire}
           setQuestionnaireLabel={setQuestionnaireLabel}
         />
-
-        <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('dataCollectionDate', { ns: 'collectionEvent' })}:
-          </Typography>
-        </Box>
-        <Stack spacing={2} direction="row">
-          <CollectionDatePicker
-            startDate={startDate}
-            setStartDate={setStartDate}
-            endDate={endDate}
-            setEndDate={setEndDate}
-          />
-        </Stack>
+        <CollectionDatePicker
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+        />
         <Box
           sx={{
             paddingTop: 2,
@@ -358,12 +325,10 @@ const EventForm = (props: DataCollectionProps) => {
             {t('collectionCommunication', { ns: 'collectionEvent' })}:
           </Typography>
         </Box>
-
         <CollectionCommunicationSelect
           userAttributePair={userAttributePairArray}
           setUserAttributePair={setUserAttributePairArray}
         />
-
         <Box
           sx={{
             display: 'flex',
