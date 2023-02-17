@@ -96,6 +96,44 @@ const DataCollectionDetailsDialog = (
             <Box
               sx={{
                 display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ marginRight: 1 }}
+              >
+                {t('statisticalOperation', { ns: 'dataCollectionForm' })}:{' '}
+              </Typography>
+              <Typography variant="body1">
+                {
+                  dataCollectionState.studyUnitReference.groupReference.label[
+                    i18n.language
+                  ]
+                }
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ marginRight: 1 }}
+              >
+                {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}:{' '}
+              </Typography>
+              <Typography variant="body1">
+                {dataCollectionState.studyUnitReference.label[i18n.language]}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
                 flexDirection: 'column',
                 marginTop: 1,
               }}

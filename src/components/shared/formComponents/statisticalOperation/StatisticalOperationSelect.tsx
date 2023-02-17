@@ -39,8 +39,8 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     props.setGroupReference({
       id: newValue.id,
       label: {
-        'fr-FR': newValue.label[0],
-        'en-IE': newValue.label[1],
+        'fr-FR': newValue.label[0].contenu,
+        'en-IE': newValue.label[1].contenu,
       },
       typeOfObject: 'Group',
     } as GroupReference);
@@ -64,8 +64,8 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     props.setStudyUnitReference({
       id: newValue.id,
       label: {
-        'fr-FR': newValue.label[0],
-        'en-IE': newValue.label[1],
+        'fr-FR': newValue.label[0].contenu,
+        'en-IE': newValue.label[1].contenu,
       },
       typeOfObject: 'StudyUnit',
       groupeReference: props.groupReference,

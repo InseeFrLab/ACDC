@@ -112,7 +112,12 @@ const CollectionForm = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
     const studyUnitReferenceFiltered =
       Object.keys(studyUnitReference).length !== 0;
-    if (labelArrayFiltered.length === 2 && studyUnitReferenceFiltered) {
+    const groupReferenceFiltered = Object.keys(groupReference).length !== 0;
+    if (
+      labelArrayFiltered.length === 2 &&
+      studyUnitReferenceFiltered &&
+      groupReferenceFiltered
+    ) {
       setTextError(false);
       return true;
     }
