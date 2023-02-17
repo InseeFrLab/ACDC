@@ -8,23 +8,22 @@ import { useMutation } from '@tanstack/react-query';
 import { formatISO } from 'date-fns';
 import {
   Typography,
-  FormControl,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   Button,
   Stack,
-  TextField,
   Box,
   DialogTitle,
-  Autocomplete,
 } from '@mui/material';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
 import CollectionCommunicationSelect from '../../shared/formComponents/collectionCommunication/collectionCommunication';
 import CollectionModeSelect from '../../shared/formComponents/collectionMode/collectionModeSelect';
+import QuestionnaireModelSelect from '../../shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
 import CollectionEvent from '../../../lib/model/collectionEvents';
+
 import {
   TypeOfModeOfCollection,
   typeMode,
@@ -106,17 +105,6 @@ const EventForm = (props: DataCollectionProps) => {
   ]);
   const [open, setOpen] = useState(false);
   const [textError, setTextError] = useState(false);
-
-  const handleQuestionnaireChange = (
-    event: any,
-    newValue: PoguesQuestionnaire
-  ) => {
-    const {
-      target: { value },
-    } = event;
-    setQuestionnaire(newValue.id);
-    setQuestionnaireLabel(newValue.label);
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -330,33 +318,11 @@ const EventForm = (props: DataCollectionProps) => {
             {t('questionnaireModel', { ns: 'collectionEvent' })}
           </Typography>
         </Box>
-        <FormControl size="small" fullWidth>
-          <Autocomplete
-            disablePortal
-            size="small"
-            id="combo-box-demo"
-            options={props.questionnaires}
-            onChange={handleQuestionnaireChange}
-            getOptionLabel={(option) => option.label}
-            renderOption={(pr, option) => {
-              return (
-                <Box
-                  component="li"
-                  sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                  {...pr}
-                >
-                  {option.label} - ({option.date})
-                </Box>
-              );
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label={t('questionnaireModel', { ns: 'collectionEvent' })}
-              />
-            )}
-          />
-        </FormControl>
+        <QuestionnaireModelSelect
+          questionnaires={props.questionnaires}
+          setQuestionnaire={setQuestionnaire}
+          setQuestionnaireLabel={setQuestionnaireLabel}
+        />
 
         <Box
           sx={{

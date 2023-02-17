@@ -2,15 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  Typography,
-  FormControl,
-  Button,
-  Stack,
-  Box,
-  TextField,
-  Autocomplete,
-} from '@mui/material';
+import { Typography, FormControl, Button, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
@@ -19,8 +11,11 @@ import { DataCollection } from '../../../lib/model/dataCollection';
 import { createDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
-import jsonData from '../../../lib/api/mock/mockSeries';
-import { GroupReference } from '../../../lib/model/studyUnitReference';
+import {
+  GroupReference,
+  StudyUnitReference,
+} from '../../../lib/model/studyUnitReference';
+import StatisticalOperationSelect from '../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
 
 const CollectionForm = () => {
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
@@ -59,32 +54,8 @@ const CollectionForm = () => {
   const [groupReference, setGroupReference] = useState<GroupReference>(
     {} as GroupReference
   );
-
-  const handleGroupReferenceChange = (event: any, newValue: any) => {
-    const {
-      target: { value },
-    } = event;
-    console.log('newValue', newValue);
-    setGroupReference({
-      id: newValue.id,
-      label: {
-        'fr-FR': newValue.label[0],
-        'en-IE': newValue.label[1],
-      },
-      typeOfObject: 'Group',
-    });
-  };
-
-  const statisticalOperation = [
-    {
-      id: 1,
-      label: 'Operation 1',
-    },
-    {
-      id: 2,
-      label: 'Operation 2',
-    },
-  ];
+  const [studyUnitReference, setStudyUnitReference] =
+    useState<StudyUnitReference>({} as StudyUnitReference);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -136,6 +107,7 @@ const CollectionForm = () => {
       description,
       collectionEvents: [],
       userAttributePair: [],
+      studyUnitReference,
     };
 
     const dataCollection: DataCollectionApi = {
@@ -157,181 +129,92 @@ const CollectionForm = () => {
   return (
     <>
       <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-        <Stack spacing={2}>
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}* :
-            </Typography>
-          </Box>
-          <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-            <Autocomplete
-              disablePortal
-              size="small"
-              id="select-statistical-operation-series"
-              options={jsonData}
-              onChange={handleGroupReferenceChange}
-              getOptionLabel={(option) => {
-                return `${option.label[0].contenu} - (${option.label[1].contenu})`;
-              }}
-              renderOption={(pr, option) => {
-                return (
-                  <Box
-                    component="li"
-                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                    {...pr}
-                  >
-                    {option.label[0].contenu} - ({option.label[1].contenu})
-                  </Box>
-                );
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label={t('statisticalOperationSeries', {
-                    ns: 'dataCollectionForm',
-                  })}
-                />
-              )}
-            />
-          </FormControl>
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('statisticalOperation', { ns: 'dataCollectionForm' })}* :
-              (TODO: Create a new react-query object to fetch data when the user
-              has chosen a series)
-            </Typography>
-          </Box>
-          <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-            <Autocomplete
-              disablePortal
-              disabled
-              size="small"
-              id="select-statistical-operation"
-              options={statisticalOperation}
-              onChange={() =>
-                console.log('Statistical Operation Series Change')
-              }
-              getOptionLabel={(option) => option.label}
-              renderOption={(pr, option) => {
-                return (
-                  <Box
-                    component="li"
-                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                    {...pr}
-                  >
-                    {option.label}
-                  </Box>
-                );
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label={t('statisticalOperation', {
-                    ns: 'dataCollectionForm',
-                  })}
-                />
-              )}
-            />
-          </FormControl>
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              paddingTop: 2,
-            }}
-          >
-            <Typography variant="h6">
-              {t('label', { ns: 'form' })}* :
-            </Typography>
-          </Box>
-          <IntlTextInput
-            textArray={labelArray}
-            setTextArray={setLabelArray}
-            multiline={false}
-          />
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('descriptionField', { ns: 'form' })} :
-            </Typography>
-          </Box>
+        <StatisticalOperationSelect
+          groupReference={groupReference}
+          setGroupReference={setGroupReference}
+          studyUnitReference={studyUnitReference}
+          setStudyUnitReference={setStudyUnitReference}
+        />
+        <Box
+          component="form"
+          className="CollectionForm"
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            paddingTop: 2,
+            marginTop: 2,
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">{t('label', { ns: 'form' })}* :</Typography>
+        </Box>
+        <IntlTextInput
+          textArray={labelArray}
+          setTextArray={setLabelArray}
+          multiline={false}
+        />
+        <Box
+          component="form"
+          className="CollectionForm"
+          sx={{
+            paddingTop: 2,
+            marginTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('descriptionField', { ns: 'form' })} :
+          </Typography>
+        </Box>
 
-          <IntlTextInput
-            textArray={descriptionArray}
-            setTextArray={setDescriptionArray}
-            multiline
-          />
+        <IntlTextInput
+          textArray={descriptionArray}
+          setTextArray={setDescriptionArray}
+          multiline
+        />
 
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              paddingTop: 2,
-              borderColor: 'divider',
-              alignItems: 'center',
-            }}
+        <Box
+          component="form"
+          className="CollectionForm"
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            paddingTop: 2,
+            borderColor: 'divider',
+            alignItems: 'center',
+          }}
+        >
+          <Button
+            variant="outlined"
+            sx={{ marginRight: 2 }}
+            onClick={() => navigate('/')}
           >
-            <Button
-              variant="outlined"
-              sx={{ marginRight: 2 }}
-              onClick={() => navigate('/')}
+            <Typography variant="subtitle1">
+              {t('cancel', { ns: 'form' })}
+            </Typography>
+          </Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            <Typography variant="subtitle1">
+              {t('submit', { ns: 'form' })}
+            </Typography>
+          </Button>
+          {textError && (
+            <Typography
+              variant="subtitle1"
+              marginLeft={2}
+              fontWeight="bold"
+              color="error"
             >
-              <Typography variant="subtitle1">
-                {t('cancel', { ns: 'form' })}
-              </Typography>
-            </Button>
-            <Button variant="contained" onClick={handleSubmit}>
-              <Typography variant="subtitle1">
-                {t('submit', { ns: 'form' })}
-              </Typography>
-            </Button>
-            {textError && (
-              <Typography
-                variant="subtitle1"
-                marginLeft={2}
-                fontWeight="bold"
-                color="error"
-              >
-                {t('generalFieldErrorMessage', { ns: 'form' })}
-              </Typography>
-            )}
-          </Box>
-        </Stack>
+              {t('generalFieldErrorMessage', { ns: 'form' })}
+            </Typography>
+          )}
+        </Box>
       </FormControl>
 
       <CreateDataCollectionDialog
