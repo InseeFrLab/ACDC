@@ -28,7 +28,7 @@ jobs:
       # build and test the apps
       - name: build
         run: |
-          npm run build
+          npm run build --noEmitOnError
         env:
           VITE_API_BASE_URL: 'https://acdc-back-office.demo.insee.io/'
       - name: Publish to Registry
