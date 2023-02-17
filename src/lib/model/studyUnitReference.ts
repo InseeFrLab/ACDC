@@ -2,7 +2,7 @@ export interface StudyUnitReference {
   id: string;
   label: Record<'fr-FR' | 'en-IE' | string, string>;
   typeOfObject: string;
-  GroupReference: GroupReference;
+  groupReference: GroupReference;
 }
 
 export interface GroupReference {

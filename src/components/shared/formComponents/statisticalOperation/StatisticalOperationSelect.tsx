@@ -35,7 +35,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     const {
       target: { value },
     } = event;
-    console.log('newValue', newValue);
+    console.log('New Statistical serie: ', newValue);
     props.setGroupReference({
       id: newValue.id,
       label: {
@@ -50,9 +50,31 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       'Associated series Operations: ',
       props.statisticalOperationsList
     );
+    // Temp timeout until I get the API token
     setTimeout(() => {
       props.setOperationDisabled(false);
     });
+  };
+
+  const handleStudyUnitReferenceChange = (event: any, newValue: any) => {
+    const {
+      target: { value },
+    } = event;
+    console.log('New Statistical Operation: ', newValue);
+    props.setStudyUnitReference({
+      id: newValue.id,
+      label: {
+        'fr-FR': newValue.label[0],
+        'en-IE': newValue.label[1],
+      },
+      typeOfObject: 'StudyUnit',
+      groupeReference: props.groupReference,
+    } as unknown as StudyUnitReference);
+
+    console.log(
+      'Assembled StudyUnitReference Object : ',
+      props.studyUnitReference
+    );
   };
 
   return (
@@ -125,7 +147,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           size="small"
           id="select-statistical-operation"
           options={props.statisticalOperationsList}
-          onChange={() => console.log('Statistical Operation Series Change')}
+          onChange={handleStudyUnitReferenceChange}
           getOptionLabel={(option) => {
             return `${option.label[0].contenu} - (${option.label[1].contenu})`;
           }}

@@ -110,7 +110,9 @@ const CollectionForm = () => {
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
-    if (labelArrayFiltered.length === 2) {
+    const studyUnitReferenceFiltered =
+      Object.keys(studyUnitReference).length !== 0;
+    if (labelArrayFiltered.length === 2 && studyUnitReferenceFiltered) {
       setTextError(false);
       return true;
     }
