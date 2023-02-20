@@ -62,10 +62,37 @@ const Home = () => {
             return dataCollection.label['en-IE'];
         }
       };
+      const studyUnitReferenceData = () => {
+        switch (i18n.language) {
+          case 'fr-FR':
+            return dataCollection.studyUnitReference.label['fr-FR'];
+          case 'en-IE':
+            return dataCollection.studyUnitReference.label['en-IE'];
+          default:
+            return dataCollection.studyUnitReference.label['en-IE'];
+        }
+      };
+      const groupReferenceData = () => {
+        switch (i18n.language) {
+          case 'fr-FR':
+            return dataCollection.studyUnitReference.groupReference.label[
+              'fr-FR'
+            ];
+          case 'en-IE':
+            return dataCollection.studyUnitReference.groupReference.label[
+              'en-IE'
+            ];
+          default:
+            return dataCollection.studyUnitReference.groupReference.label[
+              'en-IE'
+            ];
+        }
+      };
       rows.push({
         ...dataCollection,
         label: labelData(),
-
+        studyUnitReference: studyUnitReferenceData(),
+        groupReference: groupReferenceData(),
         action: dataCollection,
       });
     });

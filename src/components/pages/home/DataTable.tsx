@@ -32,18 +32,27 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
   const { t } = useTranslation(['common']);
   const columns: GridColDef[] = [
     {
-      field: 'id',
+      field: 'label',
+      renderHeader: () => (
+        <strong>{t('label', { ns: 'form' }).toString()}</strong>
+      ),
       headerClassName: 'columns--header',
       flex: 0.3,
-      description: t('id').toString(),
-      renderHeader: () => <strong>{t('id').toString()}</strong>,
+      description: t('label', { ns: 'form' }).toString(),
     },
     {
-      field: 'label',
+      field: 'groupReference',
       renderHeader: () => <strong>{t('statisticalProgram').toString()}</strong>,
       headerClassName: 'columns--header',
       flex: 0.3,
       description: t('statisticalProgram').toString(),
+    },
+    {
+      field: 'studyUnitReference',
+      renderHeader: () => <strong>{t('programCycle').toString()}</strong>,
+      headerClassName: 'columns--header',
+      flex: 0.3,
+      description: t('programCycle').toString(),
     },
     {
       field: 'versionDate',

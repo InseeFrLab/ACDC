@@ -15,8 +15,9 @@ export interface DataCollection {
 }
 
 export interface DataCollectionRow {
-  id: string;
   label: string | (() => string);
+  studyUnitReference: string | (() => string);
+  groupReference: string | (() => string);
   version: number;
   versionDate: string;
   action: DataCollection;

@@ -11,6 +11,7 @@ import {
   TextField,
   FormControl,
 } from '@mui/material';
+import { FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +31,6 @@ const DataCollectionDetailsDialog = (
   const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
   const { open, handleClose, dataCollectionState } = props;
-  console.log(dataCollectionState.studyUnitReference);
   const [openDelete, setOpenDelete] = useState(false);
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(deleteDataCollection);
@@ -222,6 +222,7 @@ const DataCollectionDetailsDialog = (
             }}
             variant="outlined"
             sx={{ marginLeft: 2 }}
+            startIcon={<FiTrash />}
           >
             <Typography variant="body1" fontWeight="xl">
               {t('delete', { ns: 'form' })}
