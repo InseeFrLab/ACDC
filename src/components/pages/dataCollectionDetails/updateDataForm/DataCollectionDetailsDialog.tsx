@@ -70,7 +70,13 @@ const DataCollectionDetailsDialog = (
   };
   return (
     <>
-      <Dialog open={open} onClose={handleClose} fullWidth>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        sx={{
+          width: '100%',
+        }}
+      >
         <DialogTitle>
           <Typography variant="h5" color="text.secondary">
             {t('dataCollectionDetails')}
@@ -97,6 +103,7 @@ const DataCollectionDetailsDialog = (
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
+                flexWrap: 'wrap',
               }}
             >
               <Typography
@@ -106,12 +113,19 @@ const DataCollectionDetailsDialog = (
               >
                 {t('statisticalOperation', { ns: 'dataCollectionForm' })}:{' '}
               </Typography>
-              <Typography variant="body1">GroupeRef</Typography>
+              <Typography variant="body1">
+                {
+                  dataCollectionState.studyUnitReference.groupReference.label[
+                    i18n.language
+                  ]
+                }
+              </Typography>
             </Box>
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
+                flexWrap: 'wrap',
               }}
             >
               <Typography

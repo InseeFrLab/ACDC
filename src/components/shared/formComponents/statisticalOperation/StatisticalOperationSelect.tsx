@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import {
   Box,
   FormControl,
@@ -28,6 +29,35 @@ interface StatisticalOperationSelectProps {
   setOperationDisabled: (operationDisabled: boolean) => void;
 }
 
+// TODO : Move these elsewhere when linked to Rmes API
+function getLanguageCode(language: string): string {
+  // Map the language to its corresponding code
+  switch (language) {
+    case 'fr':
+      return 'fr-FR';
+    case 'en':
+      return 'en-IE';
+    // Add support for other languages here
+    default:
+      return language;
+  }
+}
+
+function transformLabels(
+  labels: Record<'langue' | 'contenu', string>[]
+): Record<'fr-FR' | 'en-IE' | string, string> {
+  const transformed: Record<'fr-FR' | 'en-IE' | string, string> = {} as Record<
+    'fr-FR' | 'en-IE' | string,
+    string
+  >;
+  labels.forEach((label) => {
+    const languageCode = getLanguageCode(label.langue);
+    transformed[languageCode] = label.contenu;
+  });
+  console.log('Transformed intl fields: ', transformed);
+  return transformed;
+}
+
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   const { t } = useTranslation(['dataCollectionForm', 'form']);
 
@@ -38,10 +68,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     console.log('New Statistical serie: ', newValue);
     props.setgroupReference({
       id: newValue.id,
-      label: {
-        'fr-FR': newValue.label[0].contenu,
-        'en-IE': newValue.label[1].contenu,
-      },
+      label: transformLabels(newValue.label),
       typeOfObject: 'Group',
     } as GroupReference);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -63,10 +90,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     console.log('New Statistical Operation: ', newValue);
     props.setStudyUnitReference({
       id: newValue.id,
-      label: {
-        'fr-FR': newValue.label[0].contenu,
-        'en-IE': newValue.label[1].contenu,
-      },
+      label: transformLabels(newValue.label),
       typeOfObject: 'StudyUnit',
       groupReference: props.groupReference,
     } as unknown as StudyUnitReference);
