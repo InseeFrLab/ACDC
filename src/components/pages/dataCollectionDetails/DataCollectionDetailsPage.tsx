@@ -43,13 +43,6 @@ const DataCollectionDetails = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    const dataCollectionLink = dataCollectionState;
-    navigate(`/collection/${dataCollectionLink.id}`, {
-      state: { dataCollection: dataCollectionLink },
-    });
-  };
   const handleCloseDelete = () => {
     setOpenDelete(false);
   };
@@ -122,7 +115,7 @@ const DataCollectionDetails = () => {
 
       <DataCollectionDetailsDialog
         open={open}
-        handleClose={handleClose}
+        setOpen={setOpen}
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
       />

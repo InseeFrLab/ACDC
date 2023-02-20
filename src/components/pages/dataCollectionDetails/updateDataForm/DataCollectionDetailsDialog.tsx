@@ -16,13 +16,15 @@ import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import IntlTextInput from '@/components/shared/intlTextInput/IntlTextInput';
 import { deleteDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
 import { DataCollection } from '../../../../lib/model/dataCollection';
+import StatisticalOperationSelect from '../../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
 
 interface DataCollectionDetailsDialogProps {
   open: boolean;
-  handleClose: () => void;
   dataCollectionState: DataCollection;
+  setOpen: (open: boolean) => void;
   setDataCollectionState: (dataCollection: DataCollection) => void;
 }
 const DataCollectionDetailsDialog = (
@@ -30,8 +32,112 @@ const DataCollectionDetailsDialog = (
 ) => {
   const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
-  const { open, handleClose, dataCollectionState } = props;
+  const { open, dataCollectionState } = props;
+  const [labelArray, setLabelArray] = useState([
+    {
+      id: 1,
+      language: 'fr-FR',
+      value: dataCollectionState.label['fr-FR'],
+    },
+    {
+      id: 2,
+      language: 'en-IE',
+      value: dataCollectionState.label['en-IE'],
+    },
+  ]);
+  const [descriptionArray, setDescriptionArray] = useState([
+    {
+      id: 1,
+      language: 'fr-FR',
+      value: dataCollectionState.description['fr-FR'],
+    },
+    {
+      id: 2,
+      language: 'en-IE',
+      value: dataCollectionState.description['en-IE'],
+    },
+  ]);
+  const [studyUnitReference, setStudyUnitReference] = useState(
+    dataCollectionState.studyUnitReference
+  );
+  console.log('studyUnitReference', studyUnitReference);
+
+  const [groupReference, setGroupReference] = useState(
+    dataCollectionState.studyUnitReference.groupReference
+  );
+  const [statisticalOperationsList, setStatisticalOperationsList] = useState([
+    {
+      altLabel: [
+        {
+          langue: 'fr',
+        },
+        {
+          langue: 'en',
+        },
+      ],
+      label: [
+        {
+          langue: 'fr',
+          contenu: 'Enquête Logement Mayotte 2013',
+        },
+        {
+          langue: 'en',
+          contenu: 'Mayotte Housing Survey 2013',
+        },
+      ],
+      uri: 'http://bauhaus/operations/operation/s1448',
+      serie: {
+        id: 's1004',
+        label: [
+          {
+            langue: 'fr',
+            contenu: 'Enquête Logement',
+          },
+          {
+            langue: 'en',
+            contenu: 'Housing survey',
+          },
+        ],
+        uri: 'http://bauhaus/operations/serie/s1004',
+      },
+      id: 's1448',
+    },
+  ]);
+
+  const [operationDisabled, setOperationDisabled] = useState(true);
   const [openDelete, setOpenDelete] = useState(false);
+  const handleClose = () => {
+    props.setOpen(false);
+    const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
+      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
+        map[obj.language] = obj.value;
+        return map;
+      },
+      {}
+    );
+
+    const description: Record<'fr-FR' | 'en-IE' | string, string> =
+      descriptionArray.reduce(
+        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
+          map[obj.language] = obj.value;
+          return map;
+        },
+        {}
+      );
+    const updatedDataCollection: DataCollection = {
+      ...dataCollectionState,
+      label,
+      description,
+      studyUnitReference,
+    };
+    console.log('updatedDataCollection: ', updatedDataCollection);
+    props.setDataCollectionState(updatedDataCollection);
+    const dataCollectionLink = dataCollectionState;
+    navigate(`/collection/${dataCollectionLink.id}`, {
+      state: { dataCollection: dataCollectionLink },
+    });
+  };
+
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(deleteDataCollection);
 
@@ -45,40 +151,19 @@ const DataCollectionDetailsDialog = (
     setOpenDelete(true);
   };
 
-  const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    props.setDataCollectionState({
-      ...dataCollectionState,
-      label: {
-        ...dataCollectionState.label,
-        [i18n.language]: event.target.value,
-      },
-    });
-  };
-
-  const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    event.preventDefault();
-    props.setDataCollectionState({
-      ...dataCollectionState,
-      description: {
-        ...dataCollectionState.description,
-        [i18n.language]: event.target.value,
-      },
-    });
-  };
   return (
     <>
       <Dialog
         open={open}
         onClose={handleClose}
         sx={{
-          width: '100%',
+          '& .MuiDialog-paper': {
+            width: '100%',
+          },
         }}
       >
         <DialogTitle>
-          <Typography variant="h5" color="text.secondary">
+          <Typography variant="h4" color="text.secondary" fontWeight="bold">
             {t('dataCollectionDetails')}
           </Typography>
         </DialogTitle>
@@ -102,98 +187,74 @@ const DataCollectionDetailsDialog = (
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('statisticalOperation', { ns: 'dataCollectionForm' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {
-                  dataCollectionState.studyUnitReference.groupReference.label[
-                    i18n.language
-                  ]
-                }
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {dataCollectionState.studyUnitReference.label[i18n.language]}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
                 flexDirection: 'column',
+                flexWrap: 'wrap',
                 marginTop: 1,
               }}
             >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('label', { ns: 'form' })}:{' '}
-              </Typography>
-              <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
-                <TextField
-                  required
-                  size="small"
-                  label={t('label', { ns: 'form' })}
-                  value={dataCollectionState.label[i18n.language]}
-                  sx={{ marginRight: 2, width: '100%' }}
-                  onChange={handleLabelChange}
-                  id={dataCollectionState.label[i18n.language]}
-                />
-              </FormControl>
+              <StatisticalOperationSelect
+                groupReference={groupReference}
+                setgroupReference={setGroupReference}
+                studyUnitReference={studyUnitReference}
+                setStudyUnitReference={setStudyUnitReference}
+                statisticalOperationsList={statisticalOperationsList}
+                setStatisticalOperationsList={setStatisticalOperationsList}
+                operationDisabled={operationDisabled}
+                setOperationDisabled={setOperationDisabled}
+              />
             </Box>
+
             <Box
+              component="form"
+              className="CollectionForm"
               sx={{
                 display: 'flex',
-                flexDirection: 'column',
-                marginTop: 1,
+                justifyContent: 'flex-start',
+                paddingTop: 2,
+                marginTop: 2,
+                borderTop: '1px solid',
+                borderColor: 'divider',
               }}
             >
-              <Typography variant="body1" fontWeight="bold">
-                {t('description', { ns: 'form' })}:{' '}
+              <Typography variant="h6">
+                {t('label', { ns: 'form' })}* :
               </Typography>
-              <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
-                <TextField
-                  required
-                  size="small"
-                  label={t('description', { ns: 'form' })}
-                  multiline
-                  maxRows={4}
-                  value={dataCollectionState.description[i18n.language]}
-                  sx={{ marginRight: 2, width: '100%' }}
-                  onChange={handleDescriptionChange}
-                  id={dataCollectionState.description[i18n.language]}
-                />
-              </FormControl>
             </Box>
+            <IntlTextInput
+              textArray={labelArray}
+              setTextArray={setLabelArray}
+              multiline={false}
+            />
+            <Box
+              component="form"
+              className="CollectionForm"
+              sx={{
+                paddingTop: 2,
+                marginTop: 2,
+                display: 'flex',
+                justifyContent: 'flex-start',
+                borderTop: '1px solid',
+                borderColor: 'divider',
+              }}
+            >
+              <Typography variant="h6">
+                {t('descriptionField', { ns: 'form' })} :
+              </Typography>
+            </Box>
+
+            <IntlTextInput
+              textArray={descriptionArray}
+              setTextArray={setDescriptionArray}
+              multiline
+            />
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
                 marginTop: 1,
+                paddingTop: 1,
+                borderTop: '1px solid',
+                borderColor: 'divider',
               }}
             >
               <Typography
@@ -249,7 +310,9 @@ const DataCollectionDetailsDialog = (
       </Dialog>
       <Dialog open={openDelete} onClose={handleCloseDelete}>
         <DialogTitle>
-          <Typography variant="h5">{t('deleteCollectionEvent')}</Typography>
+          <Typography variant="h5">
+            {t('deleteCollectionEvent', { ns: 'dataCollectionDetails' })}
+          </Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
