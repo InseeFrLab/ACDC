@@ -20,6 +20,7 @@ import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import UserAttributeDisplay from './UserAttributeDisplay';
+import DataCollectionDisplay from './DataCollectionDisplay';
 
 const DataCollectionDetails = () => {
   const { t, i18n } = useTranslation([
@@ -92,30 +93,7 @@ const DataCollectionDetails = () => {
 
   return (
     <Main sx={{ justifyContent: 'flex-start' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Typography variant="h3" fontWeight="xl">
-          {dataCollection.label[i18n.language]}
-        </Typography>
-        <Button
-          onClick={handleClickOpen}
-          variant="contained"
-          sx={{ marginLeft: 2 }}
-        >
-          <Typography variant="body1" fontWeight="xl">
-            {t('showDetails', { ns: 'dataCollectionDetails' })}
-          </Typography>
-        </Button>
-      </Box>
-
-      <DataCollectionDetailsDialog
-        open={open}
-        setOpen={setOpen}
+      <DataCollectionDisplay
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
       />
@@ -125,11 +103,11 @@ const DataCollectionDetails = () => {
           marginTop: 2,
           display: 'flex',
           justifyContent: 'flex-start',
-          borderTop: '1px solid',
+          borderTop: '2px solid',
           borderColor: 'divider',
         }}
       >
-        <Typography variant="h5">
+        <Typography variant="h5" fontWeight="bold" color="text.secondary">
           {t('title', { ns: 'collectionEvent' })}:
         </Typography>
       </Box>
@@ -156,7 +134,7 @@ const DataCollectionDetails = () => {
           borderColor: 'divider',
         }}
       >
-        <Typography variant="h5">
+        <Typography variant="h5" fontWeight="bold" color="text.secondary">
           {t('title', { ns: 'userAttributeForm' })}:
         </Typography>
       </Box>
