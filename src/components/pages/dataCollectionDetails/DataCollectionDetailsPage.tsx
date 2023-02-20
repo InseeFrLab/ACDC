@@ -36,8 +36,6 @@ const DataCollectionDetails = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
 
-  console.log('Data Collection: ', dataCollectionState);
-
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
 

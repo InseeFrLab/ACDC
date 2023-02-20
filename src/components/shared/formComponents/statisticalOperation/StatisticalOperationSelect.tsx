@@ -19,7 +19,7 @@ import {
 
 interface StatisticalOperationSelectProps {
   groupReference: GroupReference;
-  setGroupReference: (groupReference: GroupReference) => void;
+  setgroupReference: (groupReference: GroupReference) => void;
   studyUnitReference: StudyUnitReference;
   setStudyUnitReference: (studyUnitReference: StudyUnitReference) => void;
   statisticalOperationsList: any[];
@@ -31,12 +31,12 @@ interface StatisticalOperationSelectProps {
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   const { t } = useTranslation(['dataCollectionForm', 'form']);
 
-  const handleGroupReferenceChange = (event: any, newValue: any) => {
+  const handlegroupReferenceChange = (event: any, newValue: any) => {
     const {
       target: { value },
     } = event;
     console.log('New Statistical serie: ', newValue);
-    props.setGroupReference({
+    props.setgroupReference({
       id: newValue.id,
       label: {
         'fr-FR': newValue.label[0].contenu,
@@ -68,7 +68,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
         'en-IE': newValue.label[1].contenu,
       },
       typeOfObject: 'StudyUnit',
-      groupeReference: props.groupReference,
+      groupReference: props.groupReference,
     } as unknown as StudyUnitReference);
 
     console.log(
@@ -100,7 +100,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           size="small"
           id="select-statistical-operation-series"
           options={jsonData}
-          onChange={handleGroupReferenceChange}
+          onChange={handlegroupReferenceChange}
           getOptionLabel={(option) => {
             return `${option.label[0].contenu} - (${option.label[1].contenu})`;
           }}

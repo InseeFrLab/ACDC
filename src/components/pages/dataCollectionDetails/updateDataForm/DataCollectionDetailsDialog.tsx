@@ -30,7 +30,7 @@ const DataCollectionDetailsDialog = (
   const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
   const { open, handleClose, dataCollectionState } = props;
-  console.log('DataCollectionState: ', dataCollectionState);
+  console.log(dataCollectionState.studyUnitReference);
   const [openDelete, setOpenDelete] = useState(false);
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(deleteDataCollection);
@@ -106,13 +106,7 @@ const DataCollectionDetailsDialog = (
               >
                 {t('statisticalOperation', { ns: 'dataCollectionForm' })}:{' '}
               </Typography>
-              <Typography variant="body1">
-                {
-                  dataCollectionState.studyUnitReference.groupReference.label[
-                    i18n.language
-                  ]
-                }
-              </Typography>
+              <Typography variant="body1">GroupeRef</Typography>
             </Box>
             <Box
               sx={{
@@ -149,7 +143,7 @@ const DataCollectionDetailsDialog = (
                 <TextField
                   required
                   size="small"
-                  label={t('label')}
+                  label={t('label', { ns: 'form' })}
                   value={dataCollectionState.label[i18n.language]}
                   sx={{ marginRight: 2, width: '100%' }}
                   onChange={handleLabelChange}
@@ -230,7 +224,7 @@ const DataCollectionDetailsDialog = (
             sx={{ marginLeft: 2 }}
           >
             <Typography variant="body1" fontWeight="xl">
-              {t('delete')}
+              {t('delete', { ns: 'form' })}
             </Typography>
           </Button>
           <Button variant="contained" onClick={handleClose} autoFocus>

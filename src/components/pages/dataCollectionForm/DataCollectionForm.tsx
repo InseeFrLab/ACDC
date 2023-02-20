@@ -51,7 +51,7 @@ const CollectionForm = () => {
   const [open, setOpen] = useState(false);
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>({} as DataCollection);
-  const [groupReference, setGroupReference] = useState<GroupReference>(
+  const [groupReference, setgroupReference] = useState<GroupReference>(
     {} as GroupReference
   );
   const [studyUnitReference, setStudyUnitReference] =
@@ -178,7 +178,7 @@ const CollectionForm = () => {
       <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
         <StatisticalOperationSelect
           groupReference={groupReference}
-          setGroupReference={setGroupReference}
+          setgroupReference={setgroupReference}
           studyUnitReference={studyUnitReference}
           setStudyUnitReference={setStudyUnitReference}
           statisticalOperationsList={statisticalOperationsList}
