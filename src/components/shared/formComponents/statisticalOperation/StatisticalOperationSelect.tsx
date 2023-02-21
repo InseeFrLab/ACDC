@@ -59,7 +59,7 @@ function transformLabels(
 }
 
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
-  const { t } = useTranslation(['dataCollectionForm', 'form']);
+  const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
 
   const handlegroupReferenceChange = (event: any, newValue: any) => {
     const {
@@ -125,8 +125,8 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           id="select-statistical-operation-series"
           options={jsonData}
           onChange={handlegroupReferenceChange}
-          getOptionLabel={(option) => {
-            return `${option.label[0].contenu} - (${option.label[1].contenu})`;
+          getOptionLabel={() => {
+            return `${props.groupReference.label[i18n.language]}`;
           }}
           renderOption={(pr, option) => {
             return (
@@ -172,8 +172,8 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           id="select-statistical-operation"
           options={props.statisticalOperationsList}
           onChange={handleStudyUnitReferenceChange}
-          getOptionLabel={(option) => {
-            return `${option.label[0].contenu} - (${option.label[1].contenu})`;
+          getOptionLabel={() => {
+            return `${props.studyUnitReference.label[i18n.language]}`;
           }}
           renderOption={(pr, option) => {
             return (

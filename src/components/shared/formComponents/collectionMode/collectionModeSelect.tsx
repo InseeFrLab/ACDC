@@ -21,7 +21,7 @@ const CollectionModeSelect = (props: CollectionModeSelectProps) => {
           borderColor: 'divider',
         }}
       >
-        <Typography variant="h6">
+        <Typography variant="h6" fontWeight="bold">
           {t('modeOfCollection', { ns: 'collectionEvent' })}:*
         </Typography>
       </Box>

@@ -249,17 +249,6 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               multiline
             />
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              paddingTop: 2,
-            }}
-          >
-            <Typography variant="h6" fontWeight="bold">
-              {t('dataCollectionDate', { ns: 'collectionEvent' })}:
-            </Typography>
-          </Box>
           <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
             <CollectionDatePicker
               startDate={startDate}
@@ -271,20 +260,16 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
           <Box
             sx={{
               display: 'flex',
-              flexDirection: 'row',
+              flexDirection: 'column',
               paddingTop: 2,
             }}
           >
-            <Typography variant="h6" fontWeight="bold">
-              {t('modeOfCollection', { ns: 'collectionEvent' })}:{' '}
-            </Typography>
-          </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
             <CollectionModeSelect
               modeCollectionCheck={modeCollectionCheck}
               setModeCollectionCheck={setModeCollectionCheck}
             />{' '}
           </Box>
+
           <Box
             sx={{
               display: 'flex',

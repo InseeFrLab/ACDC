@@ -1,4 +1,10 @@
-import { FormControl, Autocomplete, TextField, Box } from '@mui/material';
+import {
+  FormControl,
+  Autocomplete,
+  TextField,
+  Box,
+  Typography,
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { PoguesQuestionnaire } from '../../../../lib/model/poguesQuestionnaire';
 
@@ -23,33 +29,48 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
   };
 
   return (
-    <FormControl size="small" fullWidth>
-      <Autocomplete
-        disablePortal
-        size="small"
-        id="combo-box-demo"
-        options={props.questionnaires}
-        onChange={handleQuestionnaireChange}
-        getOptionLabel={(option) => option.label}
-        renderOption={(pr, option) => {
-          return (
-            <Box
-              component="li"
-              sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-              {...pr}
-            >
-              {option.label} - ({option.date})
-            </Box>
-          );
+    <>
+      <Box
+        sx={{
+          paddingTop: 2,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          borderTop: '1px solid',
+          borderColor: 'divider',
         }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={t('questionnaireModel', { ns: 'collectionEvent' })}
-          />
-        )}
-      />
-    </FormControl>
+      >
+        <Typography variant="h6" fontWeight="bold">
+          {t('questionnaireModel', { ns: 'collectionEvent' })}
+        </Typography>
+      </Box>
+      <FormControl size="small" fullWidth>
+        <Autocomplete
+          disablePortal
+          size="small"
+          id="combo-box-demo"
+          options={props.questionnaires}
+          onChange={handleQuestionnaireChange}
+          getOptionLabel={(option) => option.label}
+          renderOption={(pr, option) => {
+            return (
+              <Box
+                component="li"
+                sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                {...pr}
+              >
+                {option.label} - ({option.date})
+              </Box>
+            );
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={t('questionnaireModel', { ns: 'collectionEvent' })}
+            />
+          )}
+        />
+      </FormControl>
+    </>
   );
 };
 

@@ -79,6 +79,19 @@ const CollectionCommunicationSelect = (
 
   return (
     <>
+      <Box
+        sx={{
+          paddingTop: 2,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          borderTop: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold">
+          {t('collectionCommunication', { ns: 'collectionEvent' })}:
+        </Typography>
+      </Box>
       {props.userAttributePair.map((attribute: any, index: number) => {
         return (
           <Box

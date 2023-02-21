@@ -247,7 +247,9 @@ const EventForm = (props: DataCollectionProps) => {
             justifyContent: 'flex-start',
           }}
         >
-          <Typography variant="h6">{t('name', { ns: 'form' })}*:</Typography>
+          <Typography variant="h6" fontWeight="bold">
+            {t('name', { ns: 'form' })}*:
+          </Typography>
         </Box>
         <IntlTextInput
           textArray={collectionEventNameArray}
@@ -263,7 +265,9 @@ const EventForm = (props: DataCollectionProps) => {
             borderColor: 'divider',
           }}
         >
-          <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
+          <Typography variant="h6" fontWeight="bold">
+            {t('label', { ns: 'form' })}*:
+          </Typography>
         </Box>
         <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
         <Box
@@ -275,7 +279,7 @@ const EventForm = (props: DataCollectionProps) => {
             borderColor: 'divider',
           }}
         >
-          <Typography variant="h6">
+          <Typography variant="h6" fontWeight="bold">
             {t('descriptionField', { ns: 'form' })}:
           </Typography>
         </Box>
@@ -288,19 +292,6 @@ const EventForm = (props: DataCollectionProps) => {
           modeCollectionCheck={modeCollectionCheck}
           setModeCollectionCheck={setModeCollectionCheck}
         />{' '}
-        <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('questionnaireModel', { ns: 'collectionEvent' })}
-          </Typography>
-        </Box>
         <QuestionnaireModelSelect
           questionnaires={props.questionnaires}
           setQuestionnaire={setQuestionnaire}
@@ -312,19 +303,6 @@ const EventForm = (props: DataCollectionProps) => {
           endDate={endDate}
           setEndDate={setEndDate}
         />
-        <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('collectionCommunication', { ns: 'collectionEvent' })}:
-          </Typography>
-        </Box>
         <CollectionCommunicationSelect
           userAttributePair={userAttributePairArray}
           setUserAttributePair={setUserAttributePairArray}

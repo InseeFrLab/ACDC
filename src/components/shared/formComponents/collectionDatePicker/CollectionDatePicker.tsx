@@ -13,21 +13,22 @@ interface CollectionDatePickerProps {
 const CollectionDatePicker = (props: CollectionDatePickerProps) => {
   const { t } = useTranslation(['collectionEvent', 'form']);
   return (
-    <>
-      <Box
-        sx={{
-          paddingTop: 2,
-          display: 'flex',
-          justifyContent: 'flex-start',
-          borderTop: '1px solid',
-          borderColor: 'divider',
-        }}
-      >
-        <Typography variant="h6">
-          {t('dataCollectionDate', { ns: 'collectionEvent' })}:
-        </Typography>
-      </Box>
-      <Stack spacing={2} direction="row">
+    <Box
+      sx={{
+        paddingTop: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        borderTop: '1px solid',
+        borderColor: 'divider',
+        alignItems: 'flex-start',
+      }}
+    >
+      <Typography variant="h6" fontWeight="bold">
+        {t('dataCollectionDate', { ns: 'collectionEvent' })}:
+      </Typography>
+
+      <Stack spacing={2} direction="row" sx={{ paddingTop: 2 }}>
         <FormControl size="small">
           <DatePicker
             label={t('collectionStartDate', { ns: 'collectionEvent' })}
@@ -46,7 +47,7 @@ const CollectionDatePicker = (props: CollectionDatePickerProps) => {
           />
         </FormControl>
       </Stack>
-    </>
+    </Box>
   );
 };
 
