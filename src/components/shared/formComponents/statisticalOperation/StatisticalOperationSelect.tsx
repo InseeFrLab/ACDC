@@ -125,8 +125,8 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           id="select-statistical-operation-series"
           options={jsonData}
           onChange={handlegroupReferenceChange}
-          getOptionLabel={() => {
-            return `${props.groupReference.label[i18n.language]}`;
+          getOptionLabel={(option) => {
+            return `${option.label[0].contenu} - (${option.label[1].contenu})`;
           }}
           renderOption={(pr, option) => {
             return (
@@ -172,8 +172,8 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           id="select-statistical-operation"
           options={props.statisticalOperationsList}
           onChange={handleStudyUnitReferenceChange}
-          getOptionLabel={() => {
-            return `${props.studyUnitReference.label[i18n.language]}`;
+          getOptionLabel={(option) => {
+            return `${option.label[0].contenu} - (${option.label[1].contenu})`;
           }}
           renderOption={(pr, option) => {
             return (

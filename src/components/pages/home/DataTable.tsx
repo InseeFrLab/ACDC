@@ -49,10 +49,18 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     },
     {
       field: 'studyUnitReference',
-      renderHeader: () => <strong>{t('programCycle').toString()}</strong>,
+      renderHeader: () => (
+        <strong>
+          {t('statisticalOperationSeries', {
+            ns: 'dataCollectionForm',
+          }).toString()}
+        </strong>
+      ),
       headerClassName: 'columns--header',
       flex: 0.3,
-      description: t('programCycle').toString(),
+      description: t('statisticalOperationSeries', {
+        ns: 'dataCollectionForm',
+      }).toString(),
     },
     {
       field: 'versionDate',
