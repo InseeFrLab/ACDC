@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
@@ -11,11 +11,11 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  CircularProgress,
 } from '@mui/material';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -46,13 +46,6 @@ const DataCollectionDetails = () => {
 
   const handleCloseDelete = () => {
     setOpenDelete(false);
-  };
-  const handleCloseSave = () => {
-    setOpenSave(false);
-    const dataCollectionLink = dataCollectionState;
-    navigate(`/collection/${dataCollectionLink.id}`, {
-      state: { dataCollection: dataCollectionLink },
-    });
   };
 
   const handleDeleteCollectionEvent = (id: string) => {
@@ -90,6 +83,17 @@ const DataCollectionDetails = () => {
     setDataCollectionState(updatedDataCollection.json);
     setOpenSave(true);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setOpenSave(false);
+      const dataCollectionLink = dataCollectionState;
+      navigate(`/collection/${dataCollectionLink.id}`, {
+        state: { dataCollection: dataCollectionLink },
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <Main sx={{ justifyContent: 'flex-start' }}>
@@ -159,12 +163,19 @@ const DataCollectionDetails = () => {
             {t('deleteCollectionEvent', { ns: 'dataCollectionDetails' })}
           </Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <DialogContentText>
             {isSuccess
               ? t('successEvent', { ns: 'dataCollectionDetails' })
               : ''}
-            {isLoading ? t('loading', { ns: 'form' }) : ''}
+            {isLoading ? <CircularProgress /> : ''}
             {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
@@ -174,23 +185,33 @@ const DataCollectionDetails = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={openSave} onClose={handleCloseSave}>
+      <Dialog open={openSave}>
         <DialogTitle>
           <Typography variant="h5">
             {t('saveDataCollection', { ns: 'dataCollectionDetails' })}
           </Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <DialogContentText>
-            {isSuccess
-              ? t('successDataCollection', { ns: 'dataCollectionDetails' })
-              : ''}
-            {isLoading ? t('loading', { ns: 'form' }) : ''}
+            {isLoading ? <CircularProgress /> : ''}
             {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleCloseSave} autoFocus>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setOpenSave(false);
+            }}
+            autoFocus
+          >
             {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>

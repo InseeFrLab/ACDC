@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Dialog,
@@ -8,6 +8,7 @@ import {
   DialogContentText,
   Button,
   Typography,
+  CircularProgress,
 } from '@mui/material';
 
 interface CreateDataCollectionDialogProps {
@@ -22,6 +23,12 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
   const { t } = useTranslation(['dataCollectionForm', 'form']);
   const { open, handleClose, isSuccess, isLoading, isError } = props;
 
+  useEffect(() => {
+    if (isSuccess) {
+      handleClose();
+    }
+  }, [isSuccess, handleClose]);
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
@@ -29,10 +36,16 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
           {t('title', { ns: 'dataCollectionForm' })}
         </Typography>
       </DialogTitle>
-      <DialogContent>
+      <DialogContent
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <DialogContentText>
-          {isSuccess ? t('successForm', { ns: 'dataCollectionForm' }) : ''}
-          {isLoading ? t('loading', { ns: 'form' }) : ''}
+          {isLoading ? <CircularProgress /> : ''}
           {isError ? t('error', { ns: 'form' }) : ''}
         </DialogContentText>
       </DialogContent>

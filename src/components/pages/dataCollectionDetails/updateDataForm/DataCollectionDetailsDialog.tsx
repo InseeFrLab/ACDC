@@ -60,7 +60,6 @@ const DataCollectionDetailsDialog = (
   const [studyUnitReference, setStudyUnitReference] = useState(
     dataCollectionState.studyUnitReference
   );
-  console.log('studyUnitReference', studyUnitReference);
 
   const [groupReference, setGroupReference] = useState(
     dataCollectionState.studyUnitReference.groupReference
@@ -138,8 +137,14 @@ const DataCollectionDetailsDialog = (
     });
   };
 
-  const { isLoading, isError, isSuccess, mutate } =
-    useMutation(deleteDataCollection);
+  const { isLoading, isError, isSuccess, mutate } = useMutation(
+    deleteDataCollection,
+    {
+      onError: (error) => {
+        console.log('Error:', error);
+      },
+    }
+  );
 
   const handleCloseDelete = () => {
     setOpenDelete(false);
@@ -311,7 +316,7 @@ const DataCollectionDetailsDialog = (
       <Dialog open={openDelete} onClose={handleCloseDelete}>
         <DialogTitle>
           <Typography variant="h5">
-            {t('deleteCollectionEvent', { ns: 'dataCollectionDetails' })}
+            {t('deleteDataCollection', { ns: 'dataCollectionDetails' })}
           </Typography>
         </DialogTitle>
         <DialogContent>

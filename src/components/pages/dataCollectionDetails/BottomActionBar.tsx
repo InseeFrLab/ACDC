@@ -58,6 +58,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       </Button>
       <Button
         variant="contained"
+        disabled
         onClick={() => {
           console.log('Publish Button');
         }}

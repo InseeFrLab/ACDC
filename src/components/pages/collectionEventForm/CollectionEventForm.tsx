@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ import {
   Stack,
   Box,
   DialogTitle,
+  CircularProgress,
 } from '@mui/material';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
@@ -109,14 +110,6 @@ const EventForm = (props: DataCollectionProps) => {
   const handleClickOpen = () => {
     setOpen(true);
     console.log('dataCollectionState: ', dataCollectionState);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    const dataCollection = dataCollectionState.json;
-    navigate(`/collection/${dataCollectionState.id}`, {
-      state: { dataCollection },
-    });
   };
 
   const checkValidation = () => {
@@ -238,6 +231,17 @@ const EventForm = (props: DataCollectionProps) => {
       : console.log('Field Validation Error');
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      setOpen(false);
+      const dataCollection = dataCollectionState.json;
+      navigate(`/collection/${dataCollectionState.id}`, {
+        state: { dataCollection },
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
+
   return (
     <>
       <Stack spacing={2}>
@@ -320,7 +324,9 @@ const EventForm = (props: DataCollectionProps) => {
           <Button
             variant="outlined"
             sx={{ marginRight: 2 }}
-            onClick={handleClose}
+            onClick={() => {
+              setOpen(false);
+            }}
           >
             <Typography variant="subtitle1">
               {t('cancel', { ns: 'form' })}
@@ -344,19 +350,29 @@ const EventForm = (props: DataCollectionProps) => {
         </Box>
       </Stack>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <DialogTitle>
           <Typography variant="h5">{t('descriptionForm')}</Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {isSuccess ? t('successForm', { ns: 'collectionEvent' }) : ''}
-            {isLoading ? t('loading', { ns: 'form' }) : ''}
+            {isLoading ? <CircularProgress /> : ''}
             {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose} autoFocus>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setOpen(false);
+            }}
+            autoFocus
+          >
             {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>

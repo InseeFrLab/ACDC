@@ -48,11 +48,16 @@ export function updateDataCollection(
   }).then((response) => response.json());
 }
 
-export function deleteDataCollection(id: string): Promise<void> {
-  return fetch(
-    `${import.meta.env.VITE_API_BASE_URL}api/data-collections/${id}`,
-    {
-      method: 'DELETE',
-    }
-  ).then((response) => response.json());
+export function deleteDataCollection(id: string) {
+  try {
+    return fetch(
+      `${import.meta.env.VITE_API_BASE_URL}api/data-collections/${id}`,
+      {
+        method: 'DELETE',
+      }
+    );
+  } catch (error) {
+    console.error('Error while deleting data collection: ', error);
+    throw error;
+  }
 }
