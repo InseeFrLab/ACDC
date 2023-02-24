@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { PoguesQuestionnaire } from '../../../../lib/model/poguesQuestionnaire';
 
 interface QuestionnaireModelSelectProps {
-  questionnaires: any;
+  questionnaires: PoguesQuestionnaire[];
   setQuestionnaire: (questionnaire: string) => void;
   setQuestionnaireLabel: (questionnaireLabel: string) => void;
 }
@@ -48,6 +48,7 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
           disablePortal
           size="small"
           id="combo-box-demo"
+          disabled={props.questionnaires.length === 0}
           options={props.questionnaires}
           onChange={handleQuestionnaireChange}
           getOptionLabel={(option) => option.label}

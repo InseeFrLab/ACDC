@@ -19,12 +19,14 @@ import moment from 'moment';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
+import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;
   handleDeleteCollectionEvent: (id: string) => void;
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
+  questionnaires: PoguesQuestionnaire[];
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -46,8 +48,12 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     'form',
     'userAttributeForm',
   ]);
-  const { collectionEvent, dataCollectionState, setDataCollectionState } =
-    props;
+  const {
+    collectionEvent,
+    dataCollectionState,
+    setDataCollectionState,
+    questionnaires,
+  } = props;
   const [collectionEventState, setCollectionEventState] =
     useState(collectionEvent);
   const [expanded, setExpanded] = useState(false);
@@ -66,14 +72,16 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
       );
     });
   });
-  console.log('List of Ids', listOfIds);
-  console.log('CollectionEvent Id', collectionEvent.id);
 
   const [deletable, setDeletable] = useState(
     listOfIds.includes(collectionEvent.id)
   );
 
   const handleClickOpen = () => {
+    console.log(
+      'Open Edit CollectionEvent Dialog, with questionnaires:',
+      questionnaires
+    );
     setOpen(true);
   };
 
@@ -360,6 +368,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
         setCollectionEventState={setCollectionEventState}
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
+        questionnaires={questionnaires}
       />
     </>
   );

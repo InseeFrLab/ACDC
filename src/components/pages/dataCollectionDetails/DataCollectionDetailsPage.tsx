@@ -146,6 +146,7 @@ const DataCollectionDetails = () => {
               handleDeleteCollectionEvent={handleDeleteCollectionEvent}
               dataCollectionState={dataCollectionState}
               setDataCollectionState={setDataCollectionState}
+              questionnaires={questionnaires}
             />
           );
         })}

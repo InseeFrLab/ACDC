@@ -6,11 +6,7 @@ import Main from '../../shared/layout/Main';
 import EventForm from './CollectionEventForm';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import getQuestionnaires from '../../../lib/api/remote/poguesQuestionnaires';
-import {
-  PoguesQuestionnaire,
-  PoguesQuestionnaireResponse,
-} from '../../../lib/model/poguesQuestionnaire';
+import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 
 const CreateCollectionEvent = () => {
   const { t } = useTranslation(['collectionEvent', 'form']);

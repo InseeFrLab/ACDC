@@ -14,6 +14,9 @@ import {
   TextField,
   Stack,
 } from '@mui/material';
+import QuestionnaireModelSelect from '@/components/shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
+import { PoguesQuestionnaire } from '@/lib/model/poguesQuestionnaire';
+import InstrumentReference from '@/lib/model/instrumentReference';
 import IntlTextInput from '../../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
 import CollectionModeSelect from '../../../shared/formComponents/collectionMode/collectionModeSelect';
@@ -31,6 +34,7 @@ interface EditCollectionEventDialogProps {
   setCollectionEventState: (collectionEvent: CollectionEvent) => void;
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
+  questionnaires: PoguesQuestionnaire[];
 }
 
 const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
@@ -81,6 +85,12 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       value: props.collectionEventState.description['en-IE'],
     },
   ]);
+  const [questionnaire, setQuestionnaire] = useState(
+    props.collectionEventState.instrumentReference.id
+  );
+  const [questionnaireLabel, setQuestionnaireLabel] = useState(
+    props.collectionEventState.instrumentReference.label
+  );
 
   const handleSave = () => {
     console.log('Update CollectionEvent: ', props.collectionEventState);
@@ -106,9 +116,13 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         },
         {}
       );
-
-    console.log('label: ', label);
-    console.log('description: ', description);
+    const instrument: InstrumentReference = {
+      id: questionnaire,
+      agency: 'fr.insee',
+      version: 1,
+      typeOfObject: 'Instrument',
+      label: questionnaireLabel,
+    };
     const updatedCollectionEvent: CollectionEvent = {
       id: props.collectionEventState.id,
       collectionEventName: props.collectionEventState.collectionEventName,
@@ -121,7 +135,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         endDate: formatISO(endDate),
       },
       typeOfModeOfCollection: modeOfCollection,
-      instrumentReference: props.collectionEventState.instrumentReference,
+      instrumentReference: instrument,
       userAttributePair: props.collectionEventState.userAttributePair,
     };
     console.log(
@@ -134,34 +148,22 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       'Updated CollectionEvent State version: ',
       props.collectionEventState
     ); // Not working
-    const index = props.dataCollectionState.collectionEvents.findIndex(
-      (x) => x.id === props.collectionEventState.id
+    const updatedEvents = props.dataCollectionState.collectionEvents.map(
+      (event) =>
+        event.id === props.collectionEventState.id
+          ? updatedCollectionEvent
+          : event
     );
-
-    // const newCollectionEvents: CollectionEvent[] = [
-    //   ...props.dataCollectionState.collectionEvents.filter(
-    //     (event) => event.id !== collectionEventState.id
-    //   ),
-    // ];
-
-    // newCollectionEvents.push(collectionEventState);
-    // console.log('New CollectionEvents: ', newCollectionEvents);
     setTimeout(() => {
       props.setDataCollectionState({
         ...props.dataCollectionState,
-        collectionEvents: [
-          ...props.dataCollectionState.collectionEvents.filter(
-            (event) => event.id !== props.collectionEventState.id
-          ),
-          (props.dataCollectionState.collectionEvents[index] =
-            updatedCollectionEvent),
-        ],
+        collectionEvents: updatedEvents,
       });
       console.log(
         'Updated Data Collection with updated Collection Event: ',
         props.dataCollectionState
       );
-    }, 1000);
+    }, 500);
 
     props.handleClose();
   };
@@ -269,6 +271,11 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               setModeCollectionCheck={setModeCollectionCheck}
             />{' '}
           </Box>
+          <QuestionnaireModelSelect
+            questionnaires={props.questionnaires}
+            setQuestionnaire={setQuestionnaire}
+            setQuestionnaireLabel={setQuestionnaireLabel}
+          />
 
           <Box
             sx={{
