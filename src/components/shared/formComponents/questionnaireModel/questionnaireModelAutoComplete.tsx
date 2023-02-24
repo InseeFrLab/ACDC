@@ -40,7 +40,7 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
         }}
       >
         <Typography variant="h6" fontWeight="bold">
-          {t('questionnaireModel', { ns: 'collectionEvent' })}
+          {t('questionnaireModel', { ns: 'collectionEvent' })}* :
         </Typography>
       </Box>
       <FormControl size="small" fullWidth>

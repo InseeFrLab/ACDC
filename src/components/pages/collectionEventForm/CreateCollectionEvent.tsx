@@ -19,39 +19,6 @@ const CreateCollectionEvent = () => {
     json: dataCollection,
   };
 
-  // const { data, error, isLoading, isSuccess } = useQuery(
-  //   ['allQuestionnaires'],
-  //   getQuestionnaires
-  // );
-
-  // if (error)
-  //   return (
-  //     <Typography variant="h2" fontWeight="xl">
-  //       Request Failed
-  //     </Typography>
-  //   );
-  // if (isLoading)
-  //   return (
-  //     <Main>
-  //       <Typography variant="h2" fontWeight="xl">
-  //         {t('retrieveQuestionnaireModelPending', { ns: 'collectionEvent' })}
-  //       </Typography>
-  //     </Main>
-  //   );
-
-  // if (isSuccess) {
-  //   const questionnaires: PoguesQuestionnaire[] = [];
-  //   // TODO : Switch to full data set
-  //   data.forEach((questionnaire: PoguesQuestionnaireResponse) => {
-  //     const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
-  //     const dataQuestionnaire: PoguesQuestionnaire = {
-  //       id: questionnaire.id,
-  //       label: questionnaire.Label[0],
-  //       date: dateQuestionnaire.toLocaleDateString(),
-  //     };
-  //     questionnaires.push(dataQuestionnaire);
-  //   });
-
   return (
     <Main sx={{ justifyContent: 'flex-start' }}>
       <Typography variant="h2" fontWeight="xl">
@@ -63,12 +30,6 @@ const CreateCollectionEvent = () => {
       />
     </Main>
   );
-  // }
-  // return (
-  //   <Typography variant="h2" fontWeight="xl">
-  //     Request Failed
-  //   </Typography>
-  // );
 };
 
 export default CreateCollectionEvent;

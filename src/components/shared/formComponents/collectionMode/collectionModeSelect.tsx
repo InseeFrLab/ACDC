@@ -22,7 +22,7 @@ const CollectionModeSelect = (props: CollectionModeSelectProps) => {
         }}
       >
         <Typography variant="h6" fontWeight="bold">
-          {t('modeOfCollection', { ns: 'collectionEvent' })}:*
+          {t('modeOfCollection', { ns: 'collectionEvent' })}* :
         </Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>

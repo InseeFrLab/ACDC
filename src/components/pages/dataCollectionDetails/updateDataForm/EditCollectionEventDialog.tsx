@@ -14,9 +14,15 @@ import {
   TextField,
   Stack,
 } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 import QuestionnaireModelSelect from '@/components/shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
 import { PoguesQuestionnaire } from '@/lib/model/poguesQuestionnaire';
 import InstrumentReference from '@/lib/model/instrumentReference';
+import CollectionCommunicationSelect from '@/components/shared/formComponents/collectionCommunication/collectionCommunication';
+import {
+  UserAttributePairCollectionRow,
+  UserAttributePairCollection,
+} from '@/lib/model/userAttributePairCollection';
 import IntlTextInput from '../../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
 import CollectionModeSelect from '../../../shared/formComponents/collectionMode/collectionModeSelect';
@@ -92,6 +98,18 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
     props.collectionEventState.instrumentReference.label
   );
 
+  const [userAttributePairArray, setUserAttributePairArray] = useState(
+    props.collectionEventState.userAttributePair[0].attributeValue.map(
+      (pair, index) => {
+        return {
+          ...pair,
+          id: index + 1,
+          paperQuestionnaire: JSON.stringify(pair.paperQuestionnaire),
+        };
+      }
+    )
+  );
+
   const handleSave = () => {
     console.log('Update CollectionEvent: ', props.collectionEventState);
     const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
@@ -123,11 +141,27 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       typeOfObject: 'Instrument',
       label: questionnaireLabel,
     };
+
+    const attributeValue: UserAttributePairCollectionRow[] = [];
+    // TODO: Replace for each
+    userAttributePairArray.forEach((obj) => {
+      attributeValue.push({
+        id: uuidv4(),
+        type: obj.type,
+        media: obj.media,
+        paperQuestionnaire: JSON.parse(obj.paperQuestionnaire),
+      });
+    });
+
+    const userAttributePairCollection: UserAttributePairCollection = {
+      attributeKey: 'extension:CollectionCommunicationSteps',
+      attributeValue,
+    };
+    const userAttributePairCollectionArray: UserAttributePairCollection[] = [];
+    userAttributePairCollectionArray.push(userAttributePairCollection);
+
     const updatedCollectionEvent: CollectionEvent = {
-      id: props.collectionEventState.id,
-      collectionEventName: props.collectionEventState.collectionEventName,
-      agency: props.collectionEventState.agency,
-      version: props.collectionEventState.version,
+      ...props.collectionEventState,
       label,
       description,
       dataCollectionDate: {
@@ -136,18 +170,11 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       },
       typeOfModeOfCollection: modeOfCollection,
       instrumentReference: instrument,
-      userAttributePair: props.collectionEventState.userAttributePair,
+      userAttributePair: userAttributePairCollectionArray,
     };
-    console.log(
-      'Updated CollectionEvent before assignment: ',
-      updatedCollectionEvent
-    ); // Working
+
     props.setCollectionEventState(updatedCollectionEvent);
 
-    console.log(
-      'Updated CollectionEvent State version: ',
-      props.collectionEventState
-    ); // Not working
     const updatedEvents = props.dataCollectionState.collectionEvents.map(
       (event) =>
         event.id === props.collectionEventState.id
@@ -251,6 +278,32 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               multiline
             />
           </Box>
+
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              paddingTop: 2,
+            }}
+          >
+            <CollectionModeSelect
+              modeCollectionCheck={modeCollectionCheck}
+              setModeCollectionCheck={setModeCollectionCheck}
+            />{' '}
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              paddingTop: 2,
+            }}
+          >
+            <QuestionnaireModelSelect
+              questionnaires={props.questionnaires}
+              setQuestionnaire={setQuestionnaire}
+              setQuestionnaireLabel={setQuestionnaireLabel}
+            />
+          </Box>
           <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
             <CollectionDatePicker
               startDate={startDate}
@@ -266,17 +319,11 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
               paddingTop: 2,
             }}
           >
-            <CollectionModeSelect
-              modeCollectionCheck={modeCollectionCheck}
-              setModeCollectionCheck={setModeCollectionCheck}
-            />{' '}
+            <CollectionCommunicationSelect
+              userAttributePair={userAttributePairArray}
+              setUserAttributePair={setUserAttributePairArray}
+            />
           </Box>
-          <QuestionnaireModelSelect
-            questionnaires={props.questionnaires}
-            setQuestionnaire={setQuestionnaire}
-            setQuestionnaireLabel={setQuestionnaireLabel}
-          />
-
           <Box
             sx={{
               display: 'flex',
