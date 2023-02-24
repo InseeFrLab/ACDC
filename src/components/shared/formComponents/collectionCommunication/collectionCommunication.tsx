@@ -88,7 +88,7 @@ const CollectionCommunicationSelect = (
           borderColor: 'divider',
         }}
       >
-        <Typography variant="h6" fontWeight="bold">
+        <Typography variant="h6">
           {t('collectionCommunication', { ns: 'collectionEvent' })}:
         </Typography>
       </Box>

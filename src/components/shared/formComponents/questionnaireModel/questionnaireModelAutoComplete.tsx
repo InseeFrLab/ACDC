@@ -39,7 +39,7 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
           borderColor: 'divider',
         }}
       >
-        <Typography variant="h6" fontWeight="bold">
+        <Typography variant="h6">
           {t('questionnaireModel', { ns: 'collectionEvent' })}* :
         </Typography>
       </Box>

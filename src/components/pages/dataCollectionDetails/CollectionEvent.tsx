@@ -78,10 +78,6 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   );
 
   const handleClickOpen = () => {
-    console.log(
-      'Open Edit CollectionEvent Dialog, with questionnaires:',
-      questionnaires
-    );
     setOpen(true);
   };
 

@@ -24,7 +24,7 @@ const CollectionDatePicker = (props: CollectionDatePickerProps) => {
         alignItems: 'flex-start',
       }}
     >
-      <Typography variant="h6" fontWeight="bold">
+      <Typography variant="h6">
         {t('dataCollectionDate', { ns: 'collectionEvent' })}:
       </Typography>
 

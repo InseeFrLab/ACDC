@@ -203,141 +203,125 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-            }}
-          >
-            <Typography
-              variant="body1"
-              fontWeight="bold"
-              sx={{ marginRight: 1 }}
+          <Stack spacing={2}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
             >
-              ID:{' '}
-            </Typography>
-            <Typography variant="body1">
-              {props.collectionEventState.id}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginTop: 1,
-            }}
-          >
-            <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
-              <TextField
-                disabled
-                size="small"
-                value={
-                  props.collectionEventState.collectionEventName[i18n.language]
-                }
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ marginRight: 1 }}
+              >
+                ID:{' '}
+              </Typography>
+              <Typography variant="body1">
+                {props.collectionEventState.id}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                marginTop: 1,
+              }}
+            >
+              <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
+                <TextField
+                  disabled
+                  size="small"
+                  value={
+                    props.collectionEventState.collectionEventName[
+                      i18n.language
+                    ]
+                  }
+                  sx={{
+                    marginRight: 2,
+                    width: '100%',
+                    '& legend': { display: 'none' },
+                    '& fieldset': { top: 0 },
+                  }}
+                  id={
+                    props.collectionEventState.collectionEventName[
+                      i18n.language
+                    ]
+                  }
+                />
+              </FormControl>
+              <Box
                 sx={{
-                  marginRight: 2,
-                  width: '100%',
-                  '& legend': { display: 'none' },
-                  '& fieldset': { top: 0 },
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  paddingTop: 2,
                 }}
-                id={
-                  props.collectionEventState.collectionEventName[i18n.language]
-                }
+              >
+                <Typography variant="h6">
+                  {t('label', { ns: 'form' })}*:
+                </Typography>
+              </Box>
+              <IntlTextInput
+                textArray={labelArray}
+                setTextArray={setLabelArray}
               />
-            </FormControl>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-start',
-                paddingTop: 2,
-              }}
-            >
-              <Typography variant="h6" fontWeight="bold">
-                {t('label', { ns: 'form' })}*:
-              </Typography>
-            </Box>
-            <IntlTextInput
-              textArray={labelArray}
-              setTextArray={setLabelArray}
-            />
-            <Box
-              sx={{
-                paddingTop: 2,
-                display: 'flex',
-                justifyContent: 'flex-start',
-              }}
-            >
-              <Typography variant="h6" fontWeight="bold">
-                {t('descriptionField', { ns: 'form' })}:
-              </Typography>
-            </Box>
+              <Box
+                sx={{
+                  paddingTop: 2,
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                <Typography variant="h6">
+                  {t('descriptionField', { ns: 'form' })}:
+                </Typography>
+              </Box>
 
-            <IntlTextInput
-              textArray={descriptionArray}
-              setTextArray={setDescriptionArray}
-              multiline
-            />
-          </Box>
-
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              paddingTop: 2,
-            }}
-          >
+              <IntlTextInput
+                textArray={descriptionArray}
+                setTextArray={setDescriptionArray}
+                multiline
+              />
+            </Box>
             <CollectionModeSelect
               modeCollectionCheck={modeCollectionCheck}
               setModeCollectionCheck={setModeCollectionCheck}
             />{' '}
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              paddingTop: 2,
-            }}
-          >
             <QuestionnaireModelSelect
               questionnaires={props.questionnaires}
               setQuestionnaire={setQuestionnaire}
               setQuestionnaireLabel={setQuestionnaireLabel}
             />
-          </Box>
-          <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
-            <CollectionDatePicker
-              startDate={startDate}
-              setStartDate={setStartDate}
-              endDate={endDate}
-              setEndDate={setEndDate}
-            />
-          </Stack>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              paddingTop: 2,
-            }}
-          >
+            <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
+              <CollectionDatePicker
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+              />
+            </Stack>
             <CollectionCommunicationSelect
               userAttributePair={userAttributePairArray}
               setUserAttributePair={setUserAttributePairArray}
             />
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              paddingTop: 2,
-            }}
-          >
-            <Typography variant="h6" fontWeight="bold" sx={{ marginRight: 1 }}>
-              {t('version', { ns: 'form' })}:{' '}
-            </Typography>
-            <Typography variant="h6">
-              {props.collectionEventState.version}
-            </Typography>
-          </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+              }}
+            >
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                sx={{ marginRight: 1 }}
+              >
+                {t('version', { ns: 'form' })}:{' '}
+              </Typography>
+              <Typography variant="h6">
+                {props.collectionEventState.version}
+              </Typography>
+            </Box>
+          </Stack>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
