@@ -3,22 +3,13 @@ import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { StudyUnitReference } from '../../model/studyUnitReference';
 import { transformLabels } from '../../utils/magmaUtils';
 
-export function getAllSeries(): Promise<StatisticalSeries[]> {
+export function getAllSeries(): Promise<any[]> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return fetch(
     `${import.meta.env.VITE_API_BASE_URL}api/external/magma/series`
   ).then((response) => {
     if (response.ok) {
-      const series = [] as StatisticalSeries[];
-      response.json().then((json) => {
-        json.forEach((serie: any) => {
-          series.push({
-            id: serie.id,
-            label: transformLabels(serie.label),
-            altLabel: serie.altlabel ? transformLabels(serie.altlabel) : {},
-          });
-        });
-        return series;
-      });
+      return response.json();
     }
     throw new Error('Error while fetching series');
   });

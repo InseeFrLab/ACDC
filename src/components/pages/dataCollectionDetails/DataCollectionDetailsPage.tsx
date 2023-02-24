@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQueries } from '@tanstack/react-query';
 import {
   Typography,
   Button,
@@ -18,6 +18,8 @@ import {
   PoguesQuestionnaire,
   PoguesQuestionnaireResponse,
 } from '@/lib/model/poguesQuestionnaire';
+import { getAllSeries } from '@/lib/api/remote/magmaSeries';
+import StatisticalSeries from '@/lib/model/statisticalSeries';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
@@ -42,8 +44,14 @@ const DataCollectionDetails = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
   const questionnaires: PoguesQuestionnaire[] = [];
+  const series: StatisticalSeries[] = [];
 
-  const questionnaireQuery = useQuery(['allQuestionnaires'], getQuestionnaires);
+  const [questionnaireQuery, seriesQuery] = useQueries({
+    queries: [
+      { queryKey: ['allQuestionnaires'], queryFn: getQuestionnaires },
+      { queryKey: ['allSeries'], queryFn: getAllSeries },
+    ],
+  });
   // TODO : Loading & error indicator somewhere in the page
   questionnaireQuery.isSuccess
     ? questionnaireQuery.data.forEach(
@@ -57,6 +65,16 @@ const DataCollectionDetails = () => {
           questionnaires.push(dataQuestionnaire);
         }
       )
+    : null;
+  seriesQuery.isSuccess
+    ? seriesQuery.data.forEach((serie: any) => {
+        const dataSerie: StatisticalSeries = {
+          id: serie.id,
+          label: serie.label,
+          altLabel: serie.altLabel ? serie.altLabel : '',
+        };
+        series.push(dataSerie);
+      })
     : null;
 
   const { isLoading, isError, isSuccess, mutate } =
@@ -122,6 +140,7 @@ const DataCollectionDetails = () => {
       <DataCollectionDisplay
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
+        series={series}
       />
       <Box
         sx={{

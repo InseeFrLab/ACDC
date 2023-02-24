@@ -13,12 +13,14 @@ import {
 import { FiChevronRight } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
 
 interface DataCollectionDisplayProps {
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
+  series: StatisticalSeries[];
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -40,7 +42,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
     'form',
     'userAttributeForm',
   ]);
-  const { dataCollectionState, setDataCollectionState } = props;
+  const { dataCollectionState, setDataCollectionState, series } = props;
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
 

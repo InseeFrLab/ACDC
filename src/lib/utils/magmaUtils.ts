@@ -22,6 +22,6 @@ export function transformLabels(
     const languageCode = getLanguageCode(label.langue);
     transformed[languageCode] = label.contenu;
   });
-  console.log('Transformed intl fields: ', transformed);
+  // console.log('Transformed intl fields: ', transformed);
   return transformed;
 }

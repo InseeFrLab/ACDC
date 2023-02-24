@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { useState } from 'react';
 import {
   Box,
   FormControl,
@@ -10,6 +11,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { transformLabels } from '@/lib/utils/magmaUtils';
 import jsonData from '../../../../lib/api/mock/mockSeries';
+import StatisticalSeries from '../../../../lib/model/statisticalSeries';
 import {
   getSeriesOperation,
   SeriesId,
@@ -24,14 +26,51 @@ interface StatisticalOperationSelectProps {
   setgroupReference: (groupReference: GroupReference) => void;
   studyUnitReference: StudyUnitReference;
   setStudyUnitReference: (studyUnitReference: StudyUnitReference) => void;
-  statisticalOperationsList: any[];
-  setStatisticalOperationsList: (statisticalOperationsList: any[]) => void;
-  operationDisabled: boolean;
-  setOperationDisabled: (operationDisabled: boolean) => void;
+  series: StatisticalSeries[];
 }
 
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
+  const [operationDisabled, setOperationDisabled] = useState(true);
+  const [statisticalOperationsList, setStatisticalOperationsList] = useState([
+    {
+      altLabel: [
+        {
+          langue: 'fr',
+        },
+        {
+          langue: 'en',
+        },
+      ],
+      label: [
+        {
+          langue: 'fr',
+          contenu: 'Enquête Logement Mayotte 2013',
+        },
+        {
+          langue: 'en',
+          contenu: 'Mayotte Housing Survey 2013',
+        },
+      ],
+      uri: 'http://bauhaus/operations/operation/s1448',
+      serie: {
+        id: 's1004',
+        label: [
+          {
+            langue: 'fr',
+            contenu: 'Enquête Logement',
+          },
+          {
+            langue: 'en',
+            contenu: 'Housing survey',
+          },
+        ],
+        uri: 'http://bauhaus/operations/serie/s1004',
+      },
+      id: 's1448',
+    },
+  ]);
+  console.log('Series list: ', props.series);
 
   const handlegroupReferenceChange = (event: any, newValue: any) => {
     const {
@@ -44,14 +83,11 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       typeOfObject: 'Group',
     } as GroupReference);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    props.setStatisticalOperationsList(getSeriesOperation(newValue.id));
-    console.log(
-      'Associated series Operations: ',
-      props.statisticalOperationsList
-    );
+    setStatisticalOperationsList(getSeriesOperation(newValue.id));
+    console.log('Associated series Operations: ', statisticalOperationsList);
     // Temp timeout until I get the API token
     setTimeout(() => {
-      props.setOperationDisabled(false);
+      setOperationDisabled(false);
     });
   };
 
@@ -95,10 +131,12 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           disablePortal
           size="small"
           id="select-statistical-operation-series"
-          options={jsonData}
+          options={props.series}
           onChange={handlegroupReferenceChange}
           getOptionLabel={(option) => {
-            return `${option.label[0].contenu} - (${option.label[1].contenu})`;
+            return `${option.label[i18n.language]} - (${
+              option.altLabel[i18n.language]
+            })`;
           }}
           renderOption={(pr, option) => {
             return (
@@ -107,7 +145,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
                 sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                 {...pr}
               >
-                {option.label[0].contenu} - ({option.label[1].contenu})
+                {option.label[i18n.language]} - {option.altLabel[i18n.language]}
               </Box>
             );
           }}
@@ -117,6 +155,11 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
               label={t('statisticalOperationSeries', {
                 ns: 'dataCollectionForm',
               })}
+              value={
+                props.groupReference.label[i18n.language]
+                  ? props.groupReference.label[i18n.language]
+                  : ''
+              }
             />
           )}
         />
@@ -139,10 +182,10 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
         <Autocomplete
           disablePortal
-          disabled={props.operationDisabled}
+          disabled={operationDisabled}
           size="small"
           id="select-statistical-operation"
-          options={props.statisticalOperationsList}
+          options={statisticalOperationsList}
           onChange={handleStudyUnitReferenceChange}
           getOptionLabel={(option) => {
             return `${option.label[0].contenu} - (${option.label[1].contenu})`;

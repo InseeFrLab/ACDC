@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
 import { Typography, FormControl, Button, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import StatisticalSeries from '@/lib/model/statisticalSeries';
 import CreateDataCollectionDialog from './CreateDataCollectionDialog';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { createDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -16,8 +17,13 @@ import {
   StudyUnitReference,
 } from '../../../lib/model/studyUnitReference';
 import StatisticalOperationSelect from '../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
+import { getAllSeries } from '../../../lib/api/remote/magmaSeries';
 
-const CollectionForm = () => {
+interface CollectionFormProps {
+  series: StatisticalSeries[];
+}
+
+const CollectionForm = (props: CollectionFormProps) => {
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
   const navigate = useNavigate();
 
@@ -51,52 +57,17 @@ const CollectionForm = () => {
   const [open, setOpen] = useState(false);
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>({} as DataCollection);
-  const [groupReference, setgroupReference] = useState<GroupReference>(
-    {} as GroupReference
-  );
+  const [groupReference, setgroupReference] = useState<GroupReference>({
+    id: '',
+    label: {
+      'fr-FR': '',
+      'en-IE': '',
+    },
+    typeOfObject: '',
+  } as GroupReference);
   const [studyUnitReference, setStudyUnitReference] =
     useState<StudyUnitReference>({} as StudyUnitReference);
 
-  const [statisticalOperationsList, setStatisticalOperationsList] = useState([
-    {
-      altLabel: [
-        {
-          langue: 'fr',
-        },
-        {
-          langue: 'en',
-        },
-      ],
-      label: [
-        {
-          langue: 'fr',
-          contenu: 'Enquête Logement Mayotte 2013',
-        },
-        {
-          langue: 'en',
-          contenu: 'Mayotte Housing Survey 2013',
-        },
-      ],
-      uri: 'http://bauhaus/operations/operation/s1448',
-      serie: {
-        id: 's1004',
-        label: [
-          {
-            langue: 'fr',
-            contenu: 'Enquête Logement',
-          },
-          {
-            langue: 'en',
-            contenu: 'Housing survey',
-          },
-        ],
-        uri: 'http://bauhaus/operations/serie/s1004',
-      },
-      id: 's1448',
-    },
-  ]);
-
-  const [operationDisabled, setOperationDisabled] = useState(true);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -181,10 +152,7 @@ const CollectionForm = () => {
           setgroupReference={setgroupReference}
           studyUnitReference={studyUnitReference}
           setStudyUnitReference={setStudyUnitReference}
-          statisticalOperationsList={statisticalOperationsList}
-          setStatisticalOperationsList={setStatisticalOperationsList}
-          operationDisabled={operationDisabled}
-          setOperationDisabled={setOperationDisabled}
+          series={props.series}
         />
         <Box
           component="form"
