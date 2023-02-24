@@ -3,19 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import BottomBar from '../../shared/layout/BottomBar';
+import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 
 interface BottomActionBarProps {
   dataCollection: DataCollection;
   dataCollectionState: DataCollection;
   handleSave: () => void;
+  questionnaires: PoguesQuestionnaire[];
 }
 const BottomActionBar = (props: BottomActionBarProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation(['dataCollectionDetails']);
-  const { dataCollection } = props;
+  const { dataCollection, questionnaires } = props;
   const handleClick = () => {
     navigate(`/collection/new/${dataCollection.id}`, {
-      state: { dataCollection },
+      state: { dataCollection, questionnaires },
     });
   };
   const handleClickUserAttribute = () => {

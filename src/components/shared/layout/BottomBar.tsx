@@ -1,5 +1,5 @@
 import { Box, BoxProps } from '@mui/material';
-
+// TODO Override theme
 const BottomBar = (props: BoxProps) => {
   return (
     <Box
@@ -10,6 +10,7 @@ const BottomBar = (props: BoxProps) => {
         {
           m: 1,
           p: 1,
+          backgroundColor: '#fcfcfc',
           display: 'inline-flex',
           alignItems: 'left',
           justifyContent: 'flex-end',

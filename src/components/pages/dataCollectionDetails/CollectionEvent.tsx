@@ -256,7 +256,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 fontWeight="bold"
                 sx={{ marginRight: 1 }}
               >
-                {t('title', { ns: 'userAttributeForm' })}:
+                {t('collectionCommunication', { ns: 'collectionEvent' })}:
               </Typography>
             </Box>
             <Stack sx={{ alignItems: 'flex-start' }}>

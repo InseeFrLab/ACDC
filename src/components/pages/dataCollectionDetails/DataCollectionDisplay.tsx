@@ -6,14 +6,11 @@ import {
   Button,
   Card,
   Divider,
-  CardActions,
   IconButton,
   IconButtonProps,
   Collapse,
-  CardContent,
-  Stack,
 } from '@mui/material';
-import { FiChevronDown, FiTrash, FiChevronRight } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { DataCollection } from '../../../lib/model/dataCollection';

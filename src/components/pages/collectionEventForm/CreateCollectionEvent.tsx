@@ -15,62 +15,64 @@ import {
 const CreateCollectionEvent = () => {
   const { t } = useTranslation(['collectionEvent', 'form']);
   const dataCollection = useLocation().state.dataCollection as DataCollection;
+  const questionnaires: PoguesQuestionnaire[] = useLocation().state
+    .questionnaires as PoguesQuestionnaire[];
   console.log('Create New collection  for dataCollection:', dataCollection);
   const dataCollectionApi: DataCollectionApi = {
     id: dataCollection.id,
     json: dataCollection,
   };
 
-  const { data, error, isLoading, isSuccess } = useQuery(
-    ['allQuestionnaires'],
-    getQuestionnaires
-  );
+  // const { data, error, isLoading, isSuccess } = useQuery(
+  //   ['allQuestionnaires'],
+  //   getQuestionnaires
+  // );
 
-  if (error)
-    return (
-      <Typography variant="h2" fontWeight="xl">
-        Request Failed
-      </Typography>
-    );
-  if (isLoading)
-    return (
-      <Main>
-        <Typography variant="h2" fontWeight="xl">
-          {t('retrieveQuestionnaireModelPending', { ns: 'collectionEvent' })}
-        </Typography>
-      </Main>
-    );
+  // if (error)
+  //   return (
+  //     <Typography variant="h2" fontWeight="xl">
+  //       Request Failed
+  //     </Typography>
+  //   );
+  // if (isLoading)
+  //   return (
+  //     <Main>
+  //       <Typography variant="h2" fontWeight="xl">
+  //         {t('retrieveQuestionnaireModelPending', { ns: 'collectionEvent' })}
+  //       </Typography>
+  //     </Main>
+  //   );
 
-  if (isSuccess) {
-    const questionnaires: PoguesQuestionnaire[] = [];
-    // TODO : Switch to full data set
-    data.forEach((questionnaire: PoguesQuestionnaireResponse) => {
-      const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
-      const dataQuestionnaire: PoguesQuestionnaire = {
-        id: questionnaire.id,
-        label: questionnaire.Label[0],
-        date: dateQuestionnaire.toLocaleDateString(),
-      };
-      questionnaires.push(dataQuestionnaire);
-    });
+  // if (isSuccess) {
+  //   const questionnaires: PoguesQuestionnaire[] = [];
+  //   // TODO : Switch to full data set
+  //   data.forEach((questionnaire: PoguesQuestionnaireResponse) => {
+  //     const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
+  //     const dataQuestionnaire: PoguesQuestionnaire = {
+  //       id: questionnaire.id,
+  //       label: questionnaire.Label[0],
+  //       date: dateQuestionnaire.toLocaleDateString(),
+  //     };
+  //     questionnaires.push(dataQuestionnaire);
+  //   });
 
-    return (
-      <Main sx={{ justifyContent: 'flex-start' }}>
-        <Typography variant="h2" fontWeight="xl">
-          {t('title')}
-        </Typography>
-        <EventForm
-          DataCollectionApi={dataCollectionApi}
-          questionnaires={questionnaires}
-        />
-      </Main>
-    );
-  }
   return (
-    <Typography variant="h2" fontWeight="xl">
-      Request Failed
-    </Typography>
+    <Main sx={{ justifyContent: 'flex-start' }}>
+      <Typography variant="h2" fontWeight="xl">
+        {t('title')}
+      </Typography>
+      <EventForm
+        DataCollectionApi={dataCollectionApi}
+        questionnaires={questionnaires}
+      />
+    </Main>
   );
+  // }
+  // return (
+  //   <Typography variant="h2" fontWeight="xl">
+  //     Request Failed
+  //   </Typography>
+  // );
 };
 
 export default CreateCollectionEvent;

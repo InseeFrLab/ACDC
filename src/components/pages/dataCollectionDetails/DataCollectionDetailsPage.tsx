@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   Typography,
   Button,
@@ -13,6 +13,11 @@ import {
   DialogActions,
   CircularProgress,
 } from '@mui/material';
+import getQuestionnaires from '@/lib/api/remote/poguesQuestionnaires';
+import {
+  PoguesQuestionnaire,
+  PoguesQuestionnaireResponse,
+} from '@/lib/model/poguesQuestionnaire';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
@@ -36,6 +41,23 @@ const DataCollectionDetails = () => {
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
+  const questionnaires: PoguesQuestionnaire[] = [];
+
+  const questionnaireQuery = useQuery(['allQuestionnaires'], getQuestionnaires);
+  // TODO : Loading & error indicator somewhere in the page
+  questionnaireQuery.isSuccess
+    ? questionnaireQuery.data.forEach(
+        (questionnaire: PoguesQuestionnaireResponse) => {
+          const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
+          const dataQuestionnaire: PoguesQuestionnaire = {
+            id: questionnaire.id,
+            label: questionnaire.Label[0],
+            date: dateQuestionnaire.toLocaleDateString(),
+          };
+          questionnaires.push(dataQuestionnaire);
+        }
+      )
+    : null;
 
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
@@ -220,6 +242,7 @@ const DataCollectionDetails = () => {
         dataCollection={dataCollection}
         dataCollectionState={dataCollectionState}
         handleSave={handleSave}
+        questionnaires={questionnaires}
       />
     </Main>
   );

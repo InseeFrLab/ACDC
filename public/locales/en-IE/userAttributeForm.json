@@ -1,8 +1,8 @@
 {
-  "title": "User Attribute",
-  "descriptionForm": "Create a new user attribute",
-  "successForm": "User attribute created successfully",
-  "errorForm": "Error creating user attribute",
+  "title": "Collection Event Group",
+  "descriptionForm": "Create a new collection event group",
+  "successForm": "Collection event group created successfully",
+  "errorForm": "Error creating collection event group",
   "collectionEventReference": "Collection Event Reference",
   "email": "Email",
   "mail": "Courrier",
