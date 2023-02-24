@@ -37,7 +37,7 @@ import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 import {
   UserAttributePairCollection,
   UserAttributePairCollectionRow,
-} from '../../../lib/model/userAttributePairCollection';
+} from '../../../lib/model/communicationCollectionEvent';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;

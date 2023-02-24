@@ -23,7 +23,7 @@ import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import {
   UserAttributePair,
   UserAttributePairValue,
-} from '../../../lib/model/userAttributePair';
+} from '../../../lib/model/collectionGroups';
 
 interface UserAttributeFormProps {
   dataCollection: DataCollection;

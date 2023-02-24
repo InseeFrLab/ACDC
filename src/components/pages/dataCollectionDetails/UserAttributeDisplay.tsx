@@ -16,7 +16,7 @@ import {
 import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import { UserAttributePair } from '../../../lib/model/userAttributePair';
+import { UserAttributePair } from '../../../lib/model/collectionGroups';
 
 interface UserAttributeDisplayProps {
   userAttribute: UserAttributePair;

@@ -22,7 +22,7 @@ import CollectionCommunicationSelect from '@/components/shared/formComponents/co
 import {
   UserAttributePairCollectionRow,
   UserAttributePairCollection,
-} from '@/lib/model/userAttributePairCollection';
+} from '@/lib/model/communicationCollectionEvent';
 import IntlTextInput from '../../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
 import CollectionModeSelect from '../../../shared/formComponents/collectionMode/collectionModeSelect';

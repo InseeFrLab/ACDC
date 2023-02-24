@@ -1,6 +1,6 @@
 import InstrumentReference from './instrumentReference';
 import { TypeOfModeOfCollection } from './typeOfModeOfCollection';
-import { UserAttributePairCollection } from './userAttributePairCollection';
+import { UserAttributePairCollection } from './communicationCollectionEvent';
 
 export default interface CollectionEvent {
   id: string;

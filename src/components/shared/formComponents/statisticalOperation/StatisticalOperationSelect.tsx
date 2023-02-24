@@ -8,6 +8,7 @@ import {
   Autocomplete,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { transformLabels } from '@/lib/utils/magmaUtils';
 import jsonData from '../../../../lib/api/mock/mockSeries';
 import {
   getSeriesOperation,
@@ -27,35 +28,6 @@ interface StatisticalOperationSelectProps {
   setStatisticalOperationsList: (statisticalOperationsList: any[]) => void;
   operationDisabled: boolean;
   setOperationDisabled: (operationDisabled: boolean) => void;
-}
-
-// TODO : Move these elsewhere when linked to Rmes API
-function getLanguageCode(language: string): string {
-  // Map the language to its corresponding code
-  switch (language) {
-    case 'fr':
-      return 'fr-FR';
-    case 'en':
-      return 'en-IE';
-    // Add support for other languages here
-    default:
-      return language;
-  }
-}
-
-function transformLabels(
-  labels: Record<'langue' | 'contenu', string>[]
-): Record<'fr-FR' | 'en-IE' | string, string> {
-  const transformed: Record<'fr-FR' | 'en-IE' | string, string> = {} as Record<
-    'fr-FR' | 'en-IE' | string,
-    string
-  >;
-  labels.forEach((label) => {
-    const languageCode = getLanguageCode(label.langue);
-    transformed[languageCode] = label.contenu;
-  });
-  console.log('Transformed intl fields: ', transformed);
-  return transformed;
 }
 
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {

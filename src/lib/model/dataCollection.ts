@@ -1,5 +1,5 @@
 import CollectionEvent from './collectionEvents';
-import { UserAttributePair } from './userAttributePair';
+import { UserAttributePair } from './collectionGroups';
 import { StudyUnitReference } from './studyUnitReference';
 
 export interface DataCollection {
