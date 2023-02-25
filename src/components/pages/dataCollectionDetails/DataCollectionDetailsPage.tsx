@@ -88,10 +88,6 @@ const DataCollectionDetails = () => {
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleCloseDelete = () => {
     setOpenDelete(false);
   };

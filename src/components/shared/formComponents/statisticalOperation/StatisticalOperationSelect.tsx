@@ -13,13 +13,13 @@ import { useTranslation } from 'react-i18next';
 import { transformLabels } from '@/lib/utils/magmaUtils';
 import StatisticalSeries from '../../../../lib/model/statisticalSeries';
 import {
-  getSeriesOperation,
-  SeriesId,
-} from '../../../../lib/api/mock/serieOperation';
-import {
   GroupReference,
   StudyUnitReference,
 } from '../../../../lib/model/studyUnitReference';
+import {
+  getSeriesOperation,
+  SeriesId,
+} from '../../../../lib/api/mock/serieOperation';
 
 interface StatisticalOperationSelectProps {
   groupReference: GroupReference;
@@ -32,7 +32,9 @@ interface StatisticalOperationSelectProps {
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
   const [operationDisabled, setOperationDisabled] = useState(true);
-  const [serieId, setSerieId] = useState<string>('s1004');
+  const [serieId, setSerieId] = useState<string>(
+    props.groupReference.id.length > 0 ? props.groupReference.id : 's1004'
+  );
   const [operations, setOperations] = useState<StatisticalSeries[]>([
     {
       id: '',
@@ -146,6 +148,16 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           getOptionLabel={(option) => {
             return `${option.label[i18n.language]}`;
           }}
+          value={
+            {
+              id: '',
+              label: props.groupReference.label,
+              altLabel: {
+                'fr-FR': '',
+                'en-IE': '',
+              },
+            } as StatisticalSeries
+          }
           renderOption={(pr, option) => {
             return (
               <Box

@@ -11,6 +11,7 @@ import { PoguesQuestionnaire } from '../../../../lib/model/poguesQuestionnaire';
 interface QuestionnaireModelSelectProps {
   questionnaires: PoguesQuestionnaire[];
   setQuestionnaire: (questionnaire: string) => void;
+  questionnaireLabel: string;
   setQuestionnaireLabel: (questionnaireLabel: string) => void;
 }
 
@@ -69,6 +70,13 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
               label={t('questionnaireModel', { ns: 'collectionEvent' })}
             />
           )}
+          value={
+            {
+              id: '',
+              date: null,
+              label: props.questionnaireLabel,
+            } as PoguesQuestionnaire
+          }
         />
       </FormControl>
     </>

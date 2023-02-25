@@ -251,9 +251,7 @@ const EventForm = (props: DataCollectionProps) => {
             justifyContent: 'flex-start',
           }}
         >
-          <Typography variant="h6" fontWeight="bold">
-            {t('name', { ns: 'form' })}*:
-          </Typography>
+          <Typography variant="h6">{t('name', { ns: 'form' })}*:</Typography>
         </Box>
         <IntlTextInput
           textArray={collectionEventNameArray}
@@ -269,9 +267,7 @@ const EventForm = (props: DataCollectionProps) => {
             borderColor: 'divider',
           }}
         >
-          <Typography variant="h6" fontWeight="bold">
-            {t('label', { ns: 'form' })}*:
-          </Typography>
+          <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
         </Box>
         <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
         <Box
@@ -283,7 +279,7 @@ const EventForm = (props: DataCollectionProps) => {
             borderColor: 'divider',
           }}
         >
-          <Typography variant="h6" fontWeight="bold">
+          <Typography variant="h6">
             {t('descriptionField', { ns: 'form' })}:
           </Typography>
         </Box>
@@ -299,6 +295,7 @@ const EventForm = (props: DataCollectionProps) => {
         <QuestionnaireModelSelect
           questionnaires={props.questionnaires}
           setQuestionnaire={setQuestionnaire}
+          questionnaireLabel={questionnaireLabel}
           setQuestionnaireLabel={setQuestionnaireLabel}
         />
         <CollectionDatePicker

@@ -290,6 +290,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
             <QuestionnaireModelSelect
               questionnaires={props.questionnaires}
               setQuestionnaire={setQuestionnaire}
+              questionnaireLabel={questionnaireLabel}
               setQuestionnaireLabel={setQuestionnaireLabel}
             />
             <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
