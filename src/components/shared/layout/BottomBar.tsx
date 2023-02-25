@@ -12,7 +12,7 @@ const BottomBar = (props: BoxProps) => {
           p: 1,
           backgroundColor: '#fcfcfc',
           display: 'inline-flex',
-          alignItems: 'left',
+          alignItems: 'center',
           justifyContent: 'flex-end',
           width: '90%',
           position: 'fixed',

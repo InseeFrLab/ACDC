@@ -12,5 +12,6 @@
   "saveDataCollection": "Sauvegarder la campagne",
   "successDataCollection": "Campagne sauvegardée avec succès",
   "createUserAttribute": "Nouveau Groupe",
-  "editEvent": "Modifier le lot"
+  "editEvent": "Modifier le lot",
+  "unsavedChanges": "Modifications non enregistrées"
 }

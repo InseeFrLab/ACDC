@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Alert, Stack, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { DataCollection } from '../../../lib/model/dataCollection';
@@ -30,46 +30,60 @@ const BottomActionBar = (props: BottomActionBarProps) => {
   };
   return (
     <BottomBar>
-      <Button
-        variant="contained"
-        onClick={handleClick}
-        sx={{
-          mx: 1,
-        }}
-      >
-        <Typography variant="subtitle1">{t('createButton')}</Typography>
-      </Button>
-      <Button
-        variant="contained"
-        onClick={handleClickUserAttribute}
-        sx={{
-          mx: 1,
-        }}
-      >
-        <Typography variant="subtitle1">{t('createUserAttribute')}</Typography>
-      </Button>
-      <Button
-        variant="contained"
-        disabled={props.dataCollectionState === props.dataCollection}
-        onClick={handleClickSave}
-        sx={{
-          mx: 1,
-        }}
-      >
-        <Typography variant="subtitle1">{t('save')}</Typography>
-      </Button>
-      <Button
-        variant="contained"
-        disabled
-        onClick={() => {
-          console.log('Publish Button');
-        }}
-        sx={{
-          mx: 1,
-        }}
-      >
-        <Typography variant="subtitle1">{t('publish')}</Typography>
-      </Button>
+      {!(props.dataCollectionState === props.dataCollection) ? (
+        <Alert
+          severity="error"
+          sx={{
+            mr: 2,
+          }}
+        >
+          {t('unsavedChanges')}
+        </Alert>
+      ) : null}
+      <Box>
+        <Button
+          variant="contained"
+          onClick={handleClick}
+          sx={{
+            mx: 1,
+          }}
+        >
+          <Typography variant="subtitle1">{t('createButton')}</Typography>
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleClickUserAttribute}
+          sx={{
+            mx: 1,
+          }}
+        >
+          <Typography variant="subtitle1">
+            {t('createUserAttribute')}
+          </Typography>
+        </Button>
+        <Button
+          variant="contained"
+          disabled={props.dataCollectionState === props.dataCollection}
+          onClick={handleClickSave}
+          sx={{
+            mx: 1,
+          }}
+        >
+          <Typography variant="subtitle1">{t('save')}</Typography>
+        </Button>
+        <Button
+          variant="contained"
+          disabled
+          onClick={() => {
+            console.log('Publish Button');
+          }}
+          sx={{
+            mx: 1,
+          }}
+        >
+          <Typography variant="subtitle1">{t('publish')}</Typography>
+        </Button>
+      </Box>
     </BottomBar>
   );
 };
