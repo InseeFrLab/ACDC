@@ -69,7 +69,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
                 'en-IE': '',
               },
         };
-        console.log('dataSerie: ', dataSerie);
         newOperations.push(dataSerie);
       });
       setOperations(newOperations);

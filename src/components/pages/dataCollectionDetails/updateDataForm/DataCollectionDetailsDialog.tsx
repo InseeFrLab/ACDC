@@ -20,19 +20,21 @@ import IntlTextInput from '@/components/shared/intlTextInput/IntlTextInput';
 import { deleteDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
 import { DataCollection } from '../../../../lib/model/dataCollection';
 import StatisticalOperationSelect from '../../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
+import StatisticalSeries from '../../../../lib/model/statisticalSeries';
 
 interface DataCollectionDetailsDialogProps {
   open: boolean;
   dataCollectionState: DataCollection;
   setOpen: (open: boolean) => void;
   setDataCollectionState: (dataCollection: DataCollection) => void;
+  series: StatisticalSeries[];
 }
 const DataCollectionDetailsDialog = (
   props: DataCollectionDetailsDialogProps
 ) => {
   const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
-  const { open, dataCollectionState } = props;
+  const { open, dataCollectionState, series } = props;
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
@@ -202,10 +204,7 @@ const DataCollectionDetailsDialog = (
                 setgroupReference={setGroupReference}
                 studyUnitReference={studyUnitReference}
                 setStudyUnitReference={setStudyUnitReference}
-                statisticalOperationsList={statisticalOperationsList}
-                setStatisticalOperationsList={setStatisticalOperationsList}
-                operationDisabled={operationDisabled}
-                setOperationDisabled={setOperationDisabled}
+                series={series}
               />
             </Box>
 

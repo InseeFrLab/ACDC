@@ -50,10 +50,6 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -243,6 +239,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
         setOpen={setOpen}
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
+        series={series}
       />
     </>
   );

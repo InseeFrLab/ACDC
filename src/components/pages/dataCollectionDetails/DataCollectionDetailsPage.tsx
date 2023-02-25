@@ -28,9 +28,10 @@ import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import UserAttributeDisplay from './UserAttributeDisplay';
 import DataCollectionDisplay from './DataCollectionDisplay';
+import { transformLabels } from '../../../lib/utils/magmaUtils';
 
 const DataCollectionDetails = () => {
-  const { t, i18n } = useTranslation([
+  const { t } = useTranslation([
     'DataCollectionDetails',
     'Form',
     'userAttributeForm',
@@ -70,8 +71,15 @@ const DataCollectionDetails = () => {
     ? seriesQuery.data.forEach((serie: any) => {
         const dataSerie: StatisticalSeries = {
           id: serie.id,
-          label: serie.label,
-          altLabel: serie.altLabel ? serie.altLabel : '',
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          label: transformLabels(serie.label),
+          altLabel: serie.altLabel
+            ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+              transformLabels(serie.altLabel)
+            : {
+                'fr-FR': '',
+                'en-IE': '',
+              },
         };
         series.push(dataSerie);
       })
@@ -202,7 +210,7 @@ const DataCollectionDetails = () => {
       <Dialog open={openDelete} onClose={handleCloseDelete}>
         <DialogTitle>
           <Typography variant="h5">
-            {t('deleteCollectionEvent', { ns: 'dataCollectionDetails' })}
+            {t('deleteDataCollection', { ns: 'dataCollectionDetails' })}
           </Typography>
         </DialogTitle>
         <DialogContent
