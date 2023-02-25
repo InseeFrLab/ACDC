@@ -10,5 +10,6 @@
   "remind": "Remind",
   "paperQuestionnaire": "Paper Questionnaire",
   "type": "Type",
-  "media": "Media"
+  "media": "Media",
+  "textFieldError": "Veuillez renseigner le champs Label et ajouter au moins un lot"
 }

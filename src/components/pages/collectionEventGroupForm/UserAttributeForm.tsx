@@ -74,7 +74,10 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
-    if (labelArrayFiltered.length === 2) {
+    const collectionEventCheckedLength = collectionEventCheck.filter(
+      (obj) => Object.values(obj)[0] === true
+    ).length;
+    if (labelArrayFiltered.length === 2 && collectionEventCheckedLength > 0) {
       setTextError(false);
       return true;
     }
@@ -207,7 +210,7 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
                 fontWeight="bold"
                 color="error"
               >
-                {t('textFieldError', { ns: 'form' })}
+                {t('textFieldError', { ns: 'userAttributeForm' })}
               </Typography>
             )}
           </Box>

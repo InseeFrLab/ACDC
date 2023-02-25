@@ -4,7 +4,7 @@ import Header from '../../components/shared/header/Header';
 import CreateDataCollection from '../../components/pages/dataCollectionForm/CreateDataCollection';
 import CreateCollectionEvent from '../../components/pages/collectionEventForm/CreateCollectionEvent';
 import DataCollectionDetails from '../../components/pages/dataCollectionDetails/DataCollectionDetailsPage';
-import CreateUserAttribute from '../../components/pages/userAttributeForm/CreateUserAttribute';
+import CreateUserAttribute from '../../components/pages/collectionEventGroupForm/CreateUserAttribute';
 
 const RoutesWebs = () => {
   return (
