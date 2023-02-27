@@ -2,17 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQueries } from '@tanstack/react-query';
-import {
-  Typography,
-  Button,
-  Box,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  CircularProgress,
-} from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import getQuestionnaires from '@/lib/api/remote/poguesQuestionnaires';
 import {
   PoguesQuestionnaire,
@@ -29,6 +19,8 @@ import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiF
 import UserAttributeDisplay from './UserAttributeDisplay';
 import DataCollectionDisplay from './DataCollectionDisplay';
 import { transformLabels } from '../../../lib/utils/magmaUtils';
+import SaveDialog from './dialogs/SaveDialog';
+import DeleteDialog from './dialogs/DeleteDialog';
 
 const DataCollectionDetails = () => {
   const { t } = useTranslation([
@@ -41,11 +33,10 @@ const DataCollectionDetails = () => {
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
     useState(dataCollection);
-  const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
-  const questionnaires: PoguesQuestionnaire[] = [];
-  const series: StatisticalSeries[] = [];
+  let questionnaires: PoguesQuestionnaire[] = [];
+  let series: StatisticalSeries[] = [];
 
   const [questionnaireQuery, seriesQuery] = useQueries({
     queries: [
@@ -54,36 +45,33 @@ const DataCollectionDetails = () => {
     ],
   });
   // TODO : Loading & error indicator somewhere in the page
-  questionnaireQuery.isSuccess
-    ? questionnaireQuery.data.forEach(
-        (questionnaire: PoguesQuestionnaireResponse) => {
-          const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
-          const dataQuestionnaire: PoguesQuestionnaire = {
-            id: questionnaire.id,
-            label: questionnaire.Label[0],
-            date: dateQuestionnaire.toLocaleDateString(),
-          };
-          questionnaires.push(dataQuestionnaire);
-        }
-      )
-    : null;
-  seriesQuery.isSuccess
-    ? seriesQuery.data.forEach((serie: any) => {
-        const dataSerie: StatisticalSeries = {
-          id: serie.id,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          label: transformLabels(serie.label),
-          altLabel: serie.altLabel
-            ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-              transformLabels(serie.altLabel)
-            : {
-                'fr-FR': '',
-                'en-IE': '',
-              },
+  questionnaireQuery.isSuccess &&
+    (questionnaires = questionnaireQuery.data.map(
+      (questionnaire: PoguesQuestionnaireResponse) => {
+        const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
+        return {
+          id: questionnaire.id,
+          label: questionnaire.Label[0],
+          date: dateQuestionnaire.toLocaleDateString(),
         };
-        series.push(dataSerie);
-      })
-    : null;
+      }
+    ));
+
+  seriesQuery.isSuccess &&
+    (series = seriesQuery.data.map((serie: any) => {
+      return {
+        id: serie.id,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        label: transformLabels(serie.label),
+        altLabel: serie.altLabel
+          ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            transformLabels(serie.altLabel)
+          : {
+              'fr-FR': '',
+              'en-IE': '',
+            },
+      };
+    }));
 
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
@@ -205,66 +193,19 @@ const DataCollectionDetails = () => {
           );
         })}
       </Box>
-
-      <Dialog open={openDelete} onClose={handleCloseDelete}>
-        <DialogTitle>
-          <Typography variant="h5">
-            {t('deleteDataCollection', { ns: 'dataCollectionDetails' })}
-          </Typography>
-        </DialogTitle>
-        <DialogContent
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <DialogContentText>
-            {isSuccess
-              ? t('successEvent', { ns: 'dataCollectionDetails' })
-              : ''}
-            {isLoading ? <CircularProgress /> : ''}
-            {isError ? t('error', { ns: 'form' }) : ''}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="contained" onClick={handleCloseDelete} autoFocus>
-            {t('close', { ns: 'form' })}
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog open={openSave}>
-        <DialogTitle>
-          <Typography variant="h5">
-            {t('saveDataCollection', { ns: 'dataCollectionDetails' })}
-          </Typography>
-        </DialogTitle>
-        <DialogContent
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <DialogContentText>
-            {isLoading ? <CircularProgress /> : ''}
-            {isError ? t('error', { ns: 'form' }) : ''}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            variant="contained"
-            onClick={() => {
-              setOpenSave(false);
-            }}
-            autoFocus
-          >
-            {t('close', { ns: 'form' })}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DeleteDialog
+        openDelete={openDelete}
+        handleCloseDelete={handleCloseDelete}
+        isError={isError}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+      />
+      <SaveDialog
+        openSave={openSave}
+        setOpenSave={setOpenSave}
+        isError={isError}
+        isLoading={isLoading}
+      />
       <BottomActionBar
         dataCollection={dataCollection}
         dataCollectionState={dataCollectionState}

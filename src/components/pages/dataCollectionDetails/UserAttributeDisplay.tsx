@@ -12,10 +12,10 @@ import {
   Collapse,
   CardContent,
   Stack,
-  CardActionArea,
 } from '@mui/material';
 import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
+import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { UserAttributePair } from '../../../lib/model/collectionGroups';
 
@@ -51,7 +51,6 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
     setDataCollectionState,
     handleDeleteUserAttribute,
   } = props;
-  const [userAttributeState, setCollectionEventState] = useState(userAttribute);
   const [collectionEvents, setCollectionEvents] = useState(
     dataCollectionState.collectionEvents
   );
@@ -72,7 +71,7 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
               my: 1,
             }}
           >
-            <CardActionArea
+            <StyledCardActionArea
               onClick={handleExpandClick}
               disableRipple
               disableTouchRipple
@@ -194,7 +193,7 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
                   </Box>
                 </CardContent>
               </Collapse>
-            </CardActionArea>
+            </StyledCardActionArea>
           </Card>
         );
       })}

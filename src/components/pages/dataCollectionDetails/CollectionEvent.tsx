@@ -11,12 +11,12 @@ import {
   Collapse,
   CardContent,
   Stack,
-  CardActionArea,
 } from '@mui/material';
 import styled from '@emotion/styled';
 import { FiChevronDown, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
@@ -41,26 +41,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
 }));
-
-const StyledCardActionArea = styled(CardActionArea)(
-  ({ theme }) => `
-    .MuiCardActionArea-root {
-      background: transparent;
-      border: none;
-      outline: none;
-    },
-    .MuiCardActionArea-focusHighlight {
-        background: transparent;
-        border: none;
-        outline: none;
-    },
-    .Mui-focusVisible {
-      background: transparent;
-      border: none;
-      outline: none;
-    }
-`
-);
 
 const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   const { t, i18n } = useTranslation([
