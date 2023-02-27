@@ -18,7 +18,7 @@ const BottomBar = (props: BoxProps) => {
           position: 'fixed',
           bottom: 0,
           left: '5%',
-          zIndex: 1100,
+          // zIndex: 1100,
         },
         ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
       ]}

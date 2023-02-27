@@ -188,7 +188,11 @@ const DataCollectionDetails = () => {
           {t('title', { ns: 'userAttributeForm' })}:
         </Typography>
       </Box>
-      <Box>
+      <Box
+        sx={{
+          marginBottom: 10,
+        }}
+      >
         {dataCollectionState.userAttributePair.map((attribute) => {
           return (
             <UserAttributeDisplay
@@ -203,6 +207,7 @@ const DataCollectionDetails = () => {
           );
         })}
       </Box>
+
       <Dialog open={openDelete} onClose={handleCloseDelete}>
         <DialogTitle>
           <Typography variant="h5">

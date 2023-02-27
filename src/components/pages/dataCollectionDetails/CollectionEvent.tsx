@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from '@emotion/styled';
 import {
   Typography,
   Box,
@@ -14,6 +13,7 @@ import {
   Stack,
   CardActionArea,
 } from '@mui/material';
+import styled from '@emotion/styled';
 import { FiChevronDown, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -109,7 +109,15 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
           disableRipple
           disableTouchRipple
           sx={{
-            '& .MuiCardActionArea-focusHighlight': {
+            '&:MuiCardActionArea-focusHighlight': {
+              background: 'transparent',
+              border: 'none',
+            },
+            '&:MuiCardActionArea-focusVisible': {
+              background: 'transparent',
+              border: 'none',
+            },
+            '&:focus': {
               background: 'transparent',
               border: 'none',
             },
@@ -148,6 +156,14 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               disableSpacing
               sx={{
                 '& .MuiCardActionArea-focusHighlight': {
+                  background: 'transparent',
+                  border: 'none',
+                },
+                '& .MuiCardActionArea-focusVisible': {
+                  background: 'transparent',
+                  border: 'none',
+                },
+                ':focus': {
                   background: 'transparent',
                   border: 'none',
                 },
