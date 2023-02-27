@@ -63,10 +63,18 @@ const CollectionForm = (props: CollectionFormProps) => {
       'fr-FR': '',
       'en-IE': '',
     },
-    typeOfObject: '',
+    typeOfObject: 'Group',
   } as GroupReference);
   const [studyUnitReference, setStudyUnitReference] =
-    useState<StudyUnitReference>({} as StudyUnitReference);
+    useState<StudyUnitReference>({
+      id: '',
+      label: {
+        'fr-FR': '',
+        'en-IE': '',
+      },
+      typeOfObject: 'StudyUnit',
+      groupReference,
+    } as StudyUnitReference);
 
   const handleClickOpen = () => {
     setOpen(true);

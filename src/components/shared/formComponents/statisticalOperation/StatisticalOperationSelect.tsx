@@ -33,7 +33,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
   const [operationDisabled, setOperationDisabled] = useState(true);
   const [serieId, setSerieId] = useState<string>(
-    props.groupReference.id.length > 0 ? props.groupReference.id : 's1004'
+    props.groupReference.id.length > 0 ? props.groupReference.id : 's1002'
   );
   const [operations, setOperations] = useState<StatisticalSeries[]>([
     {
@@ -211,6 +211,16 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           getOptionLabel={(option) => {
             return `${option.label[i18n.language]}`;
           }}
+          value={
+            {
+              id: '',
+              label: props.studyUnitReference.label,
+              altLabel: {
+                'fr-FR': '',
+                'en-IE': '',
+              },
+            } as StatisticalSeries
+          }
           renderOption={(pr, option) => {
             return (
               <Box
