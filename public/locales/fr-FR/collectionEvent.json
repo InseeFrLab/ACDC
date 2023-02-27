@@ -11,5 +11,10 @@
   "collectionCommunication": "Stratégie de communication",
   "textFieldError": "Veuillez renseigner les champs obligatoires",
   "questionnaireModel": "Modèle de questionnaire",
-  "retrieveQuestionnaireModelPending": "Récupération des questionnaires ..."
+  "retrieveQuestionnaireModelPending": "Récupération des questionnaires ...",
+  "Remind": "Relance",
+  "Opening": "Ouverture",
+  "Paper": "Courrier",
+  "false": "Non",
+  "true": "Oui"
 }

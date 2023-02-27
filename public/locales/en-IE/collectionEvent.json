@@ -11,5 +11,10 @@
   "collectionCommunication": "Mode de communication",
   "textFieldError": "Field Name and Label are required",
   "questionnaireModel": "Questionnaire model",
-  "retrieveQuestionnaireModelPending": "Retrieving questionnaires ..."
+  "retrieveQuestionnaireModelPending": "Retrieving questionnaires ...",
+  "Remind": "Reminder",
+  "Opening": "Opening",
+  "Paper": "Letter",
+  "false": "False",
+  "true": "True"
 }

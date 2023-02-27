@@ -42,6 +42,26 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   marginLeft: 'auto',
 }));
 
+const StyledCardActionArea = styled(CardActionArea)(
+  ({ theme }) => `
+    .MuiCardActionArea-root {
+      background: transparent;
+      border: none;
+      outline: none;
+    },
+    .MuiCardActionArea-focusHighlight {
+        background: transparent;
+        border: none;
+        outline: none;
+    },
+    .Mui-focusVisible {
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+`
+);
+
 const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   const { t, i18n } = useTranslation([
     'dataCollectionDetails',
@@ -104,22 +124,15 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
           my: 1,
         }}
       >
-        <CardActionArea
+        <StyledCardActionArea
           onClick={handleExpandClick}
           disableRipple
           disableTouchRipple
           sx={{
-            '&:MuiCardActionArea-focusHighlight': {
-              background: 'transparent',
-              border: 'none',
-            },
-            '&:MuiCardActionArea-focusVisible': {
-              background: 'transparent',
-              border: 'none',
-            },
-            '&:focus': {
-              background: 'transparent',
-              border: 'none',
+            '&.root': {
+              '&:hover $focusHighlight': {
+                opacity: 0,
+              },
             },
           }}
         >
@@ -317,7 +330,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                           <strong>
                             {t('type', { ns: 'userAttributeForm' })} :
                           </strong>{' '}
-                          {value.type}
+                          {t(`${value.type}`, { ns: 'collectionEvent' })}
                         </Typography>
                         <Typography
                           variant="body1"
@@ -328,7 +341,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                           <strong>
                             {t('media', { ns: 'userAttributeForm' })} :{' '}
                           </strong>{' '}
-                          {value.media}
+                          {t(`${value.media}`, { ns: 'collectionEvent' })}
                         </Typography>
                         <Typography
                           variant="body1"
@@ -341,7 +354,10 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                               ns: 'userAttributeForm',
                             })}
                           </strong>{' '}
-                          : {value.paperQuestionnaire.toString()}
+                          :{' '}
+                          {t(`${value.paperQuestionnaire.toString()}`, {
+                            ns: 'collectionEvent',
+                          })}
                         </Typography>
                       </>
                     );
@@ -398,7 +414,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               </Box>
             </CardContent>
           </Collapse>
-        </CardActionArea>
+        </StyledCardActionArea>
       </Card>
       <EditCollectionEventDialog
         open={open}

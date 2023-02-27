@@ -200,9 +200,7 @@ const DataCollectionDetails = () => {
               userAttribute={attribute}
               dataCollectionState={dataCollectionState}
               setDataCollectionState={setDataCollectionState}
-              handleDeleteUserAttribute={() => {
-                console.log('Delete');
-              }}
+              handleDeleteUserAttribute={() => console.log('delete')}
             />
           );
         })}
