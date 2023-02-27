@@ -12,6 +12,7 @@ import {
   Collapse,
   CardContent,
   Stack,
+  CardActionArea,
 } from '@mui/material';
 import { FiChevronDown, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
@@ -103,259 +104,285 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
           my: 1,
         }}
       >
-        <Box
+        <CardActionArea
+          onClick={handleExpandClick}
+          disableRipple
+          disableTouchRipple
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            '& .MuiCardActionArea-focusHighlight': {
+              background: 'transparent',
+              border: 'none',
+            },
           }}
         >
           <Box
             sx={{
               display: 'flex',
               flexDirection: 'row',
+              justifyContent: 'space-between',
               alignItems: 'center',
             }}
           >
-            <Typography
-              variant="h6"
-              fontWeight="bold"
-              color="text.secondary"
-              sx={{ marginLeft: 1 }}
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
             >
-              {`${collectionEvent.collectionEventName[i18n.language]} `}
-            </Typography>
-            <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                color="text.secondary"
+                sx={{ marginLeft: 1 }}
+              >
+                {`${collectionEvent.collectionEventName[i18n.language]} `}
+              </Typography>
+              <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
 
-            <Typography variant="body1" fontWeight="xl">
-              {`${collectionEvent.label[i18n.language]} `}
-            </Typography>
+              <Typography variant="body1" fontWeight="xl">
+                {`${collectionEvent.label[i18n.language]} `}
+              </Typography>
+            </Box>
+            <CardActions
+              disableSpacing
+              sx={{
+                '& .MuiCardActionArea-focusHighlight': {
+                  background: 'transparent',
+                  border: 'none',
+                },
+              }}
+            >
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <FiChevronDown />
+              </ExpandMore>
+            </CardActions>
           </Box>
-          <CardActions disableSpacing>
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <FiChevronDown />
-            </ExpandMore>
-          </CardActions>
-        </Box>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
               >
-                ID:{' '}
-              </Typography>
-              <Typography variant="body1">{collectionEvent.id}</Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  ID:{' '}
+                </Typography>
+                <Typography variant="body1">{collectionEvent.id}</Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
               >
-                {t('label', { ns: 'form' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {collectionEvent.label[i18n.language]}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  {t('label', { ns: 'form' })}:{' '}
+                </Typography>
+                <Typography variant="body1">
+                  {collectionEvent.label[i18n.language]}
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
               >
-                {t('description', { ns: 'form' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {collectionEvent.description[i18n.language]}
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-              <Typography variant="body1" fontWeight="bold" sx={{ mr: 1 }}>
-                {' '}
-                {t('dataCollectionDate', { ns: 'collectionEvent' })}:
-              </Typography>
-              <Typography variant="body1" sx={{ mr: 1 }}>
-                {moment(collectionEvent.dataCollectionDate.startDate).format(
-                  'DD/MM/YYYY'
-                )}{' '}
-                -{' '}
-                {moment(collectionEvent.dataCollectionDate.endDate).format(
-                  'DD/MM/YYYY'
-                )}
-              </Typography>
-            </Box>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  {t('description', { ns: 'form' })}:{' '}
+                </Typography>
+                <Typography variant="body1">
+                  {collectionEvent.description[i18n.language]}
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                <Typography variant="body1" fontWeight="bold" sx={{ mr: 1 }}>
+                  {' '}
+                  {t('dataCollectionDate', { ns: 'collectionEvent' })}:
+                </Typography>
+                <Typography variant="body1" sx={{ mr: 1 }}>
+                  {moment(collectionEvent.dataCollectionDate.startDate).format(
+                    'DD/MM/YYYY'
+                  )}{' '}
+                  -{' '}
+                  {moment(collectionEvent.dataCollectionDate.endDate).format(
+                    'DD/MM/YYYY'
+                  )}
+                </Typography>
+              </Box>
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
               >
-                {t('modeOfCollection', { ns: 'collectionEvent' })}:{' '}
-              </Typography>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  {t('modeOfCollection', { ns: 'collectionEvent' })}:{' '}
+                </Typography>
 
-              {collectionEvent.typeOfModeOfCollection.map((mode) => {
-                return (
-                  <Typography variant="body1" key={mode.type} sx={{ ml: 0.5 }}>
-                    {mode.type}{' '}
-                  </Typography>
-                );
-              })}
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('instrumentReference', { ns: 'collectionEvent' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {collectionEvent.instrumentReference.label}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('collectionCommunication', { ns: 'collectionEvent' })}:
-              </Typography>
-            </Box>
-            <Stack sx={{ alignItems: 'flex-start' }}>
-              {collectionEvent.userAttributePair.map((pair) => {
-                return pair.attributeValue.map((value) => {
+                {collectionEvent.typeOfModeOfCollection.map((mode) => {
                   return (
-                    <>
-                      <Typography
-                        variant="body1"
-                        key={value.id}
-                        sx={{ ml: 1.5, alignItems: 'flex-start' }}
-                      >
-                        •{' '}
-                        <strong>
-                          {t('type', { ns: 'userAttributeForm' })} :
-                        </strong>{' '}
-                        {value.type}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        key={value.id}
-                        sx={{ ml: 1.5, alignItems: 'flex-start' }}
-                      >
-                        •{' '}
-                        <strong>
-                          {t('media', { ns: 'userAttributeForm' })} :{' '}
-                        </strong>{' '}
-                        {value.media}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        key={value.id}
-                        sx={{ ml: 1.5, alignItems: 'flex-start' }}
-                      >
-                        •{' '}
-                        <strong>
-                          {t('paperQuestionnaire', {
-                            ns: 'userAttributeForm',
-                          })}
-                        </strong>{' '}
-                        : {value.paperQuestionnaire.toString()}
-                      </Typography>
-                    </>
+                    <Typography
+                      variant="body1"
+                      key={mode.type}
+                      sx={{ ml: 0.5 }}
+                    >
+                      {mode.type}{' '}
+                    </Typography>
                   );
-                });
-              })}
-            </Stack>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
+                })}
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
               >
-                {t('version', { ns: 'form' })}:{' '}
-              </Typography>
-              <Typography variant="body1">{collectionEvent.version}</Typography>
-            </Box>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  {t('instrumentReference', { ns: 'collectionEvent' })}:{' '}
+                </Typography>
+                <Typography variant="body1">
+                  {collectionEvent.instrumentReference.label}
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  {t('collectionCommunication', { ns: 'collectionEvent' })}:
+                </Typography>
+              </Box>
+              <Stack sx={{ alignItems: 'flex-start' }}>
+                {collectionEvent.userAttributePair.map((pair) => {
+                  return pair.attributeValue.map((value) => {
+                    return (
+                      <>
+                        <Typography
+                          variant="body1"
+                          key={value.id}
+                          sx={{ ml: 1.5, alignItems: 'flex-start' }}
+                        >
+                          •{' '}
+                          <strong>
+                            {t('type', { ns: 'userAttributeForm' })} :
+                          </strong>{' '}
+                          {value.type}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          key={value.id}
+                          sx={{ ml: 1.5, alignItems: 'flex-start' }}
+                        >
+                          •{' '}
+                          <strong>
+                            {t('media', { ns: 'userAttributeForm' })} :{' '}
+                          </strong>{' '}
+                          {value.media}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          key={value.id}
+                          sx={{ ml: 1.5, alignItems: 'flex-start' }}
+                        >
+                          •{' '}
+                          <strong>
+                            {t('paperQuestionnaire', {
+                              ns: 'userAttributeForm',
+                            })}
+                          </strong>{' '}
+                          : {value.paperQuestionnaire.toString()}
+                        </Typography>
+                      </>
+                    );
+                  });
+                })}
+              </Stack>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  {t('version', { ns: 'form' })}:{' '}
+                </Typography>
+                <Typography variant="body1">
+                  {collectionEvent.version}
+                </Typography>
+              </Box>
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'flex-end',
-              }}
-            >
-              <Button
-                size="small"
-                onClick={handleDeleteClick}
-                variant="outlined"
-                sx={{ marginLeft: 2 }}
-                disabled={deletable}
-                startIcon={<FiTrash />}
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                }}
               >
-                <Typography variant="body1" fontWeight="xl">
-                  {t('delete', { ns: 'form' })}
-                </Typography>
-              </Button>
-              <Button
-                size="small"
-                onClick={handleClickOpen}
-                variant="contained"
-                sx={{ marginLeft: 2 }}
-              >
-                <Typography variant="body1" fontWeight="xl">
-                  {t('edit', { ns: 'dataCollectionDetails' })}
-                </Typography>
-              </Button>
-            </Box>
-          </CardContent>
-        </Collapse>
+                <Button
+                  size="small"
+                  onClick={handleDeleteClick}
+                  variant="outlined"
+                  sx={{ marginLeft: 2 }}
+                  disabled={deletable}
+                  startIcon={<FiTrash />}
+                >
+                  <Typography variant="body1" fontWeight="xl">
+                    {t('delete', { ns: 'form' })}
+                  </Typography>
+                </Button>
+                <Button
+                  size="small"
+                  onClick={handleClickOpen}
+                  variant="contained"
+                  sx={{ marginLeft: 2 }}
+                >
+                  <Typography variant="body1" fontWeight="xl">
+                    {t('edit', { ns: 'dataCollectionDetails' })}
+                  </Typography>
+                </Button>
+              </Box>
+            </CardContent>
+          </Collapse>
+        </CardActionArea>
       </Card>
       <EditCollectionEventDialog
         open={open}

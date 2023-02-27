@@ -11,5 +11,5 @@
   "paperQuestionnaire": "Questionnaire papier",
   "type": "Type",
   "media": "Moyen de communication",
-  "textFieldError": "Veuillez renseigner les champs Label et ajouter au moins un lot"
+  "textFieldError": "Veuillez renseigner le champs Label et ajouter au moins un lot"
 }
