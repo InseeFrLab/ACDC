@@ -106,6 +106,15 @@ const Home = () => {
         <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>
           <Typography variant="subtitle1">{t('createButton')}</Typography>
         </Button>
+        <Button
+          variant="contained"
+          sx={{ marginTop: 3, ml: 1 }}
+          onClick={() => {
+            throw new Error('Test error');
+          }}
+        >
+          <Typography variant="subtitle1">Throw Error</Typography>
+        </Button>
       </Main>
     );
   }

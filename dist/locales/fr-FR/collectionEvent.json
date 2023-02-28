@@ -1,0 +1,20 @@
+{
+  "title": "Lots",
+  "descriptionForm": "Créer un nouveau lot",
+  "successForm": "Le lot a été créé avec succès",
+  "dataCollectionDate": "Date de collecte des données",
+  "collectionStartDate": "Date de début de collecte",
+  "collectionEndDate": "Date de fin de collecte",
+  "modeOfCollection": "Mode de collecte",
+  "instrumentReference": "Instrument",
+  "addModeCollection": "Ajouter un mode de collecte",
+  "collectionCommunication": "Stratégie de communication",
+  "textFieldError": "Veuillez renseigner les champs obligatoires",
+  "questionnaireModel": "Modèle de questionnaire",
+  "retrieveQuestionnaireModelPending": "Récupération des questionnaires ...",
+  "Remind": "Relance",
+  "Opening": "Ouverture",
+  "Paper": "Courrier",
+  "false": "Non",
+  "true": "Oui"
+}
