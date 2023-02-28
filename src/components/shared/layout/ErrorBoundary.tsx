@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import React from 'react';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
 class ErrorBoundary extends React.Component {
   // eslint-disable-next-line react/state-in-constructor
@@ -25,6 +23,7 @@ class ErrorBoundary extends React.Component {
       );
     }
 
+    // @ts-expect-error - children is a prop
     // eslint-disable-next-line react/prop-types
     return this.props.children;
   }
