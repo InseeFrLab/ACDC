@@ -15,6 +15,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
