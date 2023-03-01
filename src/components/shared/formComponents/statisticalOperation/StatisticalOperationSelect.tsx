@@ -141,6 +141,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
         <Autocomplete
           disablePortal
+          blurOnSelect
           size="small"
           id="select-statistical-operation-series"
           options={props.series}
@@ -202,6 +203,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
         <Autocomplete
           disablePortal
+          blurOnSelect
           disabled={operationDisabled}
           loading={isLoading}
           size="small"

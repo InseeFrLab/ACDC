@@ -10,18 +10,6 @@ import {
 
 const IntlTextInput = (props: any) => {
   const { textArray } = props;
-  // const addTextLabel = () => {
-  //   const lastTextId: number = textArray[textArray.length - 1].id;
-  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  //   return props.setTextArray([
-  //     ...textArray,
-  //     {
-  //       id: lastTextId + 1,
-  //       language: 'en-IE',
-  //       value: '',
-  //     },
-  //   ]);
-  // };
 
   const handleTextChange = (e: any): void => {
     e.preventDefault();
@@ -90,19 +78,6 @@ const IntlTextInput = (props: any) => {
           );
         }
       )}
-      {/*
-      <Box
-        component="form"
-        className="CollectionForm"
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-        }}
-      >
-        <Button variant="outlined" size="small" onClick={addTextLabel}>
-          <Typography>{t('addLanguage', { ns: 'form' })}</Typography>
-        </Button>
-      </Box> */}
     </>
   );
 };

@@ -46,9 +46,10 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
       </Box>
       <FormControl size="small" fullWidth>
         <Autocomplete
+          blurOnSelect
           disablePortal
           size="small"
-          id="combo-box-demo"
+          id="select-questionnaire-model"
           disabled={props.questionnaires.length === 0}
           options={props.questionnaires}
           onChange={handleQuestionnaireChange}
