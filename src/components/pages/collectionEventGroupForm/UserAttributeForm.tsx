@@ -89,13 +89,7 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
     const now = Date.now();
     const today = new Date(now);
 
-    const label: Record<'fr-FR' & 'en-IE', string> = labelArray.reduce(
-      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-        map[obj.language] = obj.value;
-        return map;
-      },
-      {}
-    );
+    const label = createIntlRecord(labelArray);
     const collectionEventsChecked = collectionEventCheck.filter(
       (obj) => Object.values(obj)[0] === true
     );

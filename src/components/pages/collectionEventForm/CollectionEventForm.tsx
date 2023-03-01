@@ -18,6 +18,11 @@ import {
   DialogTitle,
   CircularProgress,
 } from '@mui/material';
+import {
+  createIntlRecord,
+  createCollectionCommunicationMode,
+  createInstrumentReference,
+} from '@/lib/utils/dataTransformation';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
 import CollectionCommunicationSelect from '../../shared/formComponents/collectionCommunication/collectionCommunication';
@@ -134,54 +139,24 @@ const EventForm = (props: DataCollectionProps) => {
   };
 
   const createCollectionEventObject = () => {
-    const instrument: InstrumentReference = {
-      id: questionnaire,
-      agency: 'fr.insee',
-      version: 1,
-      typeOfObject: 'Instrument',
-      label: questionnaireLabel,
-    };
-
+    const instrument: InstrumentReference = createInstrumentReference(
+      questionnaire,
+      questionnaireLabel
+    );
     const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
       .filter((mode) => mode.checked === true)
       .map((mode) => {
         return { type: mode.label };
       });
 
-    const collectionEventName: Record<'fr-FR' | 'en-IE' | string, string> =
-      collectionEventNameArray.reduce(
-        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-          map[obj.language] = obj.value;
-          return map;
-        },
-        {}
-      );
-    const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
-      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-        map[obj.language] = obj.value;
-        return map;
-      },
-      {}
+    const collectionEventName = createIntlRecord(collectionEventNameArray);
+    const label = createIntlRecord(labelArray);
+    const description = createIntlRecord(descriptionArray);
+
+    const attributeValue = createCollectionCommunicationMode(
+      userAttributePairArray
     );
 
-    const description: Record<'fr-FR' | 'en-IE' | string, string> =
-      descriptionArray.reduce(
-        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-          map[obj.language] = obj.value;
-          return map;
-        },
-        {}
-      );
-    const attributeValue: UserAttributePairCollectionRow[] = [];
-    // TODO: Replace for each
-    userAttributePairArray.forEach((obj) => {
-      attributeValue.push({
-        id: uuidv4(),
-        type: obj.type,
-        media: obj.media,
-        paperQuestionnaire: JSON.parse(obj.paperQuestionnaire),
-      });
-    });
     const userAttributePairCollection: UserAttributePairCollection = {
       attributeKey: 'extension:CollectionCommunicationSteps',
       attributeValue,

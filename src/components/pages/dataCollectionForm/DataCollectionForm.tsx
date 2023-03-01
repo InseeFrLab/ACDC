@@ -7,6 +7,7 @@ import { Typography, FormControl, Button, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
+import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import CreateDataCollectionDialog from './CreateDataCollectionDialog';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { createDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -17,7 +18,6 @@ import {
   StudyUnitReference,
 } from '../../../lib/model/studyUnitReference';
 import StatisticalOperationSelect from '../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
-import { getAllSeries } from '../../../lib/api/remote/magmaSeries';
 
 interface CollectionFormProps {
   series: StatisticalSeries[];
@@ -108,21 +108,8 @@ const CollectionForm = (props: CollectionFormProps) => {
     const now = Date.now();
     const today = new Date(now);
     const id = uuidv4();
-    const label: Record<'fr-FR' & 'en-IE', string> = labelArray.reduce(
-      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-        map[obj.language] = obj.value;
-        return map;
-      },
-      {}
-    );
-    const description: Record<('fr-FR' & 'en-IE') | string, string> =
-      descriptionArray.reduce(
-        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-          map[obj.language] = obj.value;
-          return map;
-        },
-        {}
-      );
+    const label = createIntlRecord(labelArray);
+    const description = createIntlRecord(descriptionArray);
 
     const data: DataCollection = {
       id,

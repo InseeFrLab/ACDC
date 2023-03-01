@@ -17,6 +17,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import IntlTextInput from '@/components/shared/intlTextInput/IntlTextInput';
+import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import { deleteDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
 import { DataCollection } from '../../../../lib/model/dataCollection';
 import StatisticalOperationSelect from '../../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
@@ -109,22 +110,9 @@ const DataCollectionDetailsDialog = (
   const [openDelete, setOpenDelete] = useState(false);
   const handleClose = () => {
     props.setOpen(false);
-    const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
-      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-        map[obj.language] = obj.value;
-        return map;
-      },
-      {}
-    );
 
-    const description: Record<'fr-FR' | 'en-IE' | string, string> =
-      descriptionArray.reduce(
-        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-          map[obj.language] = obj.value;
-          return map;
-        },
-        {}
-      );
+    const label = createIntlRecord(labelArray);
+    const description = createIntlRecord(descriptionArray);
     const updatedDataCollection: DataCollection = {
       ...dataCollectionState,
       label,

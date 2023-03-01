@@ -23,6 +23,11 @@ import {
   UserAttributePairCollectionRow,
   UserAttributePairCollection,
 } from '@/lib/model/communicationCollectionEvent';
+import {
+  createIntlRecord,
+  createCollectionCommunicationMode,
+  createInstrumentReference,
+} from '@/lib/utils/dataTransformation';
 import IntlTextInput from '../../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
 import CollectionModeSelect from '../../../shared/formComponents/collectionMode/collectionModeSelect';
@@ -118,41 +123,17 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         return { type: mode.label };
       });
 
-    const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
-      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-        map[obj.language] = obj.value;
-        return map;
-      },
-      {}
+    const label = createIntlRecord(labelArray);
+    const description = createIntlRecord(descriptionArray);
+
+    const instrument = createInstrumentReference(
+      questionnaire,
+      questionnaireLabel
     );
 
-    const description: Record<'fr-FR' | 'en-IE' | string, string> =
-      descriptionArray.reduce(
-        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-          map[obj.language] = obj.value;
-          return map;
-        },
-        {}
-      );
-    const instrument: InstrumentReference = {
-      id: questionnaire,
-      agency: 'fr.insee',
-      version: 1,
-      typeOfObject: 'Instrument',
-      label: questionnaireLabel,
-    };
-
-    const attributeValue: UserAttributePairCollectionRow[] = [];
-    // TODO: Replace for each
-    userAttributePairArray.forEach((obj) => {
-      attributeValue.push({
-        id: uuidv4(),
-        type: obj.type,
-        media: obj.media,
-        paperQuestionnaire: JSON.parse(obj.paperQuestionnaire),
-      });
-    });
-
+    const attributeValue = createCollectionCommunicationMode(
+      userAttributePairArray
+    );
     const userAttributePairCollection: UserAttributePairCollection = {
       attributeKey: 'extension:CollectionCommunicationSteps',
       attributeValue,
@@ -190,7 +171,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         'Updated Data Collection with updated Collection Event: ',
         props.dataCollectionState
       );
-    }, 500);
+    }, 200);
 
     props.handleClose();
   };
