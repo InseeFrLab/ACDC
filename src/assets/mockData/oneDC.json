@@ -1,0 +1,209 @@
+{
+  "id": "db7666e6-6162-4fc4-83c8-78ad85fba606",
+  "json": {
+    "id": "db7666e6-6162-4fc4-83c8-78ad85fba606",
+    "label": {
+      "en-IE": "step1",
+      "fr-FR": "Étape1 Innovation"
+    },
+    "agency": "fr.insee",
+    "version": 1,
+    "description": {
+      "en-IE": "first step",
+      "fr-FR": "Première étape"
+    },
+    "versionDate": "2023-02-27T10:19:01.886Z",
+    "collectionEvents": [
+      {
+        "id": "fc0d7485-ad79-471b-ad3c-863e16f3cec1",
+        "label": {
+          "en-IE": "second collection event",
+          "fr-FR": "deuxième lot1 abc"
+        },
+        "agency": "fr.insee",
+        "version": 1,
+        "description": {
+          "en-IE": "ererer",
+          "fr-FR": "erere"
+        },
+        "userAttributePair": [
+          {
+            "attributeKey": "extension:CollectionCommunicationSteps",
+            "attributeValue": [
+              {
+                "id": "11125c62-a20d-4e82-b9d4-b1d6b252653a",
+                "type": "Remind",
+                "media": "Email",
+                "paperQuestionnaire": false
+              }
+            ]
+          }
+        ],
+        "dataCollectionDate": {
+          "endDate": "2023-07-11T14:41:25+02:00",
+          "startDate": "2023-06-06T14:41:25+02:00"
+        },
+        "collectionEventName": {
+          "en-IE": "collectionevent2",
+          "fr-FR": "lot2"
+        },
+        "instrumentReference": {
+          "id": "lb27ngmk",
+          "label": "Favorite fruits demo",
+          "agency": "fr.insee",
+          "version": 1,
+          "typeOfObject": "Instrument"
+        },
+        "typeOfModeOfCollection": [
+          {
+            "type": "CAPI"
+          },
+          {
+            "type": "CATI"
+          }
+        ]
+      },
+      {
+        "id": "e738dfbd-f458-4ca2-ad22-d1de42399c09",
+        "label": {
+          "en-IE": "first collection event",
+          "fr-FR": "premier lot"
+        },
+        "agency": "fr.insee",
+        "version": 1,
+        "description": {
+          "en-IE": "erer",
+          "fr-FR": "erer"
+        },
+        "userAttributePair": [
+          {
+            "attributeKey": "extension:CollectionCommunicationSteps",
+            "attributeValue": [
+              {
+                "id": "1fe3e36c-b438-45a0-897a-4dc3c9f27263",
+                "type": "Opening",
+                "media": "Email",
+                "paperQuestionnaire": false
+              },
+              {
+                "id": "d5410b1d-e382-4177-8887-7f7bbd83bf97",
+                "type": "Remind",
+                "media": "Mail",
+                "paperQuestionnaire": false
+              }
+            ]
+          }
+        ],
+        "dataCollectionDate": {
+          "endDate": "2023-06-12T14:36:10+02:00",
+          "startDate": "2023-05-16T14:36:10+02:00"
+        },
+        "collectionEventName": {
+          "en-IE": "collection event1",
+          "fr-FR": "lot1"
+        },
+        "instrumentReference": {
+          "id": "l19gwf5d",
+          "label": "dimanche",
+          "agency": "fr.insee",
+          "version": 1,
+          "typeOfObject": "Instrument"
+        },
+        "typeOfModeOfCollection": [
+          {
+            "type": "CAPI"
+          },
+          {
+            "type": "CATI"
+          }
+        ]
+      },
+      {
+        "id": "9bb9dcee-11e4-431c-aea0-44305de74517",
+        "label": {
+          "en-IE": "Third collection event",
+          "fr-FR": "Troisième lot"
+        },
+        "agency": "fr.insee",
+        "version": 1,
+        "description": {
+          "en-IE": "liyfkudjthtdgrsfeadw",
+          "fr-FR": "qefwgrshtyjdkufliu"
+        },
+        "userAttributePair": [
+          {
+            "attributeKey": "extension:CollectionCommunicationSteps",
+            "attributeValue": [
+              {
+                "id": "7a3a9dcc-8d3a-49ee-8214-7583d36a0b9e",
+                "type": "Opening",
+                "media": "Email",
+                "paperQuestionnaire": false
+              }
+            ]
+          }
+        ],
+        "dataCollectionDate": {
+          "endDate": "2023-04-14T14:15:07+02:00",
+          "startDate": "2023-02-25T14:15:07+01:00"
+        },
+        "collectionEventName": {
+          "en-IE": "Third collection event",
+          "fr-FR": "Lot 3 ? "
+        },
+        "instrumentReference": {
+          "id": "l1oqrxrv",
+          "label": "FORM CAM ROMU Copie",
+          "agency": "fr.insee",
+          "version": 1,
+          "typeOfObject": "Instrument"
+        },
+        "typeOfModeOfCollection": [
+          {
+            "type": "CATI"
+          },
+          {
+            "type": "CAWI"
+          }
+        ]
+      }
+    ],
+    "userAttributePair": [
+      {
+        "attributeKey": "extension:CollectionEventGroup",
+        "attributeValue": [
+          {
+            "label": {
+              "en-IE": "first questionnaire sample",
+              "fr-FR": "echantillon premier questionnaire"
+            },
+            "collectionEventReference": [
+              {
+                "id": "e738dfbd-f458-4ca2-ad22-d1de42399c09"
+              },
+              {
+                "id": "fc0d7485-ad79-471b-ad3c-863e16f3cec1"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "studyUnitReference": {
+      "id": "s1199",
+      "label": {
+        "en-IE": "Community innovation survey 2014",
+        "fr-FR": "Enquête communautaire sur l'innovation 2014"
+      },
+      "typeOfObject": "StudyUnit",
+      "groupReference": {
+        "id": "s1001",
+        "label": {
+          "en-IE": "Innovation survey",
+          "fr-FR": "Enquête innovation"
+        },
+        "typeOfObject": "Group"
+      }
+    }
+  }
+}
