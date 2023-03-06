@@ -23,10 +23,7 @@ import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiF
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionEventCheckBox from './CollectionEventCheckbox';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import {
-  UserAttributePair,
-  UserAttributePairValue,
-} from '../../../lib/model/collectionGroups';
+import { UserAttributePairValue } from '../../../lib/model/collectionGroups';
 
 interface UserAttributeFormProps {
   dataCollection: DataCollection;
@@ -109,17 +106,13 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
       label,
       collectionEventReference,
     };
-
-    const userAttributePair: UserAttributePair = {
-      attributeKey: 'extension:CollectionEventGroup',
-      attributeValue: [userAttributePairValue],
-    };
-
     const dataCollectionUpdated: DataCollection = {
       versionDate: today.toISOString(),
       ...dataCollection,
     };
-    dataCollectionUpdated.userAttributePair.push(userAttributePair);
+    dataCollectionUpdated.userAttributePair[0].attributeValue.push(
+      userAttributePairValue
+    );
     console.log('dataCollectionUpdated', dataCollectionUpdated);
     const updatedDataCollection: DataCollectionApi = {
       id: dataCollection.id,

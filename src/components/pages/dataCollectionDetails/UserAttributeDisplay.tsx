@@ -17,10 +17,11 @@ import { FiChevronDown } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import { UserAttributePair } from '../../../lib/model/collectionGroups';
+import { UserAttributePairValue } from '../../../lib/model/collectionGroups';
+import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
 
 interface UserAttributeDisplayProps {
-  userAttribute: UserAttributePair;
+  attributeValue: UserAttributePairValue;
   handleDeleteUserAttribute: (id: string) => void;
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
@@ -47,7 +48,7 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
   ]);
   console.log('Language', i18n.language);
   const {
-    userAttribute,
+    attributeValue,
     dataCollectionState,
     setDataCollectionState,
     handleDeleteUserAttribute,
@@ -56,7 +57,14 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
   const [collectionEvents, setCollectionEvents] = useState(
     dataCollectionState.collectionEvents
   );
+  const [attributeValueState, setAttributeValueState] =
+    useState(attributeValue);
+  console.log('attributeValueState: ', attributeValueState);
   const [expanded, setExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -67,156 +75,163 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
 
   return (
     <>
-      {userAttribute.attributeValue.map((value) => {
-        return (
-          <Card
-            key={userAttribute.attributeKey}
+      <Card
+        key={attributeValueState.id}
+        sx={{
+          px: 1,
+          my: 1,
+        }}
+      >
+        <StyledCardActionArea
+          onClick={handleExpandClick}
+          disableRipple
+          disableTouchRipple
+          sx={{
+            '& .MuiCardActionArea-focusHighlight': {
+              background: 'transparent',
+              border: 'transparent',
+              outline: 'transparent',
+            },
+          }}
+        >
+          <Box
             sx={{
-              px: 1,
-              my: 1,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
-            <StyledCardActionArea
-              onClick={handleExpandClick}
-              disableRipple
-              disableTouchRipple
+            <Box
               sx={{
-                '& .MuiCardActionArea-focusHighlight': {
-                  background: 'transparent',
-                  border: 'transparent',
-                  outline: 'transparent',
-                },
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
               }}
             >
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                color="text.secondary"
+                key={attributeValueState.label[i18n.language]}
+                sx={{ ml: 0.5 }}
+              >
+                {attributeValueState.label[i18n.language]}{' '}
+              </Typography>
+              <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
+            </Box>
+            <CardActions disableSpacing>
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <FiChevronDown />
+              </ExpandMore>
+            </CardActions>
+          </Box>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
               <Box
                 sx={{
                   display: 'flex',
                   flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
                 }}
               >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
                 >
-                  <Typography
-                    variant="h6"
-                    fontWeight="bold"
-                    color="text.secondary"
-                    key={value.label[i18n.language]}
-                    sx={{ ml: 0.5 }}
-                  >
-                    {value.label[i18n.language]}{' '}
-                  </Typography>
-                  <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
-                </Box>
-                <CardActions disableSpacing>
-                  <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <FiChevronDown />
-                  </ExpandMore>
-                </CardActions>
+                  ID:{' '}
+                </Typography>
+                <Typography variant="body1">
+                  {attributeValueState.id}
+                </Typography>
               </Box>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                    }}
-                  >
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ marginRight: 1 }}
+                >
+                  {t('collectionEventReference', {
+                    ns: 'userAttributeForm',
+                  })}
+                  :{' '}
+                </Typography>
+              </Box>
+              <Stack sx={{ alignItems: 'flex-start' }}>
+                {attributeValueState.collectionEventReference.map((event) => {
+                  return (
                     <Typography
                       variant="body1"
-                      fontWeight="bold"
+                      key={event.id}
                       sx={{ marginRight: 1 }}
                     >
-                      ID:{' '}
+                      •{' '}
+                      {
+                        collectionEvents.find(
+                          (collectionEvent) => collectionEvent.id === event.id
+                        ).collectionEventName[i18n.language]
+                      }
                     </Typography>
-                    <Typography variant="body1">{value.id}</Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                    }}
-                  >
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      sx={{ marginRight: 1 }}
-                    >
-                      {t('collectionEventReference', {
-                        ns: 'userAttributeForm',
-                      })}
-                      :{' '}
-                    </Typography>
-                  </Box>
-                  <Stack sx={{ alignItems: 'flex-start' }}>
-                    {value.collectionEventReference.map((event) => {
-                      return (
-                        <Typography
-                          variant="body1"
-                          key={event.id}
-                          sx={{ marginRight: 1 }}
-                        >
-                          •{' '}
-                          {
-                            collectionEvents.find(
-                              (collectionEvent) =>
-                                collectionEvent.id === event.id
-                            ).collectionEventName[i18n.language]
-                          }
-                        </Typography>
-                      );
-                    })}
-                  </Stack>
+                  );
+                })}
+              </Stack>
 
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'flex-end',
-                    }}
-                  >
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        console.log('edit');
-                      }}
-                      variant="contained"
-                      sx={{ marginLeft: 2 }}
-                    >
-                      <Typography variant="body1" fontWeight="xl">
-                        {t('edit', { ns: 'dataCollectionDetails' })}
-                      </Typography>
-                    </Button>
-                    <Button
-                      size="small"
-                      onClick={() => {
-                        handleDeleteClick(value.id);
-                      }}
-                      variant="outlined"
-                      sx={{ marginLeft: 2 }}
-                    >
-                      <Typography variant="body1" fontWeight="xl">
-                        {t('delete', { ns: 'form' })}
-                      </Typography>
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Collapse>
-            </StyledCardActionArea>
-          </Card>
-        );
-      })}
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <Button
+                  size="small"
+                  onClick={() => {
+                    console.log('edit');
+                  }}
+                  variant="contained"
+                  sx={{ marginLeft: 2 }}
+                >
+                  <Typography variant="body1" fontWeight="xl">
+                    {t('edit', { ns: 'dataCollectionDetails' })}
+                  </Typography>
+                </Button>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    handleDeleteClick(attributeValueState.id);
+                  }}
+                  variant="outlined"
+                  sx={{ marginLeft: 2 }}
+                >
+                  <Typography variant="body1" fontWeight="xl">
+                    {t('delete', { ns: 'form' })}
+                  </Typography>
+                </Button>
+              </Box>
+            </CardContent>
+          </Collapse>
+        </StyledCardActionArea>
+      </Card>
+      <EditCollectionGroupDialog
+        open={open}
+        handleClose={handleClose}
+        attributeValueState={attributeValueState}
+        setAttributeValueState={setAttributeValueState}
+        dataCollectionState={dataCollectionState}
+        setDataCollectionState={setDataCollectionState}
+        collectionEvents={collectionEvents}
+        setNotSavedSate={setNotSavedState}
+      />
     </>
   );
 };

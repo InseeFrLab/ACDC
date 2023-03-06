@@ -1,4 +1,4 @@
-import { Button, Typography, Alert, Stack, Box } from '@mui/material';
+import { Button, Typography, Alert, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { DataCollection } from '../../../lib/model/dataCollection';

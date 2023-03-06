@@ -59,6 +59,7 @@ const DataCollectionDetails = () => {
     ));
 
   seriesQuery.isSuccess &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (series = seriesQuery.data.map((serie: any) => {
       return {
         id: serie.id,
@@ -212,18 +213,21 @@ const DataCollectionDetails = () => {
           marginBottom: 10,
         }}
       >
-        {dataCollectionState.userAttributePair.map((attribute) => {
-          return (
-            <UserAttributeDisplay
-              key={attribute.attributeKey}
-              userAttribute={attribute}
-              dataCollectionState={dataCollectionState}
-              setDataCollectionState={setDataCollectionState}
-              handleDeleteUserAttribute={handleDeleteCollectionGroup}
-              setNotSavedState={setNotSavedState}
-            />
-          );
-        })}
+        {dataCollectionState.userAttributePair[0].attributeValue.map(
+          (attributeValue) => {
+            console.log('attributeValue: ', attributeValue);
+            return (
+              <UserAttributeDisplay
+                key={attributeValue.id}
+                attributeValue={attributeValue}
+                dataCollectionState={dataCollectionState}
+                setDataCollectionState={setDataCollectionState}
+                handleDeleteUserAttribute={handleDeleteCollectionGroup}
+                setNotSavedState={setNotSavedState}
+              />
+            );
+          }
+        )}
       </Box>
       <DeleteDialog
         openDelete={openDelete}

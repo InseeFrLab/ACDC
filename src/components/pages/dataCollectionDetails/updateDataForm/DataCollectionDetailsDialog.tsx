@@ -8,8 +8,6 @@ import {
   DialogActions,
   Typography,
   Box,
-  TextField,
-  FormControl,
   CircularProgress,
 } from '@mui/material';
 import { FiTrash } from 'react-icons/fi';

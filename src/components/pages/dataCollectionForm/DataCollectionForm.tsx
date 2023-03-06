@@ -119,7 +119,12 @@ const CollectionForm = (props: CollectionFormProps) => {
       label,
       description,
       collectionEvents: [],
-      userAttributePair: [],
+      userAttributePair: [
+        {
+          attributeKey: 'extension:CollectionEventGroup',
+          attributeValue: [],
+        },
+      ],
       studyUnitReference,
     };
 
