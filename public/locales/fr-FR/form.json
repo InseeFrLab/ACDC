@@ -17,5 +17,6 @@
   "addCommunication": "Ajouter une communication",
   "paperQuestionnaire": "Questionnaire papier",
   "type": "Type",
-  "media": "Media"
+  "media": "Media",
+  "deleteSuccess": "L'élément a été supprimé avec succès"
 }

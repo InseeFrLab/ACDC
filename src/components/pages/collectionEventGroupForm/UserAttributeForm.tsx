@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Typography,
   FormControl,
@@ -11,6 +12,7 @@ import {
   Stack,
   Box,
   DialogTitle,
+  CircularProgress,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -66,12 +68,12 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
     navigate(`/collection/${dataCollectionState.id}`, {
       state: { dataCollection: dataCollectionState },
     });
-  };
+  }, [dataCollectionState, navigate]);
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
@@ -103,6 +105,7 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
     console.log('collectionEventReferences', collectionEventReference);
 
     const userAttributePairValue: UserAttributePairValue = {
+      id: uuidv4(),
       label,
       collectionEventReference,
     };
@@ -133,6 +136,12 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
       ? createUserAttributeObject()
       : console.log('Field Validation Error');
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      handleClose();
+    }
+  }, [isSuccess, handleClose]);
 
   return (
     <>
@@ -226,17 +235,28 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
             alignItems: 'center',
           }}
         >
-          <DialogContentText>
-            {isSuccess ? t('successForm', { ns: 'userAttributeForm' }) : ''}
-            {isLoading ? t('loading', { ns: 'form' }) : ''}
-            {isError ? t('error', { ns: 'form' }) : ''}
-          </DialogContentText>
+          {isLoading ? (
+            <DialogContentText>
+              <CircularProgress />{' '}
+            </DialogContentText>
+          ) : (
+            <DialogContentText> </DialogContentText>
+          )}
+          {isError ? (
+            <>
+              <DialogContentText>
+                {t('error', { ns: 'form' })}
+              </DialogContentText>
+              <DialogActions>
+                <Button variant="contained" onClick={handleClose} autoFocus>
+                  {t('close', { ns: 'form' })}
+                </Button>
+              </DialogActions>
+            </>
+          ) : (
+            <DialogContentText />
+          )}
         </DialogContent>
-        <DialogActions>
-          <Button variant="contained" onClick={handleClose} autoFocus>
-            {t('close', { ns: 'form' })}
-          </Button>
-        </DialogActions>
       </Dialog>
     </>
   );

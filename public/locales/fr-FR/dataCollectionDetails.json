@@ -9,6 +9,7 @@
   "deleteCollectionEvent": "Supprimer le lot",
   "deleteDataCollection": "Supprimer la campagne",
   "successEvent": "Lot supprimé avec succès",
+  "successEventDC": "Campagne supprimée avec succès",
   "saveDataCollection": "Sauvegarder la campagne",
   "successDataCollection": "Campagne sauvegardée avec succès",
   "createUserAttribute": "Nouveau Groupe",

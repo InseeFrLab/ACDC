@@ -102,6 +102,33 @@ const DataCollectionDetails = () => {
     setOpenDelete(true);
   };
 
+  const handleDeleteCollectionGroup = (id: string) => {
+    console.log('Delete Collection Group: ', id);
+    const updatedUserAttributeValue =
+      dataCollectionState.userAttributePair[0].attributeValue.filter(
+        (event) => event.id !== id
+      );
+    setDataCollectionState({
+      ...dataCollectionState,
+      userAttributePair: [
+        {
+          ...dataCollectionState.userAttributePair[0],
+          attributeValue: updatedUserAttributeValue,
+        },
+      ],
+    });
+    const updatedDataCollection: DataCollectionApi = {
+      id: dataCollectionState?.id,
+      json: dataCollectionState,
+    };
+    console.log(
+      'Updated Data Collection deleting Collection Group: ',
+      updatedDataCollection
+    );
+    mutate(updatedDataCollection);
+    setOpenDelete(true);
+  };
+
   const handleSave = () => {
     const updatedDataCollection: DataCollectionApi = {
       id: dataCollection?.id,
@@ -192,7 +219,8 @@ const DataCollectionDetails = () => {
               userAttribute={attribute}
               dataCollectionState={dataCollectionState}
               setDataCollectionState={setDataCollectionState}
-              handleDeleteUserAttribute={() => console.log('delete')}
+              handleDeleteUserAttribute={handleDeleteCollectionGroup}
+              setNotSavedState={setNotSavedState}
             />
           );
         })}

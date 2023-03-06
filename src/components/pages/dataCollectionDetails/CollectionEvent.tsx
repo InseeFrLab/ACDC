@@ -93,7 +93,6 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
 
   const handleDeleteClick = () => {
     console.log('Delete CollectionEvent in Component');
-    props.setNotSavedState(true);
     props.handleDeleteCollectionEvent(collectionEvent.id);
   };
   return (

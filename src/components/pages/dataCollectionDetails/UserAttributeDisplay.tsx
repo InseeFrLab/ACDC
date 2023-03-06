@@ -24,6 +24,7 @@ interface UserAttributeDisplayProps {
   handleDeleteUserAttribute: (id: string) => void;
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
+  setNotSavedState: (notSaved: boolean) => void;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -50,6 +51,7 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
     dataCollectionState,
     setDataCollectionState,
     handleDeleteUserAttribute,
+    setNotSavedState,
   } = props;
   const [collectionEvents, setCollectionEvents] = useState(
     dataCollectionState.collectionEvents
@@ -58,6 +60,9 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const handleDeleteClick = (id: string) => {
+    handleDeleteUserAttribute(id);
   };
 
   return (
@@ -133,6 +138,21 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
                       fontWeight="bold"
                       sx={{ marginRight: 1 }}
                     >
+                      ID:{' '}
+                    </Typography>
+                    <Typography variant="body1">{value.id}</Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      sx={{ marginRight: 1 }}
+                    >
                       {t('collectionEventReference', {
                         ns: 'userAttributeForm',
                       })}
@@ -181,7 +201,7 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
                     <Button
                       size="small"
                       onClick={() => {
-                        console.log('delete');
+                        handleDeleteClick(value.id);
                       }}
                       variant="outlined"
                       sx={{ marginLeft: 2 }}

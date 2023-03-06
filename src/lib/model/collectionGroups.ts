@@ -4,6 +4,7 @@ export interface UserAttributePair {
 }
 
 export interface UserAttributePairValue {
+  id: string;
   label: Record<'fr-FR' | 'en-IE' | string, string>;
   collectionEventReference: Record<'id', string>[];
 }

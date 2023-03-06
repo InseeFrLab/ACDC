@@ -16,5 +16,6 @@
   "addCommunication": "Add communication",
   "paperQuestionnaire": "Paper Questionnaire",
   "type": "Type",
-  "media": "Media"
+  "media": "Media",
+  "deleteSuccess": "Component deleted successfully"
 }

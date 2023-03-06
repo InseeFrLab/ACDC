@@ -23,9 +23,7 @@ const DeleteDialog = (props: DeleteDialogProps) => {
   return (
     <Dialog open={props.openDelete} onClose={props.handleCloseDelete}>
       <DialogTitle>
-        <Typography variant="h5">
-          {t('deleteDataCollection', { ns: 'dataCollectionDetails' })}
-        </Typography>
+        <Typography variant="h5">{t('delete', { ns: 'form' })}</Typography>
       </DialogTitle>
       <DialogContent
         sx={{
@@ -36,9 +34,7 @@ const DeleteDialog = (props: DeleteDialogProps) => {
         }}
       >
         <DialogContentText>
-          {props.isSuccess
-            ? t('successEvent', { ns: 'dataCollectionDetails' })
-            : ''}
+          {props.isSuccess ? t('deleteSuccess', { ns: 'form' }) : ''}
           {props.isLoading ? <CircularProgress /> : ''}
           {props.isError ? t('error', { ns: 'form' }) : ''}
         </DialogContentText>
