@@ -44,16 +44,26 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
           alignItems: 'center',
         }}
       >
-        <DialogContentText>
-          {isLoading ? <CircularProgress /> : ''}
-          {isError ? t('error', { ns: 'form' }) : ''}
-        </DialogContentText>
+        {isLoading ? (
+          <DialogContentText>
+            <CircularProgress />{' '}
+          </DialogContentText>
+        ) : (
+          <DialogContentText> </DialogContentText>
+        )}
+        {isError ? (
+          <>
+            <DialogContentText>{t('error', { ns: 'form' })}</DialogContentText>
+            <DialogActions>
+              <Button variant="contained" onClick={handleClose} autoFocus>
+                {t('close', { ns: 'form' })}
+              </Button>
+            </DialogActions>
+          </>
+        ) : (
+          <DialogContentText />
+        )}
       </DialogContent>
-      <DialogActions>
-        <Button variant="contained" onClick={handleClose} autoFocus>
-          {t('close', { ns: 'form' })}
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 };

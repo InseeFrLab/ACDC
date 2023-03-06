@@ -7,8 +7,8 @@ import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 
 interface BottomActionBarProps {
   dataCollection: DataCollection;
-  dataCollectionState: DataCollection;
   handleSave: () => void;
+  notSavedState: boolean;
   questionnaires: PoguesQuestionnaire[];
 }
 const BottomActionBar = (props: BottomActionBarProps) => {
@@ -30,7 +30,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
   };
   return (
     <BottomBar>
-      {!(props.dataCollectionState === props.dataCollection) ? (
+      {props.notSavedState ? (
         <Alert
           severity="error"
           sx={{
@@ -63,7 +63,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
         </Button>
         <Button
           variant="contained"
-          disabled={props.dataCollectionState === props.dataCollection}
+          disabled={!props.notSavedState}
           onClick={handleClickSave}
           sx={{
             mx: 1,

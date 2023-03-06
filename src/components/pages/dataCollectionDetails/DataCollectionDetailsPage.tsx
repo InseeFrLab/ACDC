@@ -35,6 +35,7 @@ const DataCollectionDetails = () => {
     useState(dataCollection);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
+  const [notSavedState, setNotSavedState] = useState(false);
   let questionnaires: PoguesQuestionnaire[] = [];
   let series: StatisticalSeries[] = [];
 
@@ -113,6 +114,7 @@ const DataCollectionDetails = () => {
     console.log('Updated Data Collection: ', updatedDataCollection);
     mutate(updatedDataCollection);
     setDataCollectionState(updatedDataCollection.json);
+    setNotSavedState(false);
     setOpenSave(true);
   };
 
@@ -133,6 +135,7 @@ const DataCollectionDetails = () => {
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
         series={series}
+        setNotSavedState={setNotSavedState}
       />
       <Box
         sx={{
@@ -158,6 +161,7 @@ const DataCollectionDetails = () => {
               dataCollectionState={dataCollectionState}
               setDataCollectionState={setDataCollectionState}
               questionnaires={questionnaires}
+              setNotSavedState={setNotSavedState}
             />
           );
         })}
@@ -208,9 +212,9 @@ const DataCollectionDetails = () => {
       />
       <BottomActionBar
         dataCollection={dataCollection}
-        dataCollectionState={dataCollectionState}
         handleSave={handleSave}
         questionnaires={questionnaires}
+        notSavedState={notSavedState}
       />
     </Main>
   );

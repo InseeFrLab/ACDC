@@ -46,6 +46,7 @@ interface EditCollectionEventDialogProps {
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
   questionnaires: PoguesQuestionnaire[];
+  setNotSavedSate: (notSaved: boolean) => void;
 }
 
 const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
@@ -172,7 +173,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         props.dataCollectionState
       );
     }, 200);
-
+    props.setNotSavedSate(true);
     props.handleClose();
   };
   return (

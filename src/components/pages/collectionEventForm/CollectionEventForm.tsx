@@ -331,7 +331,14 @@ const EventForm = (props: DataCollectionProps) => {
         <DialogTitle>
           <Typography variant="h5">{t('descriptionForm')}</Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <DialogContentText>
             {isLoading ? <CircularProgress /> : ''}
             {isError ? t('error', { ns: 'form' }) : ''}

@@ -218,7 +218,14 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
             {t('descriptionForm', { ns: 'userAttributeForm' })}
           </Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <DialogContentText>
             {isSuccess ? t('successForm', { ns: 'userAttributeForm' }) : ''}
             {isLoading ? t('loading', { ns: 'form' }) : ''}

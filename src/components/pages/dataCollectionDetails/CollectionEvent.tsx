@@ -28,6 +28,7 @@ interface CollectionEventDisplayProps {
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
   questionnaires: PoguesQuestionnaire[];
+  setNotSavedState: (notSavedState: boolean) => void;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -92,7 +93,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
 
   const handleDeleteClick = () => {
     console.log('Delete CollectionEvent in Component');
-
+    props.setNotSavedState(true);
     props.handleDeleteCollectionEvent(collectionEvent.id);
   };
   return (
@@ -404,6 +405,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
         questionnaires={questionnaires}
+        setNotSavedSate={props.setNotSavedState}
       />
     </>
   );

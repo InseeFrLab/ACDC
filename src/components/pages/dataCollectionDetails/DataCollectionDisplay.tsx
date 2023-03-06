@@ -21,6 +21,7 @@ interface DataCollectionDisplayProps {
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
   series: StatisticalSeries[];
+  setNotSavedState: (notSaved: boolean) => void;
 }
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -239,6 +240,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
         setOpen={setOpen}
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
+        setNotSavedState={props.setNotSavedState}
         series={series}
       />
     </>

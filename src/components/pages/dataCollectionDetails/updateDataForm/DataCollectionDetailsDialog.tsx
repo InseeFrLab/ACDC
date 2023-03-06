@@ -10,6 +10,7 @@ import {
   Box,
   TextField,
   FormControl,
+  CircularProgress,
 } from '@mui/material';
 import { FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
@@ -29,6 +30,7 @@ interface DataCollectionDetailsDialogProps {
   setOpen: (open: boolean) => void;
   setDataCollectionState: (dataCollection: DataCollection) => void;
   series: StatisticalSeries[];
+  setNotSavedState: (notSaved: boolean) => void;
 }
 const DataCollectionDetailsDialog = (
   props: DataCollectionDetailsDialogProps
@@ -121,6 +123,7 @@ const DataCollectionDetailsDialog = (
     };
     console.log('updatedDataCollection: ', updatedDataCollection);
     props.setDataCollectionState(updatedDataCollection);
+    props.setNotSavedState(true);
     const dataCollectionLink = dataCollectionState;
     navigate(`/collection/${dataCollectionLink.id}`, {
       state: { dataCollection: dataCollectionLink },
@@ -306,10 +309,17 @@ const DataCollectionDetailsDialog = (
             {t('deleteDataCollection', { ns: 'dataCollectionDetails' })}
           </Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <DialogContentText>
             {isSuccess ? t('successEvent') : ''}
-            {isLoading ? t('loading') : ''}
+            {isLoading ? <CircularProgress /> : ''}
             {isError ? t('error') : ''}
           </DialogContentText>
         </DialogContent>

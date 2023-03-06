@@ -2289,7 +2289,7 @@ html-parse-stringify@^3.0.1:
 
 i18next-browser-languagedetector@^7.0.1:
   version "7.0.1"
-  resolved "https://registry.npmjs.org/i18next-browser-languagedetector/-/i18next-browser-languagedetector-7.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-7.0.1.tgz#ead34592edc96c6c3a618a51cb57ad027c5b5d87"
   integrity sha512-Pa5kFwaczXJAeHE56CHG2aWzFBMJNUNghf0Pm4SwSrEMps/PTKqW90EYWlIvhuYStf3Sn1K0vw+gH3+TLdkH1g==
   dependencies:
     "@babel/runtime" "^7.19.4"

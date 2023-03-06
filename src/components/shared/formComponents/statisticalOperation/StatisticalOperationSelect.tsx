@@ -55,6 +55,8 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  console.log('Series', props.series);
+  console.log('Lang', i18n);
 
   useEffect(() => {
     if (isSuccess) {
@@ -163,6 +165,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
             return (
               <Box
                 component="li"
+                key={option.id}
                 sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                 {...pr}
               >
