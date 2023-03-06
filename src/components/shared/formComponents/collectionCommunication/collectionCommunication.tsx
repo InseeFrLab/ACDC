@@ -8,7 +8,9 @@ import {
   SelectChangeEvent,
   FormControl,
   FormHelperText,
+  IconButton,
 } from '@mui/material';
+import { FiX } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 
 interface CollectionCommunicationSelectProps {
@@ -32,6 +34,17 @@ const CollectionCommunicationSelect = (
         paperQuestionnaire: false,
       },
     ]);
+  };
+
+  const deleteCommunicationLabel = (index: number) => {
+    props.setUserAttributePair((s: any) => {
+      const newText: Record<
+        'id' | 'type' | 'media' | 'paperQuestionnaire',
+        string | boolean
+      >[] = s.slice();
+      newText.splice(index, 1);
+      return newText;
+    });
   };
 
   const handleUserAttributeTypeChange = (
@@ -99,6 +112,7 @@ const CollectionCommunicationSelect = (
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'flex-start',
+              alignItems: 'flex-start',
             }}
             key={attribute.id}
           >
@@ -168,6 +182,15 @@ const CollectionCommunicationSelect = (
                 {t('paperQuestionnaire', { ns: 'form' })}
               </FormHelperText>
             </FormControl>
+            <IconButton
+              disabled={props.userAttributePair.length === 1}
+              color="error"
+              onClick={() => {
+                deleteCommunicationLabel(index);
+              }}
+            >
+              <FiX />
+            </IconButton>
           </Box>
         );
       })}

@@ -25,10 +25,10 @@ const handlers = [
     return res(ctx.status(200), ctx.json(s1001));
   }),
   rest.post('api/data-collections', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({}));
+    return res(ctx.status(401), ctx.json({}));
   }),
   rest.put('api/data-collections', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({}));
+    return res(ctx.status(401), ctx.json({}));
   }),
 ];
 
