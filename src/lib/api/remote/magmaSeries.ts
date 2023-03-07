@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { StudyUnitReference } from '../../model/studyUnitReference';
