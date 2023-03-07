@@ -33,7 +33,7 @@ interface DataCollectionDetailsDialogProps {
 const DataCollectionDetailsDialog = (
   props: DataCollectionDetailsDialogProps
 ) => {
-  const { t, i18n } = useTranslation(['dataCollectionDetails', 'form']);
+  const { t } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
   const { open, dataCollectionState, series } = props;
   const [labelArray, setLabelArray] = useState([
@@ -67,46 +67,7 @@ const DataCollectionDetailsDialog = (
   const [groupReference, setGroupReference] = useState(
     dataCollectionState.studyUnitReference.groupReference
   );
-  const [statisticalOperationsList, setStatisticalOperationsList] = useState([
-    {
-      altLabel: [
-        {
-          langue: 'fr',
-        },
-        {
-          langue: 'en',
-        },
-      ],
-      label: [
-        {
-          langue: 'fr',
-          contenu: 'Enquête Logement Mayotte 2013',
-        },
-        {
-          langue: 'en',
-          contenu: 'Mayotte Housing Survey 2013',
-        },
-      ],
-      uri: 'http://bauhaus/operations/operation/s1448',
-      serie: {
-        id: 's1004',
-        label: [
-          {
-            langue: 'fr',
-            contenu: 'Enquête Logement',
-          },
-          {
-            langue: 'en',
-            contenu: 'Housing survey',
-          },
-        ],
-        uri: 'http://bauhaus/operations/serie/s1004',
-      },
-      id: 's1448',
-    },
-  ]);
 
-  const [operationDisabled, setOperationDisabled] = useState(true);
   const [openDelete, setOpenDelete] = useState(false);
   const handleClose = () => {
     props.setOpen(false);

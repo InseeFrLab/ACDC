@@ -18,7 +18,7 @@ class ErrorBoundary extends React.Component {
       return (
         <>
           <h1>Something went wrong. Please try again</h1>
-          <h3>If the issue persist please send me a message</h3>
+          <h3>If the issue persists, feel free to send me a message</h3>
         </>
       );
     }

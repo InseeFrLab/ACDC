@@ -1,6 +1,6 @@
 import { Box, Card, Checkbox, Divider, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import CollectionEvent from '../../../lib/model/collectionEvents';
+import CollectionEvent from '../../../../lib/model/collectionEvents';
 
 interface CollectionEventCheckBoxProps {
   collectionEvents: CollectionEvent[];
@@ -9,18 +9,37 @@ interface CollectionEventCheckBoxProps {
 }
 
 const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
-  const { i18n } = useTranslation(['userAttributeForm', 'form']);
+  const { t, i18n } = useTranslation(['userAttributeForm', 'form']);
   const { collectionEvents } = props;
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        borderTop: '1px solid',
+        borderColor: 'divider',
+      }}
+    >
+      {' '}
+      <Box
+        sx={{
+          paddingTop: 2,
+          display: 'flex',
+          justifyContent: 'flex-start',
+        }}
+      >
+        <Typography variant="h6">
+          {t('collectionEventReference', { ns: 'userAttributeForm' })}:
+        </Typography>
+      </Box>
       {collectionEvents.map((item, index) => (
         <Card
           key={item.id}
           sx={{
             p: 1,
             my: 1,
-            width: '45%',
+            // width: '48%',
           }}
         >
           <Box
@@ -70,7 +89,7 @@ const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
           </Box>
         </Card>
       ))}
-    </>
+    </Box>
   );
 };
 

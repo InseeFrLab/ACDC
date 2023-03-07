@@ -14,15 +14,10 @@ import {
   TextField,
   Stack,
 } from '@mui/material';
-import { v4 as uuidv4 } from 'uuid';
 import QuestionnaireModelSelect from '@/components/shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
 import { PoguesQuestionnaire } from '@/lib/model/poguesQuestionnaire';
-import InstrumentReference from '@/lib/model/instrumentReference';
 import CollectionCommunicationSelect from '@/components/shared/formComponents/collectionCommunication/collectionCommunication';
-import {
-  UserAttributePairCollectionRow,
-  UserAttributePairCollection,
-} from '@/lib/model/communicationCollectionEvent';
+import { UserAttributePairCollection } from '@/lib/model/communicationCollectionEvent';
 import {
   createIntlRecord,
   createCollectionCommunicationMode,

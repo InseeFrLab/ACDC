@@ -21,7 +21,7 @@ import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
-import CollectionEventCheckBox from './CollectionEventCheckbox';
+import CollectionEventCheckBox from '../../shared/formComponents/collectionGroup/CollectionEventCheckbox';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { UserAttributePairValue } from '../../../lib/model/collectionGroups';
 
@@ -154,19 +154,6 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
             </Typography>
           </Box>
           <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('collectionEventReference', { ns: 'userAttributeForm' })}:
-            </Typography>
-          </Box>
 
           <CollectionEventCheckBox
             collectionEvents={collectionEvents}

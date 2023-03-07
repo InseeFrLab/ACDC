@@ -13,14 +13,14 @@ import {
   CardContent,
   Stack,
 } from '@mui/material';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { UserAttributePairValue } from '../../../lib/model/collectionGroups';
 import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
 
-interface UserAttributeDisplayProps {
+interface CollectionGroupDisplayProps {
   attributeValue: UserAttributePairValue;
   handleDeleteUserAttribute: (id: string) => void;
   dataCollectionState: DataCollection;
@@ -40,13 +40,12 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   marginLeft: 'auto',
 }));
 
-const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
+const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
   const { t, i18n } = useTranslation([
     'dataCollectionDetails',
     'userAttributeForm',
     'form',
   ]);
-  console.log('Language', i18n.language);
   const {
     attributeValue,
     dataCollectionState,
@@ -54,12 +53,9 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
     handleDeleteUserAttribute,
     setNotSavedState,
   } = props;
-  const [collectionEvents, setCollectionEvents] = useState(
-    dataCollectionState.collectionEvents
-  );
+  const [collectionEvents] = useState(dataCollectionState.collectionEvents);
   const [attributeValueState, setAttributeValueState] =
     useState(attributeValue);
-  console.log('attributeValueState: ', attributeValueState);
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -195,26 +191,23 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
               >
                 <Button
                   size="small"
-                  onClick={() => {
-                    console.log('edit');
-                  }}
+                  onClick={() => handleDeleteClick(attributeValueState.id)}
+                  variant="outlined"
+                  sx={{ marginLeft: 2 }}
+                  startIcon={<FiTrash />}
+                >
+                  <Typography variant="body1" fontWeight="xl">
+                    {t('delete', { ns: 'form' })}
+                  </Typography>
+                </Button>
+                <Button
+                  size="small"
+                  onClick={() => setOpen(true)}
                   variant="contained"
                   sx={{ marginLeft: 2 }}
                 >
                   <Typography variant="body1" fontWeight="xl">
                     {t('edit', { ns: 'dataCollectionDetails' })}
-                  </Typography>
-                </Button>
-                <Button
-                  size="small"
-                  onClick={() => {
-                    handleDeleteClick(attributeValueState.id);
-                  }}
-                  variant="outlined"
-                  sx={{ marginLeft: 2 }}
-                >
-                  <Typography variant="body1" fontWeight="xl">
-                    {t('delete', { ns: 'form' })}
                   </Typography>
                 </Button>
               </Box>
@@ -236,4 +229,4 @@ const UserAttributeDisplay = (props: UserAttributeDisplayProps) => {
   );
 };
 
-export default UserAttributeDisplay;
+export default CollectionGroupDisplay;

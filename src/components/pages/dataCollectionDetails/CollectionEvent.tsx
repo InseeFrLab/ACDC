@@ -60,24 +60,17 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     useState(collectionEvent);
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
+  const listOfIds = dataCollectionState.userAttributePair
+    .flatMap((userAttribute) =>
+      userAttribute.attributeValue.flatMap((attributeValue) =>
+        attributeValue.collectionEventReference.map(
+          (collectionEventReference) => collectionEventReference.id
+        )
+      )
+    )
+    .filter((id, index, arr) => arr.indexOf(id) === index);
 
-  const { userAttributePair } = dataCollectionState;
-  const listOfIds: string[] = [];
-  userAttributePair.forEach((userAttribute) => {
-    userAttribute.attributeValue.forEach((attributeValue) => {
-      attributeValue.collectionEventReference.forEach(
-        (collectionEventReference) => {
-          listOfIds.indexOf(collectionEventReference.id) === -1
-            ? listOfIds.push(collectionEventReference.id)
-            : console.log('Collection already in list');
-        }
-      );
-    });
-  });
-
-  const [deletable, setDeletable] = useState(
-    listOfIds.includes(collectionEvent.id)
-  );
+  const [deletable] = useState(listOfIds.includes(collectionEvent.id));
 
   const handleClickOpen = () => {
     setOpen(true);

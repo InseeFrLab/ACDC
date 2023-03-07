@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { formatISO } from 'date-fns';
 import {
   Button,
   Dialog,
@@ -10,8 +9,6 @@ import {
   DialogTitle,
   Typography,
   Box,
-  FormControl,
-  TextField,
   Stack,
 } from '@mui/material';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
@@ -22,7 +19,7 @@ import {
   UserAttributePairValue,
 } from '@/lib/model/collectionGroups';
 import IntlTextInput from '../../../shared/intlTextInput/IntlTextInput';
-import CollectionEventCheckBox from '../../collectionEventGroupForm/CollectionEventCheckbox';
+import CollectionEventCheckBox from '../../../shared/formComponents/collectionGroup/CollectionEventCheckbox';
 
 interface EditCollectionGroupDialogProps {
   open: boolean;
@@ -36,7 +33,7 @@ interface EditCollectionGroupDialogProps {
 }
 
 const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
-  const { t, i18n } = useTranslation([
+  const { t } = useTranslation([
     'dataCollectionDetails',
     'collectionEvent',
     'form',
@@ -66,8 +63,6 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
   );
 
   const handleSave = () => {
-    console.log('Update CollectionGroup: ', props.attributeValueState);
-
     const label = createIntlRecord(labelArray);
     const collectionEventsChecked = collectionEventCheck.filter(
       (obj) => Object.values(obj)[0] === true
@@ -85,8 +80,8 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
 
     props.setAttributeValueState(userAttributePairValue);
 
-    const updatedUserAttributePair = {
-      ...props.dataCollectionState.userAttributePair,
+    const updatedUserAttributePair: UserAttributePair = {
+      attributeKey: props.dataCollectionState.userAttributePair[0].attributeKey,
       attributeValue:
         props.dataCollectionState.userAttributePair[0].attributeValue.map(
           (item) => {
@@ -97,19 +92,13 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
           }
         ),
     };
+    console.log('Updated User Attribute Pair: ', updatedUserAttributePair); // GOOD
 
     const updatedDataCollection = {
       ...props.dataCollectionState,
-      userAttributePair: updatedUserAttributePair,
-    };
-
-    setTimeout(() => {
-      props.setDataCollectionState(updatedDataCollection);
-      console.log(
-        'Updated Data Collection with updated Collection Group: ',
-        props.dataCollectionState
-      );
-    }, 200);
+      userAttributePair: [updatedUserAttributePair],
+    }; // GOOD
+    props.setDataCollectionState(updatedDataCollection);
     props.setNotSavedSate(true);
     props.handleClose();
   };

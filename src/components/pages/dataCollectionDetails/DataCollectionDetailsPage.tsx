@@ -16,7 +16,7 @@ import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
-import UserAttributeDisplay from './UserAttributeDisplay';
+import CollectionGroupDisplay from './CollectionGroupDisplay';
 import DataCollectionDisplay from './DataCollectionDisplay';
 import { transformLabels } from '../../../lib/utils/magmaUtils';
 import SaveDialog from './dialogs/SaveDialog';
@@ -215,9 +215,8 @@ const DataCollectionDetails = () => {
       >
         {dataCollectionState.userAttributePair[0].attributeValue.map(
           (attributeValue) => {
-            console.log('attributeValue: ', attributeValue);
             return (
-              <UserAttributeDisplay
+              <CollectionGroupDisplay
                 key={attributeValue.id}
                 attributeValue={attributeValue}
                 dataCollectionState={dataCollectionState}
