@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import allDC from '@/assets/mockData/allDC.json';
 
 export const getAllDataCollections = (): Promise<unknown[]> => {

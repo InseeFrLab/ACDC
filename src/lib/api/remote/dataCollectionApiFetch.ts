@@ -16,10 +16,16 @@ export async function getAllDataCollections(): Promise<DataCollectionApi[]> {
   );
   return response.json();
 }
+
+export function getDataCollectionById(id: string): Promise<DataCollectionApi> {
+  return fetch(
+    `${import.meta.env.VITE_API_BASE_URL}api/data-collections/${id}`
+  ).then((response) => response.json());
+}
+
 export async function createDataCollection(
   dataCollectionApi: DataCollectionApi
 ): Promise<DataCollectionApi> {
-  console.log('dataCollection to be send: ', dataCollectionApi);
   return fetch(`${import.meta.env.VITE_API_BASE_URL}api/data-collections`, {
     method: 'POST',
     headers: {

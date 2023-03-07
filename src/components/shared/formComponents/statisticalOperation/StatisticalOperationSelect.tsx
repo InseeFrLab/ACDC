@@ -11,15 +11,12 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { transformLabels } from '@/lib/utils/magmaUtils';
+import { getSerieOperation, SeriesId } from '@/lib/api/mock/mockSeries';
 import StatisticalSeries from '../../../../lib/model/statisticalSeries';
 import {
   GroupReference,
   StudyUnitReference,
 } from '../../../../lib/model/studyUnitReference';
-import {
-  getSeriesOperation,
-  SeriesId,
-} from '../../../../lib/api/mock/serieOperation';
 
 interface StatisticalOperationSelectProps {
   groupReference: GroupReference;
@@ -51,7 +48,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
 
   const { data, isSuccess } = useQuery(['operationSerie', serieId], () => {
     console.log('Fetch serie operation: ', serieId);
-    return getSeriesOperation(serieId);
+    return getSerieOperation(serieId);
   });
 
   const [isLoading, setIsLoading] = useState(false);
