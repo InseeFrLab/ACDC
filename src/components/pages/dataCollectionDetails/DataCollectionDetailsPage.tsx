@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import ApiContext from '@/lib/api/context/apiContext';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQueries } from '@tanstack/react-query';
 import { Typography, Box } from '@mui/material';
-import getQuestionnaires from '@/lib/api/remote/poguesQuestionnaires';
 import {
   PoguesQuestionnaire,
   PoguesQuestionnaireResponse,
 } from '@/lib/model/poguesQuestionnaire';
-import { getAllSeries } from '@/lib/api/remote/magmaSeries';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
@@ -39,6 +38,8 @@ const DataCollectionDetails = () => {
   let questionnaires: PoguesQuestionnaire[] = [];
   let series: StatisticalSeries[] = [];
 
+  const { getAllSeries, getQuestionnaires } = useContext(ApiContext);
+
   const [questionnaireQuery, seriesQuery] = useQueries({
     queries: [
       { queryKey: ['allQuestionnaires'], queryFn: getQuestionnaires },
@@ -47,20 +48,20 @@ const DataCollectionDetails = () => {
   });
   // TODO : Loading & error indicator somewhere in the page
   questionnaireQuery.isSuccess &&
-    (questionnaires = questionnaireQuery.data.map(
-      (questionnaire: PoguesQuestionnaireResponse) => {
-        const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
-        return {
-          id: questionnaire.id,
-          label: questionnaire.Label[0],
-          date: dateQuestionnaire.toLocaleDateString(),
-        };
-      }
-    ));
+    (questionnaires = (
+      questionnaireQuery.data as PoguesQuestionnaireResponse[]
+    ).map((questionnaire: PoguesQuestionnaireResponse) => {
+      const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
+      return {
+        id: questionnaire.id,
+        label: questionnaire.Label[0],
+        date: dateQuestionnaire.toLocaleDateString(),
+      };
+    }));
 
   seriesQuery.isSuccess &&
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (series = seriesQuery.data.map((serie: any) => {
+    (series = (seriesQuery.data as StatisticalSeries[]).map((serie: any) => {
       return {
         id: serie.id,
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

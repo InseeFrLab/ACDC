@@ -52,8 +52,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  console.log('Series', props.series);
-  console.log('Lang', i18n);
 
   useEffect(() => {
     if (isSuccess) {

@@ -39,15 +39,18 @@ const createApiClient = (baseUrl: string) => {
       getRequest(`${baseUrl}api/data-collections`),
     getDataCollection: async (id: string): Promise<DataCollectionApi> =>
       getRequest(`${baseUrl}api/data-collections/${id}`),
-    createDataCollection: (dataCollectionApi: DataCollectionApi) => {
-      return postRequest(`${baseUrl}api/data-collections`, dataCollectionApi);
+    createDataCollection: async (dataCollectionApi: DataCollectionApi) => {
+      const response = await postRequest(
+        `${baseUrl}api/data-collections`,
+        dataCollectionApi
+      );
+      const data = await response.json();
+      return data;
     },
-    updateDataCollection: (dataCollectionApi: DataCollectionApi) => {
-      return putRequest(`${baseUrl}api/data-collections/`, dataCollectionApi);
-    },
-    deleteDataCollection: (id: string) => {
-      return deleteRequest(`${baseUrl}api/data-collections/${id}`);
-    },
+    updateDataCollection: (dataCollectionApi: DataCollectionApi) =>
+      putRequest(`${baseUrl}api/data-collections/`, dataCollectionApi),
+    deleteDataCollection: (id: string) =>
+      deleteRequest(`${baseUrl}api/data-collections/${id}`),
   };
 };
 
