@@ -39,10 +39,7 @@ import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
-import {
-  UserAttributePairCollection,
-  UserAttributePairCollectionRow,
-} from '../../../lib/model/communicationCollectionEvent';
+import { CollectionCommunication } from '../../../lib/model/communicationCollectionEvent';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;
@@ -157,11 +154,11 @@ const EventForm = (props: DataCollectionProps) => {
       userAttributePairArray
     );
 
-    const userAttributePairCollection: UserAttributePairCollection = {
+    const userAttributePairCollection: CollectionCommunication = {
       attributeKey: 'extension:CollectionCommunicationSteps',
       attributeValue,
     };
-    const userAttributePairCollectionArray: UserAttributePairCollection[] = [];
+    const userAttributePairCollectionArray: CollectionCommunication[] = [];
     userAttributePairCollectionArray.push(userAttributePairCollection);
 
     console.log('attributeValue: ', userAttributePairCollectionArray);
