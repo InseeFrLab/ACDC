@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { UserAttributePairCollectionRow } from '../model/communicationCollectionEvent';
+import { CollectionRow } from '../model/communicationCollectionEvent';
 import InstrumentReference from '../model/instrumentReference';
 
 export const createIntlRecord = (
@@ -26,7 +26,7 @@ export const createCollectionCommunicationMode = (
     media: string;
     paperQuestionnaire: string;
   }[]
-): UserAttributePairCollectionRow[] => {
+): CollectionRow[] => {
   return input.map((obj) => ({
     id: uuidv4(),
     type: obj.type,
