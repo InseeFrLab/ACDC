@@ -2,14 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button, Typography } from '@mui/material';
+import { useContext } from 'react';
+import ApiContext from '@/lib/api/context/apiContext';
 import Main from '../../shared/layout/Main';
 import DataGridHomePage from './DataTable';
-import {
-  DataCollection,
-  DataCollectionRow,
-} from '../../../lib/model/dataCollection';
+import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import { getAllDataCollections } from '../../../lib/api/remote/dataCollectionApiFetch';
 
 const Home = () => {
   const { t, i18n } = useTranslation(['home']);
@@ -18,9 +16,11 @@ const Home = () => {
   const handleClick = () => {
     navigate('/new');
   };
+  const { getAllDataCollections } = useContext(ApiContext);
 
   const { data, error, isLoading, isSuccess } = useQuery(
     ['allDataCollection'],
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     getAllDataCollections
   );
 
@@ -49,7 +49,7 @@ const Home = () => {
     );
 
   if (isSuccess) {
-    const dataArray = data;
+    const dataArray = data as DataCollectionApi[];
     const rows = dataArray.map((dataCollectionApi: DataCollectionApi) => {
       const dataCollection: DataCollection = dataCollectionApi.json;
 

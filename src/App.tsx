@@ -18,8 +18,8 @@ const App = () => {
   const apiClient = apiUrl ? createApiClient(apiUrl) : createApiMockClient();
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={fr}>
-      <ApiContext.Provider value={apiClient}>
-        <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <ApiContext.Provider value={apiClient}>
           <Root
             sx={{
               height: '100vh',
@@ -28,8 +28,8 @@ const App = () => {
             <RoutesWebs />
           </Root>
           <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </ApiContext.Provider>
+        </ApiContext.Provider>
+      </QueryClientProvider>
     </LocalizationProvider>
   );
 };
