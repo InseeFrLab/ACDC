@@ -49,52 +49,40 @@ const Home = () => {
     );
 
   if (isSuccess) {
-    const rows: DataCollectionRow[] = [];
-    data.forEach((dataCollectionApi: DataCollectionApi) => {
+    const dataArray = data;
+    const rows = dataArray.map((dataCollectionApi: DataCollectionApi) => {
       const dataCollection: DataCollection = dataCollectionApi.json;
-      const labelData = () => {
-        switch (i18n.language) {
-          case 'fr-FR':
-            return dataCollection.label['fr-FR'];
-          case 'en-IE':
-            return dataCollection.label['en-IE'];
-          default:
-            return dataCollection.label['en-IE'];
-        }
+
+      const labelData: Record<'fr-FR' | 'en-IE' | string, string> = {
+        'fr-FR': dataCollection.label['fr-FR'],
+        'en-IE': dataCollection.label['en-IE'],
       };
-      const studyUnitReferenceData = () => {
-        switch (i18n.language) {
-          case 'fr-FR':
-            return dataCollection.studyUnitReference.label['fr-FR'];
-          case 'en-IE':
-            return dataCollection.studyUnitReference.label['en-IE'];
-          default:
-            return dataCollection.studyUnitReference.label['en-IE'];
-        }
+      const studyUnitReferenceData: Record<'fr-FR' | 'en-IE' | string, string> =
+        {
+          'fr-FR': dataCollection.studyUnitReference.label['fr-FR'],
+          'en-IE': dataCollection.studyUnitReference.label['en-IE'],
+        };
+      const groupReferenceData: Record<'fr-FR' | 'en-IE' | string, string> = {
+        'fr-FR':
+          dataCollection.studyUnitReference.groupReference.label['fr-FR'],
+        'en-IE':
+          dataCollection.studyUnitReference.groupReference.label['en-IE'],
       };
-      const groupReferenceData = () => {
-        switch (i18n.language) {
-          case 'fr-FR':
-            return dataCollection.studyUnitReference.groupReference.label[
-              'fr-FR'
-            ];
-          case 'en-IE':
-            return dataCollection.studyUnitReference.groupReference.label[
-              'en-IE'
-            ];
-          default:
-            return dataCollection.studyUnitReference.groupReference.label[
-              'en-IE'
-            ];
-        }
-      };
-      rows.push({
+
+      const label = labelData[i18n.language] || labelData['en-IE'];
+      const studyUnitReference =
+        studyUnitReferenceData[i18n.language] ||
+        studyUnitReferenceData['en-IE'];
+      const groupReference =
+        groupReferenceData[i18n.language] || groupReferenceData['en-IE'];
+
+      return {
         ...dataCollection,
-        label: labelData(),
-        studyUnitReference: studyUnitReferenceData(),
-        groupReference: groupReferenceData(),
+        label,
+        studyUnitReference,
+        groupReference,
         action: dataCollection,
-      });
+      };
     });
     console.log('Get all data collection: ', rows);
     return (

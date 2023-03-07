@@ -1,5 +1,4 @@
 import './App.css';
-import React, { createContext } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { fr } from 'date-fns/locale';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -9,10 +8,9 @@ import Root from './components/shared/layout/Root';
 import RoutesWebs from './lib/routes/routes';
 import createApiClient from './lib/api/remote/apiClient';
 import createApiMockClient from './lib/api/mock/apiMockClient';
+import ApiContext from './lib/api/context/apiContext';
 
 const queryClient = new QueryClient();
-
-export const ApiContext = createContext(null);
 
 const App = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
