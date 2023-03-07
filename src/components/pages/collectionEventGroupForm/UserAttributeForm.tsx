@@ -18,24 +18,22 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
+import { CollectionGroupValue } from '@/lib/model/collectionGroups';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionEventCheckBox from '../../shared/formComponents/collectionGroup/CollectionEventCheckbox';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
-import { UserAttributePairValue } from '../../../lib/model/collectionGroups';
 
-interface UserAttributeFormProps {
+interface CollectionGroupFormProps {
   dataCollection: DataCollection;
 }
 
-const UserAttributeForm = (props: UserAttributeFormProps) => {
+const CollectionGroupForm = (props: CollectionGroupFormProps) => {
   const { t } = useTranslation(['userAttributeForm', 'form']);
   const navigate = useNavigate();
   const { dataCollection } = props;
-  const [collectionEvents, setCollectionEvents] = useState(
-    dataCollection.collectionEvents
-  );
+  const [collectionEvents] = useState(dataCollection.collectionEvents);
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>(dataCollection);
 
@@ -101,7 +99,7 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
 
     console.log('collectionEventReferences', collectionEventReference);
 
-    const userAttributePairValue: UserAttributePairValue = {
+    const userAttributePairValue: CollectionGroupValue = {
       id: uuidv4(),
       label,
       collectionEventReference,
@@ -242,4 +240,4 @@ const UserAttributeForm = (props: UserAttributeFormProps) => {
   );
 };
 
-export default UserAttributeForm;
+export default CollectionGroupForm;

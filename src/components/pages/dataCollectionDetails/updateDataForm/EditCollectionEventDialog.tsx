@@ -17,7 +17,7 @@ import {
 import QuestionnaireModelSelect from '@/components/shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
 import { PoguesQuestionnaire } from '@/lib/model/poguesQuestionnaire';
 import CollectionCommunicationSelect from '@/components/shared/formComponents/collectionCommunication/collectionCommunication';
-import { UserAttributePairCollection } from '@/lib/model/communicationCollectionEvent';
+import { CollectionCommunication } from '@/lib/model/communicationCollectionEvent';
 import {
   createIntlRecord,
   createCollectionCommunicationMode,
@@ -130,11 +130,11 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
     const attributeValue = createCollectionCommunicationMode(
       userAttributePairArray
     );
-    const userAttributePairCollection: UserAttributePairCollection = {
+    const userAttributePairCollection: CollectionCommunication = {
       attributeKey: 'extension:CollectionCommunicationSteps',
       attributeValue,
     };
-    const userAttributePairCollectionArray: UserAttributePairCollection[] = [];
+    const userAttributePairCollectionArray: CollectionCommunication[] = [];
     userAttributePairCollectionArray.push(userAttributePairCollection);
 
     const updatedCollectionEvent: CollectionEvent = {

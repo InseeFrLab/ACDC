@@ -17,6 +17,7 @@ import { FiChevronDown, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
+import { CollectionRow } from '@/lib/model/communicationCollectionEvent';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
@@ -291,7 +292,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               </Box>
               <Stack sx={{ alignItems: 'flex-start' }}>
                 {collectionEvent.userAttributePair.map((pair) => {
-                  return pair.attributeValue.map((value) => {
+                  return pair.attributeValue.map((value: CollectionRow) => {
                     return (
                       <>
                         <Typography

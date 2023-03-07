@@ -1,9 +1,9 @@
-export interface UserAttributePairCollection {
+export interface CollectionCommunication {
   attributeKey: string;
-  attributeValue: UserAttributePairCollectionRow[];
+  attributeValue: CollectionRow[];
 }
 
-export interface UserAttributePairCollectionRow {
+export interface CollectionRow {
   id: string;
   type: string;
   media: string;

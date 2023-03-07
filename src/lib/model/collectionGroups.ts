@@ -1,9 +1,9 @@
-export interface UserAttributePair {
+export interface CollectionGroup {
   attributeKey: string;
-  attributeValue: UserAttributePairValue[];
+  attributeValue: CollectionGroupValue[];
 }
 
-export interface UserAttributePairValue {
+export interface CollectionGroupValue {
   id: string;
   label: Record<'fr-FR' | 'en-IE' | string, string>;
   collectionEventReference: Record<'id', string>[];

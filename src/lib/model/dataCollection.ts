@@ -1,5 +1,5 @@
 import CollectionEvent from './collectionEvents';
-import { UserAttributePair } from './collectionGroups';
+import { CollectionGroup } from './collectionGroups';
 import { StudyUnitReference } from './studyUnitReference';
 
 export interface DataCollection {
@@ -11,7 +11,7 @@ export interface DataCollection {
   label: Record<'fr-FR' | 'en-IE' | string, string>;
   description: Record<'fr-FR' | 'en-IE' | string, string>;
   collectionEvents?: CollectionEvent[];
-  userAttributePair?: UserAttributePair[];
+  userAttributePair?: CollectionGroup[];
 }
 
 export interface DataCollectionRow {

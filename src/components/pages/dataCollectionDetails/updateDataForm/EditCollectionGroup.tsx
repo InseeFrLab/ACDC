@@ -15,8 +15,8 @@ import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import { DataCollection } from '@/lib/model/dataCollection';
 import CollectionEvent from '@/lib/model/collectionEvents';
 import {
-  UserAttributePair,
-  UserAttributePairValue,
+  CollectionGroup,
+  CollectionGroupValue,
 } from '@/lib/model/collectionGroups';
 import IntlTextInput from '../../../shared/intlTextInput/IntlTextInput';
 import CollectionEventCheckBox from '../../../shared/formComponents/collectionGroup/CollectionEventCheckbox';
@@ -27,8 +27,8 @@ interface EditCollectionGroupDialogProps {
   collectionEvents: CollectionEvent[];
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
-  attributeValueState: UserAttributePairValue;
-  setAttributeValueState: (attributeValue: UserAttributePairValue) => void;
+  attributeValueState: CollectionGroupValue;
+  setAttributeValueState: (attributeValue: CollectionGroupValue) => void;
   setNotSavedSate: (notSaved: boolean) => void;
 }
 
@@ -72,7 +72,7 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
       collectionEventsChecked.map((obj) => {
         return { id: Object.keys(obj)[0] };
       });
-    const userAttributePairValue: UserAttributePairValue = {
+    const userAttributePairValue: CollectionGroupValue = {
       ...props.attributeValueState,
       label,
       collectionEventReference,
@@ -80,7 +80,7 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
 
     props.setAttributeValueState(userAttributePairValue);
 
-    const updatedUserAttributePair: UserAttributePair = {
+    const updatedUserAttributePair: CollectionGroup = {
       attributeKey: props.dataCollectionState.userAttributePair[0].attributeKey,
       attributeValue:
         props.dataCollectionState.userAttributePair[0].attributeValue.map(

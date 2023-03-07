@@ -17,11 +17,11 @@ import { FiChevronDown, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import { UserAttributePairValue } from '../../../lib/model/collectionGroups';
+import { CollectionGroupValue } from '../../../lib/model/collectionGroups';
 import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
 
 interface CollectionGroupDisplayProps {
-  attributeValue: UserAttributePairValue;
+  attributeValue: CollectionGroupValue;
   handleDeleteUserAttribute: (id: string) => void;
   dataCollectionState: DataCollection;
   setDataCollectionState: (dataCollection: DataCollection) => void;
