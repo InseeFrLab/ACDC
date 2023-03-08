@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Typography,
   Box,
@@ -61,17 +61,25 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     useState(collectionEvent);
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
-  const listOfIds = dataCollectionState.userAttributePair
-    .flatMap((userAttribute) =>
-      userAttribute.attributeValue.flatMap((attributeValue) =>
-        attributeValue.collectionEventReference.map(
-          (collectionEventReference) => collectionEventReference.id
-        )
-      )
-    )
-    .filter((id, index, arr) => arr.indexOf(id) === index);
+  const [deletable, setDeletable] = useState(true);
 
-  const [deletable] = useState(listOfIds.includes(collectionEvent.id));
+  useEffect(() => {
+    console.log('useEffect called on CollectionEventDisplay');
+    const findDeletableEvent = () => {
+      const listID = dataCollectionState.userAttributePair
+        .flatMap((userAttribute) =>
+          userAttribute.attributeValue.flatMap((attributeValue) =>
+            attributeValue.collectionEventReference.map(
+              (collectionEventReference) => collectionEventReference.id
+            )
+          )
+        )
+        .filter((id, index, arr) => arr.indexOf(id) === index);
+      return listID.includes(collectionEvent.id);
+    };
+    setDeletable(findDeletableEvent());
+    console.log(`Collection ${collectionEvent.id} Deletable:`, deletable);
+  }, [dataCollectionState, collectionEvent.id, deletable]);
 
   const handleClickOpen = () => {
     setOpen(true);
