@@ -277,7 +277,7 @@ const DataCollectionDetailsDialog = (
           }}
         >
           <DialogContentText>
-            {isSuccess ? t('successEvent') : ''}
+            {isSuccess ? t('successEventDC') : ''}
             {isLoading ? <CircularProgress /> : ''}
             {isError ? t('error') : ''}
           </DialogContentText>
