@@ -47,9 +47,9 @@ const createApiClient = (baseUrl: string) => {
       const data = await response.json();
       return data;
     },
-    updateDataCollection: (dataCollectionApi: DataCollectionApi) =>
+    updateDataCollection: async (dataCollectionApi: DataCollectionApi) =>
       putRequest(`${baseUrl}api/data-collections/`, dataCollectionApi),
-    deleteDataCollection: (id: string) =>
+    deleteDataCollection: async (id: string) =>
       deleteRequest(`${baseUrl}api/data-collections/${id}`),
   };
 };

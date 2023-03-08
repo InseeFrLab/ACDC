@@ -11,7 +11,7 @@ const fetcher = (url: string, method: string, body: any) => {
   })
     .then((r) => {
       if (r.ok) return r.json();
-      throw new Error('An error occuring while fetching data');
+      throw new Error(`Error fetching data: ${r.statusText}`);
     })
     .catch((e) => {
       throw new Error(`Fetch error for ${url} with the following error: ${e}`);
