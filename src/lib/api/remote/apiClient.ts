@@ -17,7 +17,7 @@ const createApiClient = (baseUrl: string) => {
       getRequest(`${baseUrl}api/external/pogues/questionnaire`),
     getAllSeries: (): Promise<any[]> =>
       getRequest(`${baseUrl}api/external/magma/series`),
-    getSerieOperation: (id: string): Promise<StatisticalSeries[]> => {
+    getSerieOperation: async (id: string): Promise<StatisticalSeries[]> => {
       const operations = [] as StatisticalSeries[];
       getRequest(`${baseUrl}api/external/magma/operations/${id}`).then(
         (jsonBody) => {

@@ -18,7 +18,7 @@ const App = () => {
   const apiClient = apiUrl ? createApiClient(apiUrl) : createApiMockClient();
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} locale={fr}>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient} contextSharing>
         <ApiContext.Provider value={apiClient}>
           <Root
             sx={{
