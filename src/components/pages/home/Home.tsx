@@ -17,6 +17,7 @@ const Home = () => {
     navigate('/new');
   };
   const { getAllDataCollections } = useContext(ApiContext);
+  console.log('getAllDataCollections: ', getAllDataCollections);
 
   const { data, error, isLoading, isSuccess } = useQuery(
     ['allDataCollection'],

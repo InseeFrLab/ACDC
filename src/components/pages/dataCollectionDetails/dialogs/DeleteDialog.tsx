@@ -34,9 +34,7 @@ const DeleteDialog = (props: DeleteDialogProps) => {
         }}
       >
         <DialogContentText>
-          {props.isSuccess
-            ? t('successEventDC', { ns: 'dataCollectionDetails' })
-            : ''}
+          {props.isSuccess ? t('deleteSuccess', { ns: 'form' }) : ''}
           {props.isLoading ? <CircularProgress /> : ''}
           {props.isError ? t('error', { ns: 'form' }) : ''}
         </DialogContentText>
