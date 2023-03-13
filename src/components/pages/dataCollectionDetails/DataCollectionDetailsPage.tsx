@@ -119,6 +119,7 @@ const DataCollectionDetails = () => {
         },
       ],
     });
+
     const updatedDataCollection: DataCollectionApi = {
       id: dataCollectionState?.id,
       json: dataCollectionState,
@@ -128,6 +129,8 @@ const DataCollectionDetails = () => {
       updatedDataCollection
     );
     mutate(updatedDataCollection);
+    setDataCollectionState(updatedDataCollection.json);
+    setNotSavedState(true);
     setOpenDelete(true);
   };
 
