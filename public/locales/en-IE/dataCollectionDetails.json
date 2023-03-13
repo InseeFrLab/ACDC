@@ -14,5 +14,6 @@
   "successDataCollection": "Data Collection saved successfully",
   "createUserAttribute": "Create User Attribute",
   "editEvent": "Edit Collection Event",
+  "editGroup": "Edit Collection Group",
   "unsavedChanges": "You have unsaved changes"
 }

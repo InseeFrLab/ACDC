@@ -106,7 +106,7 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
     <Dialog open={props.open} onClose={props.handleClose} fullWidth>
       <DialogTitle>
         <Typography variant="h5" color="text.secondary">
-          {t('editEvent', { ns: 'dataCollectionDetails' })}
+          {t('editGroup', { ns: 'dataCollectionDetails' })}
         </Typography>
       </DialogTitle>
       <DialogContent>

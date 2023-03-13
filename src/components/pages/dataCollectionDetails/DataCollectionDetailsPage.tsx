@@ -129,8 +129,6 @@ const DataCollectionDetails = () => {
       updatedDataCollection
     );
     mutate(updatedDataCollection);
-    setDataCollectionState(updatedDataCollection.json);
-    setNotSavedState(true);
     setOpenDelete(true);
   };
 

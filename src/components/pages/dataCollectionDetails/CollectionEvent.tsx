@@ -78,7 +78,6 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
       return listID.includes(collectionEvent.id);
     };
     setDeletable(findDeletableEvent());
-    console.log(`Collection ${collectionEvent.id} Deletable:`, deletable);
   }, [dataCollectionState, collectionEvent.id, deletable]);
 
   const handleClickOpen = () => {

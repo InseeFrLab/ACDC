@@ -17,7 +17,6 @@ const Home = () => {
     navigate('/new');
   };
   const { getAllDataCollections } = useContext(ApiContext);
-  console.log('getAllDataCollections: ', getAllDataCollections);
 
   const { data, error, isLoading, isSuccess } = useQuery(
     ['allDataCollection'],
@@ -85,7 +84,6 @@ const Home = () => {
         action: dataCollection,
       };
     });
-    console.log('Get all data collection: ', rows);
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">

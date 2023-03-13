@@ -67,6 +67,18 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       };
     })
   );
+  const [collectionEventNameArray, setCollectionEventNameArray] = useState([
+    {
+      id: 1,
+      language: 'fr-FR',
+      value: props.collectionEventState.collectionEventName['fr-FR'],
+    },
+    {
+      id: 2,
+      language: 'en-IE',
+      value: props.collectionEventState.collectionEventName['en-IE'],
+    },
+  ]);
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
@@ -119,6 +131,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         return { type: mode.label };
       });
 
+    const collectionEventName = createIntlRecord(collectionEventNameArray);
     const label = createIntlRecord(labelArray);
     const description = createIntlRecord(descriptionArray);
 
@@ -139,6 +152,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
 
     const updatedCollectionEvent: CollectionEvent = {
       ...props.collectionEventState,
+      collectionEventName,
       label,
       description,
       dataCollectionDate: {
@@ -205,28 +219,21 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
                 marginTop: 1,
               }}
             >
-              <FormControl size="small" fullWidth sx={{ marginTop: 1 }}>
-                <TextField
-                  disabled
-                  size="small"
-                  value={
-                    props.collectionEventState.collectionEventName[
-                      i18n.language
-                    ]
-                  }
-                  sx={{
-                    marginRight: 2,
-                    width: '100%',
-                    '& legend': { display: 'none' },
-                    '& fieldset': { top: 0 },
-                  }}
-                  id={
-                    props.collectionEventState.collectionEventName[
-                      i18n.language
-                    ]
-                  }
-                />
-              </FormControl>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  paddingTop: 2,
+                }}
+              >
+                <Typography variant="h6">
+                  {t('name', { ns: 'form' })}*:
+                </Typography>
+              </Box>
+              <IntlTextInput
+                textArray={collectionEventNameArray}
+                setTextArray={setCollectionEventNameArray}
+              />
               <Box
                 sx={{
                   display: 'flex',
