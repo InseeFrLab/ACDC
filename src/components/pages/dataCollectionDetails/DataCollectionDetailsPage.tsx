@@ -31,7 +31,7 @@ const DataCollectionDetails = () => {
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
   const [dataCollectionState, setDataCollectionState] =
-    useState(dataCollection);
+    useState<DataCollection>(dataCollection);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
   const [notSavedState, setNotSavedState] = useState(false);
