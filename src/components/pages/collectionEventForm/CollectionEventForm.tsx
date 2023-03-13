@@ -65,9 +65,9 @@ const EventForm = (props: DataCollectionProps) => {
   const [userAttributePairArray, setUserAttributePairArray] = useState([
     {
       id: 1,
-      type: 'Opening',
-      media: 'Email',
-      paperQuestionnaire: 'false',
+      type: '',
+      media: '',
+      paperQuestionnaire: '',
     },
   ]);
   const [collectionEventNameArray, setCollectionEventNameArray] = useState([
@@ -294,7 +294,7 @@ const EventForm = (props: DataCollectionProps) => {
             variant="outlined"
             sx={{ marginRight: 2 }}
             onClick={() => {
-              setOpen(false);
+              navigate(-1);
             }}
           >
             <Typography variant="subtitle1">

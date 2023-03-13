@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Typography,
   Box,
@@ -13,7 +14,7 @@ import {
   CardContent,
   Stack,
 } from '@mui/material';
-import { FiChevronDown, FiTrash } from 'react-icons/fi';
+import { FiChevronDown, FiTrash, FiEdit, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { DataCollection } from '../../../lib/model/dataCollection';
@@ -67,6 +68,27 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
   };
   const handleDeleteClick = (id: string) => {
     handleDeleteUserAttribute(id);
+  };
+  const handleDuplicateClick = () => {
+    console.log('Duplicate CollectionGroup with id: ', attributeValue.id);
+    const duplicateCollectionGroup = {
+      ...attributeValue,
+      id: uuidv4(),
+      label: {
+        'fr-FR': `${attributeValue.label['fr-FR']} (copie)`,
+        'en-IE': `${attributeValue.label['en-IE']} (copy)`,
+      },
+    } as CollectionGroupValue;
+    const newDataCollectionState = dataCollectionState;
+    newDataCollectionState.userAttributePair[0].attributeValue.push(
+      duplicateCollectionGroup
+    );
+    console.log(
+      'newDataCollectionState with duplicated collectionEvent:',
+      newDataCollectionState
+    );
+    setDataCollectionState(newDataCollectionState);
+    setNotSavedState(true);
   };
 
   return (
@@ -202,9 +224,21 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                 </Button>
                 <Button
                   size="small"
+                  onClick={handleDuplicateClick}
+                  variant="contained"
+                  sx={{ marginLeft: 2 }}
+                  startIcon={<FiCopy />}
+                >
+                  <Typography variant="body1" fontWeight="xl">
+                    {t('duplicate', { ns: 'dataCollectionDetails' })}
+                  </Typography>
+                </Button>
+                <Button
+                  size="small"
                   onClick={() => setOpen(true)}
                   variant="contained"
                   sx={{ marginLeft: 2 }}
+                  startIcon={<FiEdit />}
                 >
                   <Typography variant="body1" fontWeight="xl">
                     {t('edit', { ns: 'dataCollectionDetails' })}

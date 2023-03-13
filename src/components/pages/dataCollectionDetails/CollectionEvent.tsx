@@ -12,8 +12,9 @@ import {
   CardContent,
   Stack,
 } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
 import styled from '@emotion/styled';
-import { FiChevronDown, FiTrash } from 'react-icons/fi';
+import { FiChevronDown, FiEdit, FiTrash, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
@@ -56,6 +57,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     dataCollectionState,
     setDataCollectionState,
     questionnaires,
+    setNotSavedState,
   } = props;
   const [collectionEventState, setCollectionEventState] =
     useState(collectionEvent);
@@ -95,6 +97,30 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   const handleDeleteClick = () => {
     console.log('Delete CollectionEvent in Component');
     props.handleDeleteCollectionEvent(collectionEvent.id);
+  };
+  const handleDuplicateClick = () => {
+    console.log('Duplicate CollectionEvent with id: ', collectionEvent.id);
+    const duplicateCollectionEvent = {
+      ...collectionEvent,
+      id: uuidv4(),
+      collectionEventName: {
+        'fr-FR': `${collectionEvent.collectionEventName['fr-FR']} (copie)`,
+        'en-IE': `${collectionEvent.collectionEventName['en-IE']} (copy)`,
+      },
+    };
+    const newDataCollectionState = {
+      ...dataCollectionState,
+      collectionEvents: [
+        ...dataCollectionState.collectionEvents,
+        duplicateCollectionEvent,
+      ],
+    };
+    console.log(
+      'newDataCollectionState with duplicated collectionEvent:',
+      newDataCollectionState
+    );
+    setDataCollectionState(newDataCollectionState);
+    setNotSavedState(true);
   };
   return (
     <>
@@ -384,9 +410,21 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
                 </Button>
                 <Button
                   size="small"
+                  onClick={handleDuplicateClick}
+                  variant="contained"
+                  sx={{ marginLeft: 2 }}
+                  startIcon={<FiCopy />}
+                >
+                  <Typography variant="body1" fontWeight="xl">
+                    {t('duplicate', { ns: 'dataCollectionDetails' })}
+                  </Typography>
+                </Button>
+                <Button
+                  size="small"
                   onClick={handleClickOpen}
                   variant="contained"
                   sx={{ marginLeft: 2 }}
+                  startIcon={<FiEdit />}
                 >
                   <Typography variant="body1" fontWeight="xl">
                     {t('edit', { ns: 'dataCollectionDetails' })}
@@ -405,7 +443,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
         dataCollectionState={dataCollectionState}
         setDataCollectionState={setDataCollectionState}
         questionnaires={questionnaires}
-        setNotSavedSate={props.setNotSavedState}
+        setNotSavedSate={setNotSavedState}
       />
     </>
   );
