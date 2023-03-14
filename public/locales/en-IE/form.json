@@ -17,5 +17,7 @@
   "paperQuestionnaire": "Paper Questionnaire",
   "type": "Type",
   "media": "Media",
-  "deleteSuccess": "Component deleted successfully"
+  "deleteSuccess": "Component deleted successfully",
+  "confirmationDeleteMessage": "Are you sure you want to delete this element?",
+  "confirm": "Confirm"
 }

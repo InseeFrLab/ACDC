@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { CollectionRow } from '@/lib/model/communicationCollectionEvent';
+import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
@@ -63,10 +64,10 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     useState(collectionEvent);
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openConfirmationDelete, setOpenConfirmationDelete] = useState(false);
   const [deletable, setDeletable] = useState(true);
 
   useEffect(() => {
-    console.log('useEffect called on CollectionEventDisplay');
     const findDeletableEvent = () => {
       const listID = dataCollectionState.userAttributePair
         .flatMap((userAttribute) =>
@@ -398,7 +399,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               >
                 <Button
                   size="small"
-                  onClick={handleDeleteClick}
+                  onClick={() => setOpenConfirmationDelete(true)}
                   variant="outlined"
                   sx={{ marginLeft: 2 }}
                   disabled={deletable}
@@ -444,6 +445,11 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
         setDataCollectionState={setDataCollectionState}
         questionnaires={questionnaires}
         setNotSavedSate={setNotSavedState}
+      />
+      <ConfirmationDeleteDialog
+        openConfirmationDelete={openConfirmationDelete}
+        setConfirmationDelete={setOpenConfirmationDelete}
+        handleDeleteFunction={handleDeleteClick}
       />
     </>
   );

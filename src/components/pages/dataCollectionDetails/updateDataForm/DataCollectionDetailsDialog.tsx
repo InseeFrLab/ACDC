@@ -10,6 +10,7 @@ import {
   Box,
   CircularProgress,
 } from '@mui/material';
+import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
 import { FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
@@ -35,6 +36,7 @@ const DataCollectionDetailsDialog = (
 ) => {
   const { t } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
+  const [openConfirmationDelete, setOpenConfirmationDelete] = useState(false);
   const { open, dataCollectionState, series } = props;
   const [labelArray, setLabelArray] = useState([
     {
@@ -102,12 +104,11 @@ const DataCollectionDetailsDialog = (
     setOpenDelete(false);
     navigate('/');
   };
-  const handleDelete = (id: string) => {
-    console.log(`Delete data collection with id: ${id}`);
-    mutate(id);
+  const handleDeleteClick = () => {
+    console.log(`Delete data collection with id: ${dataCollectionState.id}`);
+    mutate(dataCollectionState.id);
     setOpenDelete(true);
   };
-
   return (
     <>
       <Dialog
@@ -246,9 +247,7 @@ const DataCollectionDetailsDialog = (
         </DialogContent>
         <DialogActions>
           <Button
-            onClick={() => {
-              handleDelete(dataCollectionState.id);
-            }}
+            onClick={() => setOpenConfirmationDelete(true)}
             variant="outlined"
             sx={{ marginLeft: 2 }}
             startIcon={<FiTrash />}
@@ -288,6 +287,11 @@ const DataCollectionDetailsDialog = (
           </Button>
         </DialogActions>
       </Dialog>
+      <ConfirmationDeleteDialog
+        openConfirmationDelete={openConfirmationDelete}
+        setConfirmationDelete={setOpenConfirmationDelete}
+        handleDeleteFunction={handleDeleteClick}
+      />
     </>
   );
 };

@@ -14,6 +14,7 @@ import {
   CardContent,
   Stack,
 } from '@mui/material';
+import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
 import { FiChevronDown, FiTrash, FiEdit, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
@@ -59,6 +60,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
     useState(attributeValue);
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openConfirmationDelete, setOpenConfirmationDelete] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
@@ -66,8 +68,8 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  const handleDeleteClick = (id: string) => {
-    handleDeleteUserAttribute(id);
+  const handleDeleteClick = () => {
+    handleDeleteUserAttribute(attributeValue.id);
   };
   const handleDuplicateClick = () => {
     console.log('Duplicate CollectionGroup with id: ', attributeValue.id);
@@ -213,7 +215,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
               >
                 <Button
                   size="small"
-                  onClick={() => handleDeleteClick(attributeValueState.id)}
+                  onClick={() => setOpenConfirmationDelete(true)}
                   variant="outlined"
                   sx={{ marginLeft: 2 }}
                   startIcon={<FiTrash />}
@@ -258,6 +260,11 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
         setDataCollectionState={setDataCollectionState}
         collectionEvents={collectionEvents}
         setNotSavedSate={setNotSavedState}
+      />
+      <ConfirmationDeleteDialog
+        openConfirmationDelete={openConfirmationDelete}
+        setConfirmationDelete={setOpenConfirmationDelete}
+        handleDeleteFunction={handleDeleteClick}
       />
     </>
   );
