@@ -22,16 +22,25 @@ export const createIntlRecord = (
 export const createCollectionCommunicationMode = (
   input: {
     id: number;
-    type: string;
-    media: string;
-    paperQuestionnaire: string;
+    type?: string;
+    media?: string;
+    paperQuestionnaire?: string;
   }[]
 ): CollectionRow[] => {
+  if (
+    input.some(
+      ({ type, media, paperQuestionnaire }) =>
+        !(type || media || paperQuestionnaire)
+    )
+  ) {
+    return [];
+  }
+
   return input.map((obj) => ({
     id: uuidv4(),
     type: obj.type,
     media: obj.media,
-    paperQuestionnaire: JSON.parse(obj.paperQuestionnaire),
+    paperQuestionnaire: JSON.parse(obj.paperQuestionnaire || 'null'),
   }));
 };
 

@@ -101,6 +101,7 @@ const DataCollectionDetails = () => {
       updatedDataCollection
     );
     mutate(updatedDataCollection);
+    setNotSavedState(true);
     setOpenDelete(true);
   };
 
@@ -129,6 +130,7 @@ const DataCollectionDetails = () => {
       updatedDataCollection
     );
     mutate(updatedDataCollection);
+    setNotSavedState(true);
     setOpenDelete(true);
   };
 
