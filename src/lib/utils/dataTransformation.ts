@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { CollectionRow } from '../model/communicationCollectionEvent';
 import InstrumentReference from '../model/instrumentReference';
+import LanguageRecord from '../model/languageRecord';
 
 export const createIntlRecord = (
   input: {
@@ -8,24 +9,20 @@ export const createIntlRecord = (
     language: string;
     value: string;
   }[]
-): Record<'fr-FR' | 'en-IE' | string, string> => {
-  const record = input.reduce(
-    (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-      map[obj.language] = obj.value;
-      return map;
-    },
-    {}
-  );
-  return record;
+): LanguageRecord => {
+  return input.reduce((map, { language, value }) => {
+    map[language] = value;
+    return map;
+  }, {} as LanguageRecord);
 };
-
+type CommunicationMode = {
+  id: string;
+  type?: string;
+  media?: string;
+  paperQuestionnaire?: string;
+};
 export const createCollectionCommunicationMode = (
-  input: {
-    id: number;
-    type?: string;
-    media?: string;
-    paperQuestionnaire?: string;
-  }[]
+  input: CommunicationMode[]
 ): CollectionRow[] => {
   if (
     input.some(
@@ -40,7 +37,9 @@ export const createCollectionCommunicationMode = (
     id: uuidv4(),
     type: obj.type,
     media: obj.media,
-    paperQuestionnaire: JSON.parse(obj.paperQuestionnaire || 'null'),
+    paperQuestionnaire: obj.paperQuestionnaire
+      ? JSON.parse(obj.paperQuestionnaire)
+      : null,
   }));
 };
 

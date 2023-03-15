@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Typography } from '@mui/material';
 import { useContext } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
+import LanguageRecord from '@/lib/model/languageRecord';
 import Main from '../../shared/layout/Main';
 import DataGridHomePage from './DataTable';
 import { DataCollection } from '../../../lib/model/dataCollection';
@@ -53,16 +54,15 @@ const Home = () => {
     const rows = dataArray.map((dataCollectionApi: DataCollectionApi) => {
       const dataCollection: DataCollection = dataCollectionApi.json;
 
-      const labelData: Record<'fr-FR' | 'en-IE' | string, string> = {
+      const labelData: LanguageRecord = {
         'fr-FR': dataCollection.label['fr-FR'],
         'en-IE': dataCollection.label['en-IE'],
       };
-      const studyUnitReferenceData: Record<'fr-FR' | 'en-IE' | string, string> =
-        {
-          'fr-FR': dataCollection.studyUnitReference.label['fr-FR'],
-          'en-IE': dataCollection.studyUnitReference.label['en-IE'],
-        };
-      const groupReferenceData: Record<'fr-FR' | 'en-IE' | string, string> = {
+      const studyUnitReferenceData: LanguageRecord = {
+        'fr-FR': dataCollection.studyUnitReference.label['fr-FR'],
+        'en-IE': dataCollection.studyUnitReference.label['en-IE'],
+      };
+      const groupReferenceData: LanguageRecord = {
         'fr-FR':
           dataCollection.studyUnitReference.groupReference.label['fr-FR'],
         'en-IE':

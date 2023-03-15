@@ -1,3 +1,5 @@
+import LanguageRecord from './languageRecord';
+
 export interface CollectionGroup {
   attributeKey: string;
   attributeValue: CollectionGroupValue[];
@@ -5,6 +7,6 @@ export interface CollectionGroup {
 
 export interface CollectionGroupValue {
   id: string;
-  label: Record<'fr-FR' | 'en-IE' | string, string>;
+  label: LanguageRecord;
   collectionEventReference: Record<'id', string>[];
 }

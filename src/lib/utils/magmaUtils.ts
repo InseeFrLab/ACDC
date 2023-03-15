@@ -1,3 +1,5 @@
+import LanguageRecord from '../model/languageRecord';
+
 export function getLanguageCode(language: string): string {
   // Map the language to its corresponding code
   switch (language) {
@@ -13,8 +15,8 @@ export function getLanguageCode(language: string): string {
 
 export function transformLabels(
   labels: Record<'langue' | 'contenu', string>[]
-): Record<'fr-FR' | 'en-IE' | string, string> {
-  const transformed: Record<'fr-FR' | 'en-IE' | string, string> = {} as Record<
+): LanguageRecord {
+  const transformed: LanguageRecord = {} as Record<
     'fr-FR' | 'en-IE' | string,
     string
   >;
@@ -22,6 +24,5 @@ export function transformLabels(
     const languageCode = getLanguageCode(label.langue);
     transformed[languageCode] = label.contenu;
   });
-  // console.log('Transformed intl fields: ', transformed);
   return transformed;
 }

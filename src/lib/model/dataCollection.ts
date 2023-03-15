@@ -1,6 +1,7 @@
 import CollectionEvent from './collectionEvents';
 import { CollectionGroup } from './collectionGroups';
 import { StudyUnitReference } from './studyUnitReference';
+import LanguageRecord from './languageRecord';
 
 export interface DataCollection {
   id: string;
@@ -8,8 +9,8 @@ export interface DataCollection {
   version: number;
   versionDate: string;
   studyUnitReference: StudyUnitReference;
-  label: Record<'fr-FR' | 'en-IE' | string, string>;
-  description: Record<'fr-FR' | 'en-IE' | string, string>;
+  label: LanguageRecord;
+  description: LanguageRecord;
   collectionEvents?: CollectionEvent[];
   userAttributePair?: CollectionGroup[];
 }
