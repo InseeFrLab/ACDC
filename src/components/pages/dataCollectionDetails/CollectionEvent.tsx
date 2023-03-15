@@ -53,6 +53,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     'form',
     'userAttributeForm',
   ]);
+
   const {
     collectionEvent,
     dataCollectionState,
@@ -62,6 +63,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   } = props;
   const [collectionEventState, setCollectionEventState] =
     useState(collectionEvent);
+
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [openConfirmationDelete, setOpenConfirmationDelete] = useState(false);
@@ -78,10 +80,10 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
           )
         )
         .filter((id, index, arr) => arr.indexOf(id) === index);
-      return listID.includes(collectionEvent.id);
+      return listID.some((id) => id === collectionEvent.id);
     };
     setDeletable(findDeletableEvent());
-  }, [dataCollectionState, collectionEvent.id, deletable]);
+  }, [dataCollectionState, collectionEvent.id]);
 
   const handleClickOpen = () => {
     setOpen(true);

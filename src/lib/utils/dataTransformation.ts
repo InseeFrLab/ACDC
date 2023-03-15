@@ -15,8 +15,8 @@ export const createIntlRecord = (
     return map;
   }, {} as LanguageRecord);
 };
-type CommunicationMode = {
-  id: string;
+export type CommunicationMode = {
+  id: number;
   type?: string;
   media?: string;
   paperQuestionnaire?: string;

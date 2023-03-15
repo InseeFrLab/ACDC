@@ -92,7 +92,6 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
     setDataCollectionState(newDataCollectionState);
     setNotSavedState(true);
   };
-
   return (
     <>
       <Card

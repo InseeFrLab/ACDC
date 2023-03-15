@@ -22,6 +22,7 @@ import {
   createIntlRecord,
   createCollectionCommunicationMode,
   createInstrumentReference,
+  CommunicationMode,
 } from '@/lib/utils/dataTransformation';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
@@ -62,7 +63,9 @@ const EventForm = (props: DataCollectionProps) => {
   );
   const [questionnaire, setQuestionnaire] = useState<string>('');
   const [questionnaireLabel, setQuestionnaireLabel] = useState<string>('');
-  const [userAttributePairArray, setUserAttributePairArray] = useState([
+  const [userAttributePairArray, setUserAttributePairArray] = useState<
+    CommunicationMode[]
+  >([
     {
       id: 1,
       type: '',
@@ -115,10 +118,6 @@ const EventForm = (props: DataCollectionProps) => {
   };
 
   const checkValidation = () => {
-    console.log('Check validation');
-    console.log('labelArray: ', labelArray);
-    console.log('descriptionArray: ', descriptionArray);
-    console.log('collectionEventNameArray: ', collectionEventNameArray);
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
 
     const collectionEventNameArrayFiltered = collectionEventNameArray.filter(
@@ -140,11 +139,13 @@ const EventForm = (props: DataCollectionProps) => {
       questionnaire,
       questionnaireLabel
     );
-    const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
-      .filter((mode) => mode.checked === true)
-      .map((mode) => {
-        return { type: mode.label };
-      });
+    const modeOfCollection: TypeOfModeOfCollection[] =
+      modeCollectionCheck.reduce<TypeOfModeOfCollection[]>((acc, mode) => {
+        if (mode.checked) {
+          acc.push({ type: mode.label });
+        }
+        return acc;
+      }, []);
 
     const collectionEventName = createIntlRecord(collectionEventNameArray);
     const label = createIntlRecord(labelArray);

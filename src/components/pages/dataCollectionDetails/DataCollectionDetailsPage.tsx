@@ -100,7 +100,7 @@ const DataCollectionDetails = () => {
       'Updated Data Collection deleting Collection Event: ',
       updatedDataCollection
     );
-    mutate(updatedDataCollection);
+    // mutate(updatedDataCollection);
     setNotSavedState(true);
     setOpenDelete(true);
   };
@@ -121,15 +121,11 @@ const DataCollectionDetails = () => {
       ],
     });
 
-    const updatedDataCollection: DataCollectionApi = {
-      id: dataCollectionState?.id,
-      json: dataCollectionState,
-    };
     console.log(
       'Updated Data Collection deleting Collection Group: ',
-      updatedDataCollection
+      dataCollectionState
     );
-    mutate(updatedDataCollection);
+    // mutate(updatedDataCollection);
     setNotSavedState(true);
     setOpenDelete(true);
   };
@@ -149,6 +145,10 @@ const DataCollectionDetails = () => {
     setNotSavedState(false);
     setOpenSave(true);
   };
+
+  useEffect(() => {
+    console.log('DC State has been updated:', dataCollectionState);
+  }, [dataCollectionState]);
 
   useEffect(() => {
     if (isSuccess) {
