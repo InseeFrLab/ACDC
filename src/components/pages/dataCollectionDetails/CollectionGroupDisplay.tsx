@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from '@emotion/styled';
 import { v4 as uuidv4 } from 'uuid';
 import {
   Typography,
@@ -8,8 +7,6 @@ import {
   Card,
   Divider,
   CardActions,
-  IconButton,
-  IconButtonProps,
   Collapse,
   CardContent,
   Stack,
@@ -18,6 +15,7 @@ import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDe
 import { FiChevronDown, FiTrash, FiEdit, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
+import ExpandMore from '@/components/shared/styled/ExpandMore';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { CollectionGroupValue } from '../../../lib/model/collectionGroups';
 import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
@@ -29,18 +27,6 @@ interface CollectionGroupDisplayProps {
   setDataCollectionState: (dataCollection: DataCollection) => void;
   setNotSavedState: (notSaved: boolean) => void;
 }
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-}));
 
 const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
   const { t, i18n } = useTranslation([

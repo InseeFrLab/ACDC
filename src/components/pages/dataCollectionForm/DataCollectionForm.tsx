@@ -24,7 +24,7 @@ interface CollectionFormProps {
 }
 
 const CollectionForm = (props: CollectionFormProps) => {
-  const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
+  const { t } = useTranslation(['dataCollectionForm', 'form']);
   const navigate = useNavigate();
 
   const { isLoading, isError, isSuccess, mutate } =
@@ -89,19 +89,16 @@ const CollectionForm = (props: CollectionFormProps) => {
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
-    const studyUnitReferenceFiltered =
-      Object.keys(studyUnitReference).length !== 0;
-    const groupReferenceFiltered = Object.keys(groupReference).length !== 0;
-    if (
+    const studyUnitReferenceFiltered = !!Object.keys(studyUnitReference).length;
+    const groupReferenceFiltered = !!Object.keys(groupReference).length;
+
+    const isValid =
       labelArrayFiltered.length === 2 &&
       studyUnitReferenceFiltered &&
-      groupReferenceFiltered
-    ) {
-      setTextError(false);
-      return true;
-    }
-    setTextError(true);
-    return false;
+      groupReferenceFiltered;
+    setTextError(!isValid);
+
+    return isValid;
   };
 
   const createDataCollectionObject = () => {

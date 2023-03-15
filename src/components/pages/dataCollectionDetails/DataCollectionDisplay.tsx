@@ -1,18 +1,10 @@
 import { useState } from 'react';
-import styled from '@emotion/styled';
-import {
-  Typography,
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  IconButtonProps,
-  Collapse,
-} from '@mui/material';
+import { Typography, Box, Button, Divider, Collapse } from '@mui/material';
 import { FiChevronRight } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
+import ExpandMore from '@/components/shared/styled/ExpandMore';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
 
@@ -22,18 +14,6 @@ interface DataCollectionDisplayProps {
   series: StatisticalSeries[];
   setNotSavedState: (notSaved: boolean) => void;
 }
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-}));
 
 const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
   const { t, i18n } = useTranslation([

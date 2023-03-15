@@ -119,19 +119,17 @@ const EventForm = (props: DataCollectionProps) => {
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
-
     const collectionEventNameArrayFiltered = collectionEventNameArray.filter(
       (obj) => obj.value !== ''
     );
-    if (
+
+    const isValid =
       labelArrayFiltered.length === 2 &&
-      collectionEventNameArrayFiltered.length === 2
-    ) {
-      setTextError(false);
-      return true;
-    }
-    setTextError(true);
-    return false;
+      collectionEventNameArrayFiltered.length === 2;
+
+    setTextError(!isValid);
+
+    return isValid;
   };
 
   const createCollectionEventObject = () => {

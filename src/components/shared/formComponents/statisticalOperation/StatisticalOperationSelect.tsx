@@ -56,20 +56,13 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   useEffect(() => {
     if (isSuccess) {
       setIsLoading(false);
-      const newOperations: StatisticalSeries[] = [];
-      data.forEach((serie: any) => {
-        const dataSerie: StatisticalSeries = {
-          id: serie.id,
-          label: transformLabels(serie.label),
-          altLabel: serie.altLabel
-            ? transformLabels(serie.altLabel)
-            : {
-                'fr-FR': '',
-                'en-IE': '',
-              },
-        };
-        newOperations.push(dataSerie);
-      });
+      const newOperations: StatisticalSeries[] = data.map((serie: any) => ({
+        id: serie.id,
+        label: transformLabels(serie.label),
+        altLabel: serie.altLabel
+          ? transformLabels(serie.altLabel)
+          : { 'fr-FR': '', 'en-IE': '' },
+      }));
       setOperations(newOperations);
       console.log('Associated series Operations: ', newOperations);
       setOperationDisabled(false);

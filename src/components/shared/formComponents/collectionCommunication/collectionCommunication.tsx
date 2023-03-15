@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { FiX } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
+import { CommunicationMode } from '@/lib/utils/dataTransformation';
 
 interface CollectionCommunicationSelectProps {
   userAttributePair: any;
@@ -38,10 +39,7 @@ const CollectionCommunicationSelect = (
 
   const deleteCommunicationLabel = (index: number) => {
     props.setUserAttributePair((s: any) => {
-      const newText: Record<
-        'id' | 'type' | 'media' | 'paperQuestionnaire',
-        string | boolean
-      >[] = s.slice();
+      const newText: CommunicationMode[] = s.slice();
       newText.splice(index, 1);
       return newText;
     });
@@ -52,10 +50,7 @@ const CollectionCommunicationSelect = (
     index: number
   ) => {
     props.setUserAttributePair((s: any) => {
-      const newText: Record<
-        'id' | 'type' | 'media' | 'paperQuestionnaire',
-        string | boolean
-      >[] = s.slice();
+      const newText: CommunicationMode[] = s.slice();
       newText[index].type = e.target.value;
       return newText;
     });
@@ -66,10 +61,7 @@ const CollectionCommunicationSelect = (
     index: number
   ) => {
     props.setUserAttributePair((s: any) => {
-      const newText: Record<
-        'id' | 'type' | 'media' | 'paperQuestionnaire',
-        string | boolean
-      >[] = s.slice();
+      const newText: CommunicationMode[] = s.slice();
       newText[index].media = e.target.value;
       return newText;
     });

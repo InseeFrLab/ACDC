@@ -6,20 +6,18 @@ import {
   Card,
   Divider,
   CardActions,
-  IconButton,
-  IconButtonProps,
   Collapse,
   CardContent,
   Stack,
 } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
-import styled from '@emotion/styled';
 import { FiChevronDown, FiEdit, FiTrash, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { CollectionRow } from '@/lib/model/communicationCollectionEvent';
 import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
+import ExpandMore from '@/components/shared/styled/ExpandMore';
 import CollectionEvent from '../../../lib/model/collectionEvents';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
@@ -33,18 +31,6 @@ interface CollectionEventDisplayProps {
   questionnaires: PoguesQuestionnaire[];
   setNotSavedState: (notSavedState: boolean) => void;
 }
-
-interface ExpandMoreProps extends IconButtonProps {
-  expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-}));
 
 const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   const { t, i18n } = useTranslation([

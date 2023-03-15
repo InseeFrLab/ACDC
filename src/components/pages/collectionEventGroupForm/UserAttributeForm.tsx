@@ -72,15 +72,14 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
-    const collectionEventCheckedLength = collectionEventCheck.filter(
-      (obj) => Object.values(obj)[0] === true
-    ).length;
-    if (labelArrayFiltered.length === 2 && collectionEventCheckedLength > 0) {
-      setTextError(false);
-      return true;
-    }
-    setTextError(true);
-    return false;
+    const collectionEventCheckedLength = collectionEventCheck.reduce(
+      (acc, obj) => acc + Number(Object.values(obj)[0]),
+      0
+    );
+    const isValid =
+      labelArrayFiltered.length === 2 && collectionEventCheckedLength > 0;
+    setTextError(!isValid);
+    return isValid;
   };
 
   const createUserAttributeObject = () => {
