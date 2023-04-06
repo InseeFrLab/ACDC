@@ -132,7 +132,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
             fontWeight="bold"
             sx={{ marginRight: 1 }}
           >
-            {t('statisticalOperation', { ns: 'dataCollectionForm' })}:{' '}
+            {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}:{' '}
           </Typography>
           <Typography variant="subtitle1">
             {
@@ -153,7 +153,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
             fontWeight="bold"
             sx={{ marginRight: 1 }}
           >
-            {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}:{' '}
+            {t('statisticalOperation', { ns: 'dataCollectionForm' })}:{' '}
           </Typography>
           <Typography variant="subtitle1">
             {dataCollectionState.studyUnitReference.label[i18n.language]}
