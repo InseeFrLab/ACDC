@@ -46,6 +46,7 @@ const IntlTextInput = (props: any) => {
               <FormControl fullWidth size="small">
                 <TextField
                   required
+                  error={label.value === ''}
                   size="small"
                   multiline={props.multiline}
                   // label={t('label')}

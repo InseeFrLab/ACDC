@@ -33,22 +33,13 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
   const columns: GridColDef[] = [
     {
       field: 'label',
-      renderHeader: () => (
-        <strong>{t('label', { ns: 'form' }).toString()}</strong>
-      ),
+      renderHeader: () => <strong>{t('statisticalProgram').toString()}</strong>,
       headerClassName: 'columns--header',
       flex: 0.3,
       description: t('label', { ns: 'form' }).toString(),
     },
     {
       field: 'groupReference',
-      renderHeader: () => <strong>{t('statisticalProgram').toString()}</strong>,
-      headerClassName: 'columns--header',
-      flex: 0.3,
-      description: t('statisticalProgram').toString(),
-    },
-    {
-      field: 'studyUnitReference',
       renderHeader: () => (
         <strong>
           {t('statisticalOperation', {
@@ -57,7 +48,20 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         </strong>
       ),
       headerClassName: 'columns--header',
-      flex: 0.3,
+      flex: 0.25,
+      description: t('statisticalProgram').toString(),
+    },
+    {
+      field: 'studyUnitReference',
+      renderHeader: () => (
+        <strong>
+          {t('statisticalOperationSeries', {
+            ns: 'dataCollectionForm',
+          }).toString()}
+        </strong>
+      ),
+      headerClassName: 'columns--header',
+      flex: 0.35,
       description: t('statisticalOperation', {
         ns: 'dataCollectionForm',
       }).toString(),
@@ -86,7 +90,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       field: 'action',
       headerName: ' ',
       headerClassName: 'columns--header',
-      flex: 0.15,
+      flex: 0.1,
       align: 'center',
       description: t('goToCollection').toString(),
       renderCell: (params: GridRenderCellParams) => (
