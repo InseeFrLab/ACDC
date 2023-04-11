@@ -7,7 +7,7 @@ import {
   GridColDef,
   GridRenderCellParams,
 } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiChevronRight } from 'react-icons/fi';
@@ -33,19 +33,29 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
   const columns: GridColDef[] = [
     {
       field: 'label',
-      renderHeader: () => <strong>{t('statisticalProgram').toString()}</strong>,
+      renderHeader: () => <h2>{t('statisticalProgram').toString()}</h2>,
       headerClassName: 'columns--header',
       flex: 0.3,
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily={'"Frank Ruhl Libre"'}>
+          {params.value}
+        </Typography>
+      ),
       description: t('label', { ns: 'form' }).toString(),
     },
     {
       field: 'groupReference',
       renderHeader: () => (
-        <strong>
+        <h2>
           {t('statisticalOperation', {
             ns: 'dataCollectionForm',
           }).toString()}
-        </strong>
+        </h2>
+      ),
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily={'"Frank Ruhl Libre"'}>
+          {params.value}
+        </Typography>
       ),
       headerClassName: 'columns--header',
       flex: 0.25,
@@ -54,37 +64,50 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'studyUnitReference',
       renderHeader: () => (
-        <strong>
+        <h2>
           {t('statisticalOperationSeries', {
             ns: 'dataCollectionForm',
           }).toString()}
-        </strong>
+        </h2>
       ),
       headerClassName: 'columns--header',
       flex: 0.35,
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily={'"Frank Ruhl Libre"'}>
+          {params.value}
+        </Typography>
+      ),
       description: t('statisticalOperation', {
         ns: 'dataCollectionForm',
       }).toString(),
     },
     {
       field: 'versionDate',
-      renderHeader: () => <strong>{t('lastUpdate').toString()}</strong>,
+      renderHeader: () => <h2>{t('lastUpdate').toString()}</h2>,
       type: 'date',
       valueFormatter: (params) =>
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         moment(params?.value).format('DD/MM/YYYY HH:mm'),
       headerClassName: 'columns--header',
       flex: 0.2,
-
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily={'"Frank Ruhl Libre"'}>
+          {params.value}
+        </Typography>
+      ),
       description: t('lastUpdate').toString(),
     },
     {
       field: 'version',
-      renderHeader: () => <strong>{t('version').toString()}</strong>,
+      renderHeader: () => <h2>{t('version').toString()}</h2>,
       headerClassName: 'columns--header',
       flex: 0.1,
-
       description: t('version').toString(),
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily={'"Frank Ruhl Libre"'}>
+          {params.value}
+        </Typography>
+      ),
     },
     {
       field: 'action',
