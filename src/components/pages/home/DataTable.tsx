@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 import {
   GridToolbarContainer,
@@ -33,29 +34,29 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
   const columns: GridColDef[] = [
     {
       field: 'label',
-      renderHeader: () => <h2>{t('statisticalProgram').toString()}</h2>,
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+          {t('statisticalProgram').toString()}
+        </Typography>
+      ),
       headerClassName: 'columns--header',
       flex: 0.3,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily={'"Frank Ruhl Libre"'}>
-          {params.value}
-        </Typography>
+        <Typography>{params.value}</Typography>
       ),
       description: t('label', { ns: 'form' }).toString(),
     },
     {
       field: 'groupReference',
       renderHeader: () => (
-        <h2>
+        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
           {t('statisticalOperation', {
             ns: 'dataCollectionForm',
           }).toString()}
-        </h2>
+        </Typography>
       ),
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily={'"Frank Ruhl Libre"'}>
-          {params.value}
-        </Typography>
+        <Typography>{params.value}</Typography>
       ),
       headerClassName: 'columns--header',
       flex: 0.25,
@@ -64,18 +65,16 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'studyUnitReference',
       renderHeader: () => (
-        <h2>
+        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
           {t('statisticalOperationSeries', {
             ns: 'dataCollectionForm',
           }).toString()}
-        </h2>
+        </Typography>
       ),
       headerClassName: 'columns--header',
       flex: 0.35,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily={'"Frank Ruhl Libre"'}>
-          {params.value}
-        </Typography>
+        <Typography>{params.value}</Typography>
       ),
       description: t('statisticalOperation', {
         ns: 'dataCollectionForm',
@@ -83,30 +82,34 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     },
     {
       field: 'versionDate',
-      renderHeader: () => <h2>{t('lastUpdate').toString()}</h2>,
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+          {t('lastUpdate').toString()}
+        </Typography>
+      ),
       type: 'date',
-      valueFormatter: (params) =>
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        moment(params?.value).format('DD/MM/YYYY HH:mm'),
+
       headerClassName: 'columns--header',
       flex: 0.2,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily={'"Frank Ruhl Libre"'}>
-          {params.value}
+        <Typography>
+          {moment(params.value).format('DD/MM/YYYY HH:mm')}
         </Typography>
       ),
       description: t('lastUpdate').toString(),
     },
     {
       field: 'version',
-      renderHeader: () => <h2>{t('version').toString()}</h2>,
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+          {t('version').toString()}
+        </Typography>
+      ),
       headerClassName: 'columns--header',
       flex: 0.1,
       description: t('version').toString(),
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily={'"Frank Ruhl Libre"'}>
-          {params.value}
-        </Typography>
+        <Typography>{params.value}</Typography>
       ),
     },
     {

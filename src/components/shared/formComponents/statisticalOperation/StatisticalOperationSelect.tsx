@@ -164,7 +164,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label={t('statisticalOperationSeries', {
+              label={t('statisticalOperation', {
                 ns: 'dataCollectionForm',
               })}
               value={
