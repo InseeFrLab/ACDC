@@ -1,4 +1,5 @@
 import './App.css';
+import 'regenerator-runtime/runtime';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { fr } from 'date-fns/locale';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

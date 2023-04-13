@@ -40,14 +40,14 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         </Typography>
       ),
       headerClassName: 'columns--header',
-      flex: 0.3,
+      flex: 0.25,
       renderCell: (params: GridRenderCellParams) => (
         <Typography>{params.value}</Typography>
       ),
       description: t('label', { ns: 'form' }).toString(),
     },
     {
-      field: 'groupReference',
+      field: 'studyUnitReference',
       renderHeader: () => (
         <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
           {t('statisticalOperation', {
@@ -59,11 +59,11 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         <Typography>{params.value}</Typography>
       ),
       headerClassName: 'columns--header',
-      flex: 0.25,
+      flex: 0.33,
       description: t('statisticalProgram').toString(),
     },
     {
-      field: 'studyUnitReference',
+      field: 'groupReference',
       renderHeader: () => (
         <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
           {t('statisticalOperationSeries', {
@@ -72,11 +72,11 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         </Typography>
       ),
       headerClassName: 'columns--header',
-      flex: 0.35,
+      flex: 0.25,
       renderCell: (params: GridRenderCellParams) => (
         <Typography>{params.value}</Typography>
       ),
-      description: t('statisticalOperation', {
+      description: t('statisticalOperationSeries', {
         ns: 'dataCollectionForm',
       }).toString(),
     },
