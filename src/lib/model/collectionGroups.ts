@@ -10,7 +10,7 @@ export interface CollectionGroupValue {
   label: LanguageRecord;
   collectionEventReference: Record<'id', string>[];
 }
-function isCollectionGroupItem(value: any): boolean {
+function isCollectionGroupItem(value: unknown): boolean {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -18,7 +18,7 @@ function isCollectionGroupItem(value: any): boolean {
     'attributeValue' in value
   );
 }
-export function isCollectionGroup(value: any): value is CollectionGroup[] {
+export function isCollectionGroup(value: unknown): value is CollectionGroup[] {
   return (
     Array.isArray(value) && value.every((item) => isCollectionGroupItem(item))
   );

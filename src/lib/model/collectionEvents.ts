@@ -14,5 +14,5 @@ export default interface CollectionEvent {
   dataCollectionDate: Record<'startDate' | 'endDate' | string, string>;
   typeOfModeOfCollection: TypeOfModeOfCollection[];
   instrumentReference: InstrumentReference;
-  userAttributePair: CollectionCommunication[] | UserAttributePair;
+  userAttributePair: CollectionCommunication[] | UserAttributePair[];
 }
