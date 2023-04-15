@@ -10,14 +10,15 @@ import {
   DialogTitle,
   Typography,
   Box,
-  FormControl,
-  TextField,
   Stack,
 } from '@mui/material';
 import QuestionnaireModelSelect from '@/components/shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
 import { PoguesQuestionnaire } from '@/lib/model/poguesQuestionnaire';
 import CollectionCommunicationSelect from '@/components/shared/formComponents/collectionCommunication/collectionCommunication';
-import { CollectionCommunication } from '@/lib/model/communicationCollectionEvent';
+import {
+  CollectionCommunication,
+  CollectionRow,
+} from '@/lib/model/communicationCollectionEvent';
 import {
   createIntlRecord,
   createCollectionCommunicationMode,
@@ -112,15 +113,19 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   );
 
   const [userAttributePairArray, setUserAttributePairArray] = useState(
-    props.collectionEventState.userAttributePair[0].attributeValue.map(
-      (pair, index) => {
-        return {
-          ...pair,
-          id: index + 1,
-          paperQuestionnaire: JSON.stringify(pair.paperQuestionnaire),
-        };
-      }
+    Array.isArray(
+      props.collectionEventState.userAttributePair[0].attributeValue
     )
+      ? props.collectionEventState.userAttributePair[0].attributeValue.map(
+          (pair, index) => {
+            return {
+              ...pair,
+              id: index + 1,
+              paperQuestionnaire: JSON.stringify(pair.paperQuestionnaire),
+            };
+          }
+        )
+      : []
   );
 
   const handleSave = () => {
@@ -140,7 +145,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       questionnaireLabel
     );
 
-    const attributeValue = createCollectionCommunicationMode(
+    const attributeValue: CollectionRow[] = createCollectionCommunicationMode(
       userAttributePairArray
     );
     const userAttributePairCollection: CollectionCommunication = {

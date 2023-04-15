@@ -107,10 +107,15 @@ const DataCollectionDetails = () => {
 
   const handleDeleteCollectionGroup = (id: string) => {
     console.log('Delete Collection Group: ', id);
-    const updatedUserAttributeValue =
-      dataCollectionState.userAttributePair[0].attributeValue.filter(
-        (event) => event.id !== id
-      );
+    const { attributeValue } = dataCollectionState.userAttributePair[0];
+    if (!Array.isArray(attributeValue)) {
+      // If attributeValue is not an array, do nothing.
+      return;
+    }
+
+    const updatedUserAttributeValue = attributeValue.filter(
+      (event) => event.id !== id
+    );
     setDataCollectionState({
       ...dataCollectionState,
       userAttributePair: [
@@ -217,9 +222,12 @@ const DataCollectionDetails = () => {
           marginBottom: 10,
         }}
       >
-        {dataCollectionState.userAttributePair[0].attributeValue.map(
-          (attributeValue) => {
-            return (
+        {Array.isArray(
+          dataCollectionState.userAttributePair[0].attributeValue
+        ) &&
+          dataCollectionState.userAttributePair[0].attributeValue
+            .filter((value) => value instanceof Object)
+            .map((attributeValue) => (
               <CollectionGroupDisplay
                 key={attributeValue.id}
                 attributeValue={attributeValue}
@@ -228,9 +236,7 @@ const DataCollectionDetails = () => {
                 handleDeleteUserAttribute={handleDeleteCollectionGroup}
                 setNotSavedState={setNotSavedState}
               />
-            );
-          }
-        )}
+            ))}
       </Box>
       <DeleteDialog
         openDelete={openDelete}

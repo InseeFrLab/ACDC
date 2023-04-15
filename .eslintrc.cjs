@@ -50,7 +50,6 @@ module.exports = {
       { namedComponents: 'arrow-function' },
     ],
     'import/no-extraneous-dependencies': 'off',
-
     'object-shorthand': 'error',
     'react/jsx-props-no-spreading': 'off',
     'global-require': 0,
