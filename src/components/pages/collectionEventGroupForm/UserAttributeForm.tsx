@@ -18,7 +18,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
-import { CollectionGroupValue } from '@/lib/model/collectionGroups';
+import {
+  CollectionGroup,
+  CollectionGroupValue,
+} from '@/lib/model/collectionGroups';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
@@ -107,9 +110,21 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
       versionDate: today.toISOString(),
       ...dataCollection,
     };
-    dataCollectionUpdated.userAttributePair[0].attributeValue.push(
-      userAttributePairValue
-    );
+    if (
+      dataCollectionUpdated.userAttributePair.length > 0 &&
+      Array.isArray(dataCollectionUpdated.userAttributePair[0].attributeValue)
+    ) {
+      dataCollectionUpdated.userAttributePair[0].attributeValue.push(
+        userAttributePairValue
+      );
+    } else {
+      dataCollectionUpdated.userAttributePair = [
+        {
+          attributeKey: 'extension:CollectionEventGroup',
+          attributeValue: [userAttributePairValue],
+        } as CollectionGroup,
+      ];
+    }
     console.log('dataCollectionUpdated', dataCollectionUpdated);
     const updatedDataCollection: DataCollectionApi = {
       id: dataCollection.id,

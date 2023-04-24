@@ -130,7 +130,6 @@ const DataCollectionDetails = () => {
       'Updated Data Collection deleting Collection Group: ',
       dataCollectionState
     );
-    // mutate(updatedDataCollection);
     setNotSavedState(true);
     setOpenDelete(true);
   };
@@ -222,9 +221,10 @@ const DataCollectionDetails = () => {
           marginBottom: 10,
         }}
       >
-        {Array.isArray(
-          dataCollectionState.userAttributePair[0].attributeValue
-        ) &&
+        {dataCollectionState.userAttributePair.length > 0 &&
+          Array.isArray(
+            dataCollectionState.userAttributePair[0].attributeValue
+          ) &&
           dataCollectionState.userAttributePair[0].attributeValue
             .filter((value) => value instanceof Object)
             .map((attributeValue) => (

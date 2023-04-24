@@ -113,9 +113,10 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   );
 
   const [userAttributePairArray, setUserAttributePairArray] = useState(
-    Array.isArray(
-      props.collectionEventState.userAttributePair[0].attributeValue
-    )
+    props.collectionEventState.userAttributePair.length > 0 &&
+      Array.isArray(
+        props.collectionEventState.userAttributePair[0].attributeValue
+      )
       ? props.collectionEventState.userAttributePair[0].attributeValue.map(
           (pair, index) => {
             return {

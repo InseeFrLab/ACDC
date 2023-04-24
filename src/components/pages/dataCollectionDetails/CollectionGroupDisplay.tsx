@@ -68,9 +68,13 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
       },
     } as CollectionGroupValue;
     const newDataCollectionState = dataCollectionState;
-    newDataCollectionState.userAttributePair[0].attributeValue.push(
-      duplicateCollectionGroup
-    );
+    if (
+      Array.isArray(newDataCollectionState.userAttributePair[0].attributeValue)
+    ) {
+      newDataCollectionState.userAttributePair[0].attributeValue.push(
+        duplicateCollectionGroup
+      );
+    }
     console.log(
       'newDataCollectionState with duplicated collectionEvent:',
       newDataCollectionState

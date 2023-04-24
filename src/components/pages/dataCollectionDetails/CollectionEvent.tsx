@@ -318,7 +318,6 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               </Box>
               <Stack sx={{ alignItems: 'flex-start' }}>
                 {collectionEvent.userAttributePair.map((pair) => {
-                  console.log('attribute pair type: ', pair);
                   if (Array.isArray(pair.attributeValue)) {
                     return pair.attributeValue.map((value: CollectionRow) => {
                       return (

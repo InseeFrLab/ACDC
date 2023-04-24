@@ -14,13 +14,14 @@ export const flattenCollectionGroups = (
 ) => {
   const flattenedUserAttributePairs: UserAttributePair[] = [];
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const userAttribute of dataCollectionObject.userAttributePair || []) {
-    for (const groupValue of userAttribute.attributeValue) {
-      flattenedUserAttributePairs.push({
-        attributeKey: userAttribute.attributeKey,
-        attributeValue: JSON.stringify(groupValue),
-      });
+    if (Array.isArray(userAttribute.attributeValue)) {
+      for (const groupValue of userAttribute.attributeValue) {
+        flattenedUserAttributePairs.push({
+          attributeKey: userAttribute.attributeKey,
+          attributeValue: JSON.stringify(groupValue),
+        });
+      }
     }
   }
   return {
@@ -35,11 +36,13 @@ export const flattenCollectionCommunication = (
   const flattenedUserAttributePairs: UserAttributePair[] = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const userAttribute of collectionEventObject.userAttributePair || []) {
-    for (const groupValue of userAttribute.attributeValue) {
-      flattenedUserAttributePairs.push({
-        attributeKey: userAttribute.attributeKey,
-        attributeValue: JSON.stringify(groupValue),
-      });
+    if (Array.isArray(userAttribute.attributeValue)) {
+      for (const groupValue of userAttribute.attributeValue) {
+        flattenedUserAttributePairs.push({
+          attributeKey: userAttribute.attributeKey,
+          attributeValue: JSON.stringify(groupValue),
+        });
+      }
     }
   }
   return {
