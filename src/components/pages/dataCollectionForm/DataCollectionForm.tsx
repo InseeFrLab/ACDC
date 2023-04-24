@@ -76,6 +76,8 @@ const CollectionForm = (props: CollectionFormProps) => {
       groupReference,
     } as StudyUnitReference);
 
+  const [submitAttempt, setSubmitAttempt] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -136,6 +138,7 @@ const CollectionForm = (props: CollectionFormProps) => {
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
+    setSubmitAttempt(true);
     checkValidation()
       ? createDataCollectionObject()
       : console.log('Field Validation Error');
@@ -169,6 +172,7 @@ const CollectionForm = (props: CollectionFormProps) => {
           textArray={labelArray}
           setTextArray={setLabelArray}
           multiline={false}
+          submitAttempt={submitAttempt}
         />
         <Box
           component="form"
@@ -191,6 +195,7 @@ const CollectionForm = (props: CollectionFormProps) => {
           textArray={descriptionArray}
           setTextArray={setDescriptionArray}
           multiline
+          submitAttempt={false}
         />
 
         <Box

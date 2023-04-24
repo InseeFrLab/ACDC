@@ -112,6 +112,8 @@ const EventForm = (props: DataCollectionProps) => {
   const [open, setOpen] = useState(false);
   const [textError, setTextError] = useState(false);
 
+  const [submitAttempt, setSubmitAttempt] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
     console.log('dataCollectionState: ', dataCollectionState);
@@ -197,6 +199,7 @@ const EventForm = (props: DataCollectionProps) => {
   };
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
+    setSubmitAttempt(true);
     checkValidation()
       ? createCollectionEventObject()
       : console.log('Field Validation Error');
@@ -228,6 +231,7 @@ const EventForm = (props: DataCollectionProps) => {
           textArray={collectionEventNameArray}
           setTextArray={setCollectionEventNameArray}
           multiline={false}
+          submitAttempt={submitAttempt}
         />
         <Box
           sx={{
@@ -240,7 +244,11 @@ const EventForm = (props: DataCollectionProps) => {
         >
           <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
         </Box>
-        <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
+        <IntlTextInput
+          textArray={labelArray}
+          setTextArray={setLabelArray}
+          submitAttempt={submitAttempt}
+        />
         <Box
           sx={{
             paddingTop: 2,
@@ -258,6 +266,7 @@ const EventForm = (props: DataCollectionProps) => {
           textArray={descriptionArray}
           setTextArray={setDescriptionArray}
           multiline
+          submitAttempt={false}
         />
         <CollectionModeSelect
           modeCollectionCheck={modeCollectionCheck}
