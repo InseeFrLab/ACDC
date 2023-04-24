@@ -35,28 +35,28 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'label',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
           {t('statisticalProgram').toString()}
         </Typography>
       ),
       headerClassName: 'columns--header',
       flex: 0.25,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography>{params.value}</Typography>
+        <Typography fontFamily="Nunito">{params.value}</Typography>
       ),
       description: t('label', { ns: 'form' }).toString(),
     },
     {
       field: 'studyUnitReference',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
           {t('statisticalOperation', {
             ns: 'dataCollectionForm',
           }).toString()}
         </Typography>
       ),
       renderCell: (params: GridRenderCellParams) => (
-        <Typography>{params.value}</Typography>
+        <Typography fontFamily="Nunito">{params.value}</Typography>
       ),
       headerClassName: 'columns--header',
       flex: 0.33,
@@ -65,7 +65,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'groupReference',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
           {t('statisticalOperationSeries', {
             ns: 'dataCollectionForm',
           }).toString()}
@@ -74,7 +74,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       headerClassName: 'columns--header',
       flex: 0.25,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography>{params.value}</Typography>
+        <Typography fontFamily="Nunito">{params.value}</Typography>
       ),
       description: t('statisticalOperationSeries', {
         ns: 'dataCollectionForm',
@@ -83,7 +83,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'versionDate',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
           {t('lastUpdate').toString()}
         </Typography>
       ),
@@ -92,7 +92,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       headerClassName: 'columns--header',
       flex: 0.2,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography>
+        <Typography fontFamily="Nunito">
           {moment(params.value).format('DD/MM/YYYY HH:mm')}
         </Typography>
       ),
@@ -101,7 +101,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'version',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Barlow" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
           {t('version').toString()}
         </Typography>
       ),
@@ -109,7 +109,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       flex: 0.1,
       description: t('version').toString(),
       renderCell: (params: GridRenderCellParams) => (
-        <Typography>{params.value}</Typography>
+        <Typography fontFamily="Nunito">{params.value}</Typography>
       ),
     },
     {

@@ -98,12 +98,12 @@ const Home = () => {
     );
     return (
       <Main>
-        <Typography variant="h2" fontWeight="xl">
+        <Typography variant="h2" fontWeight="xl" fontFamily="Roboto">
           {t('title')}
         </Typography>
         <DataGridHomePage rows={rows} heightTable={400} />
         <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>
-          <Typography variant="subtitle1">{t('createButton')}</Typography>
+          <Typography fontFamily="Nunito">{t('createButton')}</Typography>
         </Button>
       </Main>
     );

@@ -63,7 +63,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
     const findDeletableEvent = () => {
       const listID = dataCollectionState.userAttributePair
         .flatMap((userAttribute) =>
-          userAttribute.attributeValue.flatMap((attributeValue) =>
+          Array.from(userAttribute.attributeValue).flatMap((attributeValue) =>
             attributeValue.collectionEventReference.map(
               (collectionEventReference) => collectionEventReference.id
             )
@@ -318,50 +318,54 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               </Box>
               <Stack sx={{ alignItems: 'flex-start' }}>
                 {collectionEvent.userAttributePair.map((pair) => {
-                  return pair.attributeValue.map((value: CollectionRow) => {
-                    return (
-                      <>
-                        <Typography
-                          variant="body1"
-                          key={value.id}
-                          sx={{ ml: 1.5, alignItems: 'flex-start' }}
-                        >
-                          •{' '}
-                          <strong>
-                            {t('type', { ns: 'userAttributeForm' })} :
-                          </strong>{' '}
-                          {t(`${value.type}`, { ns: 'collectionEvent' })}
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          key={value.id}
-                          sx={{ ml: 1.5, alignItems: 'flex-start' }}
-                        >
-                          •{' '}
-                          <strong>
-                            {t('media', { ns: 'userAttributeForm' })} :{' '}
-                          </strong>{' '}
-                          {t(`${value.media}`, { ns: 'collectionEvent' })}
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          key={value.id}
-                          sx={{ ml: 1.5, alignItems: 'flex-start' }}
-                        >
-                          •{' '}
-                          <strong>
-                            {t('paperQuestionnaire', {
-                              ns: 'userAttributeForm',
+                  console.log('attribute pair type: ', pair);
+                  if (Array.isArray(pair.attributeValue)) {
+                    return pair.attributeValue.map((value: CollectionRow) => {
+                      return (
+                        <>
+                          <Typography
+                            variant="body1"
+                            key={value.id}
+                            sx={{ ml: 1.5, alignItems: 'flex-start' }}
+                          >
+                            •{' '}
+                            <strong>
+                              {t('type', { ns: 'userAttributeForm' })} :
+                            </strong>{' '}
+                            {t(`${value.type}`, { ns: 'collectionEvent' })}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            key={value.id}
+                            sx={{ ml: 1.5, alignItems: 'flex-start' }}
+                          >
+                            •{' '}
+                            <strong>
+                              {t('media', { ns: 'userAttributeForm' })} :{' '}
+                            </strong>{' '}
+                            {t(`${value.media}`, { ns: 'collectionEvent' })}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            key={value.id}
+                            sx={{ ml: 1.5, alignItems: 'flex-start' }}
+                          >
+                            •{' '}
+                            <strong>
+                              {t('paperQuestionnaire', {
+                                ns: 'userAttributeForm',
+                              })}
+                            </strong>{' '}
+                            :{' '}
+                            {t(`${value.paperQuestionnaire.toString()}`, {
+                              ns: 'collectionEvent',
                             })}
-                          </strong>{' '}
-                          :{' '}
-                          {t(`${value.paperQuestionnaire.toString()}`, {
-                            ns: 'collectionEvent',
-                          })}
-                        </Typography>
-                      </>
-                    );
-                  });
+                          </Typography>
+                        </>
+                      );
+                    });
+                  }
+                  return null;
                 })}
               </Stack>
               <Box
