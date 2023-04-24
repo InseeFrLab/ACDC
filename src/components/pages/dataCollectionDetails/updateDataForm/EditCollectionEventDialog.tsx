@@ -130,7 +130,6 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   );
 
   const handleSave = () => {
-    console.log('Update CollectionEvent: ', props.collectionEventState);
     const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
       .filter((mode) => mode.checked === true)
       .map((mode) => {
@@ -153,6 +152,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       attributeKey: 'extension:CollectionCommunicationSteps',
       attributeValue,
     };
+    console.log('UserAttribute', userAttributePairCollection);
     const userAttributePairCollectionArray: CollectionCommunication[] = [];
     userAttributePairCollectionArray.push(userAttributePairCollection);
 
@@ -178,6 +178,8 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
           ? updatedCollectionEvent
           : event
     );
+
+    console.log('Updated CollectionEvents: ', updatedEvents);
     setTimeout(() => {
       props.setDataCollectionState({
         ...props.dataCollectionState,

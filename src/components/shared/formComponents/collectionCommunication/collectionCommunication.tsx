@@ -23,8 +23,11 @@ const CollectionCommunicationSelect = (
 ) => {
   const { t } = useTranslation(['userAttributeForm', 'form']);
   const addCommunicationLabel = () => {
+    console.log(props.userAttributePair);
     const lastTextId: number =
-      props.userAttributePair[props.userAttributePair.length - 1].id;
+      props.userAttributePair.length > 0
+        ? props.userAttributePair[props.userAttributePair.length - 1].id
+        : 0;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return props.setUserAttributePair([
       ...props.userAttributePair,
@@ -32,7 +35,7 @@ const CollectionCommunicationSelect = (
         id: lastTextId + 1,
         type: 'Opening',
         media: 'Mail',
-        paperQuestionnaire: false,
+        paperQuestionnaire: 'false',
       },
     ]);
   };
