@@ -80,17 +80,17 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
 
     props.setAttributeValueState(userAttributePairValue);
 
+    const { attributeValue } = props.dataCollectionState.userAttributePair[0];
     const updatedUserAttributePair: CollectionGroup = {
       attributeKey: props.dataCollectionState.userAttributePair[0].attributeKey,
-      attributeValue:
-        props.dataCollectionState.userAttributePair[0].attributeValue.map(
-          (item) => {
+      attributeValue: Array.isArray(attributeValue)
+        ? attributeValue.map((item) => {
             if (item.id === props.attributeValueState.id) {
               return userAttributePairValue;
             }
             return item;
-          }
-        ),
+          })
+        : [{} as CollectionGroupValue],
     };
     console.log('Updated User Attribute Pair: ', updatedUserAttributePair); // GOOD
 
