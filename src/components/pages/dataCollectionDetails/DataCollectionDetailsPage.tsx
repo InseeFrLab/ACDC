@@ -109,7 +109,6 @@ const DataCollectionDetails = () => {
     console.log('Delete Collection Group: ', id);
     const { attributeValue } = dataCollectionState.userAttributePair[0];
     if (!Array.isArray(attributeValue)) {
-      // If attributeValue is not an array, do nothing.
       return;
     }
 
@@ -222,21 +221,20 @@ const DataCollectionDetails = () => {
         }}
       >
         {dataCollectionState.userAttributePair.length > 0 &&
-          Array.isArray(
-            dataCollectionState.userAttributePair[0].attributeValue
-          ) &&
-          dataCollectionState.userAttributePair[0].attributeValue
-            .filter((value) => value instanceof Object)
-            .map((attributeValue) => (
-              <CollectionGroupDisplay
-                key={attributeValue.id}
-                attributeValue={attributeValue}
-                dataCollectionState={dataCollectionState}
-                setDataCollectionState={setDataCollectionState}
-                handleDeleteUserAttribute={handleDeleteCollectionGroup}
-                setNotSavedState={setNotSavedState}
-              />
-            ))}
+        Array.isArray(dataCollectionState.userAttributePair[0].attributeValue)
+          ? dataCollectionState.userAttributePair[0].attributeValue.map(
+              (attributeValue) => (
+                <CollectionGroupDisplay
+                  key={attributeValue.id}
+                  attributeValue={attributeValue}
+                  dataCollectionState={dataCollectionState}
+                  setDataCollectionState={setDataCollectionState}
+                  handleDeleteUserAttribute={handleDeleteCollectionGroup}
+                  setNotSavedState={setNotSavedState}
+                />
+              )
+            )
+          : null}
       </Box>
       <DeleteDialog
         openDelete={openDelete}

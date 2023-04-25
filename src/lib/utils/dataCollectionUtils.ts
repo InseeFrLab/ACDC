@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-syntax */
 import DataCollectionApi from '../model/dataCollectionApi';
 import { DataCollection } from '../model/dataCollection';
@@ -13,37 +14,52 @@ export const flattenCollectionGroups = (
   dataCollectionObject: DataCollection
 ) => {
   const flattenedUserAttributePairs: UserAttributePair[] = [];
-
+  let attributeKey = '';
+  let attributeValue = '';
   for (const userAttribute of dataCollectionObject.userAttributePair || []) {
     if (Array.isArray(userAttribute.attributeValue)) {
-      for (const groupValue of userAttribute.attributeValue) {
-        flattenedUserAttributePairs.push({
-          attributeKey: userAttribute.attributeKey,
-          attributeValue: JSON.stringify(groupValue),
-        });
+      attributeKey = userAttribute.attributeKey;
+      for (let i = 0; i < userAttribute.attributeValue.length; i++) {
+        attributeValue += JSON.stringify(userAttribute.attributeValue[i]);
+        if (i < userAttribute.attributeValue.length - 1) {
+          attributeValue += ',';
+        }
       }
     }
+    attributeValue = `[${attributeValue}]`;
+    flattenedUserAttributePairs.push({
+      attributeKey,
+      attributeValue,
+    });
   }
+
   return {
     ...dataCollectionObject,
     userAttributePair: flattenedUserAttributePairs,
   };
 };
-
 export const flattenCollectionCommunication = (
   collectionEventObject: CollectionEvent
 ) => {
   const flattenedUserAttributePairs: UserAttributePair[] = [];
+  let attributeKey = '';
+  let attributeValue = '';
   // eslint-disable-next-line no-restricted-syntax
   for (const userAttribute of collectionEventObject.userAttributePair || []) {
     if (Array.isArray(userAttribute.attributeValue)) {
-      for (const groupValue of userAttribute.attributeValue) {
-        flattenedUserAttributePairs.push({
-          attributeKey: userAttribute.attributeKey,
-          attributeValue: JSON.stringify(groupValue),
-        });
+      attributeKey = userAttribute.attributeKey;
+      for (let i = 0; i < userAttribute.attributeValue.length; i++) {
+        attributeValue += JSON.stringify(userAttribute.attributeValue[i]);
+        if (i < userAttribute.attributeValue.length - 1) {
+          attributeValue += ',';
+        }
       }
     }
+    attributeValue = `[${attributeValue}]`;
+    flattenedUserAttributePairs.push({
+      attributeKey,
+      attributeValue,
+    });
   }
   return {
     ...collectionEventObject,

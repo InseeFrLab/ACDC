@@ -5,7 +5,7 @@ import { Button, Typography } from '@mui/material';
 import { useContext } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
 import LanguageRecord from '@/lib/model/languageRecord';
-import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectonUtils';
+import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
 import Main from '../../shared/layout/Main';
 import DataGridHomePage from './DataTable';
 import { DataCollection } from '../../../lib/model/dataCollection';

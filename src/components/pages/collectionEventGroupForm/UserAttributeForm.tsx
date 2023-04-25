@@ -61,6 +61,7 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
   ]);
   const [textError, setTextError] = useState(false);
   const [open, setOpen] = useState(false);
+  const [submitAttempt, setSubmitAttempt] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -165,7 +166,11 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
               {t('label', { ns: 'form' })}* :
             </Typography>
           </Box>
-          <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
+          <IntlTextInput
+            textArray={labelArray}
+            setTextArray={setLabelArray}
+            submitAttempt={submitAttempt}
+          />
 
           <CollectionEventCheckBox
             collectionEvents={collectionEvents}
