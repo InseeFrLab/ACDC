@@ -1,10 +1,26 @@
 import { useState } from 'react';
-import { Typography, Box, Button, Divider, Collapse } from '@mui/material';
-import { FiChevronRight } from 'react-icons/fi';
+import { useMutation } from '@tanstack/react-query';
+import {
+  Typography,
+  Box,
+  Button,
+  Divider,
+  Collapse,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from '@mui/material';
+import { FiChevronRight, FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import ExpandMore from '@/components/shared/styled/ExpandMore';
+import { deleteDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
 
@@ -22,9 +38,12 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
     'form',
     'userAttributeForm',
   ]);
+  const navigate = useNavigate();
   const { dataCollectionState, setDataCollectionState, series } = props;
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openConfirmationDelete, setOpenConfirmationDelete] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,6 +51,25 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const { isLoading, isError, isSuccess, mutate } = useMutation(
+    deleteDataCollection,
+    {
+      onError: (error) => {
+        console.log('Error:', error);
+      },
+    }
+  );
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
+    navigate('/');
+  };
+  const handleDeleteClick = () => {
+    console.log(`Delete data collection with id: ${dataCollectionState.id}`);
+    mutate(dataCollectionState.id);
+    setOpenDelete(true);
   };
 
   return (
@@ -203,6 +241,16 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
           }}
         >
           <Button
+            onClick={() => setOpenConfirmationDelete(true)}
+            variant="outlined"
+            sx={{ marginLeft: 2 }}
+            startIcon={<FiTrash />}
+          >
+            <Typography variant="body1" fontWeight="xl">
+              {t('delete', { ns: 'form' })}
+            </Typography>
+          </Button>
+          <Button
             size="small"
             onClick={handleClickOpen}
             variant="contained"
@@ -221,6 +269,37 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
         setDataCollectionState={setDataCollectionState}
         setNotSavedState={props.setNotSavedState}
         series={series}
+      />
+      <Dialog open={openDelete} onClose={handleCloseDelete}>
+        <DialogTitle>
+          <Typography variant="h5">
+            {t('deleteDataCollection', { ns: 'dataCollectionDetails' })}
+          </Typography>
+        </DialogTitle>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <DialogContentText>
+            {isSuccess ? t('successEventDC') : ''}
+            {isLoading ? <CircularProgress /> : ''}
+            {isError ? t('error') : ''}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" onClick={handleCloseDelete} autoFocus>
+            {t('close', { ns: 'form' })}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <ConfirmationDeleteDialog
+        openConfirmationDelete={openConfirmationDelete}
+        setConfirmationDelete={setOpenConfirmationDelete}
+        handleDeleteFunction={handleDeleteClick}
       />
     </>
   );

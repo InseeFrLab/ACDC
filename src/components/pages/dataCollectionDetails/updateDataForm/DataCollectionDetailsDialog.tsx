@@ -8,17 +8,13 @@ import {
   DialogActions,
   Typography,
   Box,
-  CircularProgress,
 } from '@mui/material';
-import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
 import { FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import IntlTextInput from '@/components/shared/intlTextInput/IntlTextInput';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
-import { deleteDataCollection } from '../../../../lib/api/remote/dataCollectionApiFetch';
 import { DataCollection } from '../../../../lib/model/dataCollection';
 import StatisticalOperationSelect from '../../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
 import StatisticalSeries from '../../../../lib/model/statisticalSeries';
@@ -70,7 +66,6 @@ const DataCollectionDetailsDialog = (
     dataCollectionState.studyUnitReference.groupReference
   );
 
-  const [openDelete, setOpenDelete] = useState(false);
   const handleClose = () => {
     props.setOpen(false);
 
@@ -91,208 +86,155 @@ const DataCollectionDetailsDialog = (
     });
   };
 
-  const { isLoading, isError, isSuccess, mutate } = useMutation(
-    deleteDataCollection,
-    {
-      onError: (error) => {
-        console.log('Error:', error);
-      },
-    }
-  );
+  const handleCloseCancel = () => {
+    props.setOpen(false);
+  };
 
-  const handleCloseDelete = () => {
-    setOpenDelete(false);
-    navigate('/');
-  };
-  const handleDeleteClick = () => {
-    console.log(`Delete data collection with id: ${dataCollectionState.id}`);
-    mutate(dataCollectionState.id);
-    setOpenDelete(true);
-  };
   return (
-    <>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        sx={{
-          '& .MuiDialog-paper': {
-            width: '100%',
-          },
-        }}
-      >
-        <DialogTitle>
-          <Typography variant="h4" color="text.secondary" fontWeight="bold">
-            {t('dataCollectionDetails')}
-          </Typography>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                ID:{' '}
-              </Typography>
-              <Typography variant="body1">{dataCollectionState.id}</Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexWrap: 'wrap',
-                marginTop: 1,
-              }}
-            >
-              <StatisticalOperationSelect
-                groupReference={groupReference}
-                setgroupReference={setGroupReference}
-                studyUnitReference={studyUnitReference}
-                setStudyUnitReference={setStudyUnitReference}
-                series={series}
-              />
-            </Box>
-
-            <Box
-              component="form"
-              className="CollectionForm"
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-start',
-                paddingTop: 2,
-                marginTop: 2,
-                borderTop: '1px solid',
-                borderColor: 'divider',
-              }}
-            >
-              <Typography variant="h6">
-                {t('label', { ns: 'form' })}* :
-              </Typography>
-            </Box>
-            <IntlTextInput
-              textArray={labelArray}
-              setTextArray={setLabelArray}
-              multiline={false}
-            />
-            <Box
-              component="form"
-              className="CollectionForm"
-              sx={{
-                paddingTop: 2,
-                marginTop: 2,
-                display: 'flex',
-                justifyContent: 'flex-start',
-                borderTop: '1px solid',
-                borderColor: 'divider',
-              }}
-            >
-              <Typography variant="h6">
-                {t('descriptionField', { ns: 'form' })} :
-              </Typography>
-            </Box>
-
-            <IntlTextInput
-              textArray={descriptionArray}
-              setTextArray={setDescriptionArray}
-              multiline
-            />
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginTop: 1,
-                paddingTop: 1,
-                borderTop: '1px solid',
-                borderColor: 'divider',
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('version', { ns: 'form' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {dataCollectionState.version}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginTop: 1,
-              }}
-            >
-              <Typography
-                variant="body1"
-                fontWeight="bold"
-                sx={{ marginRight: 1 }}
-              >
-                {t('lastUpdate', { ns: 'form' })}:{' '}
-              </Typography>
-              <Typography variant="body1">
-                {moment(dataCollectionState.versionDate).format(
-                  'DD/MM/YYYYHH:mm'
-                )}
-              </Typography>
-            </Box>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => setOpenConfirmationDelete(true)}
-            variant="outlined"
-            sx={{ marginLeft: 2 }}
-            startIcon={<FiTrash />}
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      sx={{
+        '& .MuiDialog-paper': {
+          width: '100%',
+        },
+      }}
+    >
+      <DialogTitle>
+        <Typography variant="h4" color="text.secondary" fontWeight="bold">
+          {t('dataCollectionDetails')}
+        </Typography>
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+            }}
           >
-            <Typography variant="body1" fontWeight="xl">
-              {t('delete', { ns: 'form' })}
+            <Typography
+              variant="body1"
+              fontWeight="bold"
+              sx={{ marginRight: 1 }}
+            >
+              ID:{' '}
             </Typography>
-          </Button>
-          <Button variant="contained" onClick={handleClose} autoFocus>
-            {t('close', { ns: 'form' })}
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog open={openDelete} onClose={handleCloseDelete}>
-        <DialogTitle>
-          <Typography variant="h5">
-            {t('deleteDataCollection', { ns: 'dataCollectionDetails' })}
-          </Typography>
-        </DialogTitle>
-        <DialogContent
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <DialogContentText>
-            {isSuccess ? t('successEventDC') : ''}
-            {isLoading ? <CircularProgress /> : ''}
-            {isError ? t('error') : ''}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="contained" onClick={handleCloseDelete} autoFocus>
-            {t('close', { ns: 'form' })}
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <ConfirmationDeleteDialog
-        openConfirmationDelete={openConfirmationDelete}
-        setConfirmationDelete={setOpenConfirmationDelete}
-        handleDeleteFunction={handleDeleteClick}
-      />
-    </>
+            <Typography variant="body1">{dataCollectionState.id}</Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              flexWrap: 'wrap',
+              marginTop: 1,
+            }}
+          >
+            <StatisticalOperationSelect
+              groupReference={groupReference}
+              setgroupReference={setGroupReference}
+              studyUnitReference={studyUnitReference}
+              setStudyUnitReference={setStudyUnitReference}
+              series={series}
+              submitAttempt={false}
+            />
+          </Box>
+
+          <Box
+            component="form"
+            className="CollectionForm"
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              paddingTop: 2,
+              marginTop: 2,
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">
+              {t('label', { ns: 'form' })}* :
+            </Typography>
+          </Box>
+          <IntlTextInput
+            textArray={labelArray}
+            setTextArray={setLabelArray}
+            multiline={false}
+          />
+          <Box
+            component="form"
+            className="CollectionForm"
+            sx={{
+              paddingTop: 2,
+              marginTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h6">
+              {t('descriptionField', { ns: 'form' })} :
+            </Typography>
+          </Box>
+
+          <IntlTextInput
+            textArray={descriptionArray}
+            setTextArray={setDescriptionArray}
+            multiline
+          />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginTop: 1,
+              paddingTop: 1,
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography
+              variant="body1"
+              fontWeight="bold"
+              sx={{ marginRight: 1 }}
+            >
+              {t('version', { ns: 'form' })}:{' '}
+            </Typography>
+            <Typography variant="body1">
+              {dataCollectionState.version}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginTop: 1,
+            }}
+          >
+            <Typography
+              variant="body1"
+              fontWeight="bold"
+              sx={{ marginRight: 1 }}
+            >
+              {t('lastUpdate', { ns: 'form' })}:{' '}
+            </Typography>
+            <Typography variant="body1">
+              {moment(dataCollectionState.versionDate).format(
+                'DD/MM/YYYYHH:mm'
+              )}
+            </Typography>
+          </Box>
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button variant="outlined" onClick={handleCloseCancel} autoFocus>
+          {t('cancel', { ns: 'form' })}
+        </Button>
+        <Button variant="contained" onClick={handleClose} autoFocus>
+          {t('submit', { ns: 'form' })}
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
