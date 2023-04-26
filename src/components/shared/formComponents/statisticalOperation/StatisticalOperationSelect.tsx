@@ -166,7 +166,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           renderInput={(params) => (
             <TextField
               {...params}
-              label={t('statisticalOperation', {
+              label={t('statisticalOperationSeries', {
                 ns: 'dataCollectionForm',
               })}
               error={
