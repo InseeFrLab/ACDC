@@ -277,6 +277,7 @@ const EventForm = (props: DataCollectionProps) => {
           setQuestionnaire={setQuestionnaire}
           questionnaireLabel={questionnaireLabel}
           setQuestionnaireLabel={setQuestionnaireLabel}
+          submitAttempt={submitAttempt}
         />
         <CollectionDatePicker
           startDate={startDate}

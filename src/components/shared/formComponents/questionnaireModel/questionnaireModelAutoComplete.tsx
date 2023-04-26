@@ -13,6 +13,7 @@ interface QuestionnaireModelSelectProps {
   setQuestionnaire: (questionnaire: string) => void;
   questionnaireLabel: string;
   setQuestionnaireLabel: (questionnaireLabel: string) => void;
+  submitAttempt: boolean;
 }
 
 const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
@@ -67,6 +68,7 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
           }}
           renderInput={(params) => (
             <TextField
+              error={props.questionnaireLabel.length < 1 && props.submitAttempt}
               {...params}
               label={t('questionnaireModel', { ns: 'collectionEvent' })}
             />
