@@ -85,7 +85,7 @@ const CollectionForm = (props: CollectionFormProps) => {
   const handleClose = () => {
     setOpen(false);
     navigate(`/collection/${dataCollectionState.id}`, {
-      state: { dataCollection: dataCollectionState },
+      state: { dataCollection: dataCollectionState, notSaved: true },
     });
   };
 
@@ -153,6 +153,7 @@ const CollectionForm = (props: CollectionFormProps) => {
           studyUnitReference={studyUnitReference}
           setStudyUnitReference={setStudyUnitReference}
           series={props.series}
+          submitAttempt={submitAttempt}
         />
         <Box
           component="form"

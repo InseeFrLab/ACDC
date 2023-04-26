@@ -34,7 +34,9 @@ const DataCollectionDetails = () => {
     useState<DataCollection>(dataCollection);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
-  const [notSavedState, setNotSavedState] = useState(false);
+  const [notSavedState, setNotSavedState] = useState(
+    !!useLocation().state.notSaved
+  );
   let questionnaires: PoguesQuestionnaire[] = [];
   let series: StatisticalSeries[] = [];
 

@@ -123,7 +123,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         <Link
           to={`/collection/${params.value.id}`}
           style={{ textDecoration: 'none' }}
-          state={{ dataCollection: params.value }}
+          state={{ dataCollection: params.value, notSaved: false }}
         >
           <FiChevronRight />
         </Link>

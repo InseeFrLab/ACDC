@@ -24,6 +24,7 @@ interface StatisticalOperationSelectProps {
   studyUnitReference: StudyUnitReference;
   setStudyUnitReference: (studyUnitReference: StudyUnitReference) => void;
   series: StatisticalSeries[];
+  submitAttempt: boolean;
 }
 
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
@@ -65,9 +66,10 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       }));
       setOperations(newOperations);
       console.log('Associated series Operations: ', newOperations);
+      console.log('Submit attempt: ', props.submitAttempt);
       setOperationDisabled(false);
     }
-  }, [isSuccess, data]);
+  }, [isSuccess, data, props.submitAttempt]);
 
   const handlegroupReferenceChange = (event: any, newValue: any) => {
     const {
@@ -167,6 +169,10 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
               label={t('statisticalOperation', {
                 ns: 'dataCollectionForm',
               })}
+              error={
+                props.submitAttempt &&
+                props.studyUnitReference.groupReference.id.length < 1
+              }
               value={
                 props.groupReference.label[i18n.language]
                   ? props.groupReference.label[i18n.language]
@@ -227,6 +233,9 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           }}
           renderInput={(params) => (
             <TextField
+              error={
+                props.submitAttempt && props.studyUnitReference.id.length < 1
+              }
               {...params}
               label={t('statisticalOperation', {
                 ns: 'dataCollectionForm',
