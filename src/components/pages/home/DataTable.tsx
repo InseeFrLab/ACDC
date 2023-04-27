@@ -42,7 +42,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       headerClassName: 'columns--header',
       flex: 0.25,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily="Nunito">{params.value}</Typography>
+        <Typography fontFamily="Lato">{params.value}</Typography>
       ),
       description: t('label', { ns: 'form' }).toString(),
     },
@@ -56,7 +56,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         </Typography>
       ),
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily="Nunito">{params.value}</Typography>
+        <Typography fontFamily="Lato">{params.value}</Typography>
       ),
       headerClassName: 'columns--header',
       flex: 0.33,
@@ -74,7 +74,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       headerClassName: 'columns--header',
       flex: 0.25,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily="Nunito">{params.value}</Typography>
+        <Typography fontFamily="Lato">{params.value}</Typography>
       ),
       description: t('statisticalOperationSeries', {
         ns: 'dataCollectionForm',
@@ -92,7 +92,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       headerClassName: 'columns--header',
       flex: 0.2,
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily="Nunito">
+        <Typography fontFamily="Lato">
           {moment(params.value).format('DD/MM/YYYY HH:mm')}
         </Typography>
       ),
@@ -109,7 +109,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       flex: 0.1,
       description: t('version').toString(),
       renderCell: (params: GridRenderCellParams) => (
-        <Typography fontFamily="Nunito">{params.value}</Typography>
+        <Typography fontFamily="Lato">{params.value}</Typography>
       ),
     },
     {

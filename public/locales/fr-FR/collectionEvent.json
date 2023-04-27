@@ -1,5 +1,6 @@
 {
   "title": "Lots",
+  "noEvent": "Veuillez créer un premier lot",
   "descriptionForm": "Créer un nouveau lot",
   "successForm": "Le lot a été créé avec succès",
   "dataCollectionDate": "Date de collecte des données",

@@ -1,6 +1,7 @@
 {
   "title": "Collection Event",
   "descriptionForm": "Create a new collection event",
+  "noEvent": "Please create a first collection event",
   "successForm": "Collection Event created successfully",
   "dataCollectionDate": "Data collection date",
   "collectionStartDate": "Collection start date",

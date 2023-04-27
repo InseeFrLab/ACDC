@@ -3,7 +3,7 @@ import ApiContext from '@/lib/api/context/apiContext';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQueries } from '@tanstack/react-query';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Alert } from '@mui/material';
 import {
   PoguesQuestionnaire,
   PoguesQuestionnaireResponse,
@@ -20,6 +20,7 @@ import DataCollectionDisplay from './DataCollectionDisplay';
 import { transformLabels } from '../../../lib/utils/magmaUtils';
 import SaveDialog from './dialogs/SaveDialog';
 import DeleteDialog from './dialogs/DeleteDialog';
+import createApiClient from '../../../lib/api/remote/apiClient';
 
 const DataCollectionDetails = () => {
   const { t } = useTranslation([
@@ -174,57 +175,79 @@ const DataCollectionDetails = () => {
         series={series}
         setNotSavedState={setNotSavedState}
       />
-      <Box
-        sx={{
-          paddingTop: 2,
-          marginTop: 2,
-          display: 'flex',
-          justifyContent: 'flex-start',
-          borderTop: '2px solid',
-          borderColor: 'divider',
-        }}
-      >
-        <Typography variant="h5" fontWeight="bold" color="text.secondary">
-          {t('title', { ns: 'collectionEvent' })}:
-        </Typography>
-      </Box>
-      <Box>
-        {dataCollectionState.collectionEvents.map((event) => {
-          return (
-            <CollectionEventDisplay
-              key={event.id}
-              collectionEvent={event}
-              handleDeleteCollectionEvent={handleDeleteCollectionEvent}
-              dataCollectionState={dataCollectionState}
-              setDataCollectionState={setDataCollectionState}
-              questionnaires={questionnaires}
-              setNotSavedState={setNotSavedState}
-            />
-          );
-        })}
-      </Box>
-      <Box
-        sx={{
-          paddingTop: 2,
-          marginTop: 2,
-          display: 'flex',
-          justifyContent: 'flex-start',
-          borderTop: '1px solid',
-          borderColor: 'divider',
-        }}
-      >
-        <Typography variant="h5" fontWeight="bold" color="text.secondary">
-          {t('title', { ns: 'userAttributeForm' })}:
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          marginBottom: 10,
-        }}
-      >
-        {dataCollectionState.userAttributePair.length > 0 &&
-        Array.isArray(dataCollectionState.userAttributePair[0].attributeValue)
-          ? dataCollectionState.userAttributePair[0].attributeValue.map(
+      {dataCollectionState.collectionEvents.length > 0 ? (
+        <>
+          <Box
+            sx={{
+              paddingTop: 2,
+              marginTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '2px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h5" fontWeight="bold" color="text.secondary">
+              {t('title', { ns: 'collectionEvent' })}:
+            </Typography>
+          </Box>
+          <Box>
+            {dataCollectionState.collectionEvents.map((event) => {
+              return (
+                <CollectionEventDisplay
+                  key={event.id}
+                  collectionEvent={event}
+                  handleDeleteCollectionEvent={handleDeleteCollectionEvent}
+                  dataCollectionState={dataCollectionState}
+                  setDataCollectionState={setDataCollectionState}
+                  questionnaires={questionnaires}
+                  setNotSavedState={setNotSavedState}
+                />
+              );
+            })}
+          </Box>
+        </>
+      ) : (
+        <Box
+          sx={{
+            paddingTop: 2,
+            marginTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '2px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h5">
+            {t('noEvent', { ns: 'collectionEvent' })}
+          </Typography>
+        </Box>
+      )}
+
+      {dataCollectionState.userAttributePair.length > 0 &&
+      Array.isArray(dataCollectionState.userAttributePair[0].attributeValue) &&
+      dataCollectionState.userAttributePair[0].attributeValue.length > 0 ? (
+        <>
+          <Box
+            sx={{
+              paddingTop: 2,
+              marginTop: 2,
+              display: 'flex',
+              justifyContent: 'flex-start',
+              borderTop: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <Typography variant="h5" fontWeight="bold" color="text.secondary">
+              {t('title', { ns: 'userAttributeForm' })}:
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              marginBottom: 10,
+            }}
+          >
+            {dataCollectionState.userAttributePair[0].attributeValue.map(
               (attributeValue) => (
                 <CollectionGroupDisplay
                   key={attributeValue.id}
@@ -235,9 +258,11 @@ const DataCollectionDetails = () => {
                   setNotSavedState={setNotSavedState}
                 />
               )
-            )
-          : null}
-      </Box>
+            )}
+          </Box>
+        </>
+      ) : null}
+
       <DeleteDialog
         openDelete={openDelete}
         handleCloseDelete={handleCloseDelete}
