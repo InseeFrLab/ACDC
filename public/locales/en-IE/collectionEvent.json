@@ -10,6 +10,7 @@
   "addModeCollection": "Add collection mode",
   "collectionCommunication": "Mode de communication",
   "textFieldError": "Field Name and Label are required",
+  "collectionModeError": "Collection mode is required",
   "questionnaireModel": "Questionnaire model",
   "retrieveQuestionnaireModelPending": "Retrieving questionnaires ...",
   "Remind": "Reminder",

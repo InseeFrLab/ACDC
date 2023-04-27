@@ -111,7 +111,7 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <Stack spacing={2}>
+          <Stack spacing={1}>
             <Box
               sx={{
                 display: 'flex',

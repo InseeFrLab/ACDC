@@ -114,7 +114,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   };
 
   return (
-    <Stack spacing={2}>
+    <Stack spacing={1}>
       <Box
         component="form"
         className="CollectionForm"

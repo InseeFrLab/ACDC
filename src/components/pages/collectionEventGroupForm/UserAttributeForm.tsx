@@ -152,7 +152,7 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
   return (
     <>
       <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-        <Stack spacing={2}>
+        <Stack spacing={1}>
           <Box
             component="form"
             className="AttributeForm"

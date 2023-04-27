@@ -202,7 +202,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <Stack spacing={2}>
+          <Stack spacing={1}>
             <Box
               sx={{
                 display: 'flex',
@@ -278,14 +278,16 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
             <CollectionModeSelect
               modeCollectionCheck={modeCollectionCheck}
               setModeCollectionCheck={setModeCollectionCheck}
+              textError={false}
             />{' '}
             <QuestionnaireModelSelect
               questionnaires={props.questionnaires}
               setQuestionnaire={setQuestionnaire}
               questionnaireLabel={questionnaireLabel}
               setQuestionnaireLabel={setQuestionnaireLabel}
+              submitAttempt={false}
             />
-            <Stack spacing={2} direction="row" sx={{ marginTop: 1 }}>
+            <Stack spacing={1} direction="row" sx={{ marginTop: 1 }}>
               <CollectionDatePicker
                 startDate={startDate}
                 setStartDate={setStartDate}

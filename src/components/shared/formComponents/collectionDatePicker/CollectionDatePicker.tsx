@@ -28,7 +28,7 @@ const CollectionDatePicker = (props: CollectionDatePickerProps) => {
         {t('dataCollectionDate', { ns: 'collectionEvent' })}:
       </Typography>
 
-      <Stack spacing={2} direction="row" sx={{ paddingTop: 2 }}>
+      <Stack spacing={1} direction="row" sx={{ paddingTop: 2 }}>
         <FormControl size="small">
           <DatePicker
             label={t('collectionStartDate', { ns: 'collectionEvent' })}

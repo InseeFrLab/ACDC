@@ -218,7 +218,7 @@ const EventForm = (props: DataCollectionProps) => {
 
   return (
     <>
-      <Stack spacing={2}>
+      <Stack spacing={1}>
         <Box
           sx={{
             display: 'flex',
@@ -271,6 +271,7 @@ const EventForm = (props: DataCollectionProps) => {
         <CollectionModeSelect
           modeCollectionCheck={modeCollectionCheck}
           setModeCollectionCheck={setModeCollectionCheck}
+          textError={textError}
         />{' '}
         <QuestionnaireModelSelect
           questionnaires={props.questionnaires}
@@ -297,6 +298,7 @@ const EventForm = (props: DataCollectionProps) => {
             borderTop: '1px solid',
             paddingTop: 2,
             borderColor: 'divider',
+            alignItems: 'baseline',
           }}
         >
           <Button

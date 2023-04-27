@@ -6,6 +6,7 @@ interface CollectionModeSelectProps {
   modeCollectionCheck: any[];
   setModeCollectionCheck: (modeCollectionCheck: any[]) => void;
   width?: string;
+  textError: boolean;
 }
 
 const CollectionModeSelect = (props: CollectionModeSelectProps) => {
@@ -19,12 +20,25 @@ const CollectionModeSelect = (props: CollectionModeSelectProps) => {
           justifyContent: 'flex-start',
           borderTop: '1px solid',
           borderColor: 'divider',
+          alignItems: 'baseline',
         }}
       >
         <Typography variant="h6">
           {t('modeOfCollection', { ns: 'collectionEvent' })}* :
         </Typography>
+        {props.textError && (
+          <Typography
+            variant="subtitle1"
+            color="error"
+            sx={{
+              marginLeft: 1,
+            }}
+          >
+            {t('collectionModeError', { ns: 'collectionEvent' })}
+          </Typography>
+        )}
       </Box>
+
       <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
         {typeMode.map((item, index) => (
           <Card
