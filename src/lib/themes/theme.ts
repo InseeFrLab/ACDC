@@ -5,6 +5,9 @@ const customTheme = createTheme({
     allVariants: {
       fontFamily: 'Lato, sans-serif',
     },
+    h2: {
+      fontFamily: 'Oswald, sans-serif',
+    },
   },
 });
 

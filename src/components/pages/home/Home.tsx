@@ -118,7 +118,7 @@ const Home = () => {
       <Typography variant="subtitle1" fontWeight="xl">
         {t('description', { ns: 'form' })}
       </Typography>
-      <Typography variant="h2" fontWeight="xl">
+      <Typography variant="h2" fontWeight="xl" fontFamily="Oswald">
         Request Failed
       </Typography>
       <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>

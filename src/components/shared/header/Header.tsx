@@ -38,7 +38,12 @@ const Header = () => {
             alignItems: 'flex-start',
           }}
         >
-          <Typography variant="h5" fontWeight="xl">
+          <Typography
+            variant="h3"
+            fontWeight="xl"
+            fontFamily="Oswald"
+            fontSize={30}
+          >
             {t('app_title')}
           </Typography>
           <Typography variant="h6" fontWeight="xl">

@@ -35,7 +35,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'label',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
           {t('statisticalProgram').toString()}
         </Typography>
       ),
@@ -49,7 +49,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'studyUnitReference',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
           {t('statisticalOperation', {
             ns: 'dataCollectionForm',
           }).toString()}
@@ -65,7 +65,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'groupReference',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
           {t('statisticalOperationSeries', {
             ns: 'dataCollectionForm',
           }).toString()}
@@ -83,7 +83,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'versionDate',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
           {t('lastUpdate').toString()}
         </Typography>
       ),
@@ -101,7 +101,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
     {
       field: 'version',
       renderHeader: () => (
-        <Typography variant="h6" fontFamily="Roboto" fontWeight={600}>
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
           {t('version').toString()}
         </Typography>
       ),
