@@ -9,7 +9,6 @@ import {
   Typography,
   Box,
 } from '@mui/material';
-import { FiTrash } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -32,7 +31,6 @@ const DataCollectionDetailsDialog = (
 ) => {
   const { t } = useTranslation(['dataCollectionDetails', 'form']);
   const navigate = useNavigate();
-  const [openConfirmationDelete, setOpenConfirmationDelete] = useState(false);
   const { open, dataCollectionState, series } = props;
   const [labelArray, setLabelArray] = useState([
     {
@@ -66,6 +64,35 @@ const DataCollectionDetailsDialog = (
     dataCollectionState.studyUnitReference.groupReference
   );
 
+  const resetState = () => {
+    setLabelArray([
+      {
+        id: 1,
+        language: 'fr-FR',
+        value: dataCollectionState.label['fr-FR'],
+      },
+      {
+        id: 2,
+        language: 'en-IE',
+        value: dataCollectionState.label['en-IE'],
+      },
+    ]);
+    setDescriptionArray([
+      {
+        id: 1,
+        language: 'fr-FR',
+        value: dataCollectionState.description['fr-FR'],
+      },
+      {
+        id: 2,
+        language: 'en-IE',
+        value: dataCollectionState.description['en-IE'],
+      },
+    ]);
+    setStudyUnitReference(dataCollectionState.studyUnitReference);
+    setGroupReference(dataCollectionState.studyUnitReference.groupReference);
+  };
+
   const handleClose = () => {
     props.setOpen(false);
 
@@ -87,6 +114,7 @@ const DataCollectionDetailsDialog = (
   };
 
   const handleCloseCancel = () => {
+    resetState();
     props.setOpen(false);
   };
 
