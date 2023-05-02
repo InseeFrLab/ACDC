@@ -176,6 +176,8 @@ export const createTreeFromDataCollection = (
         label: dataCollection.studyUnitReference.groupReference.label['fr-FR'],
       },
       position: { x: 250, y: 200 },
+      type: 'input',
+      style: { background: '#739ED0' },
       ...nodeDefaults,
     },
     {
@@ -184,6 +186,9 @@ export const createTreeFromDataCollection = (
         label: dataCollection.studyUnitReference.label['fr-FR'],
       },
       position: { x: 450, y: 200 },
+      style: {
+        background: '#B5C7DD',
+      },
       ...nodeDefaults,
     },
     {
@@ -192,6 +197,7 @@ export const createTreeFromDataCollection = (
         label: `Collecte ${dataCollection.studyUnitReference.label['fr-FR']}`,
       },
       position: { x: 650, y: 200 },
+      style: { background: '#E5EAF0' },
       ...nodeDefaults,
     }
   );
@@ -221,6 +227,7 @@ export const createTreeFromDataCollection = (
         label: collectionEvent.collectionEventName['fr-FR'],
       },
       position: { x: 850, y: initialY },
+      style: { background: '#FFFF80' },
       ...nodeDefaults,
     });
     initialEdges.push({
@@ -235,6 +242,8 @@ export const createTreeFromDataCollection = (
         label: collectionEvent.instrumentReference.label,
       },
       position: { x: 1050, y: initialY },
+      type: 'output',
+      style: { background: '#F6D595' },
       ...nodeDefaults,
     });
     initialEdges.push({
