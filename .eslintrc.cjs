@@ -53,5 +53,6 @@ module.exports = {
     'object-shorthand': 'error',
     'react/jsx-props-no-spreading': 'off',
     'global-require': 0,
+    '@typescript-eslint/ban-ts-comment': 'off',
   },
 };

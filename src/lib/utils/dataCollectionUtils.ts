@@ -1,5 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-syntax */
+import { Node, Edge, Position } from 'reactflow';
 import DataCollectionApi from '../model/dataCollectionApi';
 import { DataCollection } from '../model/dataCollection';
 import {
@@ -156,4 +157,81 @@ export const parseUserAttributeFromDataCollectionApi = (
     json: parsedDataCollectionObject,
   };
   return response;
+};
+
+export const createTreeFromDataCollection = (
+  dataCollection: DataCollection
+) => {
+  const initialNodes: Node[] = [];
+  const initialEdges: Edge[] = [];
+  const nodeDefaults = {
+    sourcePosition: Position.Right,
+    targetPosition: Position.Left,
+  };
+  let initialY = 100;
+  initialNodes.push(
+    {
+      id: 'dataCollectionSeries',
+      data: {
+        label: dataCollection.studyUnitReference.groupReference.label['fr-FR'],
+      },
+      position: { x: 250, y: 200 },
+      ...nodeDefaults,
+    },
+    {
+      id: 'dataCollectionOperation',
+      data: {
+        label: dataCollection.studyUnitReference.label['fr-FR'],
+      },
+      position: { x: 450, y: 200 },
+      ...nodeDefaults,
+    },
+    {
+      id: 'dataCollectionOperationCollection',
+      data: {
+        label: `Collecte ${dataCollection.studyUnitReference.label['fr-FR']}`,
+      },
+      position: { x: 650, y: 200 },
+      ...nodeDefaults,
+    }
+  );
+
+  initialEdges.push(
+    {
+      id: 'dataCollectionSeries-dataCollectionOperation',
+      source: 'dataCollectionSeries',
+      target: 'dataCollectionOperation',
+    },
+    {
+      id: 'dataCollectionOperation-dataCollectionOperationCollection',
+      source: 'dataCollectionOperation',
+      target: 'dataCollectionOperationCollection',
+    },
+    {
+      id: 'dataCollectionOperationCollection-dataCollection',
+      source: 'dataCollectionOperationCollection',
+      target: 'dataCollection',
+    }
+  );
+
+  for (const collectionEvent of dataCollection.collectionEvents || []) {
+    initialNodes.push({
+      id: collectionEvent.id,
+      data: {
+        label: collectionEvent.collectionEventName['fr-FR'],
+      },
+      position: { x: 850, y: initialY },
+      ...nodeDefaults,
+    });
+    initialEdges.push({
+      id: `${collectionEvent.id}-dataCollectionOperationCollection`,
+      source: 'dataCollectionOperationCollection',
+      target: collectionEvent.id,
+    });
+    initialY += 100;
+  }
+  return {
+    nodes: initialNodes,
+    edges: initialEdges,
+  };
 };
