@@ -228,6 +228,20 @@ export const createTreeFromDataCollection = (
       source: 'dataCollectionOperationCollection',
       target: collectionEvent.id,
     });
+
+    initialNodes.push({
+      id: collectionEvent.instrumentReference.id,
+      data: {
+        label: collectionEvent.instrumentReference.label,
+      },
+      position: { x: 1050, y: initialY },
+      ...nodeDefaults,
+    });
+    initialEdges.push({
+      id: `${collectionEvent.id}-${collectionEvent.instrumentReference.id}`,
+      source: collectionEvent.id,
+      target: collectionEvent.instrumentReference.id,
+    });
     initialY += 100;
   }
   return {

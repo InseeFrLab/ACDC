@@ -39,7 +39,7 @@ const FlowTree = (props: FlowTreeProps) => {
         width: '90vw',
         height: '70vh',
         border: '1px solid black',
-        marginTop: 10,
+        marginTop: '2rem',
       }}
     >
       <ReactFlow
@@ -48,6 +48,7 @@ const FlowTree = (props: FlowTreeProps) => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        fitView
       >
         <Controls />
         {/* @ts-ignore: Expected false error */}
