@@ -129,6 +129,69 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
       : []
   );
 
+  const resetState = () => {
+    setLabelArray([
+      {
+        id: 1,
+        language: 'fr-FR',
+        value: props.collectionEventState.label['fr-FR'],
+      },
+      {
+        id: 2,
+        language: 'en-IE',
+        value: props.collectionEventState.label['en-IE'],
+      },
+    ]);
+    setDescriptionArray([
+      {
+        id: 1,
+        language: 'fr-FR',
+        value: props.collectionEventState.description['fr-FR'],
+      },
+      {
+        id: 2,
+        language: 'en-IE',
+        value: props.collectionEventState.description['en-IE'],
+      },
+    ]);
+    setStartDate(
+      new Date(props.collectionEventState.dataCollectionDate.startDate)
+    );
+    setEndDate(new Date(props.collectionEventState.dataCollectionDate.endDate));
+    setModeCollectionCheck(
+      typeMode.map((label) => {
+        return {
+          label: label.type,
+          checked: props.collectionEventState.typeOfModeOfCollection.some(
+            (i) => i.type === label.type
+          ),
+        };
+      })
+    );
+    setQuestionnaire(props.collectionEventState.instrumentReference.id);
+    setQuestionnaireLabel(props.collectionEventState.instrumentReference.label);
+    setUserAttributePairArray(
+      props.collectionEventState.userAttributePair.length > 0 &&
+        Array.isArray(
+          props.collectionEventState.userAttributePair[0].attributeValue
+        )
+        ? props.collectionEventState.userAttributePair[0].attributeValue.map(
+            (pair, index) => {
+              return {
+                ...pair,
+                id: index + 1,
+                paperQuestionnaire: JSON.stringify(pair.paperQuestionnaire),
+              };
+            }
+          )
+        : []
+    );
+  };
+
+  const handleCancel = () => {
+    resetState();
+    props.handleClose();
+  };
   const handleSave = () => {
     const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
       .filter((mode) => mode.checked === true)
@@ -320,7 +383,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="outlined" onClick={props.handleClose} autoFocus>
+        <Button variant="outlined" onClick={handleCancel} autoFocus>
           {t('close', { ns: 'form' })}
         </Button>
 

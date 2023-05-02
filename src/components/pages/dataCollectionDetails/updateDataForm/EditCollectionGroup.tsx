@@ -62,6 +62,34 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
     })
   );
 
+  const resetState = () => {
+    setLabelArray([
+      {
+        id: 1,
+        language: 'fr-FR',
+        value: props.attributeValueState.label['fr-FR'],
+      },
+      {
+        id: 2,
+        language: 'en-IE',
+        value: props.attributeValueState.label['en-IE'],
+      },
+    ]);
+    setCollectionEventCheck(
+      props.collectionEvents.map((item) => {
+        return props.attributeValueState.collectionEventReference.some(
+          (ref) => ref.id === item.id
+        )
+          ? { [item.id]: true }
+          : { [item.id]: false };
+      })
+    );
+  };
+
+  const handleCancel = () => {
+    resetState();
+    props.handleClose();
+  };
   const handleSave = () => {
     const label = createIntlRecord(labelArray);
     const collectionEventsChecked = collectionEventCheck.filter(
@@ -161,7 +189,7 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="outlined" onClick={props.handleClose} autoFocus>
+        <Button variant="outlined" onClick={handleCancel} autoFocus>
           {t('close', { ns: 'form' })}
         </Button>
 
