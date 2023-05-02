@@ -25,6 +25,11 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       state: { dataCollection },
     });
   };
+  const handleClickVisualize = () => {
+    navigate(`/collection/${dataCollection.id}/visualize`, {
+      state: { dataCollection },
+    });
+  };
   const handleClickSave = () => {
     props.handleSave();
   };
@@ -70,6 +75,15 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           }}
         >
           <Typography variant="subtitle1">{t('save')}</Typography>
+        </Button>
+        <Button
+          variant="contained"
+          onClick={handleClickVisualize}
+          sx={{
+            mx: 1,
+          }}
+        >
+          <Typography variant="subtitle1">{t('visualize')}</Typography>
         </Button>
         <Button
           variant="contained"

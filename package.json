@@ -49,6 +49,7 @@
     "react-icons": "^4.7.1",
     "react-is": "^18.2.0",
     "react-router-dom": "^6.6.2",
+    "reactflow": "^11.7.0",
     "regenerator-runtime": "^0.13.11",
     "styled-components": "^5.3.6",
     "tss-react": "^4.6.1",

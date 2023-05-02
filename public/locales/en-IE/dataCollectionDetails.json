@@ -16,5 +16,6 @@
   "editEvent": "Edit Collection Event",
   "editGroup": "Edit Collection Group",
   "unsavedChanges": "You have unsaved changes",
-  "duplicate": "Duplicate"
+  "duplicate": "Duplicate",
+  "visualize": "Visualize"
 }
