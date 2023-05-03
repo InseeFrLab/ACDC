@@ -30,7 +30,7 @@ const FlowTree = (props: FlowTreeProps) => {
     <div
       style={{
         width: '90vw',
-        height: '70vh',
+        height: '85vh',
         border: '1px solid black',
         marginTop: '1.5rem',
       }}

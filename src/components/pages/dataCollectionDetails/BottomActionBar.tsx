@@ -26,9 +26,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
     });
   };
   const handleClickVisualize = () => {
-    navigate(`/collection/${dataCollection.id}/visualize`, {
-      state: { dataCollection },
-    });
+    window.open(`/collection/${dataCollection.id}/visualize`, '_blank');
   };
   const handleClickSave = () => {
     props.handleSave();
@@ -46,15 +44,6 @@ const BottomActionBar = (props: BottomActionBarProps) => {
         </Alert>
       ) : null}
       <Box>
-        <Button
-          variant="contained"
-          onClick={() => navigate(-1)}
-          sx={{
-            mx: 1,
-          }}
-        >
-          <Typography variant="subtitle1">{t('goBack')}</Typography>
-        </Button>
         <Button
           variant="contained"
           onClick={handleClick}
