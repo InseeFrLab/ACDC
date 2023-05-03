@@ -48,6 +48,15 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       <Box>
         <Button
           variant="contained"
+          onClick={() => navigate(-1)}
+          sx={{
+            mx: 1,
+          }}
+        >
+          <Typography variant="subtitle1">{t('goBack')}</Typography>
+        </Button>
+        <Button
+          variant="contained"
           onClick={handleClick}
           sx={{
             mx: 1,

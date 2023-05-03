@@ -17,5 +17,6 @@
   "editGroup": "Modifier le groupe de lot",
   "unsavedChanges": "Modifications non enregistrées",
   "duplicate": "Dupliquer",
-  "visualize": "Visualiser"
+  "visualize": "Visualiser",
+  "goBack": "Retour"
 }

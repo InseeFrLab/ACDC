@@ -5,6 +5,7 @@ import { createTreeFromDataCollection } from '@/lib/utils/dataCollectionUtils';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import FlowTree from './FlowTree';
+import BottomActionBar from '../dataCollectionDetails/BottomActionBar';
 
 const Visualizer = () => {
   const { t } = useTranslation(['visualizer', 'form']);
@@ -20,6 +21,12 @@ const Visualizer = () => {
       <FlowTree
         nodes={dataCollectionResult.nodes}
         edges={dataCollectionResult.edges}
+      />
+      <BottomActionBar
+        dataCollection={dataCollection}
+        handleSave={() => {}}
+        questionnaires={[]}
+        notSavedState={false}
       />
     </Main>
   );

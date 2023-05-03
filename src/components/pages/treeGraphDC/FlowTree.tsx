@@ -8,16 +8,9 @@ import ReactFlow, {
   addEdge,
   Node,
   Edge,
-  MiniMap,
 } from 'reactflow';
 
 import 'reactflow/dist/style.css';
-
-const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
-];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 type FlowTreeProps = {
   nodes: Node[];
@@ -39,7 +32,7 @@ const FlowTree = (props: FlowTreeProps) => {
         width: '90vw',
         height: '70vh',
         border: '1px solid black',
-        marginTop: '2rem',
+        marginTop: '1.5rem',
       }}
     >
       <ReactFlow
