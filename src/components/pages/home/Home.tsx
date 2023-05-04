@@ -101,7 +101,7 @@ const Home = () => {
         <Typography variant="h2" fontWeight="xl" fontFamily="Oswald">
           {t('title')}
         </Typography>
-        <DataGridHomePage rows={rows} heightTable={400} />
+        <DataGridHomePage rows={rows} heightTable={500} />
         <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>
           <Typography fontFamily="Lato">{t('createButton')}</Typography>
         </Button>
