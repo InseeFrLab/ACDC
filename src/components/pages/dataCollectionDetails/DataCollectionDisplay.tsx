@@ -87,6 +87,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
+            marginTop: 2,
           }}
         >
           <Typography variant="h4" fontWeight="bold" color="text.secondary">
@@ -104,6 +105,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+          sx={{ marginTop: 2 }}
         >
           <FiChevronRight fontSize={30} />
         </ExpandMore>
@@ -113,7 +115,6 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
           sx={{
             display: 'flex',
             flexDirection: 'row',
-            marginTop: 2,
           }}
         >
           <Typography

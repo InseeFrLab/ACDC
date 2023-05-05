@@ -213,12 +213,12 @@ const DataCollectionDetails = () => {
             paddingTop: 2,
             marginTop: 2,
             display: 'flex',
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
             borderTop: '2px solid',
             borderColor: 'divider',
           }}
         >
-          <Typography variant="h5">
+          <Typography variant="h2">
             {t('noEvent', { ns: 'collectionEvent' })}
           </Typography>
         </Box>

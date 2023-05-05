@@ -8,7 +8,7 @@ const HeaderComponent = (props: BoxProps) => {
       {...props}
       sx={[
         {
-          p: 1,
+          paddingBottom: '0.5rem',
           display: 'inline-flex',
           flexDirection: 'row',
           alignItems: 'center',

@@ -11,6 +11,7 @@ const customTheme = createTheme({
     primary: {
       main: '#0E417A',
     },
+    mode: 'light',
   },
   typography: {
     allVariants: {
