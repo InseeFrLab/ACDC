@@ -85,7 +85,7 @@ const CollectionForm = (props: CollectionFormProps) => {
   const handleClose = () => {
     setOpen(false);
     navigate(`/collection/${dataCollectionState.id}`, {
-      state: { dataCollection: dataCollectionState, notSaved: true },
+      state: { dataCollection: dataCollectionState, notSaved: false },
     });
   };
 
