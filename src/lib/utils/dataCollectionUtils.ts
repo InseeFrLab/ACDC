@@ -1,15 +1,20 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-syntax */
 import { Node, Edge, Position } from 'reactflow';
+import { v4 as uuidv4 } from 'uuid';
 import DataCollectionApi from '../model/dataCollectionApi';
 import { DataCollection } from '../model/dataCollection';
 import {
   UserAttributePair,
   isUserAttributePair,
 } from '../model/userAttributePair';
-import { CollectionGroup } from '../model/collectionGroups';
+import {
+  CollectionGroup,
+  CollectionGroupValue,
+} from '../model/collectionGroups';
 import CollectionEvent from '../model/collectionEvents';
 import { CollectionCommunication } from '../model/communicationCollectionEvent';
+import LanguageRecord from '../model/languageRecord';
 
 export const flattenCollectionGroups = (
   dataCollectionObject: DataCollection
@@ -257,4 +262,27 @@ export const createTreeFromDataCollection = (
     nodes: initialNodes,
     edges: initialEdges,
   };
+};
+
+const duplicateCollectionEvent = (event: CollectionEvent): CollectionEvent => {
+  const duplicatedEvent: CollectionEvent = {} as CollectionEvent;
+  Object.assign(duplicatedEvent, event);
+  duplicatedEvent.id = uuidv4();
+  return duplicatedEvent;
+};
+
+const duplicateCollectionEventGroup = (
+  group: CollectionGroup
+): CollectionGroup => {
+  const duplicatedGroup: CollectionGroup = {} as CollectionGroup;
+  Object.assign(duplicatedGroup, group);
+  duplicatedGroup.attributeValue = duplicatedGroup.attributeValue.map(
+    (event: CollectionGroupValue) => {
+      const duplicatedEvent: CollectionGroupValue = {} as CollectionGroupValue;
+      Object.assign(duplicatedEvent, event);
+      duplicatedEvent.id = uuidv4();
+      return duplicatedEvent;
+    }
+  );
+  return duplicatedGroup;
 };

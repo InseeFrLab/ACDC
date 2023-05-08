@@ -20,7 +20,6 @@ import DataCollectionDisplay from './DataCollectionDisplay';
 import { transformLabels } from '../../../lib/utils/magmaUtils';
 import SaveDialog from './dialogs/SaveDialog';
 import DeleteDialog from './dialogs/DeleteDialog';
-import createApiClient from '../../../lib/api/remote/apiClient';
 
 const DataCollectionDetails = () => {
   const { t } = useTranslation([
@@ -31,6 +30,7 @@ const DataCollectionDetails = () => {
   ]);
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
+  console.log('Data Collection: ', dataCollection);
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>(dataCollection);
   const [openDelete, setOpenDelete] = useState(false);
