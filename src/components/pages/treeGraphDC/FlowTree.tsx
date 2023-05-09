@@ -25,6 +25,7 @@ const FlowTree = (props: FlowTreeProps) => {
     (params: any) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
+  const proOptions = { hideAttribution: true };
 
   return (
     <div
@@ -41,6 +42,7 @@ const FlowTree = (props: FlowTreeProps) => {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        proOptions={proOptions}
         fitView
       >
         <Controls />

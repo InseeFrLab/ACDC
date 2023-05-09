@@ -8,12 +8,19 @@ import {
   GridColDef,
   GridRenderCellParams,
 } from '@mui/x-data-grid';
-import { Box, Typography } from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
+import { Box, IconButton, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FiChevronRight } from 'react-icons/fi';
+import { FiChevronRight, FiCopy } from 'react-icons/fi';
 import moment from 'moment';
-import { DataCollectionRow } from '../../../lib/model/dataCollection';
+import { duplicateDataCollection } from '@/lib/utils/dataCollectionUtils';
+import { createDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import DataCollectionApi from '@/lib/model/dataCollectionApi';
+import {
+  DataCollection,
+  DataCollectionRow,
+} from '../../../lib/model/dataCollection';
 
 interface DataGridHomePageProps {
   rows: DataCollectionRow[];
@@ -31,6 +38,17 @@ const CustomToolbar = () => {
 
 const DataGridHomePage = (props: DataGridHomePageProps) => {
   const { t } = useTranslation(['common']);
+  const { isLoading, isError, isSuccess, mutate } =
+    useMutation(createDataCollection);
+
+  const handleDuplicate = (dataCollection: DataCollection) => {
+    const duplicatedDataCollection = duplicateDataCollection(dataCollection);
+    const duplicatedDCApi: DataCollectionApi = {
+      id: duplicatedDataCollection.id,
+      json: duplicatedDataCollection,
+    };
+    mutate(duplicatedDCApi);
+  };
   const columns: GridColDef[] = [
     {
       field: 'label',
@@ -40,7 +58,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         </Typography>
       ),
       headerClassName: 'columns--header',
-      flex: 0.25,
+      flex: 0.22,
       renderCell: (params: GridRenderCellParams) => (
         <Typography fontFamily="Lato">{params.value}</Typography>
       ),
@@ -116,20 +134,38 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       field: 'action',
       headerName: ' ',
       headerClassName: 'columns--header',
-      flex: 0.1,
+      flex: 0.15,
       align: 'center',
       description: t('goToCollection').toString(),
       renderCell: (params: GridRenderCellParams) => (
-        <Link
-          to={`/collection/${params.value.id}`}
-          style={{ textDecoration: 'none' }}
-          state={{ dataCollection: params.value, notSaved: false }}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'baseline',
+          }}
         >
-          <FiChevronRight />
-        </Link>
+          <IconButton
+            sx={{
+              mr: 2,
+            }}
+            onClick={() => {
+              handleDuplicate(params.value);
+            }}
+          >
+            <FiCopy fontSize={19} />
+          </IconButton>
+          <Link
+            to={`/collection/${params.value.id}`}
+            style={{ textDecoration: 'none' }}
+            state={{ dataCollection: params.value, notSaved: false }}
+          >
+            <FiChevronRight fontSize={21} />
+          </Link>
+        </Box>
       ),
     },
   ];
+
   return (
     <Box
       sx={{

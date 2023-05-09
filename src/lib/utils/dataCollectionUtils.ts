@@ -272,17 +272,32 @@ const duplicateCollectionEvent = (event: CollectionEvent): CollectionEvent => {
 };
 
 const duplicateCollectionEventGroup = (
-  group: CollectionGroup
-): CollectionGroup => {
-  const duplicatedGroup: CollectionGroup = {} as CollectionGroup;
+  group: CollectionGroupValue | UserAttributePair
+): CollectionGroupValue => {
+  const duplicatedGroup: CollectionGroupValue = {} as CollectionGroupValue;
   Object.assign(duplicatedGroup, group);
-  duplicatedGroup.attributeValue = duplicatedGroup.attributeValue.map(
-    (event: CollectionGroupValue) => {
-      const duplicatedEvent: CollectionGroupValue = {} as CollectionGroupValue;
-      Object.assign(duplicatedEvent, event);
-      duplicatedEvent.id = uuidv4();
-      return duplicatedEvent;
-    }
-  );
+  duplicatedGroup.id = uuidv4();
   return duplicatedGroup;
+};
+
+export const duplicateDataCollection = (
+  dataCollection: DataCollection
+): DataCollection => {
+  const duplicatedDataCollection: DataCollection = {} as DataCollection;
+  Object.assign(duplicatedDataCollection, dataCollection);
+  duplicatedDataCollection.id = uuidv4();
+  duplicatedDataCollection.label = {
+    'fr-FR': `${dataCollection.label['fr-FR']} (copie)`,
+    'en-IE': `${dataCollection.label['en-IE']} (copy)`,
+  };
+  duplicatedDataCollection.collectionEvents =
+    duplicatedDataCollection.collectionEvents?.map((event: CollectionEvent) =>
+      duplicateCollectionEvent(event)
+    );
+
+  // TODO : Fix this
+  duplicatedDataCollection.userAttributePair[0].attributeValue =
+    [] as CollectionGroupValue[];
+  console.log('Duplicated dataCollection: ', duplicatedDataCollection);
+  return duplicatedDataCollection;
 };
