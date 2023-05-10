@@ -296,8 +296,12 @@ export const duplicateDataCollection = (
     );
 
   // TODO : Fix this
-  duplicatedDataCollection.userAttributePair[0].attributeValue =
-    [] as CollectionGroupValue[];
+  duplicatedDataCollection.userAttributePair = [
+    {
+      attributeKey: 'extension:CollectionEventGroup',
+      attributeValue: [],
+    },
+  ];
   console.log('Duplicated dataCollection: ', duplicatedDataCollection);
   return duplicatedDataCollection;
 };

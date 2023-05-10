@@ -15,7 +15,10 @@ import { useTranslation } from 'react-i18next';
 import { FiChevronRight, FiCopy } from 'react-icons/fi';
 import moment from 'moment';
 import { duplicateDataCollection } from '@/lib/utils/dataCollectionUtils';
-import { createDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import {
+  createDataCollection,
+  updateDataCollection,
+} from '@/lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import {
   DataCollection,
@@ -39,7 +42,7 @@ const CustomToolbar = () => {
 const DataGridHomePage = (props: DataGridHomePageProps) => {
   const { t } = useTranslation(['common']);
   const { isLoading, isError, isSuccess, mutate } =
-    useMutation(createDataCollection);
+    useMutation(updateDataCollection);
 
   const handleDuplicate = (dataCollection: DataCollection) => {
     const duplicatedDataCollection = duplicateDataCollection(dataCollection);
