@@ -59,6 +59,7 @@ const IntlTextInput = (props: any) => {
               <FormControl size="small">
                 <Select
                   color="primary"
+                  disabled
                   value={label.language}
                   onChange={(e) => handleTextLanguageChange(e, index)}
                   id={index.toString()}

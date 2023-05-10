@@ -25,6 +25,7 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
 
   useEffect(() => {
     if (isSuccess) {
+      console.log('Success creating data collection');
       handleClose();
     }
   }, [isSuccess, handleClose]);
@@ -44,6 +45,13 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
           alignItems: 'center',
         }}
       >
+        {isSuccess ? (
+          <DialogContentText>
+            <CircularProgress />{' '}
+          </DialogContentText>
+        ) : (
+          <DialogContentText> </DialogContentText>
+        )}
         {isLoading ? (
           <DialogContentText>
             <CircularProgress />{' '}

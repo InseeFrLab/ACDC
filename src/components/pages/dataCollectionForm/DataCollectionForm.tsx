@@ -10,7 +10,10 @@ import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import CreateDataCollectionDialog from './CreateDataCollectionDialog';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import { createDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
+import {
+  createDataCollection,
+  updateDataCollection,
+} from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import {
@@ -28,7 +31,7 @@ const CollectionForm = (props: CollectionFormProps) => {
   const navigate = useNavigate();
 
   const { isLoading, isError, isSuccess, mutate } =
-    useMutation(createDataCollection);
+    useMutation(updateDataCollection);
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
@@ -78,7 +81,8 @@ const CollectionForm = (props: CollectionFormProps) => {
 
   const [submitAttempt, setSubmitAttempt] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (dataCollection: DataCollectionApi) => {
+    mutate(dataCollection);
     setOpen(true);
   };
 
@@ -132,8 +136,7 @@ const CollectionForm = (props: CollectionFormProps) => {
       json: data,
     };
     setDataCollectionState(data);
-    mutate(dataCollection);
-    handleClickOpen();
+    handleClickOpen(dataCollection);
   };
 
   const handleSubmit = (e: React.MouseEvent) => {
