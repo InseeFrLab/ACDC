@@ -15,11 +15,9 @@ import { useTranslation } from 'react-i18next';
 import { FiChevronRight, FiCopy } from 'react-icons/fi';
 import moment from 'moment';
 import { duplicateDataCollection } from '@/lib/utils/dataCollectionUtils';
-import {
-  createDataCollection,
-  updateDataCollection,
-} from '@/lib/api/remote/dataCollectionApiFetch';
+import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '@/lib/model/dataCollectionApi';
+import { useEffect } from 'react';
 import {
   DataCollection,
   DataCollectionRow,
@@ -40,7 +38,7 @@ const CustomToolbar = () => {
 };
 
 const DataGridHomePage = (props: DataGridHomePageProps) => {
-  const { t } = useTranslation(['common']);
+  const { t, i18n } = useTranslation(['common']);
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
 
@@ -168,6 +166,11 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       ),
     },
   ];
+  useEffect(() => {
+    if (isSuccess) {
+      window.location.reload();
+    }
+  }, [isSuccess]);
 
   return (
     <Box
