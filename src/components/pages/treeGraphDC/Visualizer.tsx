@@ -1,10 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import {
-  createTreeFromDataCollection,
-  parseUserAttributeFromDataCollectionApi,
-} from '@/lib/utils/dataCollectionUtils';
+import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
+import { createTreeFromDataCollection } from '@/lib/utils/visualizationUtils';
 import { useQuery } from '@tanstack/react-query';
 import { getDataCollectionById } from '@/lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '@/lib/model/dataCollectionApi';
