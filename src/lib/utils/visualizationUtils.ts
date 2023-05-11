@@ -112,8 +112,9 @@ export const createNodeFromCollectionGroup = (
     id: collectionGroup.id,
     type: 'input',
     data: {
-      label: 'Test Group',
+      label: collectionGroup.label['fr-FR'],
     },
+
     // TODO: position should be calculated
     position: {
       x: 840,
@@ -124,6 +125,7 @@ export const createNodeFromCollectionGroup = (
     style: {
       width: 170,
       height: collectionEventReference.length * 70 + 30,
+      background: 'rgba(0, 0, 255, 0.1)',
     },
   });
   let initialY = 40;

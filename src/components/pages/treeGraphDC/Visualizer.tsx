@@ -54,6 +54,11 @@ const Visualizer = () => {
     const attributeValueArray = Array.isArray(attributeValue)
       ? attributeValue
       : [];
+    const test = createNodeFromCollectionGroup(
+      attributeValueArray[0],
+      initialTree.nodes,
+      initialTree.edges
+    );
     return (
       <Main sx={{ justifyContent: 'flex-start' }}>
         <FlowTree nodes={initialTree.nodes} edges={initialTree.edges} />{' '}
