@@ -38,9 +38,8 @@ const CustomToolbar = () => {
 };
 
 const DataGridHomePage = (props: DataGridHomePageProps) => {
-  const { t, i18n } = useTranslation(['common']);
-  const { isLoading, isError, isSuccess, mutate } =
-    useMutation(updateDataCollection);
+  const { t } = useTranslation(['common']);
+  const { isSuccess, mutate } = useMutation(updateDataCollection);
 
   const handleDuplicate = (dataCollection: DataCollection) => {
     const duplicatedDataCollection = duplicateDataCollection(dataCollection);

@@ -2,13 +2,18 @@ import { useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
-import { createTreeFromDataCollection } from '@/lib/utils/visualizationUtils';
+import {
+  createNodeFromCollectionGroup,
+  createTreeFromDataCollection,
+  deleteCollectionGroupNode,
+} from '@/lib/utils/visualizationUtils';
 import { useQuery } from '@tanstack/react-query';
 import { getDataCollectionById } from '@/lib/api/remote/dataCollectionApiFetch';
-import DataCollectionApi from '@/lib/model/dataCollectionApi';
+import { init } from 'i18next';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import FlowTree from './FlowTree';
+import { CollectionGroupValue } from '../../../lib/model/collectionGroups';
 
 const Visualizer = () => {
   const { t } = useTranslation(['visualizer', 'form']);
@@ -42,14 +47,16 @@ const Visualizer = () => {
     const parseUserAttribute =
       parseUserAttributeFromDataCollectionApi(dataArray);
     const dataCollection: DataCollection = parseUserAttribute.json;
-    const dataCollectionResult = createTreeFromDataCollection(dataCollection);
-    console.log('dataCollectionResult:', dataCollectionResult);
+    const initialTree = createTreeFromDataCollection(dataCollection);
+    const { attributeValue } = dataCollection.userAttributePair[0];
+
+    // Convert attributeValue to an array if it's a string
+    const attributeValueArray = Array.isArray(attributeValue)
+      ? attributeValue
+      : [];
     return (
       <Main sx={{ justifyContent: 'flex-start' }}>
-        <FlowTree
-          nodes={dataCollectionResult.nodes}
-          edges={dataCollectionResult.edges}
-        />{' '}
+        <FlowTree nodes={initialTree.nodes} edges={initialTree.edges} />{' '}
       </Main>
     );
   }

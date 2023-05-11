@@ -108,33 +108,83 @@ export const createNodeFromCollectionGroup = (
   edges: Edge[]
 ) => {
   const { collectionEventReference } = collectionGroup;
-  nodes.push({
+  nodes.unshift({
     id: collectionGroup.id,
-    type: 'group',
+    type: 'input',
     data: {
-      label: collectionGroup.label['fr-FR'],
+      label: 'Test Group',
     },
     // TODO: position should be calculated
-    position: { x: 250, y: 200 },
+    position: {
+      x: 840,
+      y: nodes[
+        nodes.findIndex((node) => node.id === collectionEventReference[0].id)
+      ].position.y,
+    },
+    style: {
+      width: 170,
+      height: collectionEventReference.length * 70 + 30,
+    },
+  });
+  let initialY = 40;
+  edges.push({
+    id: `${collectionGroup.id}-collectionGroup`,
+    source: 'dataCollectionOperationCollection',
+    target: collectionGroup.id,
   });
   collectionEventReference.forEach((collectionEvent) => {
     const indexNode = nodes.findIndex((node) => node.id === collectionEvent.id);
     if (indexNode !== -1) {
       nodes[indexNode].parentNode = collectionGroup.id;
       nodes[indexNode].extent = 'parent';
+      nodes[indexNode].position = { x: 10, y: initialY };
+      initialY += 70;
     }
     // Remove edge from parents if it exists
-    const indexEdge = edges.findIndex(
-      (edge) => edge.target === collectionEvent.id
-    );
-    if (indexEdge !== -1) {
-      edges.splice(indexEdge, 1);
+    // const indexEdge = edges.findIndex(
+    //   (edge) => edge.target === collectionEvent.id
+    // );
+    // if (indexEdge !== -1) {
+    //   edges.splice(indexEdge, 1);
+    // }
+  });
+
+  return {
+    nodes,
+    edges,
+  };
+};
+
+export const deleteCollectionGroupNode = (
+  collectionGroup: CollectionGroupValue,
+  nodes: Node[],
+  initialNodes: Node[],
+  edges: Edge[]
+) => {
+  const { collectionEventReference } = collectionGroup;
+  collectionEventReference.forEach((collectionEvent) => {
+    const indexNode = nodes.findIndex((node) => node.id === collectionEvent.id);
+    if (indexNode !== -1) {
+      nodes[indexNode].parentNode = null;
+      nodes[indexNode].position = initialNodes[indexNode].position;
     }
+    // Remove edge from parents if it exists
+    // const indexEdge = edges.findIndex(
+    //   (edge) => edge.target === collectionEvent.id
+    // );
+    // if (indexEdge !== -1) {
+    //   edges.splice(indexEdge, 1);
+    // }
   });
-  edges.push({
-    id: `${collectionGroup.id}-collectionGroup`,
-    source: 'dataCollectionOperationCollection',
-    target: collectionGroup.id,
-  });
-  return {};
+  const newNodes = nodes.filter((node) => node.id !== collectionGroup.id);
+  console.log('newNodes', newNodes);
+  return {
+    nodes: newNodes,
+    edges: edges.filter(
+      (edge) =>
+        edge.target !== collectionGroup.id &&
+        edge.source !== collectionGroup.id &&
+        edge.id !== `${collectionGroup.id}-collectionGroup`
+    ),
+  };
 };
