@@ -8,10 +8,10 @@ declare module '@mui/material/Button' {
 
 const customTheme = createTheme({
   palette: {
+    mode: 'light',
     primary: {
       main: '#0E417A',
     },
-    mode: 'light',
   },
   typography: {
     allVariants: {

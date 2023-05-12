@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Button,
   Typography,
@@ -12,22 +12,28 @@ import { useTranslation } from 'react-i18next';
 import { FiFilter } from 'react-icons/fi';
 import { DataCollection } from '@/lib/model/dataCollection';
 import { CollectionGroupValue } from '@/lib/model/collectionGroups';
+import { Edge, Node } from 'reactflow';
 import BottomBar from '../../shared/layout/BottomBar';
 import SelectGroup from './SelectGroupComponent';
 
 interface BottomVisualizationBarProps {
   handleReset: () => void;
   dataCollection: DataCollection;
+  nodes: Node[];
+  setNodes: (nodes: Node[]) => void;
+
+  edges: Edge[];
+  setEdges: (edges: Edge[]) => void;
 }
 const BottomVisualizationBar = (props: BottomVisualizationBarProps) => {
   const { t } = useTranslation(['common']);
   const { handleReset, dataCollection } = props;
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const collectionGroupValue: CollectionGroupValue[] = Array.isArray(
-    dataCollection.userAttributePair[0].attributeValue
-  )
-    ? dataCollection.userAttributePair[0].attributeValue
-    : [];
+  const collectionGroupValue: CollectionGroupValue[] = useMemo(() => {
+    return Array.isArray(dataCollection.userAttributePair[0].attributeValue)
+      ? dataCollection.userAttributePair[0].attributeValue
+      : [];
+  }, [dataCollection]);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -89,6 +95,7 @@ const BottomVisualizationBar = (props: BottomVisualizationBarProps) => {
         <MenuItem disabled>{t('selectGroups')}</MenuItem>
         <Divider />
         <MenuItem
+          disabled={selectedIds.length === 2}
           sx={{
             '&:hover': {
               backgroundColor: 'transparent',
@@ -99,6 +106,10 @@ const BottomVisualizationBar = (props: BottomVisualizationBarProps) => {
             collectionGroupValue={collectionGroupValue}
             selectedIds={selectedIds}
             setSelectedIds={setSelectedIds}
+            nodes={props.nodes}
+            setNodes={props.setNodes}
+            edges={props.edges}
+            setEdges={props.setEdges}
           />
         </MenuItem>
       </Menu>

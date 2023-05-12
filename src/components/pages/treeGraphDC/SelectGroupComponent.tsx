@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { CollectionGroupValue } from '@/lib/model/collectionGroups';
 import { useTranslation } from 'react-i18next';
+import { Edge, Node } from 'reactflow';
+import { createNodeFromCollectionGroup } from '@/lib/utils/visualizationUtils';
 
 interface SelectGroupProps {
   collectionGroupValue: CollectionGroupValue[];
   selectedIds: string[];
   setSelectedIds: (selectedIds: string[]) => void;
+  nodes: Node[];
+  setNodes: (nodes: Node[]) => void;
+
+  edges: Edge[];
+  setEdges: (edges: Edge[]) => void;
 }
 
 const SelectGroup = (props: SelectGroupProps) => {
@@ -20,6 +27,16 @@ const SelectGroup = (props: SelectGroupProps) => {
       );
     } else if (props.selectedIds.length < 2) {
       props.setSelectedIds([...props.selectedIds, id]);
+      const newTree = createNodeFromCollectionGroup(
+        collectionGroupValue[
+          props.selectedIds.indexOf(props.selectedIds.at(-1))
+        ],
+        props.nodes,
+        props.edges
+      );
+      console.log('New Group selected', newTree);
+      props.setNodes(newTree.nodes);
+      props.setEdges(newTree.edges);
     }
   };
 
