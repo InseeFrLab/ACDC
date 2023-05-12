@@ -11,7 +11,7 @@ import ReactFlow, {
   Edge,
 } from 'reactflow';
 import { DataCollection } from '@/lib/model/dataCollection';
-import BottomVisualizationBar from './ActionBar';
+// import BottomVisualizationBar from './ActionBar';
 import 'reactflow/dist/style.css';
 
 type FlowTreeProps = {
@@ -23,7 +23,7 @@ type FlowTreeProps = {
 const FlowTree = (props: FlowTreeProps) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(props.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(props.edges);
-
+  const { dataCollection } = props;
   const onConnect = useCallback(
     (params: any) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
@@ -58,14 +58,14 @@ const FlowTree = (props: FlowTreeProps) => {
           <Background variant="dots" gap={12} size={1} />
         </ReactFlow>
       </div>
-      <BottomVisualizationBar
+      {/* <BottomVisualizationBar
         handleReset={() => {}}
         dataCollection={props.dataCollection}
         nodes={nodes}
         setNodes={setNodes}
         edges={edges}
         setEdges={setEdges}
-      />
+      /> */}
     </>
   );
 };
