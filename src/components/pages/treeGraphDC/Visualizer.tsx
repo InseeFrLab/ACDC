@@ -13,7 +13,7 @@ import { init } from 'i18next';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import FlowTree from './FlowTree';
-import { CollectionGroupValue } from '../../../lib/model/collectionGroups';
+import BottomVisualizationBar from './ActionBar';
 
 const Visualizer = () => {
   const { t } = useTranslation(['visualizer', 'form']);
@@ -62,6 +62,10 @@ const Visualizer = () => {
     return (
       <Main sx={{ justifyContent: 'flex-start' }}>
         <FlowTree nodes={initialTree.nodes} edges={initialTree.edges} />{' '}
+        <BottomVisualizationBar
+          handleReset={() => {}}
+          dataCollection={dataCollection}
+        />
       </Main>
     );
   }

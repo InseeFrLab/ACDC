@@ -10,6 +10,7 @@ const BottomBar = (props: BoxProps) => {
         {
           m: 1,
           p: 1,
+          pr: 7,
           display: 'inline-flex',
           alignItems: 'center',
           justifyContent: 'flex-end',

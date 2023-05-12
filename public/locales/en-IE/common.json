@@ -11,5 +11,7 @@
   "programCycle": "Edition",
   "lastUpdate": "Last Updated",
   "version": "Version",
-  "goToCollection": "Go to Collection Page"
+  "goToCollection": "Go to Collection Page",
+  "reset": "Reset",
+  "selectGroups": "Please select groups (up to 2)"
 }
