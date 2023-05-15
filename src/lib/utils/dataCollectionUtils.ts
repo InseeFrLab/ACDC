@@ -163,11 +163,47 @@ export const parseUserAttributeFromDataCollectionApi = (
   return response;
 };
 
-const duplicateCollectionEvent = (event: CollectionEvent): CollectionEvent => {
-  const duplicatedEvent: CollectionEvent = {} as CollectionEvent;
-  Object.assign(duplicatedEvent, event);
-  duplicatedEvent.id = uuidv4();
-  return duplicatedEvent;
+const duplicateCollectionEvent = (
+  dataCollection: DataCollection
+): DataCollection => {
+  dataCollection.collectionEvents = dataCollection.collectionEvents?.map(
+    (event: CollectionEvent) => {
+      const oldId = event.id;
+      const duplicatedCollectionEvent: CollectionEvent = {} as CollectionEvent;
+      Object.assign(duplicatedCollectionEvent, event);
+      duplicatedCollectionEvent.id = uuidv4();
+      const newId = duplicatedCollectionEvent.id;
+
+      dataCollection.userAttributePair?.map((userAttribute) => {
+        if (userAttribute.attributeKey === 'extension:CollectionEventGroup') {
+          const collectionEventGroup: CollectionGroupValue[] =
+            typeof userAttribute.attributeValue === 'string'
+              ? []
+              : userAttribute.attributeValue;
+
+          collectionEventGroup.map((group) => {
+            group.collectionEventReference?.map((collectionEvent) => {
+              if (collectionEvent.id === oldId) {
+                collectionEvent.id = newId;
+              }
+              return collectionEvent;
+            });
+
+            return group;
+          });
+        }
+        return userAttribute;
+      });
+
+      return duplicatedCollectionEvent;
+    }
+  );
+
+  console.log(
+    'Duplicate collection event & Assign collection reference groupID: ',
+    dataCollection
+  );
+  return dataCollection;
 };
 
 const duplicateCollectionEventGroup = (
@@ -189,18 +225,23 @@ export const duplicateDataCollection = (
     'fr-FR': `${dataCollection.label['fr-FR']} (copie)`,
     'en-IE': `${dataCollection.label['en-IE']} (copy)`,
   };
-  duplicatedDataCollection.collectionEvents =
-    duplicatedDataCollection.collectionEvents?.map((event: CollectionEvent) =>
-      duplicateCollectionEvent(event)
-    );
+  duplicateCollectionEvent(duplicatedDataCollection);
 
   // TODO : Fix this
-  duplicatedDataCollection.userAttributePair = [
-    {
-      attributeKey: 'extension:CollectionEventGroup',
-      attributeValue: [],
-    },
-  ];
+  duplicatedDataCollection.userAttributePair?.map((userAttribute) => {
+    if (userAttribute.attributeKey === 'extension:CollectionEventGroup') {
+      const collectionEventGroup: CollectionGroupValue[] =
+        typeof userAttribute.attributeValue === 'string'
+          ? []
+          : userAttribute.attributeValue;
+
+      collectionEventGroup.map((group) => {
+        duplicateCollectionEventGroup(group);
+        return group;
+      });
+    }
+    return userAttribute;
+  });
   console.log('Duplicated dataCollection: ', duplicatedDataCollection);
   return duplicatedDataCollection;
 };
