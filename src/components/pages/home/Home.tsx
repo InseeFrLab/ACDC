@@ -129,7 +129,11 @@ const Home = () => {
       <Typography variant="h2" fontWeight="xl" fontFamily="Oswald">
         Request Failed
       </Typography>
-      <Button variant="test" sx={{ marginTop: 3 }} onClick={handleClick}>
+      <Button
+        variant="customContained"
+        sx={{ marginTop: 3 }}
+        onClick={handleClick}
+      >
         <Typography variant="subtitle1">{t('createButton')}</Typography>
       </Button>
     </Main>
