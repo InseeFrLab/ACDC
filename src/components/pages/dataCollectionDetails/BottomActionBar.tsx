@@ -1,6 +1,8 @@
 import { Button, Typography, Alert, Box } from '@mui/material';
+import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { publishDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import BottomBar from '../../shared/layout/BottomBar';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
@@ -15,6 +17,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
   const navigate = useNavigate();
   const { t } = useTranslation(['dataCollectionDetails']);
   const { dataCollection, questionnaires } = props;
+
   const handleClick = () => {
     navigate(`/collection/new/${dataCollection.id}`, {
       state: { dataCollection, questionnaires },
@@ -87,7 +90,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           variant="customContained"
           disabled
           onClick={() => {
-            console.log('Publish Button');
+            console.log('publish');
           }}
           sx={{
             mx: 1,

@@ -264,6 +264,7 @@ export const createNodeFromCollectionGroup = (
   nodes: Node[],
   edges: Edge[]
 ) => {
+  const oldNodes = [...nodes];
   console.log('collectionGroup', collectionGroup);
   const { collectionEventReference } = collectionGroup;
   nodes.unshift({
@@ -276,8 +277,8 @@ export const createNodeFromCollectionGroup = (
     // TODO: position should be calculated
     position: {
       x: 840,
-      y: nodes[
-        nodes.findIndex((node) => node.id === collectionEventReference[0].id)
+      y: oldNodes[
+        oldNodes.findIndex((node) => node.id === collectionEventReference[0].id)
       ].position.y,
     },
     style: {

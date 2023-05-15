@@ -51,6 +51,8 @@ const createApiClient = (baseUrl: string) => {
       putRequest(`${baseUrl}api/data-collections/`, dataCollectionApi),
     deleteDataCollection: async (id: string) =>
       deleteRequest(`${baseUrl}api/data-collections/${id}`),
+    publishDataCollection: async (id: string): Promise<unknown> =>
+      getRequest(`${baseUrl}api/external/publish/${id}`),
   };
 };
 

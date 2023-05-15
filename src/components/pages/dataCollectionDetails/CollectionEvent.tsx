@@ -154,7 +154,7 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
               <Typography
                 variant="h6"
                 fontWeight="bold"
-                // color="text.secondary"
+                color="text.secondary"
                 sx={{ marginLeft: 1 }}
               >
                 {`${collectionEvent.collectionEventName[i18n.language]} `}

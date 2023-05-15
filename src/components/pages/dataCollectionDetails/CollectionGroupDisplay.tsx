@@ -121,7 +121,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
               <Typography
                 variant="h6"
                 fontWeight="bold"
-                // color="text.secondary"
+                color="text.secondary"
                 key={attributeValueState.label[i18n.language]}
                 sx={{ ml: 0.5 }}
               >
