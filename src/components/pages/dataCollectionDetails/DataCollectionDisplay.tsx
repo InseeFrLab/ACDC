@@ -254,7 +254,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
           <Button
             size="small"
             onClick={handleClickOpen}
-            variant="contained"
+            variant="customContained"
             sx={{ marginLeft: 2 }}
           >
             <Typography variant="subtitle1" fontWeight="xl">
@@ -292,7 +292,11 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleCloseDelete} autoFocus>
+          <Button
+            variant="customContained"
+            onClick={handleCloseDelete}
+            autoFocus
+          >
             {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>

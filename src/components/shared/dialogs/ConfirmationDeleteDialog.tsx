@@ -39,7 +39,7 @@ const ConfirmationDeleteDialog = (props: ConfirmationDeleteDialogProps) => {
       </DialogContent>
       <DialogActions>
         <Button
-          variant="contained"
+          variant="customContained"
           onClick={() => props.setConfirmationDelete(false)}
           autoFocus
         >

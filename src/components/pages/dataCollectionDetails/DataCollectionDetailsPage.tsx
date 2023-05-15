@@ -211,7 +211,7 @@ const DataCollectionDetails = () => {
         <Box
           sx={{
             paddingTop: 2,
-            marginTop: 2,
+            my: 2,
             display: 'flex',
             justifyContent: 'center',
             borderTop: '2px solid',
@@ -231,7 +231,7 @@ const DataCollectionDetails = () => {
           <Box
             sx={{
               paddingTop: 2,
-              marginTop: 2,
+              my: 2,
               display: 'flex',
               justifyContent: 'flex-start',
               borderTop: '1px solid',

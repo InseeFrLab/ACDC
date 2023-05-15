@@ -40,7 +40,11 @@ const DeleteDialog = (props: DeleteDialogProps) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={props.handleCloseDelete} autoFocus>
+        <Button
+          variant="customContained"
+          onClick={props.handleCloseDelete}
+          autoFocus
+        >
           {t('close', { ns: 'form' })}
         </Button>
       </DialogActions>

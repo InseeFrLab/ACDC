@@ -121,7 +121,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
               <Typography
                 variant="h6"
                 fontWeight="bold"
-                color="text.secondary"
+                // color="text.secondary"
                 key={attributeValueState.label[i18n.language]}
                 sx={{ ml: 0.5 }}
               >
@@ -216,7 +216,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                 <Button
                   size="small"
                   onClick={handleDuplicateClick}
-                  variant="contained"
+                  variant="customContained"
                   sx={{ marginLeft: 2 }}
                   startIcon={<FiCopy />}
                 >
@@ -227,7 +227,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                 <Button
                   size="small"
                   onClick={() => setOpen(true)}
-                  variant="contained"
+                  variant="customContained"
                   sx={{ marginLeft: 2 }}
                   startIcon={<FiEdit />}
                 >

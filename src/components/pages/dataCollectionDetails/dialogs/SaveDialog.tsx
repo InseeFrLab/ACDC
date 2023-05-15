@@ -41,7 +41,7 @@ const SaveDialog = (props: SaveDialogProps) => {
       </DialogContent>
       <DialogActions>
         <Button
-          variant="contained"
+          variant="customContained"
           onClick={() => {
             props.setOpenSave(false);
           }}

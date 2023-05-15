@@ -224,7 +224,7 @@ const CollectionForm = (props: CollectionFormProps) => {
               {t('cancel', { ns: 'form' })}
             </Typography>
           </Button>
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button variant="customContained" onClick={handleSubmit}>
             <Typography variant="subtitle1">
               {t('submit', { ns: 'form' })}
             </Typography>

@@ -258,7 +258,7 @@ const DataCollectionDetailsDialog = (
         <Button variant="outlined" onClick={handleCloseCancel} autoFocus>
           {t('cancel', { ns: 'form' })}
         </Button>
-        <Button variant="contained" onClick={handleClose} autoFocus>
+        <Button variant="customContained" onClick={handleClose} autoFocus>
           {t('submit', { ns: 'form' })}
         </Button>
       </DialogActions>

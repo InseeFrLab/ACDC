@@ -48,7 +48,7 @@ const BottomVisualizationBar = (props: BottomVisualizationBarProps) => {
       <BottomBar>
         <Box>
           <Button
-            variant="contained"
+            variant="customContained"
             onClick={handleClick}
             sx={{
               mx: 1,

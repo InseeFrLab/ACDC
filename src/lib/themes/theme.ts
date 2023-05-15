@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
-    test: true;
+    customContained: true;
   }
 }
 
@@ -11,6 +11,10 @@ const customTheme = createTheme({
     mode: 'light',
     primary: {
       main: '#0E417A',
+    },
+    text: {
+      // primary: '#0E417A',
+      secondary: '#3467AE',
     },
   },
   typography: {
@@ -25,12 +29,22 @@ const customTheme = createTheme({
     MuiButton: {
       variants: [
         {
-          props: { variant: 'test' },
+          props: { variant: 'customContained' },
           style: {
             backgroundColor: '#0E417A',
-            borderRadius: '10px',
-            padding: '0.5rem 1rem',
+            borderRadius: '5px',
+            padding: '0.5rem 0.9rem',
             color: '#fff',
+            '&:hover': {
+              backgroundColor: '#FFC303',
+              color: '#263238',
+            },
+            '&:disabled': {
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              boxShadow: 'none',
+            },
+            boxShadow:
+              '0px 1px 1px -1px rgba(0, 0, 0, 0.1), 0px 3px 2px 0px rgba(0, 0, 0, 0.08), 0px 1px 6px 0px rgba(0, 0, 0, 0.05)',
           },
         },
       ],

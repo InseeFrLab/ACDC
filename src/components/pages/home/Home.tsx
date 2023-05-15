@@ -44,7 +44,11 @@ const Home = () => {
         <Typography variant="h2" fontWeight="xl">
           Loading...
         </Typography>
-        <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>
+        <Button
+          variant="customContained"
+          sx={{ marginTop: 3 }}
+          onClick={handleClick}
+        >
           <Typography variant="subtitle1">{t('createButton')}</Typography>
         </Button>
       </Main>
@@ -102,7 +106,11 @@ const Home = () => {
           {t('title')}
         </Typography>
         <DataGridHomePage rows={rows} heightTable={500} />
-        <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>
+        <Button
+          variant="customContained"
+          sx={{ marginTop: 3 }}
+          onClick={handleClick}
+        >
           <Typography fontFamily="Lato">{t('createButton')}</Typography>
         </Button>
       </Main>
@@ -121,7 +129,7 @@ const Home = () => {
       <Typography variant="h2" fontWeight="xl" fontFamily="Oswald">
         Request Failed
       </Typography>
-      <Button variant="contained" sx={{ marginTop: 3 }} onClick={handleClick}>
+      <Button variant="test" sx={{ marginTop: 3 }} onClick={handleClick}>
         <Typography variant="subtitle1">{t('createButton')}</Typography>
       </Button>
     </Main>

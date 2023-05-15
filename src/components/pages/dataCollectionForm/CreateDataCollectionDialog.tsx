@@ -63,7 +63,7 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
           <>
             <DialogContentText>{t('error', { ns: 'form' })}</DialogContentText>
             <DialogActions>
-              <Button variant="contained" onClick={handleClose} autoFocus>
+              <Button variant="customContained" onClick={handleClose} autoFocus>
                 {t('close', { ns: 'form' })}
               </Button>
             </DialogActions>

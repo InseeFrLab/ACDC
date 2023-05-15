@@ -199,7 +199,7 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
                 {t('cancel', { ns: 'form' })}
               </Typography>
             </Button>
-            <Button variant="contained" onClick={handleSubmit}>
+            <Button variant="customContained" onClick={handleSubmit}>
               <Typography variant="subtitle1">
                 {t('submit', { ns: 'form' })}
               </Typography>
@@ -245,7 +245,11 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
                 {t('error', { ns: 'form' })}
               </DialogContentText>
               <DialogActions>
-                <Button variant="contained" onClick={handleClose} autoFocus>
+                <Button
+                  variant="customContained"
+                  onClick={handleClose}
+                  autoFocus
+                >
                   {t('close', { ns: 'form' })}
                 </Button>
               </DialogActions>

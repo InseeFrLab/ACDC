@@ -197,7 +197,7 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
           onClick={() => {
             handleSave();
           }}
-          variant="contained"
+          variant="customContained"
           sx={{ marginLeft: 2 }}
         >
           {t('save', { ns: 'dataCollectionDetails' })}

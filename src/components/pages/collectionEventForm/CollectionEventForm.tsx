@@ -312,7 +312,7 @@ const EventForm = (props: DataCollectionProps) => {
               {t('cancel', { ns: 'form' })}
             </Typography>
           </Button>
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button variant="customContained" onClick={handleSubmit}>
             <Typography variant="subtitle1">
               {t('submit', { ns: 'form' })}
             </Typography>
@@ -354,7 +354,7 @@ const EventForm = (props: DataCollectionProps) => {
         </DialogContent>
         <DialogActions>
           <Button
-            variant="contained"
+            variant="customContained"
             onClick={() => {
               setOpen(false);
             }}

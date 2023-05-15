@@ -45,7 +45,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       ) : null}
       <Box>
         <Button
-          variant="contained"
+          variant="customContained"
           onClick={handleClick}
           sx={{
             mx: 1,
@@ -54,7 +54,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           <Typography variant="subtitle1">{t('createButton')}</Typography>
         </Button>
         <Button
-          variant="contained"
+          variant="customContained"
           onClick={handleClickUserAttribute}
           sx={{
             mx: 1,
@@ -65,7 +65,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           </Typography>
         </Button>
         <Button
-          variant="contained"
+          variant="customContained"
           disabled={!props.notSavedState}
           onClick={handleClickSave}
           sx={{
@@ -75,7 +75,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           <Typography variant="subtitle1">{t('save')}</Typography>
         </Button>
         <Button
-          variant="contained"
+          variant="customContained"
           onClick={handleClickVisualize}
           sx={{
             mx: 1,
@@ -84,7 +84,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           <Typography variant="subtitle1">{t('visualize')}</Typography>
         </Button>
         <Button
-          variant="contained"
+          variant="customContained"
           disabled
           onClick={() => {
             console.log('Publish Button');
