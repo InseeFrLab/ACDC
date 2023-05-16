@@ -216,7 +216,7 @@ const DataCollectionDetails = () => {
             }}
           >
             <Typography variant="h5" fontWeight="bold" color="text.secondary">
-              {t('title', { ns: 'collectionEvent' })}:
+              {t('title', { ns: 'collectionEvent' })}
             </Typography>
           </Box>
           <Box>
@@ -267,7 +267,7 @@ const DataCollectionDetails = () => {
             }}
           >
             <Typography variant="h5" fontWeight="bold" color="text.secondary">
-              {t('title', { ns: 'userAttributeForm' })}:
+              {t('title', { ns: 'userAttributeForm' })}
             </Typography>
           </Box>
           <Box

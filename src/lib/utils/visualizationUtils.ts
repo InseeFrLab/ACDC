@@ -37,7 +37,7 @@ export const createTreeFromDataCollection = (
     {
       id: 'dataCollectionOperationCollection',
       data: {
-        label: `Collecte ${dataCollection.studyUnitReference.label['fr-FR']}`,
+        label: `${dataCollection.label['fr-FR']}`,
       },
       position: { x: 650, y: 200 },
       style: { background: '#E5EAF0' },
@@ -137,7 +137,7 @@ export const createFullTreeFromDataCollection = (
     {
       id: 'dataCollectionOperationCollection',
       data: {
-        label: `Collecte ${dataCollection.studyUnitReference.label['fr-FR']}`,
+        label: `${dataCollection.label['fr-FR']}`,
       },
       position: { x: 650, y: 200 },
       style: { background: '#E5EAF0' },
