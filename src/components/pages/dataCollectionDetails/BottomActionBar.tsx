@@ -12,6 +12,7 @@ interface BottomActionBarProps {
   handleSave: () => void;
   notSavedState: boolean;
   questionnaires: PoguesQuestionnaire[];
+  handlePublish: () => void;
 }
 const BottomActionBar = (props: BottomActionBarProps) => {
   const navigate = useNavigate();
@@ -88,10 +89,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
         </Button>
         <Button
           variant="customContained"
-          disabled
-          onClick={() => {
-            console.log('publish');
-          }}
+          onClick={props.handlePublish}
           sx={{
             mx: 1,
           }}

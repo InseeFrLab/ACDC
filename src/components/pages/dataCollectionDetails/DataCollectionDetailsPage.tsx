@@ -9,6 +9,7 @@ import {
   PoguesQuestionnaireResponse,
 } from '@/lib/model/poguesQuestionnaire';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
+import { downloadFile } from '@/lib/utils/dataTransformation';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
@@ -30,7 +31,6 @@ const DataCollectionDetails = () => {
   ]);
   const navigate = useNavigate();
   const dataCollection = useLocation().state.dataCollection as DataCollection;
-  console.log('Data Collection: ', dataCollection);
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollection>(dataCollection);
   const [openDelete, setOpenDelete] = useState(false);
@@ -41,12 +41,27 @@ const DataCollectionDetails = () => {
   let questionnaires: PoguesQuestionnaire[] = [];
   let series: StatisticalSeries[] = [];
 
-  const { getAllSeries, getQuestionnaires } = useContext(ApiContext);
+  const { getAllSeries, getQuestionnaires, publishDataCollection } =
+    useContext(ApiContext);
 
-  const [questionnaireQuery, seriesQuery] = useQueries({
+  const [questionnaireQuery, seriesQuery, publishQuery] = useQueries({
     queries: [
       { queryKey: ['allQuestionnaires'], queryFn: getQuestionnaires },
       { queryKey: ['allSeries'], queryFn: getAllSeries },
+      {
+        queryKey: ['publishDataCollectionQuery', dataCollection.id],
+        queryFn: () => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+          return publishDataCollection(dataCollection.id);
+        },
+        enabled: false,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        onSuccess(data: unknown) {
+          console.log('Fetching json with ddi success: ', data);
+          downloadFile(JSON.stringify(data), 'export.json', 'application/json');
+        },
+      },
     ],
   });
   // TODO : Loading & error indicator somewhere in the page
@@ -150,6 +165,14 @@ const DataCollectionDetails = () => {
     setDataCollectionState(updatedDataCollection.json);
     setNotSavedState(false);
     setOpenSave(true);
+  };
+
+  const handlePublish = () => {
+    console.log('Publish Data Collection: ', dataCollectionState.id);
+    publishQuery.refetch();
+
+    publishQuery.isError ? console.log(publishQuery.error) : null;
+    publishQuery.isLoading ? console.log('publish loading') : null;
   };
 
   useEffect(() => {
@@ -281,6 +304,7 @@ const DataCollectionDetails = () => {
         handleSave={handleSave}
         questionnaires={questionnaires}
         notSavedState={notSavedState}
+        handlePublish={handlePublish}
       />
     </Main>
   );
