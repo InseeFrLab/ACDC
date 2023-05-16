@@ -3,13 +3,14 @@ import ApiContext from '@/lib/api/context/apiContext';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQueries } from '@tanstack/react-query';
-import { Typography, Box, Alert } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import {
   PoguesQuestionnaire,
   PoguesQuestionnaireResponse,
 } from '@/lib/model/poguesQuestionnaire';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { downloadFile } from '@/lib/utils/dataTransformation';
+import { set } from 'date-fns';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
@@ -21,6 +22,7 @@ import DataCollectionDisplay from './DataCollectionDisplay';
 import { transformLabels } from '../../../lib/utils/magmaUtils';
 import SaveDialog from './dialogs/SaveDialog';
 import DeleteDialog from './dialogs/DeleteDialog';
+import PublishDialog from './dialogs/PublishDialog';
 
 const DataCollectionDetails = () => {
   const { t } = useTranslation([
@@ -35,6 +37,7 @@ const DataCollectionDetails = () => {
     useState<DataCollection>(dataCollection);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
+  const [openPublish, setOpenPublish] = useState(false);
   const [notSavedState, setNotSavedState] = useState(
     !!useLocation().state.notSaved
   );
@@ -60,6 +63,7 @@ const DataCollectionDetails = () => {
         onSuccess(data: unknown) {
           console.log('Fetching json with ddi success: ', data);
           downloadFile(JSON.stringify(data), 'export.json', 'application/json');
+          setOpenPublish(false);
         },
       },
     ],
@@ -170,6 +174,7 @@ const DataCollectionDetails = () => {
   const handlePublish = () => {
     console.log('Publish Data Collection: ', dataCollectionState.id);
     publishQuery.refetch();
+    setOpenPublish(true);
 
     publishQuery.isError ? console.log(publishQuery.error) : null;
     publishQuery.isLoading ? console.log('publish loading') : null;
@@ -298,6 +303,12 @@ const DataCollectionDetails = () => {
         setOpenSave={setOpenSave}
         isError={isError}
         isLoading={isLoading}
+      />
+      <PublishDialog
+        openPublish={openPublish}
+        setOpenPublish={setOpenPublish}
+        isError={publishQuery.isError}
+        isLoading={publishQuery.isLoading}
       />
       <BottomActionBar
         dataCollection={dataCollection}

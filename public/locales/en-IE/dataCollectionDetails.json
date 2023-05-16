@@ -11,6 +11,8 @@
   "successEvent": "Collection Event deleted successfully",
   "successEventDC": "Data Collection deleted successfully",
   "saveDataCollection": "Save Data Collection",
+  "publishDataCollection": "Publish Data Collection",
+  "successEventPublish": "Collection Event published successfully",
   "successDataCollection": "Data Collection saved successfully",
   "createUserAttribute": "Create User Attribute",
   "editEvent": "Edit Collection Event",

@@ -89,6 +89,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
         </Button>
         <Button
           variant="customContained"
+          disabled={props.notSavedState}
           onClick={props.handlePublish}
           sx={{
             mx: 1,

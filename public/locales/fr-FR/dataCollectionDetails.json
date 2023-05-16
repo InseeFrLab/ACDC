@@ -12,6 +12,8 @@
   "successEventDC": "Campagne supprimée avec succès",
   "saveDataCollection": "Sauvegarder la campagne",
   "successDataCollection": "Campagne sauvegardée avec succès",
+  "publishDataCollection": "Publier la campagne",
+  "successEventPublish": "Campagne publiée avec succès",
   "createUserAttribute": "Nouveau Groupe",
   "editEvent": "Modifier le lot",
   "editGroup": "Modifier le groupe de lot",
