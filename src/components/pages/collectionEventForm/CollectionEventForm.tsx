@@ -24,6 +24,7 @@ import {
   createInstrumentReference,
   CommunicationMode,
 } from '@/lib/utils/dataTransformation';
+import getCurrentDate from '@/lib/utils/otherUtils';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
 import CollectionCommunicationSelect from '../../shared/formComponents/collectionCommunication/collectionCommunication';
@@ -181,7 +182,7 @@ const EventForm = (props: DataCollectionProps) => {
     const now = Date.now();
     const today: string = new Date(now).toISOString();
     props.DataCollectionApi.json.collectionEvents.push(data);
-    props.DataCollectionApi.json.versionDate = today;
+    props.DataCollectionApi.json.versionDate = getCurrentDate();
 
     const updatedDataCollection: DataCollectionApi = {
       id: props.DataCollectionApi?.id,

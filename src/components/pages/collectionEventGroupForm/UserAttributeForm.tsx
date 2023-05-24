@@ -22,6 +22,7 @@ import {
   CollectionGroup,
   CollectionGroupValue,
 } from '@/lib/model/collectionGroups';
+import getCurrentDate from '@/lib/utils/otherUtils';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
@@ -108,7 +109,7 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
       collectionEventReference,
     };
     const dataCollectionUpdated: DataCollection = {
-      versionDate: today.toISOString(),
+      versionDate: getCurrentDate(),
       ...dataCollection,
     };
     if (

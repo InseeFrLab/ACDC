@@ -11,6 +11,7 @@ import {
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { downloadFile } from '@/lib/utils/dataTransformation';
 import { set } from 'date-fns';
+import getCurrentDate from '@/lib/utils/otherUtils';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
@@ -162,7 +163,7 @@ const DataCollectionDetails = () => {
     };
     const now = Date.now();
     const today: string = new Date(now).toISOString();
-    updatedDataCollection.json.versionDate = today;
+    updatedDataCollection.json.versionDate = getCurrentDate();
 
     console.log('Updated Data Collection: ', updatedDataCollection);
     mutate(updatedDataCollection);
