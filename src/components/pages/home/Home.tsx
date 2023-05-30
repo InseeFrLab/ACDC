@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Button, Typography } from '@mui/material';
+import { Button, Stack, Typography, Box } from '@mui/material';
 import { useContext } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
 import LanguageRecord from '@/lib/model/languageRecord';
@@ -12,11 +12,14 @@ import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 
 const Home = () => {
-  const { t, i18n } = useTranslation(['home']);
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate('/new');
+  };
+  const handleClickMail = () => {
+    navigate('/mail');
   };
   const { getAllDataCollections } = useContext(ApiContext);
 
@@ -103,16 +106,36 @@ const Home = () => {
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl" fontFamily="Oswald">
-          {t('title')}
+          {t('title', { ns: 'home' })}
         </Typography>
         <DataGridHomePage rows={rows} heightTable={450} />
-        <Button
-          variant="customContained"
-          sx={{ marginTop: 3 }}
-          onClick={handleClick}
+        <Box
+          sx={{
+            marginTop: 3,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
         >
-          <Typography fontFamily="Lato">{t('createButton')}</Typography>
-        </Button>
+          <Button
+            variant="customContained"
+            sx={{ marginTop: 3, mr: 2 }}
+            onClick={handleClick}
+          >
+            <Typography fontFamily="Lato">
+              {t('createButton', { ns: 'home' })}
+            </Typography>
+          </Button>
+          <Button
+            variant="customContained"
+            sx={{ marginTop: 3 }}
+            onClick={handleClickMail}
+          >
+            <Typography fontFamily="Lato">
+              {t('title', { ns: 'mailRender' })}
+            </Typography>
+          </Button>
+        </Box>
       </Main>
     );
   }
@@ -121,7 +144,7 @@ const Home = () => {
   return (
     <Main>
       <Typography variant="h2" fontWeight="xl">
-        {t('title')}
+        {t('title', { ns: 'home' })}
       </Typography>
       <Typography variant="subtitle1" fontWeight="xl">
         {t('description', { ns: 'form' })}
@@ -134,7 +157,18 @@ const Home = () => {
         sx={{ marginTop: 3 }}
         onClick={handleClick}
       >
-        <Typography variant="subtitle1">{t('createButton')}</Typography>
+        <Typography variant="subtitle1">
+          {t('createButton', { ns: 'home' })}
+        </Typography>
+      </Button>
+      <Button
+        variant="customContained"
+        sx={{ marginTop: 3 }}
+        onClick={handleClickMail}
+      >
+        <Typography fontFamily="Lato">
+          {t('title', { ns: 'mailRender' })}
+        </Typography>
       </Button>
     </Main>
   );
