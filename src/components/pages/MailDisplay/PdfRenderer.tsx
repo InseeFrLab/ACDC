@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Viewer, Worker, RenderPageProps } from '@react-pdf-viewer/core';
+import { Viewer, Worker } from '@react-pdf-viewer/core';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';

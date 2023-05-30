@@ -3,6 +3,7 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { publishDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import { ContactSupport } from '@mui/icons-material';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import BottomBar from '../../shared/layout/BottomBar';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
@@ -96,6 +97,17 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           }}
         >
           <Typography variant="subtitle1">{t('publish')}</Typography>
+        </Button>
+        <Button
+          variant="customContained"
+          onClick={() => {
+            console.log('mail');
+          }}
+          sx={{
+            mx: 1,
+          }}
+        >
+          <Typography variant="subtitle1">{t('mail')}</Typography>
         </Button>
       </Box>
     </BottomBar>

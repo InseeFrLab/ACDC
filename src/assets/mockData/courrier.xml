@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+<fo:layout-master-set>
+
+<fo:page-sequence-master master-name="relanceTelephoneSequentielWTCOLEM">
+<fo:repeatable-page-master-alternatives>
+<fo:conditional-page-master-reference master-reference="relanceTelephoneSequentielWTCOLEM-recto" odd-or-even="odd"/>
+<fo:conditional-page-master-reference master-reference="relanceTelephoneSequentielWTCOLEM-verso" odd-or-even="even"/>
+</fo:repeatable-page-master-alternatives>
+</fo:page-sequence-master>
+
+<fo:simple-page-master master-name="relanceTelephoneSequentielWTCOLEM-recto" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm">
+<fo:region-body region-name="xsl-region-body" margin-top="10mm" margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
+<fo:region-before region-name="xsl-region-before-courrier" display-align="before" extent="10mm" precedence="true"/>
+<fo:region-after region-name="xsl-region-after-cover" display-align="before" extent="10mm" precedence="true"/>
+<fo:region-start extent="10mm" display-align="before"/>
+<fo:region-end extent="10mm" display-align="before"/>
+</fo:simple-page-master>
+
+<fo:simple-page-master master-name="relanceTelephoneSequentielWTCOLEM-verso" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm">
+<fo:region-body margin-top="10mm" margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
+<fo:region-before region-name="xsl-region-before-cover" display-align="before" extent="10mm" precedence="true"/>
+<fo:region-after region-name="xsl-region-after-cover" display-align="before" extent="10mm" precedence="true"/>
+<fo:region-start extent="10mm" display-align="before"/>
+<fo:region-end extent="10mm" display-align="before"/>
+</fo:simple-page-master>
+
+</fo:layout-master-set>
+
+<fo:page-sequence font-family="Liberation Sans" font-size="8pt" master-reference="relanceTelephoneSequentielWTCOLEM">
+
+<!-- ZONE LIGNE TECHNIQUE -->
+<fo:static-content flow-name="xsl-region-before-courrier">
+<fo:block position="absolute" margin-top="5mm" margin-left="10mm" margin-right="10mm" margin-bottom="10mm" color="white">
+<![CDATA[#]]><![CDATA[#]]><![CDATA[#]]>DS${NumeroDocument}col${data-IdEdition}
+</fo:block>
+</fo:static-content>
+
+<fo:flow flow-name="xsl-region-body">
+
+<!-- PAGE COURRIER RECTO -->
+<fo:block page-break-after="always">
+
+<!-- ZONE LOGOS -->
+<fo:block-container absolute-position="absolute" left="5mm" top="2mm" width="180mm" height="25mm">
+<fo:block>
+<fo:external-graphic src="coleman/${Enq_ImageLogos}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+</fo:block>
+</fo:block-container>
+
+<!-- ZONE RESERVE ADRESSE -->
+<fo:block-container absolute-position="absolute" left="80mm" top="33mm" width="110mm" height="50mm" overflow="hidden">
+<fo:block/>
+</fo:block-container>
+
+<!-- ZONE DATAMATRIX ALLIAGE -->
+<fo:block-container absolute-position="absolute" left="100mm" top="27.8mm" width="11.88mm" height="11.88mm" overflow="hidden">
+<fo:block>
+<fo:instream-foreign-object>
+<barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" message="${Barcode}" orientation="0">
+<barcode:datamatrix>
+<barcode:module-width>0.53mm</barcode:module-width>
+<barcode:quiet-zone enabled="false">0mw</barcode:quiet-zone>
+<barcode:min-symbol-size>22x22</barcode:min-symbol-size>
+<barcode:max-symbol-size>22x22</barcode:max-symbol-size>
+</barcode:datamatrix>
+</barcode:barcode>
+</fo:instream-foreign-object>
+</fo:block>
+</fo:block-container>
+<!-- ZONE ADRESSE -->
+<fo:block-container absolute-position="absolute" left="100mm" top="20mm" width="82mm" height="31.5mm" overflow="hidden" font-size="10pt" display-align="after">
+<fo:block font-family="Lucida Console" text-transform="uppercase">
+<fo:inline-container margin="0mm">
+<fo:block>
+$BddAdressePosteeL1
+</fo:block>
+</fo:inline-container>
+</fo:block>
+</fo:block-container>
+
+<!-- ZONE RESERVE INTEGRALITE -->
+<fo:block-container absolute-position="absolute" left="187mm" top="35mm" width="13mm" height="22mm" overflow="hidden" font-size="10pt">
+<fo:block/>
+</fo:block-container>
+
+<!-- ZONE TITRE COURRIER -->
+<fo:block-container absolute-position="absolute" left="1mm" top="18mm" width="78mm" height="6mm" overflow="hidden" font-size="10pt">
+<fo:block color="white">$!{InitAccuseReception}</fo:block>
+</fo:block-container>
+
+<!-- ZONE REFERENCES -->
+<fo:block-container absolute-position="absolute" left="5mm" top="20mm" width="74mm" height="47mm" overflow="hidden" font-size="10pt">
+<fo:block>
+<fo:inline-container>
+<fo:block font-size="11pt" font-weight="bold">
+Nous contacter&#160;:&#160; <fo:inline><fo:external-graphic src="coleman/${Enq_ImageContact}" width="5mm" content-height="scale-to-fit" scaling="uniform"/></fo:inline>
+</fo:block>
+<fo:block margin-top="1mm">
+<fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
+<fo:table-column column-width="7%"/>
+<fo:table-column column-width="93%"/>
+<fo:table-body>
+<fo:table-row>
+<fo:table-cell>
+<fo:block>
+<fo:external-graphic src="coleman/${Enq_ImageTel}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell>
+<fo:block>
+${Ue_TelAssistance}
+</fo:block>
+</fo:table-cell>
+</fo:table-row>
+<fo:table-row>
+<fo:table-cell>
+<fo:block margin-top="1mm">
+<fo:external-graphic src="coleman/${Enq_ImageArobase}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell>
+<fo:block margin-top="1mm">
+${Ue_MailAssistance}
+</fo:block>
+</fo:table-cell>
+</fo:table-row>
+</fo:table-body>
+</fo:table>
+</fo:block>
+</fo:inline-container>
+</fo:block>
+</fo:block-container>
+
+<!-- ZONE LIEU ET DATE -->
+<fo:block-container absolute-position="absolute" left="96mm" top="34.5mm" width="89mm" height="100%" overflow="hidden" text-align="right" font-size="10pt">
+<fo:block>${Enq_Ville}, le ${Enq_DateEditionRelance}</fo:block>
+</fo:block-container>
+
+<!-- RAPPEL -->
+<fo:block-container absolute-position="absolute" left="5mm" top="58mm" width="16.5mm" overflow="hidden" font-size="10pt">
+<fo:block margin="1pt" font-weight="bold" border-style="solid" padding="1pt">
+RAPPEL
+</fo:block>
+</fo:block-container>
+
+<!-- ZONE OBJET -->
+<fo:block-container absolute-position="absolute" left="5mm" top="66mm" width="180mm" overflow="hidden" font-size="11pt">
+<fo:block font-weight="bold">
+Objet&#160;: <fo:inline font-weight="bold">${Enq_LibelleEnquete}</fo:inline>
+</fo:block>
+</fo:block-container>
+
+<!-- ZONE COURRIER -->
+
+
+<fo:block-container absolute-position="absolute" left="5mm" top="70mm" width="180mm" height="177mm" overflow="hidden" text-align="justify" font-size="10pt">
+<fo:block>
+<fo:inline-container>
+<fo:block margin-top="3mm">
+Madame, Monsieur,
+</fo:block>
+<fo:block margin-top="3mm">
+${Enq_MoisEditionOuverture}, ${Ue_RelanceQuiSollicite} pour répondre à
+l’$Modif_Enq_LibelleEnquete de ${Enq_Commanditaire}.
+</fo:block>
+<fo:block>
+<fo:block margin-top="3mm">
+${Ue_CiviliteEnqueteur} ${Ue_PrenomEnqueteur} ${Ue_NomEnqueteur},
+#if(${Ue_CiviliteEnqueteur}=="Monsieur")enquêteur de l’Insee,#end
+a tenté de vous joindre à plusieurs reprises sans succès.
+</fo:block>
+#end
+</fo:block>
+<fo:block>
+#if(${Enq_TypeRelance}=="REF")
+<fo:block margin-top="3mm">
+Vous n’avez pas souhaité vous entretenir avec notre
+#if(${Ue_CiviliteEnqueteur}=="Madame")enquêtrice#end
+#if(${Ue_CiviliteEnqueteur}=="Monsieur")enquêteur#end
+${Ue_CiviliteEnqueteur} ${Ue_PrenomEnqueteur} ${Ue_NomEnqueteur} sur ce sujet.
+</fo:block>
+#end
+</fo:block>
+<fo:block margin-top="3mm">
+Votre participation à cette enquête #if($Modif_Enq_InteretGeneral=="oui") reconnue d’intérêt général
+#if($Modif_Enq_QualiteStatistique=="oui") et de qualité statistique#end
+par le Conseil national de l’information statistique (Cnis)#end est essentielle ;
+elle permet de prendre en compte la diversité des situations et d’éclairer les décisions publiques.
+</fo:block>
+<fo:block>
+#if(${Enq_CaractereObligatoire}=="oui")
+<fo:block margin-top="3mm">
+La réponse à cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>.
+</fo:block>
+#end
+</fo:block>
+<fo:block margin-top="3mm">
+Je vous remercie de contacter ${Ue_CiviliteEnqueteur} ${Ue_PrenomEnqueteur} ${Ue_NomEnqueteur}
+afin de convenir d’un rendez-vous avant le <fo:inline font-weight="bold">${Enq_DateFinCollecte}</fo:inline>.
+Les <fo:inline font-weight="bold">modalités pratiques</fo:inline> sont précisées <fo:inline font-weight="bold">au dos</fo:inline> de ce courrier.
+</fo:block>
+<fo:block margin-top="3mm">
+Vos réponses sont confidentielles et servent uniquement à établir des statistiques.
+Tous vos droits sont rappelés dans l’encadré en bas de cette page.
+</fo:block>
+<fo:block margin-top="3mm">
+En comptant sur votre participation, veuillez recevoir, Madame, Monsieur, mes respectueuses salutations.
+</fo:block>
+
+<fo:block margin-top="1mm">
+<fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center" text-align="center">
+<fo:table-column column-width="35%"/>
+<fo:table-column column-width="65%"/>
+<fo:table-body>
+<fo:table-row>
+<fo:table-cell number-rows-spanned="2">
+<fo:block text-align="right" padding-top="1mm">
+<fo:external-graphic src="coleman/${Enq_ImageLogoSignataire}" height="15mm" content-width="scale-to-fit"/>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell padding-top="3mm">
+<fo:block>${Enq_ServiceCollecteurSignataireFonction},</fo:block>
+</fo:table-cell>
+</fo:table-row>
+<fo:table-row>
+<fo:table-cell padding-top="3mm">
+<fo:block>${Enq_ServiceCollecteurSignataireNom}</fo:block>
+</fo:table-cell>
+</fo:table-row>
+</fo:table-body>
+</fo:table>
+</fo:block>
+
+<fo:block  margin-top="4mm" padding="1mm" margin="1mm" border="solid black 0.5pt" font-size="7pt">
+<fo:block><fo:block margin-top="0.5mm">
+
+Vu l'avis favorable du Conseil national de l'information statistique,
+cette enquête est <fo:inline font-weight="bold">reconnue d'intérêt général</fo:inline>#if($Modif_Enq_QualiteStatistique=="oui")<fo:inline font-weight="bold"> et de qualité statistique</fo:inline>#end,
+en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.
+Elle a obtenu le visa n°${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l’année ${Enq_AnneeVisa} –
+</fo:block>
+<fo:block>
+<fo:block margin-top="0.5mm">
+Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. En cas de défaut de réponse,
+les personnes enquêtées peuvent être l’objet de l’amende prévue à l’article 131-13 du code pénal.
+
+<fo:block>
+#if($Modif_Enq_TestNonLabellise=="oui")
+<fo:block margin-top="0.5mm">
+Cette enquête #if($Modif_Enq_CaractereObligatoire=="non") non obligatoire#end
+relève de l'exercice des missions de service public dont est investi l’Insee
+(articles 4, 5 et 5 bis du règlement 223/2009 relatif aux statistiques européennes, article 1 de la loi
+n° 51-711 du 7 juin 1951 sur l’obligation, la coordination et le secret en matière de statistiques, décret
+du 14 juin 1946 organisant l’Insee). ${Enq_ComplementOpportunite}
+</fo:block>
+</fo:block>
+<fo:block margin-top="0.5mm">
+<!-- Insensible à la casse ${Enq_Appariement} -->
+#set($Modif_Enq_Appariement = ${Enq_Appariement})
+#set($Modif_Enq_Appariement = $Modif_Enq_Appariement.toLowerCase())
+
+Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${Enq_RespTraitement}.
+Ces réponses#if($Modif_Enq_Appariement=="oui"), ainsi que les données obtenues par appariement ${Enq_SourceAdmin},#end seront conservées
+pendant ${Enq_DureeConservation} à compter de la fin de la collecte pour les besoins de l’enquête.
+#if($Modif_Enq_Archivage=="oui")Elles seront archivées au-delà de cette durée. À tout moment, leur usage et leur accès
+seront strictement contrôlés et limités à l'élaboration de statistiques ou à des travaux de recherche scientifique ou historique.#end
+</fo:block>
+<fo:block margin-top="0.5mm">
+#if($Modif_Enq_CaractereObligatoire=="non" and $Modif_Enq_TestNonLabellise=="non")Cette enquête n’est pas obligatoire.#end
+</fo:block>
+<fo:block margin-top="0.5mm">
+Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers
+et aux libertés s'appliquent à la présente enquête.
+</fo:block>
+
+<fo:block>
+#if($Modif_Enq_Prestataire=="oui" and $Modif_Enq_Archivage=="oui")
+<fo:block margin-top="0.5mm">
+${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées),
+ainsi que son sous-traitant ${Enq_NomPrestataire}, habilité par le Comité du secret de la statistique publique, et les Archives de France,
+conformément aux dispositions de l’article L. 212-4 du code du patrimoine. Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
+</fo:block>
+#end
+</fo:block>
+
+<fo:block>
+#if($Modif_Enq_Prestataire=="non" and $Modif_Enq_Archivage=="oui")
+<fo:block margin-top="0.5mm">
+${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées),
+ainsi que les Archives de France, conformément aux dispositions de l’article L. 212-4 du code du patrimoine.
+Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
+</fo:block>
+#end
+</fo:block>
+
+<fo:block>
+#if($Modif_Enq_Prestataire=="non" and $Modif_Enq_Archivage=="non")
+<fo:block margin-top="0.5mm">
+${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées).
+Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
+</fo:block>
+#end
+</fo:block>
+
+<fo:block>
+#if($Modif_Enq_Prestataire=="oui" and $Modif_Enq_Archivage=="non")
+<fo:block margin-top="0.5mm">
+${Enq_RespTraitementIdenti} est seul($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées),
+ainsi que son sous-traitant ${Enq_NomPrestataire}, habilité par le Comité du secret de la statistique publique.
+Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
+</fo:block>
+#end
+</fo:block>
+<fo:block margin-top="0.5mm">
+<!-- Insensible à la casse ${Enq_RepresentantLegal}, ${Enq_Mineur} et (${Enq_DPD} -->
+
+Les personnes enquêtées#if($Modif_Enq_RepresentantLegal=="oui"), ou leurs représentants légaux,#end peuvent exercer un droit d'accès, de rectification
+ou de limitation de traitement pour les données les concernant pendant la période de conservation des données d’identification.
+#if($Modif_Enq_Mineur=="oui")${Enq_MineurDroit}#end Ces droits peuvent être exercés auprès de ${Enq_RespOperationnel}
+(${Enq_MailRespOperationnel}) #if($Modif_Enq_DPD=="oui") ou de son délégué à la protection des données (${Enq_MailDPD})#end.
+Les personnes enquêtées peuvent, si elles l’estiment nécessaire, adresser une réclamation à la Cnil (<fo:inline text-decoration="underline">www.cnil.fr</fo:inline>).
+</fo:block>
+</fo:block>
+</fo:block>
+</fo:block>
+
+<!-- Tournez la Page -->
+
+</fo:block>
+
+<!-- PAGE COURRIER VERSO -->
+
+</fo:inline-container>
+</fo:block>
+</fo:block-container>
+</fo:block>
+</fo:flow>
+</fo:page-sequence>
+</fo:root>
+    </xsl:template>
+</xsl:stylesheet>
