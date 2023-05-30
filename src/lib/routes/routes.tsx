@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ErrorBoundary from '@/components/shared/layout/ErrorBoundary';
 import Visualizer from '@/components/pages/treeGraphDC/Visualizer';
+import PdfRenderer from '@/components/pages/MailDisplay/PdfRenderer';
 import Home from '../../components/pages/home/Home';
 import Header from '../../components/shared/header/Header';
 import CreateDataCollection from '../../components/pages/dataCollectionForm/CreateDataCollection';
@@ -27,6 +28,7 @@ const RoutesWebs = () => {
             element={<CreateUserAttribute />}
           />
           <Route path="collection/:id/visualize" element={<Visualizer />} />
+          <Route path="mail" element={<PdfRenderer />} />
         </Routes>
       </ErrorBoundary>
     </Router>
