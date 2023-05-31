@@ -40,7 +40,9 @@ const BottomActionBar = (props: BottomActionBarProps) => {
   const handleClickMail = () => {
     const xmlString = replaceLabel(dataCollection.label['fr-FR']).then(
       (res) => {
-        navigate(`/mail`, { state: { xmlString: res.toString() } });
+        navigate(`/mail/${dataCollection.id}`, {
+          state: { xmlString: res.toString() },
+        });
       }
     );
     // navigate(`/mail`, { state: { xmlString } });

@@ -28,7 +28,7 @@ const RoutesWebs = () => {
             element={<CreateUserAttribute />}
           />
           <Route path="collection/:id/visualize" element={<Visualizer />} />
-          <Route path="mail" element={<PdfDisplay />} />
+          <Route path="mail/:id" element={<PdfDisplay />} />
         </Routes>
       </ErrorBoundary>
     </Router>
