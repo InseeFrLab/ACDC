@@ -7,12 +7,12 @@ import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import Main from '@/components/shared/layout/Main';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import GeneratedPdf from '@/assets/mockData/generatedPdf.pdf';
 import { useLocation } from 'react-router-dom';
 import generateMailFromXml from '@/lib/api/remote/mailGeneration';
 
-const PdfRenderer = () => {
+const PdfDisplay = () => {
   const { t } = useTranslation(['mailRender']);
   const locationState = useLocation().state;
 
@@ -40,13 +40,12 @@ const PdfRenderer = () => {
     return (
       <Main>
         <Box sx={{ marginTop: 3 }}>
-          <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.7.107/build/pdf.worker.min.js">
-            <Viewer
-              fileUrl={GeneratedPdf}
-              plugins={[defaultLayoutPluginInstance]}
-              defaultScale={1}
-            />
-          </Worker>
+          <Typography variant="h2" fontWeight="xl">
+            {t('title')}
+          </Typography>
+          <Typography variant="h2" fontWeight="xl">
+            Loading...
+          </Typography>
         </Box>
       </Main>
     );
@@ -67,4 +66,4 @@ const PdfRenderer = () => {
   );
 };
 
-export default PdfRenderer;
+export default PdfDisplay;
