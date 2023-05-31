@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Viewer, Worker } from '@react-pdf-viewer/core';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import Main from '@/components/shared/layout/Main';
-import { Box, Typography, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import GeneratedPdf from '@/assets/mockData/generatedPdf.pdf';
 import { useLocation } from 'react-router-dom';
 import generateMailFromXml from '@/lib/api/remote/mailGeneration';

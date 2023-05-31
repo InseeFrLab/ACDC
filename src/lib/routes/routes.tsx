@@ -2,12 +2,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ErrorBoundary from '@/components/shared/layout/ErrorBoundary';
 import Visualizer from '@/components/pages/treeGraphDC/Visualizer';
 import PdfRenderer from '@/components/pages/mailDisplay/PdfRenderer';
-import Home from '../../components/pages/home/Home';
-import Header from '../../components/shared/header/Header';
-import CreateDataCollection from '../../components/pages/dataCollectionForm/CreateDataCollection';
-import CreateCollectionEvent from '../../components/pages/collectionEventForm/CreateCollectionEvent';
-import DataCollectionDetails from '../../components/pages/dataCollectionDetails/DataCollectionDetailsPage';
-import CreateUserAttribute from '../../components/pages/collectionEventGroupForm/CreateUserAttribute';
+import Home from '@/components/pages/home/Home';
+import Header from '@/components/shared/header/Header';
+import CreateDataCollection from '@/components/pages/dataCollectionForm/CreateDataCollection';
+import CreateCollectionEvent from '@/components/pages/collectionEventForm/CreateCollectionEvent';
+import DataCollectionDetails from '@/components/pages/dataCollectionDetails/DataCollectionDetailsPage';
+import CreateUserAttribute from '@/components/pages/collectionEventGroupForm/CreateUserAttribute';
 
 const RoutesWebs = () => {
   return (
