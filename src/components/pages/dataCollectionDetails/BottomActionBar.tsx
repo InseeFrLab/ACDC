@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { publishDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
 import { ContactSupport } from '@mui/icons-material';
+import replaceLabel from '@/lib/utils/mailUtils';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import BottomBar from '../../shared/layout/BottomBar';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
@@ -35,6 +36,14 @@ const BottomActionBar = (props: BottomActionBarProps) => {
   };
   const handleClickSave = () => {
     props.handleSave();
+  };
+  const handleClickMail = () => {
+    const xmlString = replaceLabel(dataCollection.label['fr-FR']).then(
+      (res) => {
+        navigate(`/mail`, { state: { xmlString: res.toString() } });
+      }
+    );
+    // navigate(`/mail`, { state: { xmlString } });
   };
   return (
     <BottomBar>
@@ -100,9 +109,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
         </Button>
         <Button
           variant="customContained"
-          onClick={() => {
-            console.log('mail');
-          }}
+          onClick={handleClickMail}
           sx={{
             mx: 1,
           }}

@@ -53,6 +53,8 @@ const createApiClient = (baseUrl: string) => {
       deleteRequest(`${baseUrl}api/data-collections/${id}`),
     publishDataCollection: async (id: string): Promise<unknown> =>
       getRequest(`${baseUrl}api/external/publish/${id}`),
+    createPdfFromXml: async (xmlString: string): Promise<unknown> =>
+      postRequest(`${baseUrl}api/external/mail/generate/fo`, xmlString),
   };
 };
 

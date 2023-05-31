@@ -1,12 +1,11 @@
-// import Courrier from '@/assets/mockData/courrier.xml';
 import { XMLSerializer } from 'xmldom';
 
 const getMockCourrier = async () => {
   try {
-    const response = await fetch('courrier.xml');
-    const xmlString = await response.text();
+    const response = await fetch('../courrier.xml').then((res) => res.text());
     const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+    const xmlDoc = parser.parseFromString(response, 'text/xml');
+    // console.log('XML document', xmlDoc);
     return xmlDoc;
   } catch (error) {
     console.error('Error fetching or parsing XML:', error);
@@ -14,6 +13,7 @@ const getMockCourrier = async () => {
   }
 };
 const replaceLabel = async (label: string) => {
+  // Temp while waiting for real datamodel
   try {
     const xmlDocument = await getMockCourrier();
     const xmlString = new XMLSerializer().serializeToString(xmlDocument);
@@ -22,10 +22,12 @@ const replaceLabel = async (label: string) => {
       '${Enq_LibelleEnquete}',
       label
     );
+    // console.log('Update XML string', updatedXmlString);
     return updatedXmlString;
   } catch (error) {
     console.error('Error fetching or parsing XML:', error);
     throw error;
   }
 };
+
 export default replaceLabel;
