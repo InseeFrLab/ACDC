@@ -1,0 +1,17 @@
+{
+  "table": "Table",
+  "id": "Id",
+  "field": "Field",
+  "filter": "Filter",
+  "page": "Page",
+  "rows": "Rows",
+  "search": "Search",
+  "description": "Description",
+  "statisticalProgram": "Data Collection",
+  "programCycle": "Edition",
+  "lastUpdate": "Last Updated",
+  "version": "Version",
+  "goToCollection": "Go to Collection Page",
+  "reset": "Reset",
+  "selectGroups": "Please select groups (up to 2)"
+}

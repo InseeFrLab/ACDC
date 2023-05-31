@@ -1,0 +1,16 @@
+{
+  "table": "Tableau",
+  "id": "Id",
+  "field": "Champ",
+  "filter": "Filtrer",
+  "page": "Page",
+  "rows": "Lignes",
+  "search": "Rechercher",
+  "statisticalProgram": "Collecte de données",
+  "programCycle": "Edition",
+  "lastUpdate": "Dernière mise à jour",
+  "version": "Version",
+  "goToCollection": "ToBeTranslated",
+  "reset": "Réinitialiser",
+  "selectGroups": "Sélectionner des groupes (2 maximum)"
+}
