@@ -108,7 +108,7 @@ const Home = () => {
         <Typography variant="h2" fontWeight="xl" fontFamily="Oswald">
           {t('title', { ns: 'home' })}
         </Typography>
-        <DataGridHomePage rows={rows} heightTable={450} />
+        <DataGridHomePage rows={rows} />
         <Box
           sx={{
             marginTop: 3,

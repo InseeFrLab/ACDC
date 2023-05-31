@@ -25,7 +25,6 @@ import {
 
 interface DataGridHomePageProps {
   rows: DataCollectionRow[];
-  heightTable: number;
 }
 
 const CustomToolbar = () => {
@@ -179,7 +178,6 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
           fontWeight: '700',
         },
         p: 2,
-        height: props.heightTable,
       }}
     >
       <DataGrid
@@ -192,8 +190,8 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         }}
         rows={props.rows}
         columns={columns}
-        // getRowHeight={() => 'auto'}
-        autoPageSize
+        pageSize={10}
+        autoHeight
         pagination
         getRowClassName={() => 'row--style'}
         disableSelectionOnClick
