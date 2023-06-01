@@ -18,9 +18,6 @@ const Home = () => {
   const handleClick = () => {
     navigate('/new');
   };
-  const handleClickMail = () => {
-    navigate('/mail');
-  };
   const { getAllDataCollections } = useContext(ApiContext);
 
   const { data, error, isLoading, isSuccess } = useQuery(
@@ -126,15 +123,6 @@ const Home = () => {
               {t('createButton', { ns: 'home' })}
             </Typography>
           </Button>
-          <Button
-            variant="customContained"
-            sx={{ marginTop: 3 }}
-            onClick={handleClickMail}
-          >
-            <Typography fontFamily="Lato">
-              {t('title', { ns: 'mailRender' })}
-            </Typography>
-          </Button>
         </Box>
       </Main>
     );
@@ -159,15 +147,6 @@ const Home = () => {
       >
         <Typography variant="subtitle1">
           {t('createButton', { ns: 'home' })}
-        </Typography>
-      </Button>
-      <Button
-        variant="customContained"
-        sx={{ marginTop: 3 }}
-        onClick={handleClickMail}
-      >
-        <Typography fontFamily="Lato">
-          {t('title', { ns: 'mailRender' })}
         </Typography>
       </Button>
     </Main>

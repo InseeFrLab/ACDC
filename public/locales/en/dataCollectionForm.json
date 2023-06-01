@@ -3,5 +3,6 @@
   "descriptionCreateForm": "Create a new data collection by filling the form below.",
   "successForm": "Data Collection created successfully",
   "statisticalOperation": "Statistical Operation",
-  "statisticalOperationSeries": "Statistical Operation Series"
+  "statisticalOperationSeries": "Statistical Operation Series",
+  "qualityReport": "Quality Report"
 }

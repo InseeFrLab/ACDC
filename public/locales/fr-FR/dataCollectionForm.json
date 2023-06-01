@@ -3,5 +3,6 @@
   "descriptionCreateForm": "Creér une nouvelle campagne ",
   "successForm": "Campagne créée avec succès",
   "statisticalOperation": "Opération statistique",
-  "statisticalOperationSeries": "Série d'opérations statistiques"
+  "statisticalOperationSeries": "Série d'opérations statistiques",
+  "qualityReport": "Rapport qualité"
 }

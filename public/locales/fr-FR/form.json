@@ -20,5 +20,6 @@
   "media": "Media",
   "deleteSuccess": "L'élément a été supprimé avec succès",
   "confirmationDeleteMessage": "Voulez-vous vraiment supprimer cet élément ?",
-  "confirm": "Confirmer"
+  "confirm": "Confirmer",
+  "addInfo": "+ Autres informations"
 }

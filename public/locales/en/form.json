@@ -19,5 +19,6 @@
   "media": "Media",
   "deleteSuccess": "Component deleted successfully",
   "confirmationDeleteMessage": "Are you sure you want to delete this element?",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "addInfo": "+ Other informations"
 }
