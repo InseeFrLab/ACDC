@@ -8,12 +8,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
+import OtherInfo from '@/components/shared/formComponents/otherInformations/OtherInfo';
 import CreateDataCollectionDialog from './CreateDataCollectionDialog';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import {
-  createDataCollection,
-  updateDataCollection,
-} from '../../../lib/api/remote/dataCollectionApiFetch';
+import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import {
@@ -202,6 +200,8 @@ const CollectionForm = (props: CollectionFormProps) => {
           submitAttempt={false}
         />
 
+        <OtherInfo multiline />
+
         <Box
           component="form"
           className="CollectionForm"
@@ -210,6 +210,7 @@ const CollectionForm = (props: CollectionFormProps) => {
             flexDirection: 'row',
             justifyContent: 'flex-start',
             borderTop: '1px solid',
+            marginTop: 2,
             paddingTop: 2,
             borderColor: 'divider',
             alignItems: 'center',

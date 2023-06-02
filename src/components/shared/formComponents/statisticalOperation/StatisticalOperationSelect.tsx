@@ -119,214 +119,137 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   };
 
   return (
-    <>
-      <Stack spacing={1}>
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}* :
-          </Typography>
-        </Box>
-        <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-          <Autocomplete
-            disablePortal
-            blurOnSelect
-            size="small"
-            id="select-statistical-operation-series"
-            options={props.series}
-            onChange={handlegroupReferenceChange}
-            getOptionLabel={(option) => {
-              return `${option.label[i18n.language]}`;
-            }}
-            value={
-              {
-                id: '',
-                label: props.groupReference.label,
-                altLabel: {
-                  'fr-FR': '',
-                  'en-IE': '',
-                },
-              } as StatisticalSeries
-            }
-            renderOption={(pr, option) => {
-              return (
-                <Box
-                  component="li"
-                  key={option.id}
-                  sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                  {...pr}
-                >
-                  {option.label[i18n.language]}
-                </Box>
-              );
-            }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label={t('statisticalOperationSeries', {
-                  ns: 'dataCollectionForm',
-                })}
-                error={
-                  props.submitAttempt &&
-                  props.studyUnitReference.groupReference.id.length < 1
-                }
-                value={
-                  props.groupReference.label[i18n.language]
-                    ? props.groupReference.label[i18n.language]
-                    : ''
-                }
-              />
-            )}
-          />
-        </FormControl>
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('statisticalOperation', { ns: 'dataCollectionForm' })}* :
-          </Typography>
-        </Box>
-        <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-          <Autocomplete
-            disablePortal
-            blurOnSelect
-            disabled={operationDisabled}
-            loading={isLoading}
-            size="small"
-            id="select-statistical-operation"
-            options={operations}
-            onChange={handleStudyUnitReferenceChange}
-            getOptionLabel={(option) => {
-              return `${option.label[i18n.language]}`;
-            }}
-            value={
-              {
-                id: '',
-                label: props.studyUnitReference.label,
-                altLabel: {
-                  'fr-FR': '',
-                  'en-IE': '',
-                },
-              } as StatisticalSeries
-            }
-            renderOption={(pr, option) => {
-              return (
-                <Box
-                  component="li"
-                  sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                  {...pr}
-                >
-                  {option.label[i18n.language]}
-                </Box>
-              );
-            }}
-            renderInput={(params) => (
-              <TextField
-                error={
-                  props.submitAttempt && props.studyUnitReference.id.length < 1
-                }
-                {...params}
-                label={t('statisticalOperation', {
-                  ns: 'dataCollectionForm',
-                })}
-              />
-            )}
-          />
-        </FormControl>
-      </Stack>
-
-      <ExpandMore
-        expand={false}
-        onClick={() => {
-          setAddInfo(!addInfo);
+    <Stack spacing={1}>
+      <Box
+        component="form"
+        className="CollectionForm"
+        sx={{
+          paddingTop: 2,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          borderTop: '1px solid',
+          borderColor: 'divider',
         }}
-        aria-expanded={addInfo}
-        aria-label="show more"
-        sx={{ marginTop: 2 }}
       >
-        <Typography variant="body2">{t('addInfo', { ns: 'form' })}:</Typography>
-      </ExpandMore>
-
-      <Collapse in={addInfo} timeout="auto" unmountOnExit>
-        <Stack spacing={1} sx={{ alignItems: 'flex-start' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          />
-          <Typography variant="h6">
-            {t('qualityReport', { ns: 'dataCollectionForm' })} :
-          </Typography>
-          <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-            <Autocomplete
-              disablePortal
-              blurOnSelect
-              disabled
-              loading={isLoading}
-              size="small"
-              id="select-statistical-operation"
-              options={operations}
-              onChange={handleStudyUnitReferenceChange}
-              getOptionLabel={(option) => {
-                return `${option.label[i18n.language]}`;
-              }}
-              value={
-                {
-                  id: '',
-                  label: props.studyUnitReference.label,
-                  altLabel: {
-                    'fr-FR': '',
-                    'en-IE': '',
-                  },
-                } as StatisticalSeries
+        <Typography variant="h6">
+          {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}* :
+        </Typography>
+      </Box>
+      <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
+        <Autocomplete
+          disablePortal
+          blurOnSelect
+          size="small"
+          id="select-statistical-operation-series"
+          options={props.series}
+          onChange={handlegroupReferenceChange}
+          getOptionLabel={(option) => {
+            return `${option.label[i18n.language]}`;
+          }}
+          value={
+            {
+              id: '',
+              label: props.groupReference.label,
+              altLabel: {
+                'fr-FR': '',
+                'en-IE': '',
+              },
+            } as StatisticalSeries
+          }
+          renderOption={(pr, option) => {
+            return (
+              <Box
+                component="li"
+                key={option.id}
+                sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                {...pr}
+              >
+                {option.label[i18n.language]}
+              </Box>
+            );
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label={t('statisticalOperationSeries', {
+                ns: 'dataCollectionForm',
+              })}
+              error={
+                props.submitAttempt &&
+                props.studyUnitReference.groupReference.id.length < 1
               }
-              renderOption={(pr, option) => {
-                return (
-                  <Box
-                    component="li"
-                    sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                    {...pr}
-                  >
-                    {option.label[i18n.language]}
-                  </Box>
-                );
-              }}
-              renderInput={(params) => (
-                <TextField
-                  error={
-                    props.submitAttempt &&
-                    props.studyUnitReference.id.length < 1
-                  }
-                  {...params}
-                  label={t('qualityReport', {
-                    ns: 'dataCollectionForm',
-                  })}
-                />
-              )}
+              value={
+                props.groupReference.label[i18n.language]
+                  ? props.groupReference.label[i18n.language]
+                  : ''
+              }
             />
-          </FormControl>
-        </Stack>
-      </Collapse>
-    </>
+          )}
+        />
+      </FormControl>
+      <Box
+        component="form"
+        className="CollectionForm"
+        sx={{
+          paddingTop: 2,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          borderTop: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Typography variant="h6">
+          {t('statisticalOperation', { ns: 'dataCollectionForm' })}* :
+        </Typography>
+      </Box>
+      <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
+        <Autocomplete
+          disablePortal
+          blurOnSelect
+          disabled={operationDisabled}
+          loading={isLoading}
+          size="small"
+          id="select-statistical-operation"
+          options={operations}
+          onChange={handleStudyUnitReferenceChange}
+          getOptionLabel={(option) => {
+            return `${option.label[i18n.language]}`;
+          }}
+          value={
+            {
+              id: '',
+              label: props.studyUnitReference.label,
+              altLabel: {
+                'fr-FR': '',
+                'en-IE': '',
+              },
+            } as StatisticalSeries
+          }
+          renderOption={(pr, option) => {
+            return (
+              <Box
+                component="li"
+                sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                {...pr}
+              >
+                {option.label[i18n.language]}
+              </Box>
+            );
+          }}
+          renderInput={(params) => (
+            <TextField
+              error={
+                props.submitAttempt && props.studyUnitReference.id.length < 1
+              }
+              {...params}
+              label={t('statisticalOperation', {
+                ns: 'dataCollectionForm',
+              })}
+            />
+          )}
+        />
+      </FormControl>
+    </Stack>
   );
 };
 

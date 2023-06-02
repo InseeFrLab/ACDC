@@ -23,6 +23,7 @@ const customTheme = createTheme({
     },
     h2: {
       fontFamily: 'Oswald, sans-serif',
+      marginTop: '1rem',
     },
   },
   components: {

@@ -108,7 +108,6 @@ const Home = () => {
         <DataGridHomePage rows={rows} />
         <Box
           sx={{
-            marginTop: 3,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'center',
@@ -116,7 +115,7 @@ const Home = () => {
         >
           <Button
             variant="customContained"
-            sx={{ marginTop: 3, mr: 2 }}
+            sx={{ marginTop: '1rem' }}
             onClick={handleClick}
           >
             <Typography fontFamily="Lato">
@@ -142,7 +141,7 @@ const Home = () => {
       </Typography>
       <Button
         variant="customContained"
-        sx={{ marginTop: 3 }}
+        sx={{ marginTop: '1rem' }}
         onClick={handleClick}
       >
         <Typography variant="subtitle1">

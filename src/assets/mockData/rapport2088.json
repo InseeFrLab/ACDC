@@ -1,0 +1,1831 @@
+{
+  "id": "2088",
+  "uri": "http://id.insee.fr/qualite/rapport/2088",
+  "label": [
+    {
+      "contenu": "Rapport qualité : Enquête capacité à innover et stratégie 2022",
+      "langue": "fr"
+    },
+    {
+      "contenu": "Quality report: Quality report: Community Innovation Survey 2022",
+      "langue": "en"
+    }
+  ],
+  "rubriques": [
+    {
+      "id": "S.3.9",
+      "uri": "http://ec.europa.eu/eurostat/simsv2/attribute/S.3.9",
+      "idParent": "S.3",
+      "type": "TEXT",
+      "label": [
+        {
+          "contenu": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ],
+      "titre": [
+        {
+          "contenu": "Période de base",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Base period",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "I.18.7",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.18.7",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Période de collecte",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data collection period",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>La période de collecte s'étend de avril à novembre 2023.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The collection period will run from April 2023 to November 2023.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.3.8",
+      "uri": "http://ec.europa.eu/eurostat/simsv2/attribute/S.3.8",
+      "idParent": "S.3",
+      "type": "TEXT",
+      "label": [
+        {
+          "contenu": "<p>2020 à 2022 selon les questions</p>",
+          "langue": "fr"
+        },
+        {
+          "contenu": "<p>2020 to 2022 depending on the questions</p>",
+          "langue": "en"
+        }
+      ],
+      "titre": [
+        {
+          "contenu": "Couverture temporelle",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Time coverage",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.18.6.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.18.6.1",
+      "idParent": "S.18.6",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Correction des variations saisonnières",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Seasonal adjustment",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.19",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.19",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Commentaire",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Comment",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.16",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.16",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Coûts et charge",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Cost and burden",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Le temps de réponse médian (estimé après redressement) est de 30 minutes.</p>\n<p>Le comité du label s'assure que l'enquête n'entraîne pas de charge excessive sur les enquêtés. De plus, d'autres décisions ont été prises afin de limiter la charge des répondants : </p>\n<p>• coordination négative de l'échantillon avec les échantillons d'un certain nombre d'autres enquêtes,</p>\n<p>• collecte électronique.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.3.7",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.3.7",
+      "idParent": "S.3",
+      "type": "GEOGRAPHY",
+      "titre": [
+        {
+          "contenu": "Zone géographique de référence",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Reference area",
+          "langue": "en"
+        }
+      ],
+      "territoire": {
+        "id": "territoireDeLaRepubliqueFrancaise",
+        "uri": "http://id.insee.fr/geo/territoireFrancais/territoireDeLaRepubliqueFrancaise",
+        "label": [
+          {
+            "contenu": "Territoire de la République française",
+            "langue": "fr"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I.18.9",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.18.9",
+      "idParent": "S.18",
+      "type": "CODE_LIST",
+      "titre": [
+        {
+          "contenu": "Unité(s) enquêtée(s)",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Survey unit",
+          "langue": "en"
+        }
+      ],
+      "codes": [
+        {
+          "id": "P",
+          "uri": "http://id.insee.fr/codes/uniteEnquetee/P",
+          "label": [
+            {
+              "contenu": "Entreprise",
+              "langue": "fr"
+            },
+            {
+              "contenu": "Enterprise",
+              "langue": "en"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S.7.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.7.2",
+      "idParent": "S.7",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Confidentialité — traitement des données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Confidentiality - data treatment",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Concernant la collecte internet, le site de collecte est entièrement sécurisé et les normes en termes de gestion des codes d'accès à l'enquête sont strictes. Pour les entreprises choisissant d'utiliser le support papier, la saisie est assurée par les gestionnaires, dans le strict respect de la confidentialité des données récoltées.</p>\n<p>Le secret est appliqué avant la diffusion des données : pour les données relatives aux entreprises, aucun résultat qui concerne moins de trois entreprises ou établissements n'est publié.</p>\n<p>De même, un résultat ne sera diffusé que si aucune entreprise ou établissement ne contribue à plus de 85 % de ce résultat.</p>\n<p>Les suppressions primaires correspondent aux cases ne répondant pas au critère ci-dessus. Le secret secondaire consiste ensuite à supprimer d'autres cases pour que les données ne puissent pas être retrouvées par addition soustraction avec les marges des tableaux.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>For Internet collection, the collection site is completely secure and the standards for managing survey access codes are strict. For companies that choose to use paper, the data entry is carried out by the managers, with strict respect for the confidentiality of the data collected.</p>\n<p>Before the data is released, confidentiality is applied. For company data: no results are published for less than three companies or establishments. Similarly, a result will only be disclosed if no company or establishment contributes more than 85% of that result. Primary deletions correspond to boxes that do not meet the above criteria. Secondary secrecy removes other boxes so that the data cannot be retrieved by subtraction with the margins of the tables. Statistical confidentiality is defined in Act No. 51-711 of 7 June 1951.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "I.18.8",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.18.8",
+      "idParent": "S.18",
+      "type": "CODE_LIST",
+      "titre": [
+        {
+          "contenu": "Mode de collecte",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Collection mode",
+          "langue": "en"
+        }
+      ],
+      "codes": [
+        {
+          "id": "M",
+          "uri": "http://id.insee.fr/codes/modeCollecte/M",
+          "label": [
+            {
+              "contenu": "Par voie postale",
+              "langue": "fr"
+            },
+            {
+              "contenu": "By post mail",
+              "langue": "en"
+            }
+          ]
+        },
+        {
+          "id": "I",
+          "uri": "http://id.insee.fr/codes/modeCollecte/I",
+          "label": [
+            {
+              "contenu": "Par Internet",
+              "langue": "fr"
+            },
+            {
+              "contenu": "By Internet",
+              "langue": "en"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S.3.6",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.3.6",
+      "idParent": "S.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Population statistique",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Statistical population",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les entreprises enquêtées sont des entreprises implantées sur le territoire français (métropole et DOM y compris Mayotte), actives au 31/12/2022 et ayant eu au moins 6 mois d'activité, marchandes, exploitantes de 10 salariés ou plus (en ETP).</p>\n<p>Les entreprises appartiennent aux divisions 05 à 81 de la  nomenclature statistique des activités économiques dans la Communauté européenne (NACE rév.2, à l'exception de 75 : vétérinaires).</p>\n<p>Au sein de la section K de la NACE rév.2 (divisions 64, 65 et 66), les sections 5195, 6595 sont exclues (agence locale de banque).</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The enterprises surveyed are enterprises established on French territory (metropolitan France and overseas departments including Mayotte), active on 31/12/2022 having had at least 6 months of activity, merchants, operators with 10 or more employees (in FTE). </p>\n<p>The companies belong to divisions 05 to 81 of the Statistical Classification of Economic Activities in the European Community (NACE rev.2, with the exception of 75: veterinary surgeons).  Within Section K of NACE rev.2 (Divisions 64, 65 and 66), sections 5195, 6595 are excluded.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.13.3.4",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.13.3.4",
+      "idParent": "S.13.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Erreur de traitement",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Processing error",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "I.18.11",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.18.11",
+      "idParent": "S.18",
+      "type": "TEXT",
+      "label": [
+        {
+          "contenu": "<p>De l'ordre de 20 000 unités</p>",
+          "langue": "fr"
+        }
+      ],
+      "titre": [
+        {
+          "contenu": "Taille de l'échantillon",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Sample size",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "I.18.12",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.18.12",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Documents de collecte",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data collection documents",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Notice du questionnaire 2022 relatif à l'enquête capacité à innover et stratégie",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Notice of the CIS 2022 questionnaire",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "2023-02-01T00:00:00",
+              "langue": "fr",
+              "url": "https://www.insee.fr/fr/metadonnees/source/fichier/Notice_CIS2022.pdf"
+            },
+            {
+              "label": [
+                {
+                  "contenu": "Questionnaire complet 2022 relatif à l'enquête capacité à innover et stratégie",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Questionnaire of the CIS2022 survey",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "2023-03-23T00:00:00",
+              "langue": "fr",
+              "url": "https://www.insee.fr/fr/metadonnees/source/fichier/Questionnaire_complet_CIS2022.pdf"
+            }
+          ],
+          "texte": "",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "I.18.10",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.18.10",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Plan de sondage",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Sampling method",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>L'échantillon est tiré dans une base de sondage construite à partir du Système d'immatriculation au répertoire des unités statistiques (Sirus) selon un plan de sondage aléatoire simple stratifié selon l'activité, la tranche d'effectifs et la région lorsque cela était possible. Le calcul des allocations combine une allocation de Neyman sur le taux d'unités innovantes et une allocation proportionnelle sur le nombre d'unités innovantes, ce qui permet d'une part d'être précis sur la variable centrale de l'enquête (le taux d'innovation) et également d'interroger un nombre raisonnable d'unités innovantes afin d'assurer une précision satisfaisante pour les questions ne concernant que ces unités.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The sample is drawn from a sampling frame constructed from the Sirus inventory using a simple random sampling design stratified by activity, workforce segment and region where possible. The calculation of the allocations combines a Neyman allocation on the rate of innovative enterprises and a proportional allocation on the number of innovative enterprises, which makes it possible on the one hand to be precise on the central variable of the survey (the innovation rate) and also to query a reasonable number of innovative enterprises in order to ensure satisfactory accuracy for questions concerning only these enterprises.</p>\n<p>As the interrogation unit is modified, an over-sample of legal units is also drawn. These belong to the profiled firms drawn in the main sample. The objective is to compare their answers to the mandatory questions in the Eurostat questionnaire with those given at enterprise level, and to use them if necessary to modify or complete the answer given at enterprise level.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.15.3.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.15.3.2",
+      "idParent": "S.15.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Cohérence – Comptes nationaux",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Coherence - National Accounts",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.15.3.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.15.3.1",
+      "idParent": "S.15.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Cohérence – Statistiques annuelles et infra-annuelles",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Coherence - sub annual and annual statistics",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.10.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.10.1",
+      "idParent": "S.10",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Communiqué de presse",
+          "langue": "fr"
+        },
+        {
+          "contenu": "News release",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.12.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.12.1",
+      "idParent": "S.12",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Besoins des utilisateurs",
+          "langue": "fr"
+        },
+        {
+          "contenu": "User needs",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les principaux utilisateurs de l'enquête CIS sont des chercheurs, des chargés d'études ou de conseil et des cadres (public/privé). Les résultats de l'enquête sont utilisées pour des études ou de la veille technologique.</p>\n<p>Les principales données consultées sont : les innovations de produits, la proportion de sociétés innovantes par secteur d'activité et les facteurs expliquant l'absence d'innovation.</p>\n<p>Les utilisateurs souhaiteraient des données régionales plus fines.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>A consultation committee, made up of experts and representatives of public policies concerned with innovation issues, as well as representatives of professional organizations and employee unions, met to help design the questionnaire.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.10.3",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.10.3",
+      "idParent": "S.10",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Base de données en ligne",
+          "langue": "fr"
+        },
+        {
+          "contenu": "On-line database",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les données détaillées sont disponibles dans la collection Insee Résultats sur le site de l'Insee.</p>\n<p>Les indicateurs avec comparaison européenne sont disponibles sur le site d'Eurostat.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.10.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.10.2",
+      "idParent": "S.10",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Publications",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Publications",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Insee Première -- Insee.fr (juillet 2024)</p>\n<p>Insee Résultats -- Insee.fr (juillet 2024)</p>\n<p>Eurostat Statistics explained (fin début 2024-début 2025)</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The data are published in the Insee Première collections : <a href=\"https://www.insee.fr/fr/statistiques?debut=0&amp;idprec=3606601&amp;theme=37&amp;collection=116\">https://www.insee.fr/fr/statistiques?debut=0&amp;idprec=3606601&amp;theme=37&amp;collection=116</a></p>\n<p>and Insee Resultas of Insee.fr.</p>\n<p><a href=\"https://www.insee.fr/fr/statistiques/4637870\">https://www.insee.fr/fr/statistiques/4637870</a></p>\n<p>Eurostat Statistics explained </p>\n<p><a href=\"https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Main_Page\">https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Main_Page</a></p>\n<p>European Innovation Scoreboard </p>\n<p><a href=\"https://ec.europa.eu/docsroom/documents/41875\">https://ec.europa.eu/docsroom/documents/41875</a></p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.14.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.14.1",
+      "idParent": "S.14",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Actualité",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Timeliness and TP2. Time lag - final results for U",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Le laps de temps entre la période de référence et la date de publication est de 19 mois pour l'Insee et 24 mois pour Eurostat.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.10.5",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.10.5",
+      "idParent": "S.10",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Autres",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Other",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>In addition to publications, data quality indicators are also disseminated.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.12.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.12.2",
+      "idParent": "S.12",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Satisfaction des utilisateurs",
+          "langue": "fr"
+        },
+        {
+          "contenu": "User satisfaction",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Résultats de l'enquête de satisfaction Innovation (CIS-capacité à innover et stratégie)",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Results of the Innovation Satisfaction Survey (CIS-innovation capacity and strategy)",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://www.insee.fr/fr/information/5227627"
+            }
+          ],
+          "texte": "<p>Une enquête de satisfaction a été menée sur l'enquête CIS en août/septembre 2020. Les principaux résultats sont consultables sur Insee.fr.</p>\n<p>Les utilisateurs (chercheurs, administration, représentants d'entreprises, syndicats, etc.) sont conviés tous les 2 ans à un comité de concertation afin de leur présenter le nouveau questionnaire et de recueillir leurs besoins. Le dernier comité de concertation a eu lieu le 27 septembre 2022.</p>\n<p>Enfin, un comité utilisateurs a lieu ponctuellement afin d'échanger sur les études en cours utilisant l'enquête CIS et les besoins pour les projets futurs.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.10.4",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.10.4",
+      "idParent": "S.10",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Accès aux micro-données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Micro-data access",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Centre d'Accès Sécurisé aux Données - CASD - Enquête communautaire sur l'innovation",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Secure Access Data Center - CASD - Community Innovation Survey",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://www.casd.eu/source/enquete-communautaire-sur-linnovation/"
+            }
+          ],
+          "texte": "<p>Les fichiers individuels sont mis à disposition des utilisateurs extérieurs à l'Insee via le Centre d'Accès Sécurisé aux Données (CASD), après passage au Comité du secret.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The survey is the subject of a procedure for archiving databases under GEN. </p>\n<p>The individual files are made available to users outside INSEE via the CASD, after passing through the Secrecy Committee.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.10.7",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.10.7",
+      "idParent": "S.10",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Documentation sur la qualité",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Quality documentation",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "API Métadonnées",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "API Metadata",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://api.insee.fr/catalogue/"
+            }
+          ],
+          "texte": "<p>Le présent rapport qualité de l'enquête CIS 2022 ainsi que les rapports des millésimes précédents sont publiés sur le site insee.fr et également disponibles via l'API Métadonnées de l'Insee.</p>\n<p>La précision et la fiabilité sont décrites dans les rubriques correspondantes.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "I.20",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.20",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Voir aussi",
+          "langue": "fr"
+        },
+        {
+          "contenu": "See Also",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "L'état de l’Enseignement supérieur et de la Recherche en France",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Higher Education and Research in France, Facts and Figures",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://publication.enseignementsup-recherche.gouv.fr/eesr/FR/T027/les_depenses_interieures_de_recherche_et_developpement/"
+            }
+          ],
+          "texte": "<p>Enquête R&amp;D du ministère de l'Enseignement supérieur, de la recherche et de l'innovation</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.10.6",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.10.6",
+      "idParent": "S.10",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Documentation sur la méthodologie",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Documentation on methodology",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Méthodes et pratique des enquêtes entreprises à l'Insee",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Methods and practice of business surveys at INSEE",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "2018-09-12T00:00:00",
+              "langue": "fr",
+              "url": "https://www.insee.fr/fr/metadonnees/source/fichier/S_10_6_Methodes_et_pratiques_enquetes_entreprises.pdf"
+            }
+          ],
+          "texte": "<p>Texte de référence méthodologique</p>\n<p>Méthodes et pratique des enquêtes entreprises à l'Insee (fr -- 12/09/2018)</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.14.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.14.2",
+      "idParent": "S.14",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Ponctualité",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Punctuality and TP3. Punctuality - delivery and publication for U",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.18.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.18.1",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Données sources",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Source data",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Il n'existe pas d'autre source au sujet de l'innovation des entreprises en France. Le questionnaire CIS est la seule source à l'échelle nationale permettant d'avoir des données sur la fréquence de l'innovation et ses mécanismes.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.18.3",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.18.3",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Collecte des données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data collection",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>La collecte est réalisée par internet et, éventuellement, par voie postale (à la demande de l'entreprise).</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>Data collection is carried out via the Internet and possibly by post (at the request of the company).</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.18.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.18.2",
+      "idParent": "S.18",
+      "type": "CODE_LIST",
+      "titre": [
+        {
+          "contenu": "Fréquence de collecte des données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Frequency of data collection",
+          "langue": "en"
+        }
+      ],
+      "codes": [
+        {
+          "id": "U",
+          "uri": "http://id.insee.fr/codes/frequence/U",
+          "label": [
+            {
+              "contenu": "Pluriannuelle",
+              "langue": "fr"
+            },
+            {
+              "contenu": "Multiannual",
+              "langue": "en"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S.18.5",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.18.5",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Élaboration des données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data compilation",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Méthodes et pratique des enquêtes entreprises à l'Insee",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Methods and practice of business surveys at INSEE",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "2018-09-12T00:00:00",
+              "langue": "fr",
+              "url": "https://www.insee.fr/fr/metadonnees/source/fichier/S_10_6_Methodes_et_pratiques_enquetes_entreprises.pdf"
+            }
+          ],
+          "texte": "<p>Différentes étapes sont mises en œuvre afin de corriger les données :</p>\n<ul>\n<li>\n<p>apurement</p>\n</li>\n<li>\n<p>redressement de la non réponse partielle</p>\n</li>\n<li>\n<p>calage</p>\n</li>\n<li>\n<p>winsorisation</p>\n</li>\n</ul>\n<p>Le détail des différentes étapes se trouve dans le document Méthodes et pratique des enquêtes entreprises à l'Insee (fr -- 12/09/2018)</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.18.4",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.18.4",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Validation des données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data validation",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les différentes étapes de l'enquête garantissent que le processus répond aux exigences en matière de production statistique :</p>\n<ul>\n<li>\n<p>tests réalisés en amont de la collecte, auprès de 60 entreprises ;</p>\n</li>\n<li>\n<p>tirage stratifié de l'échantillon ;</p>\n</li>\n<li>\n<p>relances et contrôles des données en cours de collecte par les gestionnaires ;</p>\n</li>\n<li>\n<p>apurement ;</p>\n</li>\n<li>\n<p>redressement de la non-réponse totale ;</p>\n</li>\n<li>\n<p>calage ;</p>\n</li>\n<li>\n<p>redressement de la non réponse partielle ;</p>\n</li>\n<li>\n<p>winsorisation (contrôle de l'influence des unités atypiques).</p>\n</li>\n</ul>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The different steps of the survey ensure that the process meets the requirements for statistical production:</p>\n<ul>\n<li>\n<p>stratified sample selection</p>\n</li>\n<li>\n<p>reminders and checks of data being collected by collectors</p>\n</li>\n<li>\n<p>clearance</p>\n</li>\n<li>\n<p>adjustment of total non-response</p>\n</li>\n<li>\n<p>shimming</p>\n</li>\n<li>\n<p>adjustment for partial non-response</p>\n</li>\n<li>\n<p>winsorisation.</p>\n</li>\n</ul>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.18.6",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.18.6",
+      "idParent": "S.18",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Ajustement",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Adjustment",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Pas d'effet saisonnier</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "C.3.7.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/C.3.7.1",
+      "idParent": "S.3.7",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Extensions régionales",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Regional extensions",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "C.12.1.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/C.12.1.1",
+      "idParent": "S.12.1",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Instances de concertation",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Users consultation organisation",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Un comité de concertation, composé des experts et représentants des politiques publiques concernées par les questions de l'innovation, ainsi que des représentants d'organisations professionnelles, ou de syndicats de salariés s'est réuni pour participer à la conception du questionnaire.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.3.5",
+      "uri": "http://ec.europa.eu/eurostat/simsv2/attribute/S.3.5",
+      "idParent": "S.3",
+      "type": "TEXT",
+      "label": [
+        {
+          "contenu": "<p>L'unité d'interrogation est l'entreprise au sens de la loi de modernisation de l'économie de 2008 (LME 2008). L'entreprise y est définie comme la plus petite combinaison d'unités légales qui constitue une unité organisationnelle de production de biens et de services jouissant d'une certaine autonomie de décision, notamment pour l'affectation de ses ressources courantes.</p>",
+          "langue": "fr"
+        },
+        {
+          "contenu": "<p>The interrogation unit is the enterprise (independent or profiled). As the interrogation unit is modified for tje 2020 CIS, an oversample consisting of legal units is drawn. The objective is to compare the answers of these legal units with those of the enterprise to which they belong. The results will only be published at the enterprise level.</p>",
+          "langue": "en"
+        }
+      ],
+      "titre": [
+        {
+          "contenu": "Unité statistique",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Statistical unit",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.7.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.7.1",
+      "idParent": "S.7",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Politique de confidentialité",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Confidentiality - policy",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Law No. 51-711 of 7 June 1951 on the obligation, coordination and secrecy of statistics",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000888573/"
+            }
+          ],
+          "texte": "<p>Loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques.</p>\n<p>L'article 6 concerne le secret statistique. Sous réserve des dispositions des articles 40,  56, 76,  97 et 99 du code de procédure pénale et de celles de l'article L. 213-3 du code du patrimoine, les renseignements individuels figurant dans les questionnaires revêtus du visa prévu à l'article 2 de la présente loi et ayant trait à la vie personnelle et familiale et, d'une manière générale, aux faits et comportements d'ordre privé ne peuvent, sauf décision de l'administration des archives, prise après avis du comité du secret statistique et relative à une demande effectuée à des fins de statistique publique ou de recherche scientifique ou historique, faire l'objet d'aucune communication de la part du service dépositaire avant l'expiration d'un délai de soixante-quinze ans suivant la date de réalisation de l'enquête ou d'un délai de vingt-cinq ans à compter de la date du décès de l'intéressé, si ce dernier délai est plus bref.</p>\n<p>Il est institué un comité du secret statistique. Ce comité est appelé à se prononcer sur toute question relative au secret en matière de statistiques. Il donne son avis sur les demandes de communication de données individuelles collectées en application de la présente loi. Le comité est présidé par un conseiller d'Etat, désigné par le vice-président du Conseil d'Etat. Il comprend notamment des représentants de l'Assemblée nationale et du Sénat. La composition et les modalités de fonctionnement du comité sont fixées par décret en Conseil d'Etat. Les bénéficiaires des communications de données résultant des décisions ministérielles prises après avis du comité du secret statistique s'engagent à ne communiquer ces données à quiconque. Toute infraction aux dispositions de cet alinéa est punie des peines prévues à l'article 226-13 du code pénal.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>Act No. 51-711 of 7 June 1951 on the obligation, coordination and secrecy of statistics. Available at <a href=\"https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573\">https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000888573</a>.</p>\n<p>Article 6 concerns statistical confidentiality: Subject to the provisions of Articles 40, 56, 76, 97 and 99 of the Code of Criminal Procedure and those of Article L. 213-3 of the Heritage Code, the individual information contained in the questionnaires bearing the visa provided for in Article 2 of this Law and relating to personal and family life and, in general, to private facts and conduct may not, unless decided by the Archives Administration, after consulting the Committee on Statistical Confidentiality and in respect of a request made for the purposes of public statistics or scientific or historical research, not to be communicated by the depositary service before the expiry of 75 years from the date of the survey or 25 years from the date of the person's death, whichever is the shorter.</p>\n<p>A Committee on Statistical Confidentiality is hereby established. This committee is called upon to rule on any question relating to statistical confidentiality. It shall give its opinion on requests for the disclosure of individual data collected pursuant to this Law. The committee is chaired by a Councillor of State, appointed by the Vice-President of the Council of State. It includes representatives of the National Assembly and the Senate. The composition and operating procedures of the committee are determined by decree of the Conseil d'Etat. Beneficiaries of data communications resulting from ministerial decisions taken after consulting the Committee on Statistical Confidentiality undertake not to communicate such data to anyone. Any infringement of the provisions of this paragraph shall be punishable by the penalties provided for in Article 226-13 of the Criminal Code.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.3.4",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.3.4",
+      "idParent": "S.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Concepts et définitions statistiques",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Statistical concepts and definitions",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Manuel d'Oslo 2018",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Oslo Manual 2018",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "en",
+              "url": "https://www.oecd.org/sti/oslo-manual-2018-9789264304604-en.htm"
+            }
+          ],
+          "texte": "<p>La frontière entre les innovations technologiques et non technologiques est de plus en plus ténue. Dès lors, la 4ème édition du manuel d'Oslo (octobre 2018) ne retient plus que les deux types d'innovation suivants :</p>\n<p>• l'innovation de produits : il s'agit de  l'introduction sur le marché d'un bien ou d'un service nouveau ou significativement amélioré par rapport aux produits précédemment élaborés par l'entreprise. Elle inclut les changements significatifs de design et les biens ou services numériques. Elle exclut la revente en l'état de nouveaux biens ou services et les changements de nature esthétique ;</p>\n<p>• l'innovation de procédés : il s'agit de la mise en œuvre dans l'entreprise d'un procédé nouveau ou significativement amélioré par rapport aux procédés précédemment employés par l'entreprise. Elle concerne la production et les méthodes de développement, la logistique et la distribution, le système d'information et de communication, les tâches administratives et la comptabilité, l'organisation des procédures, la gestion des relations avec les fournisseurs, l'organisation du travail, les processus de décision, les ressources humaines, le marketing, l'emballage, la tarification et le service après-vente.</p>\n<p>Dans la 3ème édition du manuel d'Oslo, donc pour les enquêtes CIS de 2008 à 2016, 4 types d'innovation étaient distinguées :</p>\n<p>• les innovations de produits, soit l'introduction sur le marché d'un bien ou service nouveau ou significativement amélioré par rapport aux produits précédemment élaborés par l'entreprise au regard de ses caractéristiques essentielles, de sa convivialité (facilité d'usage), ses composants (ou son utilisation) et des éléments intégrés ;</p>\n<p>• les innovations de procédés, soit la mise en œuvre d'un procédé de production, d'une méthode de distribution ou d'une activité de soutien ou support nouveau ou significativement amélioré. Les innovations n'ayant trait qu'à l'organisation ou au marketing étaient exclues ;</p>\n<p>• l'innovation d'organisation : il s'agit d'un nouveau mode de fonctionnement de l'entreprise (y compris la gestion des connaissances), une nouvelle méthode d'organisation du travail ou de ses relations externes qui n'étaient pas utilisés précédemment dans l'entreprise ;</p>\n<p>• l'innovation de marketing : elle correspond à la mise en œuvre de concepts nouveaux ou de stratégies de vente nouvelles qui diffèrent significativement des méthodes de vente existant dans l'entreprise et qui n'avaient pas été utilisés auparavant. Elle inclut les changements dans le design, l'emballage ou la présentation d'un bien ou d'une prestation de services, son positionnement, sa promotion ou son prix s'ils ont un impact significatif.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The boundary between technological and non-technological innovations is increasingly being held. As a result, the 4th edition of the Oslo Manual (October 2018) now includes only the following two types of innovation:</p>\n<ul>\n<li>\n<p>product innovation: the introduction on the market of a new or significantly improved good or service compared to the products previously developed by the company. It includes significant design changes and digital goods or services, and excludes the resale in the same condition as new goods or services and changes of an aesthetic nature.</p>\n</li>\n<li>\n<p>process innovation: the implementation in the company of a new or significantly improved process compared to the processes previously used by the company. It concerns production and development methods, logistics and distribution, information and communication system, administrative tasks and accounting, organisation of procedures, management of relations with suppliers, work organisation, decision-making processes, human resources, marketing, packaging, pricing and after-sales service.      </p>\n</li>\n</ul>\n<p>In the 3rd edition of the Oslo Manual, i. e. for CIS surveys from 2008 to 2016, 4 types of innovation were distinguished:</p>\n<ul>\n<li>\n<p>product innovations, i.e. the introduction on the market of a new or significantly improved good or service compared to the products previously developed by the company in terms of its essential characteristics, its user-friendliness (ease of use), its components (or its use) and the integrated elements;</p>\n</li>\n<li>\n<p>process innovation, i.e. the implementation of a new or significantly improved production process, distribution method or support activity or support. Innovations related only to organization or marketing were excluded;</p>\n</li>\n<li>\n<p>organisational innovation: a new way of operating the company (including knowledge management), a new way of organising work or its external relations that was not previously used in the company;</p>\n</li>\n<li>\n<p>marketing innovation: this refers to the implementation of new concepts or new sales strategies that differ significantly from existing sales methods in the company and that have not been used before. It includes changes in the design, packaging or presentation of a good or service, its positioning, promotion or price if they have a significant impact.</p>\n</li>\n</ul>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.3.3",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.3.3",
+      "idParent": "S.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Couverture sectorielle",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Sector coverage",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les principaux secteurs d'activité couverts par le champ de l'enquête sont :</p>\n<ul>\n<li>\n<p>Section B &lt;&lt; Industries extractives &gt;&gt;</p>\n</li>\n<li>\n<p>Section C &lt;&lt; Industrie manufacturière &gt;&gt;</p>\n</li>\n<li>\n<p>Sections D et E &lt;&lt; Électricité, gaz et vapeur, production et distribution d'eau, assainissement et gestion des déchets &gt;&gt;</p>\n</li>\n<li>\n<p>Section F &lt;&lt; Construction &gt;&gt;</p>\n</li>\n<li>\n<p>Section G &lt;&lt; Commerce ; réparation d'automobiles et de motocycles &gt;&gt;</p>\n</li>\n<li>\n<p>Section H &lt;&lt; Transports et entreposage &gt;&gt;</p>\n</li>\n<li>\n<p>Section I &lt;&lt; Hébergement et restauration &gt;&gt;</p>\n</li>\n<li>\n<p>Section J &lt;&lt; Information et communication &gt;&gt;</p>\n</li>\n<li>\n<p>Section K &lt;&lt; activités financières et d'assurance &gt;&gt; (hors catégorie juridique 5195 et 6595)</p>\n</li>\n<li>\n<p>Section L &lt;&lt; Activités immobilières &gt;&gt;</p>\n</li>\n<li>\n<p>Section M &lt;&lt; Activités spécialisées, scientifiques et techniques &gt;&gt; (hors division 75)</p>\n</li>\n<li>\n<p>Section N &lt;&lt; Activités de services administratifs et de soutien &gt;&gt; (hors division 82)</p>\n</li>\n</ul>\n<p>La catégorie juridique 7353 (Syndicat intercommunal à vocation unique (SIVU)) est exclue.</p>\n<p>Les entreprises de 10 salariés ou plus sont couvertes par le champ de l'enquête. Elles sont classées en 3 catégories :</p>\n<ul>\n<li>\n<p>10-49 salariés</p>\n</li>\n<li>\n<p>50-249 salariés</p>\n</li>\n<li>\n<p>250 salariés et plus</p>\n</li>\n</ul>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The companies belong to NACE Rev.2 divisions 05 to 81 (except for 75: Veterinarians). Legal category 7353 (Syndicat intercommunal à vocation unique (SIVU)) is excluded.</p>\n<p>Within Section K of NAF rev2 (divisions 64, 65 and 66), the scope of mutuals was limited since CIS 2010.  Since the 2018 CIS, only the local units of certain banks, i.e. legal categories 5195 and 6595, are excluded.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.3.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.3.2",
+      "idParent": "S.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Nomenclature",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Classification system",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les indicateurs sont diffusés selon les secteurs d'activité (NACE Rev.2), la taille et le type d'innovation.</p>\n<p>Par ailleurs, la classification de l'innovation distingue les entreprises innovantes (innovation de produit ou de procédés, innovation en cours ou abandonnées, activité de R&amp;D) et les entreprises non innovantes durant la période de référence.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The main areas of dissemination are the activity sector of the company described according to the Statistical Classification of Economic Activities in the European Community (NACE Rev. 2) and the size of the enterprise.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.3.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.3.1",
+      "idParent": "S.3",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Description  des données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data description",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les principaux thèmes abordés dans l'enquête CIS 2022 sont les suivants :</p>\n<ul>\n<li>\n<p>la stratégie ;</p>\n</li>\n<li>\n<p>la co-création (participation active de l'utilisateur dans le développement d'un produit) et personnalisation (adaptation d'un produit sur demande des utilisateurs) ;</p>\n</li>\n<li>\n<p>les droits de propriété intellectuelle (dépôt de brevet, enregistrement de modèle) ;</p>\n</li>\n<li>\n<p>la présence de l'innovation par type d'innovation (produits, procédés) ; </p>\n</li>\n<li>\n<p>la part en chiffre d'affaires des innovations de produits introduites entre 2020 et 2022 ;</p>\n</li>\n<li>\n<p>les dépenses liées aux activités d'innovation ;</p>\n</li>\n<li>\n<p>l'existence de financements publics (nationaux, européens) ;</p>\n</li>\n<li>\n<p>les formes de coopération pour le développement des innovations ; </p>\n</li>\n<li>\n<p>les facteurs expliquant l'absence d'innovation sur la période 2020-2022 ;</p>\n</li>\n<li>\n<p>la présence d'innovations apportant des bénéfices environnementaux.</p>\n</li>\n</ul>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The main topics covered in the 2022 CIS survey are as follows:</p>\n<ul>\n<li>\n<p>strategy</p>\n</li>\n<li>\n<p>co-creation (active participation of the user in the development of a product) and customization (adaptation of a product at the request of users);</p>\n</li>\n<li>\n<p>intellectual property rights (patent filing, design registration etc.)</p>\n</li>\n<li>\n<p>presence of innovation by type of innovation (products, processes)</p>\n</li>\n<li>\n<p>turnover share from product or service innovations introduced between 2020 and 2022 </p>\n</li>\n<li>\n<p>expenditure associated with product and process innovation activities</p>\n</li>\n<li>\n<p>public funding (European and national)</p>\n</li>\n<li>\n<p>forms of cooperation for the development of innovations</p>\n</li>\n<li>\n<p>factors hampering innovation over the 2020-2022 period ;</p>\n</li>\n<li>\n<p>presence of innovations with environmental benefits.</p>\n</li>\n</ul>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.1.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.1.2",
+      "idParent": "S.1",
+      "type": "ORGANIZATION",
+      "titre": [
+        {
+          "contenu": "Unité d'appartenance du  contact dans l'organisme",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Contact organisation unit",
+          "langue": "en"
+        }
+      ],
+      "organisme": {
+        "id": "DG75-E001",
+        "uri": "http://id.insee.fr/organisations/insee/DG75-E001",
+        "label": [
+          {
+            "contenu": "Direction des statistiques d'entreprises (DSE)",
+            "langue": "fr"
+          }
+        ]
+      }
+    },
+    {
+      "id": "S.1.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.1.1",
+      "idParent": "S.1",
+      "type": "ORGANIZATION",
+      "titre": [
+        {
+          "contenu": "Organisme de contact",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Contact organisation",
+          "langue": "en"
+        }
+      ],
+      "organisme": {
+        "id": "Insee",
+        "uri": "http://id.insee.fr/organisations/insee",
+        "label": [
+          {
+            "contenu": "Institut national de la statistique et des études économiques",
+            "langue": "fr"
+          },
+          {
+            "contenu": "National Institute of Statistics and Economic Studies",
+            "langue": "en"
+          }
+        ]
+      }
+    },
+    {
+      "id": "S.8.3",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.8.3",
+      "idParent": "S.8",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Accès par l’utilisateur",
+          "langue": "fr"
+        },
+        {
+          "contenu": "User access",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Données Eurostat \\ Enquête communautaire sur l'innovation \\ Base de données",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Eurostat data \\ Community Innovation Survey \\ Database",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://ec.europa.eu/eurostat/fr/data/database"
+            }
+          ],
+          "texte": "<p>Les données agrégées sont accessibles sur le site Insee.fr et le site d'Eurostat.</p>\n<p>Les données individuelles sont mises à disposition des chercheurs au Centre d'accès sécurisé (CASD).</p>\n<p>L'accès est possible sur demande après passage devant le Comité du secret.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.8.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.8.2",
+      "idParent": "S.8",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Accès au calendrier de diffusion",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Release calendar access",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Agenda des publications",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Publications agenda",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://www.insee.fr/fr/information/2416834"
+            }
+          ],
+          "texte": "<p>L'agenda des publications est disponible sur le site Insee.fr.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.8.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.8.1",
+      "idParent": "S.8",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Calendrier de diffusion",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Release calendar",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Des premiers indicateurs rapides sont transmis à Eurostat le 30 mars N+2 pour l'enquête CIS N.</p>\n<p>Les indicateurs complets sont à transmettre à Eurostat le 30 juin N+2.</p>\n<p>Les premiers résultats (Insee Première) et les tableaux détaillés (Insee Résultats) sont diffusés sur Insee.fr à l'été N+2.</p>\n<p>Les données individuelles sont mises à disposition des chercheurs au CASD en septembre N+2.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "I.6.3",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.6.3",
+      "idParent": "S.6",
+      "type": "CODE_LIST",
+      "titre": [
+        {
+          "contenu": "Statut de l'enquête",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Survey status",
+          "langue": "en"
+        }
+      ],
+      "codes": [
+        {
+          "id": "T",
+          "uri": "http://id.insee.fr/codes/statutEnquete/T",
+          "label": [
+            {
+              "contenu": "Enquête d'intérêt général et de qualité statistique à caractère obligatoire",
+              "langue": "fr"
+            },
+            {
+              "contenu": "Survey of general interest and statistical quality, with compulsory nature",
+              "langue": "en"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "I.6.4",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/I.6.4",
+      "idParent": "S.6",
+      "type": "TEXT",
+      "label": [
+        {
+          "contenu": "<p>2023X062EC</p>",
+          "langue": "fr"
+        }
+      ],
+      "titre": [
+        {
+          "contenu": "n° de visa",
+          "langue": "fr"
+        },
+        {
+          "contenu": "n° visa",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.4",
+      "uri": "http://ec.europa.eu/eurostat/simsv2/attribute/S.4",
+      "type": "TEXT",
+      "label": [
+        {
+          "contenu": "<p>Les principaux indicateurs peuvent avoir 3 unités de mesure : nombre (nombre d'entreprises et nombre de personnes employées), milliers d'euros pour les variables financières (chiffres d'affaires, dépenses d'innovation) et pourcentage.</p>",
+          "langue": "fr"
+        }
+      ],
+      "titre": [
+        {
+          "contenu": "Unité de mesure",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Unit of measure",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.5",
+      "uri": "http://ec.europa.eu/eurostat/simsv2/attribute/S.5",
+      "type": "TEXT",
+      "label": [
+        {
+          "contenu": "<p>La période couverte par l'enquête CIS 2022 est une période de 3 ans, du 1er janvier 2020 au 31 décembre 2022. Certaines variables, financières notamment, portent uniquement sur l'année 2022.</p>",
+          "langue": "fr"
+        }
+      ],
+      "titre": [
+        {
+          "contenu": "Période de référence",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Reference period",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.11.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.11.2",
+      "idParent": "S.11",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Évaluation de la qualité",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Quality assessment",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>L'enquête CIS est soumise au comité du label tous les 5 ans et le dernier avis de conformité date de janvier 2019 pour la période 2019-2023.</p>\n<p>Un audit d'efficience des enquêtes thématiques auprès des entreprises, dont l'enquête CIS, a été conduit par l'Inspection générale de l'Insee en 2018. Les axes d'analyse de cet audit ont porté sur l'efficacité (atteinte des objectifs), l'économie (coût des moyens mobilisés pour la réalisation de ces enquêtes) et l'efficience (utilisation au mieux des moyens).</p>\n<p>Une démarche qualité visant à évaluer l'atteinte des objectifs du processus de production des enquêtes thématiques sur les entreprises a été réalisée en 2020. La démarche qualité s'est déroulée en plusieurs étapes : description du processus, analyse des risques et analyse des forces et faiblesses du processus.</p>\n<p>Une enquête de satisfaction utilisateur a été menée entre le 25 août et le 28 septembre 2020 auprès d'internautes visitant les pages des résultats de l'enquête CIS 2018 sur le site insee.fr mais également auprès de chercheurs, par publipostage en ligne. Cette enquête doit être renouvelée à chaque enquête CIS. Les principaux résultats sont présentés dans la rubrique &quot;Satisfaction des utilisateurs&quot;.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.9",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.9",
+      "type": "CODE_LIST",
+      "titre": [
+        {
+          "contenu": "Fréquence de diffusion",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Frequency of dissemination",
+          "langue": "en"
+        }
+      ],
+      "codes": [
+        {
+          "id": "U",
+          "uri": "http://id.insee.fr/codes/frequence/U",
+          "label": [
+            {
+              "contenu": "Pluriannuelle",
+              "langue": "fr"
+            },
+            {
+              "contenu": "Multiannual",
+              "langue": "en"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S.11.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.11.1",
+      "idParent": "S.11",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Cadre d'assurance qualité",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Quality assurance",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Depuis 2005, le Code de bonnes pratiques de la statistique européenne constitue la référence pour évaluer la qualité de la production des instituts nationaux de statistiques. Des revues par des pairs européens sont périodiquement organisées pour s'assurer de la mise en œuvre des principes de ce référentiel et inscrire chaque institut dans une logique d'amélioration continue. Dans ce cadre, l'Insee a adopté une approche fondée sur les processus. Une palette d'outils, mise en commun au sein du Service Statistique Public, a été créée pour décrire les processus de production statistique, analyser leurs forces et fragilités, évaluer les risques encourus, examiner leur documentation (métadonnées) ou expertiser une étape particulière (analyse des besoins des utilisateurs, validation des données, etc.). Les diagnostics issus de ces &lt;&lt; démarches qualité &gt;&gt; conduisent à établir des plans d'actions suivis régulièrement dans le cadre de &lt;&lt; revues de processus &gt;&gt;. Par ailleurs, l'Insee effectue régulièrement des enquêtes de satisfaction sur les indicateurs et les données qu'il produit. Les résultats de ces enquêtes sont disponibles sur le site insee.fr.</p>\n<p>De plus, s'agissant des enquêtes réalisées par des services producteurs de statistiques publiques (Insee, services statistiques ministériels, autres organismes proches comme l'Ined, le Céreq, l'Inserm...), le Comité du label a pour mission d'examiner pour le compte du Conseil national de l'information statistique (Cnis) tous les projets pour lesquels est sollicité le visa prévu à l'article 2 de la loi du 7 juin 1951. Le Comité a construit au fil du temps une méthode et une jurisprudence pour examiner les dossiers qui lui sont soumis. Partant de considérations exprimées en termes de charge ou de proportionnalité de la collecte aux objectifs poursuivis, le Comité a élargi ses règles d'examen pour couvrir l'ensemble des dimensions de la qualité statistique, telles que formalisées dans le Code de bonnes pratiques de la statistique européenne. Pour le SSP, le Comité du label constitue ainsi un levier pour s'assurer du respect de ces principes, que ce soit en termes de concertation, de qualité méthodologique, de charge proportionnée, de diffusion ou de mise à disposition des sources statistiques dûment documentées.</p>\n<p>Dans un registre plus stratégique, l'Inspection générale de l'Insee réalise des évaluations, expertises et audits des travaux de l'Institut, de son fonctionnement et de l'organisation de ses services. Certaines de ces missions portent plus spécifiquement sur des processus clé de l'Insee.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The different steps of the survey ensure that the process meets the requirements for statistical production:</p>\n<ul>\n<li>\n<p>tests carried out prior to collection</p>\n</li>\n<li>\n<p>stratified sample selection</p>\n</li>\n<li>\n<p>reminders and checks of data being collected by collectors</p>\n</li>\n<li>\n<p>clearance</p>\n</li>\n<li>\n<p>adjustment of total non-response</p>\n</li>\n<li>\n<p>shimming</p>\n</li>\n<li>\n<p>adjustment for partial non-response</p>\n</li>\n<li>\n<p>winsorisation.</p>\n</li>\n</ul>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.13.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.13.1",
+      "idParent": "S.13",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Précision globale",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Overall accuracy",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Des calculs de précision sont effectués sur l'ensemble des variables.</p>\n<p>Les indicateurs de précision (écart-type ou coefficient de variation, intervalle de confiance à 95 %) prennent en compte les erreurs dues à l'échantillonnage, à la correction de la non-réponse totale, au calage et à la winsorisation, mais pas l'erreur liée à la correction de la non-réponse partielle.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.15.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.15.2",
+      "idParent": "S.15",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Comparabilité dans le temps",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Comparability - over time and CC2. Length of comparable time series for U",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Les différents millésimes des enquêtes CIS peuvent être comparés jusqu'à CIS 2016 inclue, modulo les changements éventuels de formulation des questions. L'évolution des méthodes de redressement peuvent affecter à la marge certaines évolutions.</p>\n<p>Une rupture de série est à noter à partir de CIS 2018. En effet, suite à la 4ème édition du manuel d'Oslo, seuls deux types d'innovation sont désormais définis depuis CIS 2018 (produits ou procédés y compris organisation et marketing), contre quatre pour CIS 2016 (produits, procédés, organisation, marketing). Certaines questions, précédemment posées aux seules entreprises innovantes sont désormais posées à toutes les entreprises. Il faut donc être vigilant sur la comparaison entre CIS 2020 ou CIS 2018 et les enquêtes précédentes.</p>\n<p>Par ailleurs, à partir de CIS 2020, l'unité d'interrogation est l'entreprise (indépendante ou profilée), et non plus l'unité légale.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>The different vintages of the CIS surveys can be compared up to and including the 2016 CIS, modulo possible changes in question wording. The evolution of adjustment methods may affect certain developments at the margin. </p>\n<p>However, a break in the series is to be noted from the 2018 CIS onwards. Indeed, following the 4th edition of the Oslo manual, only two types of innovation are now defined from the 2018 CIS (products or processes including organization and marketing), compared to four for the 2016 CIS (products, processes, organization, marketing). Moreover, some questions previously asked only to innovative companies are now asked to all companies. It is therefore necessary to be vigilant on the comparison between the 2020 CIS or the 2018 CIS and previous surveys.</p>\n<p>In addition, from the 2020 CIS, the interrogation unit is the enterprise (independant or profiled), rather than the legal unit.</p>",
+          "langue": "en"
+        }
+      ]
+    },
+    {
+      "id": "S.15.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.15.1",
+      "idParent": "S.15",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Comparabilité — géographique",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Comparability - geographical",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Données Eurostat \\ Enquête communautaire sur l'innovation \\ Base de données",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Eurostat data \\ Community Innovation Survey \\ Database",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://ec.europa.eu/eurostat/fr/data/database"
+            }
+          ],
+          "texte": "<p>Pour les comparaisons entre les pays de l'Union européenne, se référer aux indicateurs Eurostat.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.17.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.17.2",
+      "idParent": "S.17",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Révision des données — pratiques",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data revision - practice and A6. Data revision - average size for U",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Aucune révision n'est réalisée sur les données de l'enquête CIS.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.15.4",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.15.4",
+      "idParent": "S.15",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Cohérence — interne",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Coherence - internal",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.17.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.17.1",
+      "idParent": "S.17",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Révision des données — politique",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data revision - policy",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Politique générale de révision de l’Insee",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Insee general revision policy",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://www.insee.fr/fr/statistiques/fichier/4137938/Politique_generale_revisions_Insee.pdf"
+            }
+          ],
+          "texte": "<p>L'Insee révise les valeurs de ses statistiques pour qu'elles reflètent la réalité de la manière la plus exacte possible et pour garantir leur pertinence et leur fiabilité. Il a recours à des procédures bien établies, normalisées et planifiées suivant les standards internationaux. Il annonce les révisions simultanément à leur diffusion ou à l'avance selon un protocole adapté à la source des révisions, à leur ampleur et à la sensibilité des statistiques publiées. Toutes les explications nécessaires à la compréhension de ces révisions accompagnent la diffusion des sources statistiques concernées sur le site Insee.fr.</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.15.3",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.15.3",
+      "idParent": "S.15",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Cohérence — entre domaines",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Coherence - cross domain",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.6.2",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.6.2",
+      "idParent": "S.6",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Partage des données",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Data sharing",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "texte": "<p>Sans objet</p>",
+          "langue": "fr"
+        }
+      ]
+    },
+    {
+      "id": "S.6.1",
+      "uri": "http://id.insee.fr/qualite/simsv2fr/attribut/S.6.1",
+      "idParent": "S.6",
+      "type": "RICH_TEXT",
+      "titre": [
+        {
+          "contenu": "Actes juridiques et autres accords",
+          "langue": "fr"
+        },
+        {
+          "contenu": "Legal acts and other agreements",
+          "langue": "en"
+        }
+      ],
+      "contenus": [
+        {
+          "documents": [
+            {
+              "label": [
+                {
+                  "contenu": "Règlement d’exécution (UE) n° 995/2012 de la Commission du 26 octobre 2012",
+                  "langue": "fr"
+                },
+                {
+                  "contenu": "Commission Implementing Regulation (EU) No 995/2012 of 26 October 2012",
+                  "langue": "en"
+                }
+              ],
+              "dateMiseAJour": "",
+              "langue": "fr",
+              "url": "https://eur-lex.europa.eu/eli/reg_impl/2012/995/oj?locale=fr"
+            }
+          ],
+          "texte": "<p>Au niveau national, les comités qui ont donné à l'Insee le droit et la légitimité pour collecter ces données sont :</p>\n<ul>\n<li>\n<p>le Cnis qui examine chaque nouveau projet, qu'il s'agisse d'une enquête, d'un répertoire ou d'une exploitation de fichiers administratifs, etc. Ces projets sont présentés par toutes les institutions qui contribuent par leurs travaux à la construction de la statistique publique. La discussion porte notamment sur la finalité du projet, sa place dans le système d'information et les conditions prévues de sa diffusion. Il convient de vérifier que chaque opération répond à un besoin d'intérêt général et ne fait pas double emploi avec les sources d'information existantes, en d'autres termes de s'assurer de son opportunité. Il donne un avis d'opportunité.</p>\n</li>\n<li>\n<p>le comité du label, au sein du Cnis, veille à ce qu'il respecte les critères de qualité statistique. Celui-ci s'assure que l'enquête répond aux critères de qualité statistique en ce qui concerne la méthode de collecte et d'échantillonnage (plan de sondage, méthode de redressement des données, traitement des non-réponses garantissant la fiabilité des résultats, etc.), de pertinence du questionnement et d'adaptation de la diffusion aux objectifs annoncés. Il s'assure également que l'enquête n'entraîne pas de charge excessive sur les enquêtés, qu'une concertation a été menée avec les partenaires concernés et que les souhaits exprimés par le Cnis lors du débat d'opportunité ont bien été pris en compte. Il donne un label d'intérêt général et de qualité statistique.</p>\n</li>\n</ul>\n<p>Au niveau européen, l'enquête CIS répond au règlement européen n° 995/2012 du 26 octobre 2012 relatif aux statistiques communautaires de la science et de la technologie.</p>",
+          "langue": "fr"
+        },
+        {
+          "texte": "<p>At the national level, the committees that gave INSEE the right and legitimacy to collect this data are:</p>\n<ul>\n<li>the CNIS, which examines each new project, whether it is a survey, a directory or an exploitation of administrative files... These projects are presented by all the institutions that contribute through their work to the construction of official statistics. The discussion focuses in particular on the purpose of the project, its place in the information system and the planned conditions for its dissemination. It should be verified that each operation meets a need of general interest and does not duplicate existing sources of information, in other words, to ensure that it is appropriate. He gives a notice of opportunity.</li>\n<li>the Label Committee within the CNIS ensures that it meets the statistical quality criteria. The latter ensures that the survey meets statistical quality criteria with regard to the collection and sampling method (sampling design, data adjustment method, treatment of non-responses guaranteeing the reliability of the results, etc.), the relevance of the questioning and the adaptation of the dissemination to the stated objectives. It also ensures that the survey does not place an excessive burden on the respondents, that consultation has been carried out with the partners concerned and that the wishes expressed by the CNIS during the opportunity debate have been taken into account. It gives a label of general interest and statistical quality.</li>\n</ul>\n<p>At the European level, CIS survey is coordinated in accordance with the Regulation No 995/2012 in force on Community statistics on science and technology.</p>",
+          "langue": "en"
+        }
+      ]
+    }
+  ]
+}
