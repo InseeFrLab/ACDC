@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import { XMLSerializer } from 'xmldom';
 
 const getMockCourrier = async () => {
@@ -17,11 +18,12 @@ const replaceLabel = async (label: string) => {
   try {
     const xmlDocument = await getMockCourrier();
     const xmlString = new XMLSerializer().serializeToString(xmlDocument);
-    const updatedXmlString: string = xmlString.replace(
-      // eslint-disable-next-line no-template-curly-in-string
-      '${Enq_LibelleEnquete}',
-      label
-    );
+    const updatedXmlString: string = xmlString
+      .replace('${Enq_LibelleEnquete}', label)
+      .replace('${Ue_PrenomEnqueteur}', 'Geralt')
+      .replace('${Ue_NomEnqueteur}', 'de Riv')
+      .replace('${Ue_TelephoneEnqueteur}', '06 06 06 06 06')
+      .replace('${Ue_CiviliteEnqueteur}', 'Monsieur');
     // console.log('Update XML string', updatedXmlString);
     return updatedXmlString;
   } catch (error) {
