@@ -218,16 +218,16 @@ const duplicateCollectionEventGroup = (
 export const duplicateDataCollection = (
   dataCollection: DataCollection
 ): DataCollection => {
-  const duplicatedDataCollection: DataCollection = {} as DataCollection;
-  Object.assign(duplicatedDataCollection, dataCollection);
-  duplicatedDataCollection.id = uuidv4();
-  duplicatedDataCollection.label = {
-    'fr-FR': `${dataCollection.label['fr-FR']} (copie)`,
-    'en-IE': `${dataCollection.label['en-IE']} (copy)`,
+  const duplicatedDataCollection: DataCollection = {
+    ...dataCollection,
+    id: uuidv4(),
+    label: {
+      'fr-FR': `${dataCollection.label['fr-FR']} (copie)`,
+      'en-IE': `${dataCollection.label['en-IE']} (copy)`,
+    },
   };
   duplicateCollectionEvent(duplicatedDataCollection);
 
-  // TODO : Fix this
   duplicatedDataCollection.userAttributePair?.map((userAttribute) => {
     if (userAttribute.attributeKey === 'extension:CollectionEventGroup') {
       const collectionEventGroup: CollectionGroupValue[] =

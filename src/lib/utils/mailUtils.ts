@@ -22,8 +22,7 @@ const replaceLabel = async (label: string) => {
       .replace('${Enq_LibelleEnquete}', label)
       .replace('${Ue_PrenomEnqueteur}', 'Geralt')
       .replace('${Ue_NomEnqueteur}', 'de Riv')
-      .replace('${Ue_TelephoneEnqueteur}', '06 06 06 06 06')
-      .replace('${Ue_CiviliteEnqueteur}', 'Monsieur');
+      .replace('${Ue_TelephoneEnqueteur}', '06 06 06 06 06');
     // console.log('Update XML string', updatedXmlString);
     return updatedXmlString;
   } catch (error) {
