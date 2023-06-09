@@ -6,12 +6,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { ThemeProvider } from '@mui/material';
+import { RouterProvider } from 'react-router-dom';
+import Header from '@/components/shared/header/Header';
 import Root from './components/shared/layout/Root';
-import RoutesWebs from './lib/routes/routes';
 import createApiClient from './lib/api/remote/apiClient';
 import createApiMockClient from './lib/api/mock/apiMockClient';
 import ApiContext from './lib/api/context/apiContext';
 import customTheme from './lib/themes/theme';
+import router from './lib/routes/routes';
+import ErrorBoundary from './components/shared/layout/ErrorBoundary';
 
 const queryClient = new QueryClient();
 
@@ -30,7 +33,13 @@ const App = () => {
                 height: '100vh',
               }}
             >
-              <RoutesWebs />
+              <Header />
+              <ErrorBoundary>
+                <RouterProvider
+                  router={router}
+                  fallbackElement={<div>Loading...</div>}
+                />
+              </ErrorBoundary>
             </Root>
           </ThemeProvider>
           <ReactQueryDevtools initialIsOpen={false} />

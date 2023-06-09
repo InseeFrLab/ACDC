@@ -120,7 +120,6 @@ const Home = () => {
     );
   }
 
-  // TODO: Responsive table height
   return (
     <Main>
       <Typography variant="h2" fontWeight="xl">
