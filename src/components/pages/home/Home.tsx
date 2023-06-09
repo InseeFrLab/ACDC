@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Stack, Typography, Box } from '@mui/material';
 import { useContext } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
@@ -136,9 +136,7 @@ const Home = () => {
         sx={{ marginTop: '1rem' }}
         onClick={handleClick}
       >
-        <Typography variant="subtitle1">
-          {t('createButton', { ns: 'home' })}
-        </Typography>
+        <Link to="new">{t('createButton', { ns: 'home' })}</Link>
       </Button>
     </Main>
   );
