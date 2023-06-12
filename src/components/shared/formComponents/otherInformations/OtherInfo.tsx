@@ -20,8 +20,6 @@ const OtherInfo = (props: OtherInfoProps) => {
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
   const i63 = Rapport2088.rubriques.find((r) => r.id === 'I.6.3');
   const i64 = Rapport2088.rubriques.find((r) => r.id === 'I.6.4');
-  console.log('i63', i63);
-  console.log('i64', i64);
   return (
     <>
       <ExpandMore

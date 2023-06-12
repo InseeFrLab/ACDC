@@ -7,15 +7,12 @@ import {
   TextField,
   Typography,
   Autocomplete,
-  Button,
-  Collapse,
 } from '@mui/material';
-import ExpandMore from '@/components/shared/styled/ExpandMore';
-import { useQuery } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { transformLabels } from '@/lib/utils/magmaUtils';
-import { getSerieOperation, SeriesId } from '@/lib/api/mock/mockSeries';
-import { add } from 'date-fns';
+import { getSerieOperation } from '@/lib/api/mock/mockSeries';
+import { getQualityReport } from '@/lib/api/remote/dataCollectionApiFetch';
 import StatisticalSeries from '../../../../lib/model/statisticalSeries';
 import {
   GroupReference,
@@ -52,35 +49,62 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     },
   ]);
 
-  const { data, isSuccess } = useQuery(['operationSerie', serieId], () => {
-    console.log('Fetch serie operation: ', serieId);
-    return getSerieOperation(serieId);
+  const [operationSerie, qualityReportSerie] = useQueries({
+    queries: [
+      {
+        queryKey: ['operationSerie', serieId],
+        queryFn: () => {
+          console.log('Fetch serie operation: ', serieId);
+          return getSerieOperation(serieId);
+        },
+      },
+      {
+        queryKey: ['qualitySerie', serieId],
+        queryFn: () => {
+          return getQualityReport(serieId);
+        },
+        enabled: false,
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        onSuccess(data: unknown) {
+          console.log('Fetch quality report success: ', data);
+        },
+      },
+    ],
   });
 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (operationSerie.isSuccess) {
       setIsLoading(false);
-      const newOperations: StatisticalSeries[] = data.map((serie: any) => ({
-        id: serie.id,
-        label: transformLabels(serie.label),
-        altLabel: serie.altLabel
-          ? transformLabels(serie.altLabel)
-          : { 'fr-FR': '', 'en-IE': '' },
-      }));
+      const newOperations: StatisticalSeries[] = operationSerie.data.map(
+        (serie: any) => ({
+          id: serie.id,
+          label: transformLabels(serie.label),
+          altLabel: serie.altLabel
+            ? transformLabels(serie.altLabel)
+            : { 'fr-FR': '', 'en-IE': '' },
+        })
+      );
       setOperations(newOperations);
       console.log('Associated series Operations: ', newOperations);
       console.log('Submit attempt: ', props.submitAttempt);
       setOperationDisabled(false);
     }
-  }, [isSuccess, data, props.submitAttempt]);
+  }, [operationSerie.isSuccess, operationSerie.data, props.submitAttempt]);
+
+  useEffect(() => {
+    if (qualityReportSerie.isSuccess) {
+      setIsLoading(false);
+      console.log('Quality report: ', qualityReportSerie.data);
+    }
+  }, [qualityReportSerie.isSuccess, qualityReportSerie.data]);
 
   const handlegroupReferenceChange = (event: any, newValue: any) => {
     const {
       target: { value },
     } = event;
-    console.log('New Statistical serie: ', newValue);
     props.setgroupReference({
       id: newValue.id,
       label: newValue.label,
@@ -104,7 +128,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     const {
       target: { value },
     } = event;
-    console.log('New Statistical Operation: ', newValue);
     props.setStudyUnitReference({
       id: newValue.id,
       label: newValue.label,
@@ -116,6 +139,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       'Assembled StudyUnitReference Object : ',
       props.studyUnitReference
     );
+    qualityReportSerie.refetch();
   };
 
   return (

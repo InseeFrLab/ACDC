@@ -79,3 +79,17 @@ export function publishDataCollection(id: string) {
     throw error;
   }
 }
+
+export function getQualityReport(id: string) {
+  try {
+    return fetch(
+      `${import.meta.env.VITE_API_BASE_URL}api/external/quality/${id}`,
+      {
+        method: 'GET',
+      }
+    ).then((response) => response.json());
+  } catch (error) {
+    console.error('Error while getting quality report: ', error);
+    throw error;
+  }
+}
