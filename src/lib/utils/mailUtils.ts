@@ -18,11 +18,10 @@ const replaceLabel = async (label: string) => {
   try {
     const xmlDocument = await getMockCourrier();
     const xmlString = new XMLSerializer().serializeToString(xmlDocument);
-    const updatedXmlString: string = xmlString
-      .replace('${Enq_LibelleEnquete}', label)
-      .replace('${Ue_PrenomEnqueteur}', 'Geralt')
-      .replace('${Ue_NomEnqueteur}', 'de Riv')
-      .replace('${Ue_TelephoneEnqueteur}', '06 06 06 06 06');
+    const updatedXmlString: string = xmlString.replace(
+      '${Enq_LibelleEnquete}',
+      label
+    );
     // console.log('Update XML string', updatedXmlString);
     return updatedXmlString;
   } catch (error) {
