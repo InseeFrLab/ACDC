@@ -165,6 +165,7 @@ const DataCollectionDetailsDialog = (
               setStudyUnitReference={setStudyUnitReference}
               series={series}
               submitAttempt={false}
+              setRapport={() => {}}
             />
           </Box>
 
