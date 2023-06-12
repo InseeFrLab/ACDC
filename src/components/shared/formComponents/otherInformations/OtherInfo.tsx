@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Collapse,
   Typography,
   Stack,
-  Box,
   FormControl,
   TextField,
 } from '@mui/material';
@@ -13,13 +13,17 @@ import Rapport2088 from '@/assets/mockData/rapport2088.json';
 
 interface OtherInfoProps {
   multiline: boolean;
+  rapport: string;
 }
 // Hardcoded data for now
+// TODO: Proper Interface
 const OtherInfo = (props: OtherInfoProps) => {
   const [addInfo, setAddInfo] = useState(false);
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
-  const i63 = Rapport2088.rubriques.find((r) => r.id === 'I.6.3');
-  const i64 = Rapport2088.rubriques.find((r) => r.id === 'I.6.4');
+  const rapportData =
+    props.rapport.length > 10 ? JSON.parse(props.rapport) : Rapport2088;
+  const i63 = rapportData.rubriques.find((r: any) => r.id === 'I.6.3');
+  const i64 = rapportData.rubriques.find((r: any) => r.id === 'I.6.4');
   return (
     <>
       <ExpandMore

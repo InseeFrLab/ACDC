@@ -77,6 +77,8 @@ const CollectionForm = (props: CollectionFormProps) => {
       groupReference,
     } as StudyUnitReference);
 
+  const [rapport, setRapport] = useState('');
+
   const [submitAttempt, setSubmitAttempt] = useState(false);
 
   const handleClickOpen = (dataCollection: DataCollectionApi) => {
@@ -155,6 +157,7 @@ const CollectionForm = (props: CollectionFormProps) => {
           setStudyUnitReference={setStudyUnitReference}
           series={props.series}
           submitAttempt={submitAttempt}
+          setRapport={setRapport}
         />
         <Box
           component="form"
@@ -200,7 +203,7 @@ const CollectionForm = (props: CollectionFormProps) => {
           submitAttempt={false}
         />
 
-        <OtherInfo multiline />
+        <OtherInfo multiline rapport={rapport} />
 
         <Box
           component="form"

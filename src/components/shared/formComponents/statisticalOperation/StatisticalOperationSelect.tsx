@@ -26,6 +26,7 @@ interface StatisticalOperationSelectProps {
   setStudyUnitReference: (studyUnitReference: StudyUnitReference) => void;
   series: StatisticalSeries[];
   submitAttempt: boolean;
+  setRapport: (rapport: string) => void;
 }
 
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
@@ -61,7 +62,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       {
         queryKey: ['qualitySerie', serieId],
         queryFn: () => {
-          return getQualityReport(serieId);
+          return getQualityReport('2088');
         },
         enabled: false,
         refetchOnMount: false,
@@ -98,8 +99,9 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     if (qualityReportSerie.isSuccess) {
       setIsLoading(false);
       console.log('Quality report: ', qualityReportSerie.data);
+      props.setRapport(qualityReportSerie.data);
     }
-  }, [qualityReportSerie.isSuccess, qualityReportSerie.data]);
+  }, [qualityReportSerie.isSuccess, qualityReportSerie.data, props]);
 
   const handlegroupReferenceChange = (event: any, newValue: any) => {
     const {
