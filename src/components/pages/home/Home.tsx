@@ -54,10 +54,6 @@ const Home = () => {
         return parseUserAttributeFromDataCollectionApi(dataCollectionApi);
       }
     );
-    console.log(
-      'get DataCollection parsed userAttribute: ',
-      parseUserAttribute
-    );
     const rows = parseUserAttribute.map(
       (dataCollectionApi: DataCollectionApi) => {
         const dataCollection: DataCollection = dataCollectionApi.json;

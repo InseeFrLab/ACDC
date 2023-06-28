@@ -50,8 +50,44 @@ const DataCollectionDetails = () => {
 
   const [questionnaireQuery, seriesQuery, publishQuery] = useQueries({
     queries: [
-      { queryKey: ['allQuestionnaires'], queryFn: getQuestionnaires },
-      { queryKey: ['allSeries'], queryFn: getAllSeries },
+      {
+        queryKey: ['allQuestionnaires'],
+        queryFn: getQuestionnaires,
+        onSuccess: () => {
+          questionnaires = (
+            questionnaireQuery.data as PoguesQuestionnaireResponse[]
+          ).map((questionnaire: PoguesQuestionnaireResponse) => {
+            const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
+            return {
+              id: questionnaire.id,
+              label: questionnaire.Label[0],
+              date: dateQuestionnaire.toLocaleDateString(),
+            };
+          });
+        },
+      },
+      {
+        queryKey: ['allSeries'],
+        queryFn: getAllSeries,
+        onSuccess: () => {
+          series = (seriesQuery.data as StatisticalSeries[]).map(
+            (serie: any) => {
+              return {
+                id: serie.id,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                label: transformLabels(serie.label),
+                altLabel: serie.altLabel
+                  ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                    transformLabels(serie.altLabel)
+                  : {
+                      'fr-FR': '',
+                      'en-IE': '',
+                    },
+              };
+            }
+          );
+        },
+      },
       {
         queryKey: ['publishDataCollectionQuery', dataCollection.id],
         queryFn: () => {
@@ -70,35 +106,6 @@ const DataCollectionDetails = () => {
     ],
   });
   // TODO : Loading & error indicator somewhere in the page
-  questionnaireQuery.isSuccess &&
-    (questionnaires = (
-      questionnaireQuery.data as PoguesQuestionnaireResponse[]
-    ).map((questionnaire: PoguesQuestionnaireResponse) => {
-      const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
-      return {
-        id: questionnaire.id,
-        label: questionnaire.Label[0],
-        date: dateQuestionnaire.toLocaleDateString(),
-      };
-    }));
-
-  seriesQuery.isSuccess &&
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (series = (seriesQuery.data as StatisticalSeries[]).map((serie: any) => {
-      return {
-        id: serie.id,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        label: transformLabels(serie.label),
-        altLabel: serie.altLabel
-          ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            transformLabels(serie.altLabel)
-          : {
-              'fr-FR': '',
-              'en-IE': '',
-            },
-      };
-    }));
-
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
 
