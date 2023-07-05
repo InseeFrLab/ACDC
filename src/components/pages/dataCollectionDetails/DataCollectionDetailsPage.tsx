@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQueries } from '@tanstack/react-query';
 import { Typography, Box } from '@mui/material';
 import {
@@ -10,7 +10,6 @@ import {
 } from '@/lib/model/poguesQuestionnaire';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { downloadFile } from '@/lib/utils/dataTransformation';
-import { set } from 'date-fns';
 import getCurrentDate from '@/lib/utils/otherUtils';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
@@ -33,78 +32,97 @@ const DataCollectionDetails = () => {
     'CollectionEvent',
   ]);
   const navigate = useNavigate();
-  const dataCollection = useLocation().state.dataCollection as DataCollection;
+  const { idDataCollection } = useParams();
+  const [dataCollection, setDataCollection] = useState<DataCollection>(
+    {} as DataCollection
+  );
   const [dataCollectionState, setDataCollectionState] =
-    useState<DataCollection>(dataCollection);
+    useState<DataCollection>({} as DataCollection);
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
   const [openPublish, setOpenPublish] = useState(false);
-  const [notSavedState, setNotSavedState] = useState(
-    !!useLocation().state.notSaved
-  );
+  const [notSavedState, setNotSavedState] = useState(false);
   let questionnaires: PoguesQuestionnaire[] = [];
   let series: StatisticalSeries[] = [];
 
-  const { getAllSeries, getQuestionnaires, publishDataCollection } =
-    useContext(ApiContext);
+  const {
+    getAllSeries,
+    getQuestionnaires,
+    publishDataCollection,
+    getDataCollection,
+  } = useContext(ApiContext);
 
-  const [questionnaireQuery, seriesQuery, publishQuery] = useQueries({
-    queries: [
-      {
-        queryKey: ['allQuestionnaires'],
-        queryFn: getQuestionnaires,
-        onSuccess: () => {
-          questionnaires = (
-            questionnaireQuery.data as PoguesQuestionnaireResponse[]
-          ).map((questionnaire: PoguesQuestionnaireResponse) => {
-            const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
-            return {
-              id: questionnaire.id,
-              label: questionnaire.Label[0],
-              date: dateQuestionnaire.toLocaleDateString(),
-            };
-          });
-        },
-      },
-      {
-        queryKey: ['allSeries'],
-        queryFn: getAllSeries,
-        onSuccess: () => {
-          series = (seriesQuery.data as StatisticalSeries[]).map(
-            (serie: any) => {
-              return {
-                id: serie.id,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                label: transformLabels(serie.label),
-                altLabel: serie.altLabel
-                  ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                    transformLabels(serie.altLabel)
-                  : {
-                      'fr-FR': '',
-                      'en-IE': '',
-                    },
-              };
-            }
-          );
-        },
-      },
-      {
-        queryKey: ['publishDataCollectionQuery', dataCollection.id],
-        queryFn: () => {
+  const [dataCollectionQuery, questionnaireQuery, seriesQuery, publishQuery] =
+    useQueries({
+      queries: [
+        {
+          queryKey: ['dataCollection', idDataCollection],
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          return publishDataCollection(dataCollection.id);
+          queryFn: () => getDataCollection(idDataCollection),
+          onSuccess: (data: DataCollectionApi) => {
+            setDataCollectionState(data.json);
+            setDataCollection(data.json);
+          },
         },
-        enabled: false,
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
-        onSuccess(data: unknown) {
-          console.log('Fetching json with ddi success: ', data);
-          downloadFile(JSON.stringify(data), 'export.json', 'application/json');
-          setOpenPublish(false);
+        {
+          queryKey: ['allQuestionnaires'],
+          queryFn: getQuestionnaires,
+          onSuccess: () => {
+            questionnaires = (
+              questionnaireQuery.data as PoguesQuestionnaireResponse[]
+            ).map((questionnaire: PoguesQuestionnaireResponse) => {
+              const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
+              return {
+                id: questionnaire.id,
+                label: questionnaire.Label[0],
+                date: dateQuestionnaire.toLocaleDateString(),
+              };
+            });
+          },
         },
-      },
-    ],
-  });
+        {
+          queryKey: ['allSeries'],
+          queryFn: getAllSeries,
+          onSuccess: () => {
+            series = (seriesQuery.data as StatisticalSeries[]).map(
+              (serie: any) => {
+                return {
+                  id: serie.id,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                  label: transformLabels(serie.label),
+                  altLabel: serie.altLabel
+                    ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                      transformLabels(serie.altLabel)
+                    : {
+                        'fr-FR': '',
+                        'en-IE': '',
+                      },
+                };
+              }
+            );
+          },
+        },
+        {
+          queryKey: ['publishDataCollectionQuery', idDataCollection],
+          queryFn: () => {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+            return publishDataCollection(idDataCollection);
+          },
+          enabled: false,
+          refetchOnMount: false,
+          refetchOnWindowFocus: false,
+          onSuccess(data: unknown) {
+            console.log('Fetching json with ddi success: ', data);
+            downloadFile(
+              JSON.stringify(data),
+              'export.json',
+              'application/json'
+            );
+            setOpenPublish(false);
+          },
+        },
+      ],
+    });
   // TODO : Loading & error indicator somewhere in the page
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
@@ -165,7 +183,7 @@ const DataCollectionDetails = () => {
 
   const handleSave = () => {
     const updatedDataCollection: DataCollectionApi = {
-      id: dataCollection?.id,
+      id: idDataCollection,
       json: dataCollectionState,
     };
     const now = Date.now();
@@ -203,128 +221,148 @@ const DataCollectionDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
-  return (
-    <Main sx={{ justifyContent: 'flex-start' }}>
-      <DataCollectionDisplay
-        dataCollectionState={dataCollectionState}
-        setDataCollectionState={setDataCollectionState}
-        series={series}
-        setNotSavedState={setNotSavedState}
-      />
-      {dataCollectionState.collectionEvents.length > 0 ? (
-        <>
-          <Box
-            sx={{
-              paddingTop: 2,
-              marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '2px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h5" fontWeight="bold" color="text.secondary">
-              {t('title', { ns: 'collectionEvent' })}
-            </Typography>
-          </Box>
-          <Box>
-            {dataCollectionState.collectionEvents.map((event) => {
-              return (
-                <CollectionEventDisplay
-                  key={event.id}
-                  collectionEvent={event}
-                  handleDeleteCollectionEvent={handleDeleteCollectionEvent}
-                  dataCollectionState={dataCollectionState}
-                  setDataCollectionState={setDataCollectionState}
-                  questionnaires={questionnaires}
-                  setNotSavedState={setNotSavedState}
-                />
-              );
-            })}
-          </Box>
-        </>
-      ) : (
-        <Box
-          sx={{
-            paddingTop: 2,
-            my: 2,
-            display: 'flex',
-            justifyContent: 'center',
-            borderTop: '2px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h2">
-            {t('noEvent', { ns: 'collectionEvent' })}
-          </Typography>
-        </Box>
-      )}
-
-      {dataCollectionState.userAttributePair.length > 0 &&
-      Array.isArray(dataCollectionState.userAttributePair[0].attributeValue) &&
-      dataCollectionState.userAttributePair[0].attributeValue.length > 0 ? (
-        <>
+  if (dataCollectionQuery.isLoading) {
+    return (
+      <Main>
+        <Typography variant="h2" fontWeight="xl">
+          Loading...
+        </Typography>
+      </Main>
+    );
+  }
+  if (dataCollectionQuery.isSuccess) {
+    return (
+      <Main sx={{ justifyContent: 'flex-start' }}>
+        <DataCollectionDisplay
+          dataCollectionState={dataCollectionState}
+          setDataCollectionState={setDataCollectionState}
+          series={series}
+          setNotSavedState={setNotSavedState}
+        />
+        {dataCollectionState.collectionEvents.length > 0 ? (
+          <>
+            <Box
+              sx={{
+                paddingTop: 2,
+                marginTop: 2,
+                display: 'flex',
+                justifyContent: 'flex-start',
+                borderTop: '2px solid',
+                borderColor: 'divider',
+              }}
+            >
+              <Typography variant="h5" fontWeight="bold" color="text.secondary">
+                {t('title', { ns: 'collectionEvent' })}
+              </Typography>
+            </Box>
+            <Box>
+              {dataCollectionState.collectionEvents.map((event) => {
+                return (
+                  <CollectionEventDisplay
+                    key={event.id}
+                    collectionEvent={event}
+                    handleDeleteCollectionEvent={handleDeleteCollectionEvent}
+                    dataCollectionState={dataCollectionState}
+                    setDataCollectionState={setDataCollectionState}
+                    questionnaires={questionnaires}
+                    setNotSavedState={setNotSavedState}
+                  />
+                );
+              })}
+            </Box>
+          </>
+        ) : (
           <Box
             sx={{
               paddingTop: 2,
               my: 2,
               display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
+              justifyContent: 'center',
+              borderTop: '2px solid',
               borderColor: 'divider',
             }}
           >
-            <Typography variant="h5" fontWeight="bold" color="text.secondary">
-              {t('title', { ns: 'userAttributeForm' })}
+            <Typography variant="h2">
+              {t('noEvent', { ns: 'collectionEvent' })}
             </Typography>
           </Box>
-          <Box
-            sx={{
-              marginBottom: 10,
-            }}
-          >
-            {dataCollectionState.userAttributePair[0].attributeValue.map(
-              (attributeValue) => (
-                <CollectionGroupDisplay
-                  key={attributeValue.id}
-                  attributeValue={attributeValue}
-                  dataCollectionState={dataCollectionState}
-                  setDataCollectionState={setDataCollectionState}
-                  handleDeleteUserAttribute={handleDeleteCollectionGroup}
-                  setNotSavedState={setNotSavedState}
-                />
-              )
-            )}
-          </Box>
-        </>
-      ) : null}
+        )}
 
-      <DeleteDialog
-        openDelete={openDelete}
-        handleCloseDelete={handleCloseDelete}
-        isError={isError}
-        isLoading={isLoading}
-        isSuccess={isSuccess}
-      />
-      <SaveDialog
-        openSave={openSave}
-        setOpenSave={setOpenSave}
-        isError={isError}
-        isLoading={isLoading}
-      />
-      <PublishDialog
-        openPublish={openPublish}
-        setOpenPublish={setOpenPublish}
-        isError={publishQuery.isError}
-        isLoading={publishQuery.isLoading}
-      />
-      <BottomActionBar
-        dataCollection={dataCollection}
-        handleSave={handleSave}
-        questionnaires={questionnaires}
-        notSavedState={notSavedState}
-        handlePublish={handlePublish}
-      />
+        {dataCollectionState.userAttributePair.length > 0 &&
+        Array.isArray(
+          dataCollectionState.userAttributePair[0].attributeValue
+        ) &&
+        dataCollectionState.userAttributePair[0].attributeValue.length > 0 ? (
+          <>
+            <Box
+              sx={{
+                paddingTop: 2,
+                my: 2,
+                display: 'flex',
+                justifyContent: 'flex-start',
+                borderTop: '1px solid',
+                borderColor: 'divider',
+              }}
+            >
+              <Typography variant="h5" fontWeight="bold" color="text.secondary">
+                {t('title', { ns: 'userAttributeForm' })}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                marginBottom: 10,
+              }}
+            >
+              {dataCollectionState.userAttributePair[0].attributeValue.map(
+                (attributeValue) => (
+                  <CollectionGroupDisplay
+                    key={attributeValue.id}
+                    attributeValue={attributeValue}
+                    dataCollectionState={dataCollectionState}
+                    setDataCollectionState={setDataCollectionState}
+                    handleDeleteUserAttribute={handleDeleteCollectionGroup}
+                    setNotSavedState={setNotSavedState}
+                  />
+                )
+              )}
+            </Box>
+          </>
+        ) : null}
+
+        <DeleteDialog
+          openDelete={openDelete}
+          handleCloseDelete={handleCloseDelete}
+          isError={isError}
+          isLoading={isLoading}
+          isSuccess={isSuccess}
+        />
+        <SaveDialog
+          openSave={openSave}
+          setOpenSave={setOpenSave}
+          isError={isError}
+          isLoading={isLoading}
+        />
+        <PublishDialog
+          openPublish={openPublish}
+          setOpenPublish={setOpenPublish}
+          isError={publishQuery.isError}
+          isLoading={publishQuery.isLoading}
+        />
+        <BottomActionBar
+          dataCollection={dataCollection}
+          handleSave={handleSave}
+          questionnaires={questionnaires}
+          notSavedState={notSavedState}
+          handlePublish={handlePublish}
+        />
+      </Main>
+    );
+  }
+  return (
+    <Main>
+      <Typography variant="h2" fontWeight="xl">
+        Request not found
+      </Typography>
     </Main>
   );
 };

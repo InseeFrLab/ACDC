@@ -44,7 +44,7 @@
                 <!-- ZONE LOGOS -->
                 <fo:block-container absolute-position="absolute" left="5mm" top="2mm" width="180mm" height="25mm">
                     <fo:block>
-                        <fo:external-graphic src="coleman/${Enq_ImageLogos}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                        <fo:external-graphic src="https://logos-marques.com/wp-content/uploads/2022/03/ACDC-Logo-500x313.png" width="25%" height="25%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                     </fo:block>
                 </fo:block-container>
                 

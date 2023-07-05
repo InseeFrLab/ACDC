@@ -68,7 +68,10 @@ const RoutesWebs = () => {
             path="collection/new/:id"
             element={<CreateCollectionEvent />}
           />
-          <Route path="collection/:id" element={<DataCollectionDetails />} />
+          <Route
+            path="collection/:idDataCollection"
+            element={<DataCollectionDetails />}
+          />
           <Route
             path="collection/:id/attribute/new"
             element={<CreateUserAttribute />}

@@ -36,12 +36,6 @@ const Home = () => {
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
-          {t('title')}
-        </Typography>
-        <Typography variant="subtitle1" fontWeight="xl">
-          {t('description')}
-        </Typography>
-        <Typography variant="h2" fontWeight="xl">
           Loading...
         </Typography>
       </Main>
