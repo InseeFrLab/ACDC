@@ -122,16 +122,32 @@ export const flattenUserAttributeFromDataCollectionApi = (
 };
 
 export const parseCollectionGroups = (dataCollectionObject: DataCollection) => {
-  const collectionGroups: CollectionGroup[] = [];
-  for (const userAttribute of dataCollectionObject.userAttributePair || []) {
-    if (isUserAttributePair(userAttribute)) {
-      const collectionGroup: CollectionGroup = {
-        attributeKey: userAttribute.attributeKey,
-        attributeValue: JSON.parse(userAttribute.attributeValue),
-      };
-      collectionGroups.push(collectionGroup);
+  const collectionGroups: (CollectionGroup | UserAttributePair)[] = [];
+  const collectionGroupIndex =
+    dataCollectionObject.userAttributePair?.findIndex(
+      (userAttribute) =>
+        userAttribute.attributeKey === 'extension:CollectionEventGroup'
+    );
+  if (collectionGroupIndex !== undefined && collectionGroupIndex !== -1) {
+    const collectionGroup =
+      dataCollectionObject.userAttributePair[collectionGroupIndex];
+    if (isUserAttributePair(collectionGroup)) {
+      const collectionGroupValue: CollectionGroupValue[] = JSON.parse(
+        collectionGroup.attributeValue
+      );
+      collectionGroups.push({
+        attributeKey: 'extension:CollectionEventGroup',
+        attributeValue: collectionGroupValue,
+      } as CollectionGroup);
     }
   }
+  const parsedCollectionGroup: (CollectionGroup | UserAttributePair)[] =
+    dataCollectionObject.userAttributePair?.filter(
+      (userAttribute) =>
+        userAttribute.attributeKey !== 'extension:CollectionEventGroup'
+    ) || [];
+  collectionGroups.push(...parsedCollectionGroup);
+
   return {
     ...dataCollectionObject,
     userAttributePair: collectionGroups,
