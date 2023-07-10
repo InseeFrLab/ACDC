@@ -25,7 +25,6 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('Success creating data collection');
       handleClose();
     }
   }, [isSuccess, handleClose]);

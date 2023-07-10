@@ -75,10 +75,6 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
         duplicateCollectionGroup
       );
     }
-    console.log(
-      'newDataCollectionState with duplicated collectionEvent:',
-      newDataCollectionState
-    );
     setDataCollectionState(newDataCollectionState);
     setNotSavedState(true);
   };

@@ -8,6 +8,7 @@ export interface CollectionGroup {
 export interface CollectionGroupValue {
   collectionEventReference?: { id: string }[];
   id?: string;
+  label?: LanguageRecord;
 }
 function isCollectionGroupItem(value: unknown): boolean {
   return (

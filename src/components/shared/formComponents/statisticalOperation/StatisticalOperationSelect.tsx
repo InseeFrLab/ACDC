@@ -55,7 +55,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       {
         queryKey: ['operationSerie', serieId],
         queryFn: () => {
-          console.log('Fetch serie operation: ', serieId);
           return getSerieOperation(serieId);
         },
       },
@@ -67,9 +66,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
         enabled: false,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
-        onSuccess(data: unknown) {
-          console.log('Fetch quality report success: ', data);
-        },
       },
     ],
   });
@@ -89,7 +85,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
         })
       );
       setOperations(newOperations);
-      console.log('Submit attempt: ', props.submitAttempt);
       setOperationDisabled(false);
     }
   }, [operationSerie.isSuccess, operationSerie.data, props.submitAttempt]);

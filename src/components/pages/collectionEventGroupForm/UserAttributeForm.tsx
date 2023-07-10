@@ -112,6 +112,10 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
       versionDate: getCurrentDate(),
       ...dataCollection,
     };
+    console.log(
+      'dataCollectionUpdated in UserAttributeForm',
+      dataCollectionUpdated
+    );
     if (
       dataCollectionUpdated.userAttributePair.length > 0 &&
       Array.isArray(dataCollectionUpdated.userAttributePair[0].attributeValue)
@@ -125,6 +129,7 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
           attributeKey: 'extension:CollectionEventGroup',
           attributeValue: [userAttributePairValue],
         } as CollectionGroup,
+        ...dataCollectionUpdated.userAttributePair,
       ];
     }
     console.log('dataCollectionUpdated', dataCollectionUpdated);

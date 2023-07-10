@@ -18,15 +18,24 @@ import { CollectionCommunication } from '../model/communicationCollectionEvent';
 export const flattenCollectionGroups = (
   dataCollectionObject: DataCollection
 ) => {
+  console.log('dataCollectionObject', dataCollectionObject);
   const flattenedUserAttributePairs: UserAttributePair[] = [];
   let attributeKey = '';
   let attributeValue = '';
-  for (const userAttribute of dataCollectionObject.userAttributePair || []) {
-    if (Array.isArray(userAttribute.attributeValue)) {
-      attributeKey = userAttribute.attributeKey;
-      for (let i = 0; i < userAttribute.attributeValue.length; i++) {
-        attributeValue += JSON.stringify(userAttribute.attributeValue[i]);
-        if (i < userAttribute.attributeValue.length - 1) {
+  const collectionGroupIndex =
+    dataCollectionObject.userAttributePair?.findIndex(
+      (userAttribute) =>
+        userAttribute.attributeKey === 'extension:CollectionEventGroup'
+    );
+
+  if (collectionGroupIndex !== undefined && collectionGroupIndex !== -1) {
+    const collectionGroup =
+      dataCollectionObject.userAttributePair[collectionGroupIndex];
+    if (Array.isArray(collectionGroup.attributeValue)) {
+      attributeKey = collectionGroup.attributeKey;
+      for (let i = 0; i < collectionGroup.attributeValue.length; i++) {
+        attributeValue += JSON.stringify(collectionGroup.attributeValue[i]);
+        if (i < collectionGroup.attributeValue.length - 1) {
           attributeValue += ',';
         }
       }
@@ -36,6 +45,23 @@ export const flattenCollectionGroups = (
       attributeKey,
       attributeValue,
     });
+    if (Array.isArray(dataCollectionObject.userAttributePair)) {
+      const filteredUserAttributePairs =
+        dataCollectionObject.userAttributePair.filter(
+          (userAttribute, index) =>
+            index !== collectionGroupIndex &&
+            userAttribute.attributeKey !== 'extension:CollectionEventGroup'
+        );
+      flattenedUserAttributePairs.push(
+        ...filteredUserAttributePairs.map((userAttribute) => ({
+          attributeKey: userAttribute.attributeKey,
+          attributeValue: JSON.stringify(userAttribute.attributeValue).replace(
+            /"/g,
+            ''
+          ),
+        }))
+      );
+    }
   }
 
   return {
