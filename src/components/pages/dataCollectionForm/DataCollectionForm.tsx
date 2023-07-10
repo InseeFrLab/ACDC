@@ -110,7 +110,7 @@ const CollectionForm = (props: CollectionFormProps) => {
   const handleClose = () => {
     setOpen(false);
     navigate(`/collection/${dataCollectionState.id}`, {
-      state: { dataCollection: dataCollectionState, notSaved: false },
+      state: { notSaved: false },
     });
   };
 
@@ -147,6 +147,34 @@ const CollectionForm = (props: CollectionFormProps) => {
         {
           attributeKey: 'extension:CollectionEventGroup',
           attributeValue: [],
+        },
+        {
+          attributeKey: 'extension:anneeVisa',
+          attributeValue: anneeVisa,
+        },
+        {
+          attributeKey: 'extension:ministereTutelle',
+          attributeValue: ministereTutelle,
+        },
+        {
+          attributeKey: 'extension:parutionJO',
+          attributeValue: parutionJO.toString(),
+        },
+        {
+          attributeKey: 'extension:dateParutionJO',
+          attributeValue: dateParutionJO,
+        },
+        {
+          attributeKey: 'extension:serviceCollecteurSignataireNom',
+          attributeValue: serviceCollecteurSignataireNom,
+        },
+        {
+          attributeKey: 'extension:serviceCollecteurSignataireFonction',
+          attributeValue: serviceCollecteurSignataireFonction,
+        },
+        {
+          attributeKey: 'extension:mailResponsableOperationel',
+          attributeValue: mailResponsableOperationel,
         },
       ],
       studyUnitReference,
@@ -275,7 +303,6 @@ const CollectionForm = (props: CollectionFormProps) => {
             fullWidth
             value={ministereTutelle}
             onChange={(e) => setMinistereTutelle(e.target.value)}
-            error={submitAttempt && ministereTutelle === ''}
           />
         </FormControl>
         <Box
@@ -351,7 +378,6 @@ const CollectionForm = (props: CollectionFormProps) => {
             fullWidth
             value={serviceCollecteurSignataireNom}
             onChange={(e) => setServiceCollecteurSignataireNom(e.target.value)}
-            error={submitAttempt && serviceCollecteurSignataireNom === ''}
           />
         </FormControl>
 
@@ -385,7 +411,6 @@ const CollectionForm = (props: CollectionFormProps) => {
             onChange={(e) =>
               setServiceCollecteurSignataireFonction(e.target.value)
             }
-            error={submitAttempt && serviceCollecteurSignataireFonction === ''}
           />
         </FormControl>
 

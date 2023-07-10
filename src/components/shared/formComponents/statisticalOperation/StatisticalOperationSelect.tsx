@@ -89,7 +89,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
         })
       );
       setOperations(newOperations);
-      console.log('Associated series Operations: ', newOperations);
       console.log('Submit attempt: ', props.submitAttempt);
       setOperationDisabled(false);
     }
@@ -98,7 +97,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   useEffect(() => {
     if (qualityReportSerie.isSuccess) {
       setIsLoading(false);
-      console.log('Quality report: ', qualityReportSerie.data);
       props.setRapport(qualityReportSerie.data);
     }
   }, [qualityReportSerie.isSuccess, qualityReportSerie.data, props]);

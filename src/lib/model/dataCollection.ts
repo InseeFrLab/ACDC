@@ -13,7 +13,7 @@ export interface DataCollection {
   label: LanguageRecord;
   description: LanguageRecord;
   collectionEvents?: CollectionEvent[];
-  userAttributePair?: CollectionGroup[] | UserAttributePair[];
+  userAttributePair?: (CollectionGroup | UserAttributePair)[];
 }
 
 export interface DataCollectionRow {

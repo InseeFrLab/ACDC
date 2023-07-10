@@ -78,20 +78,12 @@ export const flattenUserAttributeFromDataCollectionApi = (
   const dataCollectionFlattenGroup: DataCollection = flattenCollectionGroups(
     dataCollectionApi.json
   );
-  console.log(
-    'flattenedUserAttributePairs CollectionGroup: : ',
-    dataCollectionFlattenGroup
-  );
   const dataCollectionFlattenCommunication: CollectionEvent[] =
     dataCollectionFlattenGroup.collectionEvents?.map((collectionEvent) => {
       const flattenCollectionEvent: CollectionEvent =
         flattenCollectionCommunication(collectionEvent);
       return flattenCollectionEvent;
     }) || [];
-  console.log(
-    'dataCollectionFlattenCommunication: ',
-    dataCollectionFlattenCommunication
-  );
   const flattenedDataCollectionObject: DataCollection = {
     ...dataCollectionFlattenGroup,
     collectionEvents: dataCollectionFlattenCommunication,
@@ -100,7 +92,6 @@ export const flattenUserAttributeFromDataCollectionApi = (
     ...dataCollectionApi,
     json: flattenedDataCollectionObject,
   };
-  console.log('Flattened dataCollectionApi: ', response);
   return response;
 };
 

@@ -11,15 +11,15 @@ import {
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { downloadFile } from '@/lib/utils/dataTransformation';
 import getCurrentDate from '@/lib/utils/otherUtils';
+import { DataCollection } from '@/lib/model/dataCollection';
+import DataCollectionApi from '@/lib/model/dataCollectionApi';
+import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import { transformLabels } from '@/lib/utils/magmaUtils';
 import Main from '../../shared/layout/Main';
-import { DataCollection } from '../../../lib/model/dataCollection';
-import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
-import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import CollectionGroupDisplay from './CollectionGroupDisplay';
 import DataCollectionDisplay from './DataCollectionDisplay';
-import { transformLabels } from '../../../lib/utils/magmaUtils';
 import SaveDialog from './dialogs/SaveDialog';
 import DeleteDialog from './dialogs/DeleteDialog';
 import PublishDialog from './dialogs/PublishDialog';
@@ -60,6 +60,7 @@ const DataCollectionDetails = () => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           queryFn: () => getDataCollection(idDataCollection),
           onSuccess: (data: DataCollectionApi) => {
+            console.log('dataCollectionQuery', data);
             setDataCollectionState(data.json);
             setDataCollection(data.json);
           },
@@ -170,6 +171,7 @@ const DataCollectionDetails = () => {
           ...dataCollectionState.userAttributePair[0],
           attributeValue: updatedUserAttributeValue,
         },
+        ...dataCollectionState.userAttributePair.slice(1),
       ],
     });
 
