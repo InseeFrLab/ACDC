@@ -4,5 +4,13 @@
   "successForm": "Data Collection created successfully",
   "statisticalOperation": "Statistical Operation",
   "statisticalOperationSeries": "Statistical Operation Series",
-  "qualityReport": "Quality Report"
+  "qualityReport": "Quality Report",
+  "addInfo": "+ Other informations",
+  "visaYear": "Visa Year",
+  "ministry": "Ministry",
+  "parutionJO": "Parution JO",
+  "dateParutionJO": "Date Parution JO",
+  "serviceCollecteurSignataireName": "Name of the signatory collector service",
+  "serviceCollecteurSignataireFunction": "Function of the signatory collector service",
+  "mailResponsableOperationnel": "Mail of the operational manager"
 }

@@ -49,7 +49,6 @@ const IntlTextInput = (props: any) => {
                   error={label.value === '' && props.submitAttempt}
                   size="small"
                   multiline={props.multiline}
-                  // label={t('label')}
                   value={label.value}
                   sx={{ paddingRight: 2, width: '99%', marginTop: 1 }}
                   onChange={handleTextChange}

@@ -4,5 +4,12 @@
   "successForm": "Campagne créée avec succès",
   "statisticalOperation": "Opération statistique",
   "statisticalOperationSeries": "Série d'opérations statistiques",
-  "qualityReport": "Rapport qualité"
+  "qualityReport": "Rapport qualité",
+  "visaYear": "Année Visa",
+  "ministry": "Ministère Tutelle",
+  "parutionJO": "Parution au JO",
+  "dateParutionJO": "Date de parution au JO",
+  "serviceCollecteurSignataireName": "Nom signataire pour le service collecteur",
+  "serviceCollecteurSignataireFunction": "Fonction du signataire pour le service collecteur",
+  "mailResponsableOperationnel": "Mail du responsable opérationnel"
 }
