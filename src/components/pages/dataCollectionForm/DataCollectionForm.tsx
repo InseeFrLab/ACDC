@@ -273,6 +273,7 @@ const CollectionForm = (props: CollectionFormProps) => {
             label={t('visaYear', { ns: 'dataCollectionForm' })}
             openTo="year"
             value={anneeVisa}
+            views={['year']}
             onChange={(date) => date && setAnneeVisa(date.toString())}
             renderInput={(params) => <TextField {...params} />}
           />
@@ -345,6 +346,7 @@ const CollectionForm = (props: CollectionFormProps) => {
               label={t('dateParutionJO', { ns: 'dataCollectionForm' })}
               disabled={!parutionJO}
               openTo="year"
+              views={['year']}
               value={dateParutionJO}
               onChange={(date) => date && setDateParutionJO(date.toString())}
               renderInput={(params) => <TextField {...params} />}

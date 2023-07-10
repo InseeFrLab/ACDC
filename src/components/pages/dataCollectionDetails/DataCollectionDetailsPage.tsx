@@ -189,7 +189,6 @@ const DataCollectionDetails = () => {
       json: dataCollectionState,
     };
     const now = Date.now();
-    const today: string = new Date(now).toISOString();
     updatedDataCollection.json.versionDate = getCurrentDate();
 
     console.log('Updated Data Collection: ', updatedDataCollection);
