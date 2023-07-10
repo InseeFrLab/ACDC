@@ -44,7 +44,7 @@
                 <!-- ZONE LOGOS -->
                 <fo:block-container absolute-position="absolute" left="5mm" top="2mm" width="180mm" height="25mm">
                     <fo:block>
-                        <fo:external-graphic src="https://logos-marques.com/wp-content/uploads/2022/03/ACDC-Logo-500x313.png" width="25%" height="25%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                        <fo:external-graphic src="https://i.etsystatic.com/14980242/r/il/3fe441/3685179418/il_1588xN.3685179418_c7de.jpg" width="20%" height="20%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                     </fo:block>
                 </fo:block-container>
                 
@@ -381,13 +381,12 @@
                                 </fo:block>
                                 
                                 <fo:block>
-                                    #if($Modif_Enq_Prestataire=="non" and $Modif_Enq_Archivage=="oui")
                                     <fo:block margin-top="0.5mm">
                                         ${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées), 
                                         ainsi que les Archives de France, conformément aux dispositions de l’article L. 212-4 du code du patrimoine. 
                                         Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
                                     </fo:block>
-                                    #end
+                                   
                                 </fo:block>
                                 
                                 <fo:block>
@@ -400,13 +399,12 @@
                                 </fo:block>
                                 
                                 <fo:block>
-                                    #if($Modif_Enq_Prestataire=="oui" and $Modif_Enq_Archivage=="non")
                                     <fo:block margin-top="0.5mm">
                                         ${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées), 
                                         ainsi que son sous-traitant ${Enq_NomPrestataire}, habilité par le Comité du secret de la statistique publique. 
                                         Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
                                     </fo:block>
-                                    #end
+                                    
                                 </fo:block>
                                 <fo:block margin-top="0.5mm">
                                     <!-- Insensible à la casse ${Enq_RepresentantLegal}, ${Enq_Mineur} et (${Enq_DPD} -->
@@ -427,7 +425,6 @@
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                
                 <!-- Tournez la Page -->
                
                 <fo:block-container absolute-position="absolute" left="158mm" top="270mm" width="100%" height="100%" overflow="hidden" font-size="10pt" text-align="justify">
@@ -474,7 +471,7 @@
             </fo:block-container>
             
             <!-- COMMENT RÉPONDRE À L’ENQUÊTE ?  -->
-            <fo:block-container absolute-position="absolute" left="1mm" top="28mm" width="188mm" height="10mm"  font-size="10pt" text-align="justify">
+           <fo:block-container absolute-position="absolute" left="1mm" top="28mm" width="188mm" height="10mm"  font-size="10pt" text-align="justify">
                 <fo:block margin-top="5mm">                        
                     <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
                         <fo:table-column column-width="3%"/>
@@ -542,7 +539,7 @@
               
             <!-- COMMENT SE DÉROULE L’ENQUÊTE ? -->
             <fo:block>
-                #if($Modif_Enq_PartieDeroulementEnquete=="oui")
+                
             <fo:block-container absolute-position="absolute" left="1mm" top="122mm" width="187mm" height="100%"  font-size="10pt" text-align="justify">           
                 <fo:block>
                     <fo:external-graphic src="coleman/${Enq_ImageDeroulementEnquete}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>  
@@ -572,13 +569,13 @@
                     ${Enq_DeroulementEnquete}                        
                 </fo:block>  
             </fo:block-container> 
-                #end
+                
             </fo:block>
                
                
             <!-- Cas 1: Position À QUOI SERVENT LES INFORMATIONS COLLECTÉES et POUR EN SAVOIR PLUS... si COMMENT SE DÉROULE L’ENQUÊTE existe  -->               
             <fo:block>
-                #if($Modif_Enq_PartieDeroulementEnquete=="oui")
+                
                 <fo:block-container absolute-position="absolute" left="1mm" top="175mm" width="188mm" height="100%"  font-size="10pt" text-align="justify">
                     
                     <!-- À QUOI SERVENT LES INFORMATIONS COLLECTÉES ? -->          
@@ -662,7 +659,7 @@
                         </fo:table>
                     </fo:block> 
                 </fo:block-container>    
-                #end
+                
             </fo:block>
             
             <!-- Cas 2: Position À QUOI SERVENT LES INFORMATIONS COLLECTÉES et POUR EN SAVOIR PLUS... si COMMENT SE DÉROULE L’ENQUÊTE n'existe pas  -->               
