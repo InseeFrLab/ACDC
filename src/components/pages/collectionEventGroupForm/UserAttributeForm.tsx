@@ -70,10 +70,8 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
 
   const handleClose = useCallback(() => {
     setOpen(false);
-    navigate(`/collection/${dataCollectionState.id}`, {
-      state: { dataCollection: dataCollectionState },
-    });
-  }, [dataCollectionState, navigate]);
+    navigate('/');
+  }, [navigate]);
 
   const checkValidation = () => {
     const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');

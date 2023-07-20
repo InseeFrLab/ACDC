@@ -11,6 +11,7 @@ import {
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { downloadFile } from '@/lib/utils/dataTransformation';
 import getCurrentDate from '@/lib/utils/otherUtils';
+import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
 import { DataCollection } from '@/lib/model/dataCollection';
 import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
@@ -61,8 +62,9 @@ const DataCollectionDetails = () => {
           queryFn: () => getDataCollection(idDataCollection),
           onSuccess: (data: DataCollectionApi) => {
             console.log('dataCollectionQuery', data);
-            setDataCollectionState(data.json);
-            setDataCollection(data.json);
+            const parsedData = parseUserAttributeFromDataCollectionApi(data);
+            setDataCollectionState(parsedData.json);
+            setDataCollection(parsedData.json);
           },
         },
         {

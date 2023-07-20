@@ -23,10 +23,10 @@ import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import { CollectionRow } from '@/lib/model/communicationCollectionEvent';
 import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
 import ExpandMore from '@/components/shared/styled/ExpandMore';
-import CollectionEvent from '../../../lib/model/collectionEvents';
-import { DataCollection } from '../../../lib/model/dataCollection';
+import CollectionEvent from '../../../src/lib/model/collectionEvents';
+import { DataCollection } from '../../../src/lib/model/dataCollection';
 import EditCollectionEventDialog from './updateDataForm/EditCollectionEventDialog';
-import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
+import { PoguesQuestionnaire } from '../../../src/lib/model/poguesQuestionnaire';
 
 interface CollectionEventDisplayProps {
   collectionEvent: CollectionEvent;

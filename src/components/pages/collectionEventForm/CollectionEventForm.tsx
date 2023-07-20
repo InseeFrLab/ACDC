@@ -117,7 +117,6 @@ const EventForm = (props: DataCollectionProps) => {
 
   const handleClickOpen = () => {
     setOpen(true);
-    console.log('dataCollectionState: ', dataCollectionState);
   };
 
   const checkValidation = () => {
@@ -209,10 +208,7 @@ const EventForm = (props: DataCollectionProps) => {
   useEffect(() => {
     if (isSuccess) {
       setOpen(false);
-      const dataCollection = dataCollectionState.json;
-      navigate(`/collection/${dataCollectionState.id}`, {
-        state: { dataCollection },
-      });
+      navigate(`/`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
