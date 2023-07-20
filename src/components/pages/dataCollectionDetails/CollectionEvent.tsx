@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
@@ -57,23 +58,24 @@ const CollectionEventDisplay = (props: CollectionEventDisplayProps) => {
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
   const [openConfirmationDelete, setOpenConfirmationDelete] = useState(false);
-  const [deletable, setDeletable] = useState(true);
+  const [deletable, setDeletable] = useState(false);
 
-  useEffect(() => {
-    const findDeletableEvent = () => {
-      const listID = dataCollectionState.userAttributePair
-        .flatMap((userAttribute) =>
-          Array.from(userAttribute.attributeValue).flatMap((attributeValue) =>
-            attributeValue.collectionEventReference.map(
-              (collectionEventReference) => collectionEventReference.id
-            )
-          )
-        )
-        .filter((id, index, arr) => arr.indexOf(id) === index);
-      return listID.some((id) => id === collectionEvent.id);
-    };
-    setDeletable(findDeletableEvent());
-  }, [dataCollectionState, collectionEvent.id]);
+  // useEffect(() => {
+  //   const findDeletableEvent = () => {
+  //     const listID = Array.from(
+  //       dataCollectionState.userAttributePair[0].attributeValue
+  //     )
+  //       .flatMap((attributeValue) =>
+  //         attributeValue.collectionEventReference.map(
+  //           (collectionEventReference) => collectionEventReference.id
+  //         )
+  //       )
+
+  //       .filter((id, index, arr) => arr.indexOf(id) === index);
+  //     return listID.some((id) => id === collectionEvent.id);
+  //   };
+  //   setDeletable(findDeletableEvent());
+  // }, [dataCollectionState, collectionEvent.id]);
 
   const handleClickOpen = () => {
     setOpen(true);
