@@ -22,6 +22,10 @@ const BottomActionBar = (props: BottomActionBarProps) => {
   const { dataCollection, questionnaires } = props;
 
   const handleClick = () => {
+    console.log(
+      'Create New CollectionGroup with questionnaires:',
+      questionnaires
+    );
     navigate(`/collection/new/${dataCollection.id}`, {
       state: { dataCollection, questionnaires },
     });
@@ -62,6 +66,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
       <Box>
         <Button
           variant="customContained"
+          disabled={questionnaires.length < 1}
           onClick={handleClick}
           sx={{
             mx: 1,

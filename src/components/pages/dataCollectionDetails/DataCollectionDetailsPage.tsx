@@ -16,6 +16,7 @@ import { DataCollection } from '@/lib/model/dataCollection';
 import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
 import { transformLabels } from '@/lib/utils/magmaUtils';
+import { set } from 'date-fns';
 import Main from '../../shared/layout/Main';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
@@ -43,7 +44,9 @@ const DataCollectionDetails = () => {
   const [openSave, setOpenSave] = useState(false);
   const [openPublish, setOpenPublish] = useState(false);
   const [notSavedState, setNotSavedState] = useState(false);
-  let questionnaires: PoguesQuestionnaire[] = [];
+  const [questionnaires, setQuestionnaires] = useState<PoguesQuestionnaire[]>(
+    []
+  );
   let series: StatisticalSeries[] = [];
 
   const {
@@ -71,7 +74,7 @@ const DataCollectionDetails = () => {
           queryKey: ['allQuestionnaires'],
           queryFn: getQuestionnaires,
           onSuccess: () => {
-            questionnaires = (
+            const questionnairesResult = (
               questionnaireQuery.data as PoguesQuestionnaireResponse[]
             ).map((questionnaire: PoguesQuestionnaireResponse) => {
               const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
@@ -81,6 +84,8 @@ const DataCollectionDetails = () => {
                 date: dateQuestionnaire.toLocaleDateString(),
               };
             });
+            console.log(`Got ${questionnairesResult.length} questionnaires`);
+            setQuestionnaires(questionnairesResult);
           },
         },
         {
