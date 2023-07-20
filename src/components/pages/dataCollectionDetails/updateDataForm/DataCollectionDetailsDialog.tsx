@@ -76,7 +76,14 @@ const DataCollectionDetailsDialog = (
       dataCollectionState.userAttributePair.findIndex(
         (userAttribute) => userAttribute.attributeKey === 'extension:anneeVisa'
       )
-    ].attributeValue
+    ]
+      ? dataCollectionState.userAttributePair[
+          dataCollectionState.userAttributePair.findIndex(
+            (userAttribute) =>
+              userAttribute.attributeKey === 'extension:anneeVisa'
+          )
+        ].attributeValue
+      : ''
   );
   const [ministereTutelle, setMinistereTutelle] = useState(
     dataCollectionState.userAttributePair[
@@ -84,17 +91,30 @@ const DataCollectionDetailsDialog = (
         (userAttribute) =>
           userAttribute.attributeKey === 'extension:ministereTutelle'
       )
-    ].attributeValue
+    ]
+      ? dataCollectionState.userAttributePair[
+          dataCollectionState.userAttributePair.findIndex(
+            (userAttribute) =>
+              userAttribute.attributeKey === 'extension:ministereTutelle'
+          )
+        ].attributeValue
+      : ''
   );
   const [parutionJO, setParutionJO] = useState<boolean>(
-    JSON.parse(
-      dataCollectionState.userAttributePair[
-        dataCollectionState.userAttributePair.findIndex(
-          (userAttribute) =>
-            userAttribute.attributeKey === 'extension:parutionJO'
-        )
-      ].attributeValue.toString()
-    ) as boolean
+    dataCollectionState.userAttributePair[
+      dataCollectionState.userAttributePair.findIndex(
+        (userAttribute) => userAttribute.attributeKey === 'extension:parutionJO'
+      )
+    ]
+      ? (JSON.parse(
+          dataCollectionState.userAttributePair[
+            dataCollectionState.userAttributePair.findIndex(
+              (userAttribute) =>
+                userAttribute.attributeKey === 'extension:parutionJO'
+            )
+          ].attributeValue.toString()
+        ) as boolean)
+      : false
   );
   const [dateParutionJO, setDateParutionJO] = useState(
     dataCollectionState.userAttributePair[
@@ -102,7 +122,14 @@ const DataCollectionDetailsDialog = (
         (userAttribute) =>
           userAttribute.attributeKey === 'extension:dateParutionJO'
       )
-    ].attributeValue
+    ]
+      ? dataCollectionState.userAttributePair[
+          dataCollectionState.userAttributePair.findIndex(
+            (userAttribute) =>
+              userAttribute.attributeKey === 'extension:dateParutionJO'
+          )
+        ].attributeValue
+      : ''
   );
   const [serviceCollecteurSignataireNom, setServiceCollecteurSignataireNom] =
     useState(
@@ -112,7 +139,15 @@ const DataCollectionDetailsDialog = (
             userAttribute.attributeKey ===
             'extension:serviceCollecteurSignataireNom'
         )
-      ].attributeValue
+      ]
+        ? dataCollectionState.userAttributePair[
+            dataCollectionState.userAttributePair.findIndex(
+              (userAttribute) =>
+                userAttribute.attributeKey ===
+                'extension:serviceCollecteurSignataireNom'
+            )
+          ].attributeValue
+        : ''
     );
   const [
     serviceCollecteurSignataireFonction,
@@ -124,7 +159,15 @@ const DataCollectionDetailsDialog = (
           userAttribute.attributeKey ===
           'extension:serviceCollecteurSignataireFonction'
       )
-    ].attributeValue
+    ]
+      ? dataCollectionState.userAttributePair[
+          dataCollectionState.userAttributePair.findIndex(
+            (userAttribute) =>
+              userAttribute.attributeKey ===
+              'extension:serviceCollecteurSignataireFonction'
+          )
+        ].attributeValue
+      : ''
   );
   const [mailResponsableOperationel, setMailResponsableOperationel] = useState(
     dataCollectionState.userAttributePair[
@@ -132,7 +175,15 @@ const DataCollectionDetailsDialog = (
         (userAttribute) =>
           userAttribute.attributeKey === 'extension:mailResponsableOperationel'
       )
-    ].attributeValue
+    ]
+      ? dataCollectionState.userAttributePair[
+          dataCollectionState.userAttributePair.findIndex(
+            (userAttribute) =>
+              userAttribute.attributeKey ===
+              'extension:mailResponsableOperationel'
+          )
+        ].attributeValue
+      : ''
   );
 
   const resetState = () => {
