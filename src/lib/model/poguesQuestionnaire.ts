@@ -4,6 +4,12 @@ export class PoguesQuestionnaire {
   label: string;
 
   date: string;
+
+  constructor(id: string, label: string, date: string) {
+    this.id = id;
+    this.label = label;
+    this.date = date;
+  }
 }
 
 export interface PoguesQuestionnaireResponse {
