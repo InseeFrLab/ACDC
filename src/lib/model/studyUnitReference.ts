@@ -1,9 +1,12 @@
 import LanguageRecord from './languageRecord';
 
-export interface StudyUnitReference {
+export class StudyUnitReference {
   id: string;
+
   label: LanguageRecord;
+
   typeOfObject: string;
+
   groupReference: GroupReference;
 }
 

@@ -1,4 +1,4 @@
-export interface TypeOfModeOfCollection {
+export class TypeOfModeOfCollection {
   type: string;
 }
 

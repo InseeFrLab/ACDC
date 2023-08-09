@@ -8,12 +8,10 @@ import {
   UserAttributePair,
   isUserAttributePair,
 } from '../model/userAttributePair';
-import {
-  CollectionGroup,
-  CollectionGroupValue,
-} from '../model/collectionGroups';
+import { CollectionGroup } from '../model/collectionGroups';
 import CollectionEvent from '../model/collectionEvents';
 import { CollectionCommunication } from '../model/communicationCollectionEvent';
+import CollectionGroupValue from '../model/collectionGroupValue';
 
 export const flattenCollectionGroups = (
   dataCollectionObject: DataCollection

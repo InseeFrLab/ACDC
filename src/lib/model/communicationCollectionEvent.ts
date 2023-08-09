@@ -1,13 +1,9 @@
-export interface CollectionCommunication {
-  attributeKey: string;
-  attributeValue: CollectionRow[];
-}
+import CollectionRow from './collectionRow';
 
-export interface CollectionRow {
-  id: string;
-  type: string;
-  media: string;
-  paperQuestionnaire: boolean;
+export class CollectionCommunication {
+  attributeKey: string;
+
+  attributeValue: CollectionRow[];
 }
 
 function isCollectionCommunicationItem(value: unknown): boolean {

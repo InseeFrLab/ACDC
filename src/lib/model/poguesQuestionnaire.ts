@@ -1,6 +1,8 @@
-export interface PoguesQuestionnaire {
+export class PoguesQuestionnaire {
   id: string;
+
   label: string;
+
   date: string;
 }
 

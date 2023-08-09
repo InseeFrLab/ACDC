@@ -4,15 +4,23 @@ import { StudyUnitReference } from './studyUnitReference';
 import LanguageRecord from './languageRecord';
 import { UserAttributePair } from './userAttributePair';
 
-export interface DataCollection {
+export class DataCollection {
   id: string;
+
   agency: string;
+
   version: number;
+
   versionDate: string;
+
   studyUnitReference: StudyUnitReference;
+
   label: LanguageRecord;
+
   description: LanguageRecord;
+
   collectionEvents?: CollectionEvent[];
+
   userAttributePair?: (CollectionGroup | UserAttributePair)[];
 }
 

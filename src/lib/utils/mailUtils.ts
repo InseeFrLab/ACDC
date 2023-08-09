@@ -1,5 +1,9 @@
 /* eslint-disable no-template-curly-in-string */
 import { XMLSerializer } from 'xmldom';
+import { DataCollection } from '../model/dataCollection';
+import MailVariables from '../model/mailVariables';
+import { UserAttributePair } from '../model/userAttributePair';
+import { CollectionGroup } from '../model/collectionGroups';
 
 const getMockCourrier = async () => {
   try {
@@ -13,7 +17,7 @@ const getMockCourrier = async () => {
     throw error;
   }
 };
-const replaceLabel = async (label: string) => {
+export const replaceLabel = async (label: string) => {
   // Temp while waiting for real datamodel
   try {
     const xmlDocument = await getMockCourrier();
@@ -30,4 +34,55 @@ const replaceLabel = async (label: string) => {
   }
 };
 
-export default replaceLabel;
+export const createMailVariable = (
+  dataCollection: DataCollection
+): MailVariables => {
+  const mailVariables: MailVariables = {
+    Enq_AnneeVisa: '',
+    Enq_MinistereTutelle: '',
+    Enq_ParutionJo: false,
+    Enq_DateParutionJo: '',
+    Enq_ServiceCollecteurSignataireNom: '',
+    Enq_ServiceCollecteurSignataireFonction: '',
+    Enq_MailRespOperationnel: '',
+  };
+
+  const { userAttributePair = [] } = dataCollection;
+
+  userAttributePair.forEach((value) => {
+    if (!(value instanceof CollectionGroup)) {
+      const userAttribute = value;
+
+      switch (userAttribute.attributeKey) {
+        case 'Enq_AnneeVisa':
+          mailVariables.Enq_AnneeVisa = userAttribute.attributeValue;
+          break;
+        case 'Enq_MinistereTutelle':
+          mailVariables.Enq_MinistereTutelle = userAttribute.attributeValue;
+          break;
+        case 'Enq_ParutionJo':
+          mailVariables.Enq_ParutionJo =
+            userAttribute.attributeValue === 'true';
+          break;
+        case 'Enq_DateParutionJo':
+          mailVariables.Enq_DateParutionJo = userAttribute.attributeValue;
+          break;
+        case 'Enq_ServiceCollecteurSignataireNom':
+          mailVariables.Enq_ServiceCollecteurSignataireNom =
+            userAttribute.attributeValue;
+          break;
+        case 'Enq_ServiceCollecteurSignataireFonction':
+          mailVariables.Enq_ServiceCollecteurSignataireFonction =
+            userAttribute.attributeValue;
+          break;
+        case 'Enq_MailRespOperationnel':
+          mailVariables.Enq_MailRespOperationnel = userAttribute.attributeValue;
+          break;
+        default:
+          break;
+      }
+    }
+  });
+
+  return mailVariables;
+};

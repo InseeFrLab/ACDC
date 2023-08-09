@@ -1,5 +1,6 @@
-export interface UserAttributePair {
+export class UserAttributePair {
   attributeKey: string;
+
   attributeValue: string;
 }
 export function isUserAttributePair(obj: any): obj is UserAttributePair {

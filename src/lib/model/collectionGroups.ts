@@ -1,15 +1,12 @@
+import CollectionGroupValue from './collectionGroupValue';
 import LanguageRecord from './languageRecord';
 
-export interface CollectionGroup {
+export class CollectionGroup {
   attributeKey: string;
+
   attributeValue: CollectionGroupValue[];
 }
 
-export interface CollectionGroupValue {
-  collectionEventReference?: { id: string }[];
-  id?: string;
-  label?: LanguageRecord;
-}
 function isCollectionGroupItem(value: unknown): boolean {
   return (
     typeof value === 'object' &&
