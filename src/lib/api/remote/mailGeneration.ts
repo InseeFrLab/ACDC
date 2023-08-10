@@ -4,7 +4,7 @@ export default function generateMailFromXml(xmlString: string) {
     {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/xml',
+        'Content-Type': 'application/json',
       },
       body: xmlString,
     }

@@ -18,7 +18,7 @@ const PdfDisplay = () => {
 
   const location: string =
     locationState && locationState.xmlString
-      ? locationState.xmlString
+      ? locationState.xmlString.toString()
       : GeneratedPdf;
   const { data, error, isLoading, isSuccess, mutate } =
     useMutation(generateMailFromXml);
@@ -27,7 +27,7 @@ const PdfDisplay = () => {
 
   useEffect(() => {
     if (locationState && locationState.xmlString) {
-      mutate(location);
+      mutate(location.toString());
     }
   }, [locationState, mutate, location]);
 

@@ -38,28 +38,28 @@ export const createMailVariable = (
       const userAttribute = value;
 
       switch (userAttribute.attributeKey) {
-        case 'Enq_AnneeVisa':
+        case 'extension:anneeVisa':
           mailVariables.Enq_AnneeVisa = userAttribute.attributeValue;
           break;
-        case 'Enq_MinistereTutelle':
+        case 'extension:ministereTutelle':
           mailVariables.Enq_MinistereTutelle = userAttribute.attributeValue;
           break;
-        case 'Enq_ParutionJo':
+        case 'extension:parutionJO':
           mailVariables.Enq_ParutionJo =
             userAttribute.attributeValue === 'true';
           break;
-        case 'Enq_DateParutionJo':
+        case 'extension:dateParutionJO':
           mailVariables.Enq_DateParutionJo = userAttribute.attributeValue;
           break;
-        case 'Enq_ServiceCollecteurSignataireNom':
+        case 'extension:serviceCollecteurSignataireNom':
           mailVariables.Enq_ServiceCollecteurSignataireNom =
             userAttribute.attributeValue;
           break;
-        case 'Enq_ServiceCollecteurSignataireFonction':
+        case 'extension:serviceCollecteurSignataireFonction':
           mailVariables.Enq_ServiceCollecteurSignataireFonction =
             userAttribute.attributeValue;
           break;
-        case 'Enq_MailRespOperationnel':
+        case 'extension:mailResponsableOperationel':
           mailVariables.Enq_MailRespOperationnel = userAttribute.attributeValue;
           break;
         default:
@@ -73,13 +73,15 @@ export const createMailVariable = (
 
 export const generateMailData = async (
   dataCollection: DataCollection
-): Promise<Mail> => {
+): Promise<string> => {
   // Temp while waiting for real datamodel
   try {
     const xmlDocument = await getMockCourrier();
     const xmlString = new XMLSerializer().serializeToString(xmlDocument);
     const mailVariables = createMailVariable(dataCollection);
-    return new Mail(xmlString, mailVariables);
+    const mail = new Mail(xmlString, mailVariables);
+    console.log('Mail', mail);
+    return JSON.stringify(mail);
   } catch (error) {
     console.error('Error fetching or parsing XML:', error);
     throw error;
