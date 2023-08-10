@@ -14,10 +14,8 @@ import {
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import { DataCollection } from '@/lib/model/dataCollection';
 import CollectionEvent from '@/lib/model/collectionEvents';
-import {
-  CollectionGroup,
-  CollectionGroupValue,
-} from '@/lib/model/collectionGroups';
+import { CollectionGroup } from '@/lib/model/collectionGroups';
+import CollectionGroupValue from '@/lib/model/collectionGroupValue';
 import IntlTextInput from '../../../shared/intlTextInput/IntlTextInput';
 import CollectionEventCheckBox from '../../../shared/formComponents/collectionGroup/CollectionEventCheckbox';
 

@@ -16,8 +16,8 @@ import { FiChevronDown, FiTrash, FiEdit, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import ExpandMore from '@/components/shared/styled/ExpandMore';
+import CollectionGroupValue from '@/lib/model/collectionGroupValue';
 import { DataCollection } from '../../../lib/model/dataCollection';
-import { CollectionGroupValue } from '../../../lib/model/collectionGroups';
 import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
 
 interface CollectionGroupDisplayProps {
