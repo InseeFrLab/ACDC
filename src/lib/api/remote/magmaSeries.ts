@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import StatisticalSeries from '@/lib/model/statisticalSeries';
-import { StudyUnitReference } from '../../model/studyUnitReference';
+import LanguageRecord from '@/lib/model/languageRecord';
 import { transformLabels } from '../../utils/magmaUtils';
 
 export function getAllSeries(): Promise<any[]> {
@@ -29,7 +29,7 @@ export function getSerieOperation(id: string): Promise<StatisticalSeries[]> {
             label: transformLabels(operation.label),
             altLabel: operation.altlabel
               ? transformLabels(operation.altlabel)
-              : {},
+              : ({ 'fr-FR': '', 'en-IE': '' } as LanguageRecord),
           });
         });
         return operations;

@@ -4,6 +4,7 @@ import StatisticalSeries from '@/lib/model/statisticalSeries';
 import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import { PoguesQuestionnaireResponse } from '@/lib/model/poguesQuestionnaire';
 import { transformLabels } from '@/lib/utils/magmaUtils';
+import LanguageRecord from '@/lib/model/languageRecord';
 import {
   getRequest,
   postRequest,
@@ -22,14 +23,16 @@ const createApiClient = (baseUrl: string) => {
       getRequest(`${baseUrl}api/external/magma/operations/${id}`).then(
         (jsonBody) => {
           jsonBody.forEach((operation: any) => {
+            const altLabel: LanguageRecord = operation.altlabel
+              ? transformLabels(operation.altlabel)
+              : { 'fr-FR': '', 'en-IE': '' };
             operations.push({
               id: operation.id,
               label: transformLabels(operation.label),
-              altLabel: operation.altlabel
-                ? transformLabels(operation.altlabel)
-                : {},
+              altLabel,
             });
           });
+
           return operations;
         }
       );

@@ -8,19 +8,16 @@ import {
   DialogActions,
   Typography,
   Box,
-  Stack,
-  FormControl,
-  Checkbox,
-  TextField,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import IntlTextInput from '@/components/shared/intlTextInput/IntlTextInput';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
-import { DatePicker } from '@mui/x-date-pickers';
 import { CollectionGroup } from '@/lib/model/collectionGroups';
 import { UserAttributePair } from '@/lib/model/userAttributePair';
+import OtherInfo from '@/components/shared/formComponents/otherInformations/OtherInfo';
+import CodeList from '@/lib/model/codeList';
 import { DataCollection } from '../../../../lib/model/dataCollection';
 import StatisticalOperationSelect from '../../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
 import StatisticalSeries from '../../../../lib/model/statisticalSeries';
@@ -71,20 +68,26 @@ const DataCollectionDetailsDialog = (
     dataCollectionState.studyUnitReference.groupReference
   );
 
-  const [anneeVisa, setAnneeVisa] = useState(
-    dataCollectionState.userAttributePair[
-      dataCollectionState.userAttributePair.findIndex(
-        (userAttribute) => userAttribute.attributeKey === 'extension:anneeVisa'
-      )
-    ]
-      ? dataCollectionState.userAttributePair[
-          dataCollectionState.userAttributePair.findIndex(
-            (userAttribute) =>
-              userAttribute.attributeKey === 'extension:anneeVisa'
-          )
-        ].attributeValue
-      : ''
-  );
+  const [anneeVisa, setAnneeVisa] = useState(() => {
+    const result = dataCollectionState.userAttributePair.find(
+      (userAttributeValue) =>
+        userAttributeValue.attributeKey === 'extension:anneeVisa'
+    );
+
+    if (result) {
+      const attributeValue = result.attributeValue as string;
+
+      if (attributeValue !== 'NaN') {
+        const date = new Date(attributeValue);
+
+        if (!Number.isNaN(date.getTime())) {
+          return date.toISOString();
+        }
+      }
+    }
+
+    return '';
+  });
   const [ministereTutelle, setMinistereTutelle] = useState(
     dataCollectionState.userAttributePair[
       dataCollectionState.userAttributePair.findIndex(
@@ -116,21 +119,22 @@ const DataCollectionDetailsDialog = (
         ) as boolean)
       : false
   );
-  const [dateParutionJO, setDateParutionJO] = useState(
-    dataCollectionState.userAttributePair[
-      dataCollectionState.userAttributePair.findIndex(
-        (userAttribute) =>
-          userAttribute.attributeKey === 'extension:dateParutionJO'
-      )
-    ]
-      ? dataCollectionState.userAttributePair[
-          dataCollectionState.userAttributePair.findIndex(
-            (userAttribute) =>
-              userAttribute.attributeKey === 'extension:dateParutionJO'
-          )
-        ].attributeValue
-      : ''
-  );
+  const [dateParutionJO, setDateParutionJO] = useState(() => {
+    const result = dataCollectionState.userAttributePair.find(
+      (userAttribute) =>
+        userAttribute.attributeKey === 'extension:dateParutionJO'
+    );
+
+    if (result) {
+      const date = new Date(result.attributeValue as string);
+
+      if (!Number.isNaN(date.getTime())) {
+        return date.toISOString();
+      }
+    }
+
+    return '';
+  });
   const [serviceCollecteurSignataireNom, setServiceCollecteurSignataireNom] =
     useState(
       dataCollectionState.userAttributePair[
@@ -186,6 +190,35 @@ const DataCollectionDetailsDialog = (
       : ''
   );
 
+  const [qualityReport, setQualityReport] = useState(
+    dataCollectionState.userAttributePair[
+      dataCollectionState.userAttributePair.findIndex(
+        (userAttribute) =>
+          userAttribute.attributeKey === 'extension:qualityReport'
+      )
+    ].attributeValue
+  );
+
+  const [surveyStatus, setSurveyStatus] = useState<CodeList>(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    CodeList.fromString(
+      dataCollectionState.userAttributePair[
+        dataCollectionState.userAttributePair.findIndex(
+          (userAttribute) =>
+            userAttribute.attributeKey === 'extension:surveyStatus'
+        )
+      ].attributeValue as string
+    )
+  );
+
+  const [visaNumber, setVisaNumber] = useState(
+    dataCollectionState.userAttributePair[
+      dataCollectionState.userAttributePair.findIndex(
+        (userAttribute) => userAttribute.attributeKey === 'extension:visaNumber'
+      )
+    ].attributeValue
+  );
+
   const resetState = () => {
     setLabelArray([
       {
@@ -220,10 +253,17 @@ const DataCollectionDetailsDialog = (
 
     const label = createIntlRecord(labelArray);
     const description = createIntlRecord(descriptionArray);
+    const dateJO = new Date(dateParutionJO);
+    const formatedJO = `${dateJO.getFullYear()}/${(dateJO.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}/${dateJO.getDate().toString().padStart(2, '0')}`;
+    console.log('DurveyStatus: ', surveyStatus);
+    const dateVisa = new Date(anneeVisa);
+    const formatedVisa = `${dateVisa.getFullYear()}`;
     const userAttributePair: (CollectionGroup | UserAttributePair)[] = [
       {
         attributeKey: 'extension:anneeVisa',
-        attributeValue: anneeVisa,
+        attributeValue: formatedVisa,
       } as UserAttributePair,
       {
         attributeKey: 'extension:ministereTutelle',
@@ -235,7 +275,7 @@ const DataCollectionDetailsDialog = (
       } as UserAttributePair,
       {
         attributeKey: 'extension:dateParutionJO',
-        attributeValue: dateParutionJO,
+        attributeValue: formatedJO,
       } as UserAttributePair,
       {
         attributeKey: 'extension:serviceCollecteurSignataireNom',
@@ -249,7 +289,17 @@ const DataCollectionDetailsDialog = (
         attributeKey: 'extension:mailResponsableOperationel',
         attributeValue: mailResponsableOperationel,
       } as UserAttributePair,
+      {
+        attributeKey: 'extension:qualityReport',
+        attributeValue: qualityReport.toString(),
+      } as UserAttributePair,
+      {
+        attributeKey: 'extension:visaNumber',
+        attributeValue: visaNumber.toString(),
+      } as UserAttributePair,
+      ...dataCollectionState.userAttributePair,
     ];
+
     const collectionGroupIndex =
       dataCollectionState.userAttributePair?.findIndex(
         (userAttribute) =>
@@ -290,6 +340,8 @@ const DataCollectionDetailsDialog = (
     <Dialog
       open={open}
       onClose={handleClose}
+      fullWidth
+      maxWidth="md"
       sx={{
         '& .MuiDialog-paper': {
           width: '100%',
@@ -334,12 +386,15 @@ const DataCollectionDetailsDialog = (
               series={series}
               submitAttempt={false}
               setRapport={() => {}}
+              setQualityReport={() => {}}
+              setSurveyStatus={() => {}}
+              setVisaNumber={() => {}}
             />
           </Box>
 
           <Box
-            component="form"
-            className="CollectionForm"
+            component="div"
+            className="LabelForm"
             sx={{
               display: 'flex',
               justifyContent: 'flex-start',
@@ -359,8 +414,8 @@ const DataCollectionDetailsDialog = (
             multiline={false}
           />
           <Box
-            component="form"
-            className="CollectionForm"
+            component="div"
+            className="DescriptionForm"
             sx={{
               paddingTop: 2,
               marginTop: 2,
@@ -379,6 +434,32 @@ const DataCollectionDetailsDialog = (
             textArray={descriptionArray}
             setTextArray={setDescriptionArray}
             multiline
+          />
+          <OtherInfo
+            multiline
+            rapport=""
+            anneeVisa={anneeVisa}
+            setAnneeVisa={setAnneeVisa}
+            ministereTutelle={ministereTutelle.toString()}
+            setMinistereTutelle={setMinistereTutelle}
+            parutionJO={parutionJO}
+            setParutionJO={setParutionJO}
+            dateParutionJO={dateParutionJO}
+            setDateParutionJO={setDateParutionJO}
+            serviceCollecteurSignataireNom={serviceCollecteurSignataireNom.toString()}
+            setServiceCollecteurSignataireNom={
+              setServiceCollecteurSignataireNom
+            }
+            serviceCollecteurSignataireFonction={serviceCollecteurSignataireFonction.toString()}
+            setServiceCollecteurSignataireFonction={
+              setServiceCollecteurSignataireFonction
+            }
+            mailResponsableOperationel={mailResponsableOperationel.toString()}
+            setMailResponsableOperationel={setMailResponsableOperationel}
+            submitAttempt={false}
+            qualityReport={qualityReport.toString()}
+            surveyStatus={surveyStatus}
+            visaNumber={visaNumber.toString()}
           />
           <Box
             sx={{
@@ -421,210 +502,6 @@ const DataCollectionDetailsDialog = (
               )}
             </Typography>
           </Box>
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('visaYear', { ns: 'dataCollectionForm' })} :
-            </Typography>
-          </Box>
-          <FormControl size="small" sx={{ marginTop: 1 }}>
-            <DatePicker
-              label={t('visaYear', { ns: 'dataCollectionForm' })}
-              openTo="year"
-              value={anneeVisa}
-              views={['year']}
-              onChange={(date) => date && setAnneeVisa(date.toString())}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </FormControl>
-
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('ministry', { ns: 'dataCollectionForm' })} :
-            </Typography>
-          </Box>
-          <FormControl size="small" sx={{ marginTop: 1 }}>
-            <TextField
-              id="ministry"
-              name="ministry"
-              variant="outlined"
-              size="small"
-              fullWidth
-              value={ministereTutelle}
-              onChange={(e) => setMinistereTutelle(e.target.value)}
-            />
-          </FormControl>
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            {' '}
-            <Stack
-              direction="row"
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <FormControl size="small">
-                <Checkbox
-                  checked={parutionJO}
-                  sx={{ '& .MuiSvgIcon-root': { fontSize: 25 } }}
-                  onChange={(e) => setParutionJO(e.target.checked)}
-                />
-              </FormControl>
-              <Typography variant="h6">
-                {t('parutionJO', { ns: 'dataCollectionForm' })}
-              </Typography>
-            </Stack>
-          </Box>
-
-          {parutionJO && (
-            <FormControl size="small" sx={{ marginTop: 1 }}>
-              <DatePicker
-                label={t('dateParutionJO', { ns: 'dataCollectionForm' })}
-                disabled={!parutionJO}
-                openTo="year"
-                views={['year']}
-                value={dateParutionJO}
-                onChange={(date) => date && setDateParutionJO(date.toString())}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </FormControl>
-          )}
-
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('serviceCollecteurSignataireName', {
-                ns: 'dataCollectionForm',
-              })}{' '}
-              :
-            </Typography>
-          </Box>
-          <FormControl size="small" sx={{ marginTop: 1 }}>
-            <TextField
-              id="serviceCollecteurSignataireName"
-              name="serviceCollecteurSignataireName"
-              variant="outlined"
-              size="small"
-              fullWidth
-              value={serviceCollecteurSignataireNom}
-              onChange={(e) =>
-                setServiceCollecteurSignataireNom(e.target.value)
-              }
-            />
-          </FormControl>
-
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('serviceCollecteurSignataireFunction', {
-                ns: 'dataCollectionForm',
-              })}{' '}
-              :
-            </Typography>
-          </Box>
-          <FormControl size="small" sx={{ marginTop: 1 }}>
-            <TextField
-              id="serviceCollecteurSignataireFonction"
-              name="serviceCollecteurSignataireFonction"
-              variant="outlined"
-              size="small"
-              fullWidth
-              value={serviceCollecteurSignataireFonction}
-              onChange={(e) =>
-                setServiceCollecteurSignataireFonction(e.target.value)
-              }
-            />
-          </FormControl>
-
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              paddingTop: 2,
-              marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">
-              {t('mailResponsableOperationnel', {
-                ns: 'dataCollectionForm',
-              })}{' '}
-              :
-            </Typography>
-          </Box>
-          <FormControl size="small" sx={{ marginTop: 1 }}>
-            <TextField
-              id="mailResponsableOperationel"
-              name="mailResponsableOperationel"
-              variant="outlined"
-              size="small"
-              fullWidth
-              value={mailResponsableOperationel}
-              onChange={(e) => setMailResponsableOperationel(e.target.value)}
-              label="Email"
-              type="email"
-              inputProps={{
-                pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$',
-                title: 'Please enter a valid email address',
-              }}
-            />
-          </FormControl>
         </DialogContentText>
       </DialogContent>
       <DialogActions>

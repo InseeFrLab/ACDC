@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import ExpandMore from '@/components/shared/styled/ExpandMore';
 import CollectionGroupValue from '@/lib/model/collectionGroupValue';
+import LanguageRecord from '@/lib/model/languageRecord';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
 
@@ -118,10 +119,20 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                 variant="h6"
                 fontWeight="bold"
                 color="text.secondary"
-                key={attributeValueState.label[i18n.language]}
+                key={`${
+                  attributeValueState.label[
+                    i18n.language as keyof LanguageRecord
+                  ]
+                }
+                `}
                 sx={{ ml: 0.5 }}
               >
-                {attributeValueState.label[i18n.language]}{' '}
+                {`${
+                  attributeValueState.label[
+                    i18n.language as keyof LanguageRecord
+                  ]
+                }
+                `}
               </Typography>
               <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
             </Box>
@@ -181,11 +192,13 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                       sx={{ marginRight: 1 }}
                     >
                       •{' '}
-                      {
+                      {`${
                         collectionEvents.find(
                           (collectionEvent) => collectionEvent.id === event.id
-                        ).collectionEventName[i18n.language]
-                      }
+                        ).collectionEventName[
+                          i18n.language as keyof LanguageRecord
+                        ]
+                      }`}
                     </Typography>
                   );
                 })}

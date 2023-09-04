@@ -104,7 +104,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
           {t('lastUpdate').toString()}
         </Typography>
       ),
-      type: 'date',
+      // type: 'date',
 
       headerClassName: 'columns--header',
       flex: 0.2,
@@ -172,7 +172,7 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
   return (
     <Box
       sx={{
-        width: '100%',
+        width: '97%',
         '& .columns--header': {
           fontWeight: '700',
         },
@@ -180,8 +180,8 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       }}
     >
       <DataGrid
-        components={{
-          Toolbar: CustomToolbar,
+        slots={{
+          toolbar: CustomToolbar,
         }}
         localeText={{
           toolbarFilters: t('filter'),
@@ -189,11 +189,11 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         }}
         rows={props.rows}
         columns={columns}
-        pageSize={10}
+        // pageSizeOptions={[10, 20, 50]}
         autoHeight
         pagination
         getRowClassName={() => 'row--style'}
-        disableSelectionOnClick
+        disableRowSelectionOnClick
       />
     </Box>
   );

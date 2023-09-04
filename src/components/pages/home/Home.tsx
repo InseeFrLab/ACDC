@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Stack, Typography, Box } from '@mui/material';
+import { Button, Typography, Box } from '@mui/material';
 import { useContext } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
 import LanguageRecord from '@/lib/model/languageRecord';
@@ -36,7 +36,7 @@ const Home = () => {
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
-          Loading...
+          Chargement des données...
         </Typography>
       </Main>
     );
@@ -67,12 +67,15 @@ const Home = () => {
             dataCollection.studyUnitReference.groupReference.label['en-IE'],
         };
 
-        const label = labelData[i18n.language] || labelData['en-IE'];
+        const label =
+          labelData[i18n.language as keyof LanguageRecord] ||
+          labelData['en-IE'];
         const studyUnitReference =
-          studyUnitReferenceData[i18n.language] ||
+          studyUnitReferenceData[i18n.language as keyof LanguageRecord] ||
           studyUnitReferenceData['en-IE'];
         const groupReference =
-          groupReferenceData[i18n.language] || groupReferenceData['en-IE'];
+          groupReferenceData[i18n.language as keyof LanguageRecord] ||
+          groupReferenceData['en-IE'];
 
         return {
           ...dataCollection,

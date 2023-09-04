@@ -3,7 +3,7 @@ export default class MailVariables {
 
   Enq_MinistereTutelle: string;
 
-  Enq_ParutionJo: boolean;
+  Enq_ParutionJo: string;
 
   Enq_DateParutionJo: string;
 
@@ -13,14 +13,20 @@ export default class MailVariables {
 
   Enq_MailRespOperationnel: string;
 
+  Enq_LibelleEnquete: string;
+
+  Enq_CaractereObligatoire: string;
+
   constructor(
     Enq_AnneeVisa: string,
     Enq_MinistereTutelle: string,
-    Enq_ParutionJo: boolean,
+    Enq_ParutionJo: string,
     Enq_DateParutionJo: string,
     Enq_ServiceCollecteurSignataireNom: string,
     Enq_ServiceCollecteurSignataireFonction: string,
-    Enq_MailRespOperationnel: string
+    Enq_MailRespOperationnel: string,
+    Enq_LibelleEnquete: string,
+    Enq_CaractereObligatoire: string
   ) {
     this.Enq_AnneeVisa = Enq_AnneeVisa;
     this.Enq_MinistereTutelle = Enq_MinistereTutelle;
@@ -31,5 +37,7 @@ export default class MailVariables {
     this.Enq_ServiceCollecteurSignataireFonction =
       Enq_ServiceCollecteurSignataireFonction;
     this.Enq_MailRespOperationnel = Enq_MailRespOperationnel;
+    this.Enq_LibelleEnquete = Enq_LibelleEnquete;
+    this.Enq_CaractereObligatoire = Enq_CaractereObligatoire;
   }
 }

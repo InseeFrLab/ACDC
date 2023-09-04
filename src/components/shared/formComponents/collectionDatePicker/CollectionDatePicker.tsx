@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FormControl, TextField, Stack, Typography, Box } from '@mui/material';
+import { FormControl, Stack, Typography, Box } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 
 interface CollectionDatePickerProps {
@@ -34,7 +34,7 @@ const CollectionDatePicker = (props: CollectionDatePickerProps) => {
             label={t('collectionStartDate', { ns: 'collectionEvent' })}
             value={props.startDate}
             onChange={(date) => date && props.setStartDate(date)}
-            renderInput={(params) => <TextField {...params} />}
+            slotProps={{ textField: { variant: 'outlined' } }}
           />
         </FormControl>
         <FormControl size="small">
@@ -43,7 +43,7 @@ const CollectionDatePicker = (props: CollectionDatePickerProps) => {
             value={props.endDate}
             minDate={props.startDate}
             onChange={(date) => date && props.setEndDate(date)}
-            renderInput={(params) => <TextField {...params} />}
+            slotProps={{ textField: { variant: 'outlined' } }}
           />
         </FormControl>
       </Stack>

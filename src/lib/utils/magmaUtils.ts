@@ -16,13 +16,16 @@ export function getLanguageCode(language: string): string {
 export function transformLabels(
   labels: Record<'langue' | 'contenu', string>[]
 ): LanguageRecord {
-  const transformed: LanguageRecord = {} as Record<
-    'fr-FR' | 'en-IE' | string,
-    string
-  >;
+  const transformed: LanguageRecord = {
+    'fr-FR': '',
+    'en-IE': '',
+  };
+
   labels.forEach((label) => {
     const languageCode = getLanguageCode(label.langue);
-    transformed[languageCode] = label.contenu;
+    (transformed as unknown as Record<string, string>)[languageCode] =
+      label.contenu;
   });
+
   return transformed;
 }

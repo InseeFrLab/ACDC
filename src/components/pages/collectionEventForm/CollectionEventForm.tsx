@@ -179,14 +179,21 @@ const EventForm = (props: DataCollectionProps) => {
       userAttributePair: userAttributePairCollectionArray,
     };
     const now = Date.now();
-    const today: string = new Date(now).toISOString();
+    // const today: string = new Date(now).toISOString();
     props.DataCollectionApi.json.collectionEvents.push(data);
+
     props.DataCollectionApi.json.versionDate = getCurrentDate();
 
     const updatedDataCollection: DataCollectionApi = {
       id: props.DataCollectionApi?.id,
       json: props.DataCollectionApi.json,
     };
+
+    updatedDataCollection.json.userAttributePair[
+      updatedDataCollection.json.userAttributePair.findIndex(
+        (pair) => pair.attributeKey === 'extension:surveyStatus'
+      )
+    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
 
     console.log(
       'Updated Data Collection with new Collection Event: ',

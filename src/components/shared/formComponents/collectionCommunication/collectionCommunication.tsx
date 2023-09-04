@@ -191,7 +191,7 @@ const CollectionCommunicationSelect = (
       })}
 
       <Box
-        component="form"
+        component="div"
         className="CollectionForm"
         sx={{
           display: 'flex',

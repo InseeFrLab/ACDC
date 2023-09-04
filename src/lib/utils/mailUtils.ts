@@ -24,11 +24,13 @@ export const createMailVariable = (
   const mailVariables: MailVariables = {
     Enq_AnneeVisa: '',
     Enq_MinistereTutelle: '',
-    Enq_ParutionJo: false,
+    Enq_ParutionJo: 'non',
     Enq_DateParutionJo: '',
     Enq_ServiceCollecteurSignataireNom: '',
     Enq_ServiceCollecteurSignataireFonction: '',
     Enq_MailRespOperationnel: '',
+    Enq_LibelleEnquete: '',
+    Enq_CaractereObligatoire: 'non',
   };
 
   const { userAttributePair = [] } = dataCollection;
@@ -46,7 +48,7 @@ export const createMailVariable = (
           break;
         case 'extension:parutionJO':
           mailVariables.Enq_ParutionJo =
-            userAttribute.attributeValue === 'true';
+            userAttribute.attributeValue === 'true' ? 'oui' : 'non';
           break;
         case 'extension:dateParutionJO':
           mailVariables.Enq_DateParutionJo = userAttribute.attributeValue;
@@ -62,11 +64,31 @@ export const createMailVariable = (
         case 'extension:mailResponsableOperationel':
           mailVariables.Enq_MailRespOperationnel = userAttribute.attributeValue;
           break;
+        case 'extension:surveyStatus':
+          // eslint-disable-next-line no-case-declarations
+          const escapedValue = userAttribute.attributeValue.replace(
+            /'/g,
+            "\\\\'"
+          );
+          try {
+            const json = JSON.parse(escapedValue);
+            console.log('json', json);
+            if (json.code === 'C' || json.code === 'T') {
+              mailVariables.Enq_CaractereObligatoire = 'oui';
+            } else {
+              mailVariables.Enq_CaractereObligatoire = 'non';
+            }
+          } catch (error) {
+            console.error(error);
+          }
+          break;
         default:
           break;
       }
     }
   });
+  mailVariables.Enq_LibelleEnquete =
+    dataCollection.studyUnitReference.label['fr-FR'];
 
   return mailVariables;
 };
@@ -80,7 +102,6 @@ export const generateMailData = async (
     const xmlString = new XMLSerializer().serializeToString(xmlDocument);
     const mailVariables = createMailVariable(dataCollection);
     const mail = new Mail(xmlString, mailVariables);
-    console.log('Mail', mail);
     return JSON.stringify(mail);
   } catch (error) {
     console.error('Error fetching or parsing XML:', error);

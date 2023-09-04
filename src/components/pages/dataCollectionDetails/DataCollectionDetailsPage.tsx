@@ -16,7 +16,6 @@ import { DataCollection } from '@/lib/model/dataCollection';
 import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
 import { transformLabels } from '@/lib/utils/magmaUtils';
-import { set } from 'date-fns';
 import Main from '../../shared/layout/Main';
 import CollectionEventDisplay from './CollectionEvent';
 import BottomActionBar from './BottomActionBar';
@@ -64,11 +63,14 @@ const DataCollectionDetails = () => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           queryFn: () => getDataCollection(idDataCollection),
           onSuccess: (data: DataCollectionApi) => {
-            console.log('dataCollectionQuery', data);
             const parsedData = parseUserAttributeFromDataCollectionApi(data);
             setDataCollectionState(parsedData.json);
             setDataCollection(parsedData.json);
           },
+          refetchOnWindowFocus: true,
+          staleTime: 0,
+          cacheTime: 0,
+          refetchInterval: 0,
         },
         {
           queryKey: ['allQuestionnaires'],
@@ -84,9 +86,12 @@ const DataCollectionDetails = () => {
                 date: dateQuestionnaire.toLocaleDateString(),
               };
             });
-            console.log(`Got ${questionnairesResult.length} questionnaires`);
             setQuestionnaires(questionnairesResult);
           },
+          refetchOnWindowFocus: true,
+          staleTime: 0,
+          cacheTime: 0,
+          refetchInterval: 0,
         },
         {
           queryKey: ['allSeries'],
@@ -109,6 +114,10 @@ const DataCollectionDetails = () => {
               }
             );
           },
+          refetchOnWindowFocus: true,
+          staleTime: 0,
+          cacheTime: 0,
+          refetchInterval: 0,
         },
         {
           queryKey: ['publishDataCollectionQuery', idDataCollection],
@@ -152,10 +161,6 @@ const DataCollectionDetails = () => {
       id: dataCollectionState?.id,
       json: dataCollectionState,
     };
-    console.log(
-      'Updated Data Collection deleting Collection Event: ',
-      updatedDataCollection
-    );
     // mutate(updatedDataCollection);
     setNotSavedState(true);
     setOpenDelete(true);
@@ -195,7 +200,13 @@ const DataCollectionDetails = () => {
       id: idDataCollection,
       json: dataCollectionState,
     };
-    const now = Date.now();
+    // TEMPORARY FIX
+    updatedDataCollection.json.userAttributePair[
+      updatedDataCollection.json.userAttributePair.findIndex(
+        (pair) => pair.attributeKey === 'extension:surveyStatus'
+      )
+    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
+    // const now = Date.now();
     updatedDataCollection.json.versionDate = getCurrentDate();
 
     console.log('Updated Data Collection: ', updatedDataCollection);
@@ -215,10 +226,6 @@ const DataCollectionDetails = () => {
   };
 
   useEffect(() => {
-    console.log('DC State has been updated:', dataCollectionState);
-  }, [dataCollectionState]);
-
-  useEffect(() => {
     if (isSuccess) {
       setOpenSave(false);
       const dataCollectionLink = dataCollectionState;
@@ -233,7 +240,7 @@ const DataCollectionDetails = () => {
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
-          Loading...
+          Chargement des données...
         </Typography>
       </Main>
     );

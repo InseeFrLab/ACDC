@@ -3,7 +3,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 // TODO : Remove no check
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Typography,
   Box,
@@ -20,7 +20,7 @@ import { FiChevronDown, FiEdit, FiTrash, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
-import { CollectionRow } from '@/lib/model/communicationCollectionEvent';
+import CollectionRow from '@/lib/model/collectionRow';
 import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
 import ExpandMore from '@/components/shared/styled/ExpandMore';
 import CollectionEvent from '../../../lib/model/collectionEvents';

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Edge, Node } from 'reactflow';
 import { createNodeFromCollectionGroup } from '@/lib/utils/visualizationUtils';
 import CollectionGroupValue from '@/lib/model/collectionGroupValue';
+import LanguageRecord from '@/lib/model/languageRecord';
 
 interface SelectGroupProps {
   collectionGroupValue: CollectionGroupValue[];
@@ -53,7 +54,7 @@ const SelectGroup = (props: SelectGroupProps) => {
               onChange={() => handleSelectionChange(group.id)}
             />
           }
-          label={group.label[i18n.language]}
+          label={`${group.label[i18n.language as keyof LanguageRecord]} `}
         />
       ))}
     </FormGroup>

@@ -21,6 +21,7 @@ import StatisticalSeries from '@/lib/model/statisticalSeries';
 import ExpandMore from '@/components/shared/styled/ExpandMore';
 import { deleteDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
 import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
+import LanguageRecord from '@/lib/model/languageRecord';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import DataCollectionDetailsDialog from './updateDataForm/DataCollectionDetailsDialog';
 
@@ -91,12 +92,18 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
           }}
         >
           <Typography variant="h4" fontWeight="bold" color="text.secondary">
-            {`${dataCollectionState.label[i18n.language]} `}
+            {`${
+              dataCollectionState.label[i18n.language as keyof LanguageRecord]
+            } `}
           </Typography>
           <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
 
           <Typography variant="h6" fontWeight="xl">
-            {`${dataCollectionState.studyUnitReference.label[i18n.language]} `}
+            {`${
+              dataCollectionState.studyUnitReference.label[
+                i18n.language as keyof LanguageRecord
+              ]
+            } `}
           </Typography>
         </Box>
 
@@ -140,7 +147,10 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
             {t('label', { ns: 'form' })}:{' '}
           </Typography>
           <Typography variant="subtitle1">
-            {dataCollectionState.label[i18n.language]}
+            {`${
+              dataCollectionState.label[i18n.language as keyof LanguageRecord]
+            }
+            `}
           </Typography>
         </Box>
         <Box
@@ -157,7 +167,12 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
             {t('description', { ns: 'form' })}:{' '}
           </Typography>
           <Typography variant="subtitle1">
-            {dataCollectionState.description[i18n.language]}
+            {`${
+              dataCollectionState.description[
+                i18n.language as keyof LanguageRecord
+              ]
+            }
+            `}
           </Typography>
         </Box>
         <Box
@@ -174,11 +189,11 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
             {t('statisticalOperationSeries', { ns: 'dataCollectionForm' })}:{' '}
           </Typography>
           <Typography variant="subtitle1">
-            {
+            {`${
               dataCollectionState.studyUnitReference.groupReference.label[
-                i18n.language
+                i18n.language as keyof LanguageRecord
               ]
-            }
+            }`}
           </Typography>
         </Box>
         <Box
@@ -195,7 +210,12 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
             {t('statisticalOperation', { ns: 'dataCollectionForm' })}:{' '}
           </Typography>
           <Typography variant="subtitle1">
-            {dataCollectionState.studyUnitReference.label[i18n.language]}
+            {`${
+              dataCollectionState.studyUnitReference.label[
+                i18n.language as keyof LanguageRecord
+              ]
+            }
+            `}
           </Typography>
         </Box>
         <Box

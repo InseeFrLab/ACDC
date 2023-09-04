@@ -1,5 +1,6 @@
 import { Box, Card, Checkbox, Divider, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import LanguageRecord from '@/lib/model/languageRecord';
 import CollectionEvent from '../../../../lib/model/collectionEvents';
 
 interface CollectionEventCheckBoxProps {
@@ -78,12 +79,16 @@ const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
                 color="text.secondary"
                 sx={{ marginLeft: 1 }}
               >
-                {`${item.collectionEventName[i18n.language]} `}
+                {`${
+                  item.collectionEventName[
+                    i18n.language as keyof LanguageRecord
+                  ]
+                } `}
               </Typography>
               <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />
 
               <Typography variant="body1" fontWeight="xl">
-                {`${item.label[i18n.language]} `}
+                {`${item.label[i18n.language as keyof LanguageRecord]} `}
               </Typography>
             </Box>
           </Box>

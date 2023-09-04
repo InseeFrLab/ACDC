@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.Suspense fallback="Loading...">
+  <React.Suspense fallback="Chargement des données...">
     <App />
   </React.Suspense>
 );

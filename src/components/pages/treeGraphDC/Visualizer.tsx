@@ -33,7 +33,7 @@ const Visualizer = () => {
           {t('title', { ns: 'visualizer' })}
         </Typography>
         <Typography variant="h2" fontWeight="xl">
-          Loading...
+          Chargement des données...
         </Typography>
       </Main>
     );

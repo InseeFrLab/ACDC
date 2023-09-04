@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="/">
-    
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
-
-<fo:layout-master-set>
+    
+    <fo:layout-master-set>
         
-        <fo:page-sequence-master master-name="relanceTelephoneSequentielWTCOLEM">
+        <fo:page-sequence-master master-name="relancelibreWebavecMDPCOLEM">
             <fo:repeatable-page-master-alternatives>
-                <fo:conditional-page-master-reference master-reference="relanceTelephoneSequentielWTCOLEM-recto" odd-or-even="odd"/>
-                <fo:conditional-page-master-reference master-reference="relanceTelephoneSequentielWTCOLEM-verso" odd-or-even="even"/>
+                <fo:conditional-page-master-reference master-reference="relancelibreWebavecMDPCOLEM-recto" odd-or-even="odd"/>
+                <fo:conditional-page-master-reference master-reference="relancelibreWebavecMDPCOLEM-verso" odd-or-even="even"/>
             </fo:repeatable-page-master-alternatives>
         </fo:page-sequence-master>
-        
-        <fo:simple-page-master master-name="relanceTelephoneSequentielWTCOLEM-recto" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm">
+
+        <fo:simple-page-master master-name="relancelibreWebavecMDPCOLEM-recto" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm">
             <fo:region-body region-name="xsl-region-body" margin-top="10mm" margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
             <fo:region-before region-name="xsl-region-before-courrier" display-align="before" extent="10mm" precedence="true"/>
             <fo:region-after region-name="xsl-region-after-cover" display-align="before" extent="10mm" precedence="true"/>
@@ -22,7 +20,7 @@
             <fo:region-end extent="10mm" display-align="before"/>
         </fo:simple-page-master>
         
-        <fo:simple-page-master master-name="relanceTelephoneSequentielWTCOLEM-verso" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm">
+        <fo:simple-page-master master-name="relancelibreWebavecMDPCOLEM-verso" font-family="Liberation Sans" font-size="10pt" font-weight="normal" page-height="297mm" page-width="210mm">
             <fo:region-body margin-top="10mm" margin-bottom="10mm" margin-right="10mm" margin-left="10mm" column-count="1"/>
             <fo:region-before region-name="xsl-region-before-cover" display-align="before" extent="10mm" precedence="true"/>
             <fo:region-after region-name="xsl-region-after-cover" display-align="before" extent="10mm" precedence="true"/>
@@ -32,11 +30,12 @@
         
     </fo:layout-master-set>
     
-
-<fo:page-sequence font-family="Liberation Sans" font-size="8pt" master-reference="relanceTelephoneSequentielWTCOLEM">
-
-
-<fo:flow flow-name="xsl-region-body">
+    <fo:page-sequence font-family="Liberation Sans" font-size="8pt" master-reference="relancelibreWebavecMDPCOLEM">
+        
+        <!-- ZONE LIGNE TECHNIQUE -->
+        
+        
+        <fo:flow flow-name="xsl-region-body">
             
             <!-- PAGE COURRIER RECTO -->
             <fo:block page-break-after="always">
@@ -44,7 +43,10 @@
                 <!-- ZONE LOGOS -->
                 <fo:block-container absolute-position="absolute" left="5mm" top="2mm" width="180mm" height="25mm">
                     <fo:block>
-                        <fo:external-graphic src="https://i.etsystatic.com/14980242/r/il/3fe441/3685179418/il_1588xN.3685179418_c7de.jpg" width="20%" height="20%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                        <fo:external-graphic
+                                    src="https://i.etsystatic.com/14980242/r/il/3fe441/3685179418/il_570xN.3685179418_c7de.jpg"
+                                    width="15%" height="15%" content-height="scale-to-fit"
+                                    content-width="scale-to-fit" scaling="uniform" />
                     </fo:block>
                 </fo:block-container>
                 
@@ -54,7 +56,6 @@
                 </fo:block-container>
 
                 <!-- ZONE DATAMATRIX ALLIAGE -->
-                #if($!{InitAccuseReception}!='' and $!{InitAccuseReception}!='oui')
                 <fo:block-container absolute-position="absolute" left="100mm" top="37.8mm" width="11.88mm" height="11.88mm" overflow="hidden">
                     <fo:block>
                         <fo:instream-foreign-object>
@@ -69,60 +70,18 @@
                         </fo:instream-foreign-object>
                     </fo:block>
                 </fo:block-container>
-                 #end
-                 
-                #set($BddAdressePosteeL1 = ${BddAdressePosteeL1})
-                #set($BddAdressePosteeL2 = ${BddAdressePosteeL2})
-                #set($BddAdressePosteeL3 = ${BddAdressePosteeL3})
-                #set($BddAdressePosteeL4 = ${BddAdressePosteeL4})
-                #set($BddAdressePosteeL5 = ${BddAdressePosteeL5})
-                #set($BddAdressePosteeL6 = ${BddAdressePosteeL6})
-                #set($BddAdressePosteeL7 = ${BddAdressePosteeL7})
-                
-                <!-- Mise en place du REGEX pour chaque type de caractère accentué -->
-                #set($RegexA = "[àáâãäåÀÁÂÃÄÅ]")
-                #set($RegexE = "[èéêëÈÉÊË]")
-                #set($RegexI = "[ìíîïÌÍÎÏ]")
-                #set($RegexO = "[òóôõöÒÓÔÕÖ]")
-                #set($RegexU = "[ùúûüÙÚÛÜ]")
-                #set($RegexY = "[ýÿÝ]")
-                #set($RegexC = "[çÇ]")
-                #set($RegexN = "[ñÑ]")
-                
-                <!-- Remplacement des caractères accentués par des caractères non accentués en minuscules car ensuite on fait un "uppercase" sur le bloc adresse -->
-                #set($BddAdressePosteeL1 = $BddAdressePosteeL1.replaceAll($RegexA, 'a').replaceAll($RegexE, 'e').replaceAll($RegexI, 'i').replaceAll($RegexO, 'o').replaceAll($RegexU, 'u').replaceAll($RegexY, 'y').replaceAll($RegexC, 'c').replaceAll($RegexN, 'n'))
-                #set($BddAdressePosteeL2 = $BddAdressePosteeL2.replaceAll($RegexA, 'a').replaceAll($RegexE, 'e').replaceAll($RegexI, 'i').replaceAll($RegexO, 'o').replaceAll($RegexU, 'u').replaceAll($RegexY, 'y').replaceAll($RegexC, 'c').replaceAll($RegexN, 'n'))
-                #set($BddAdressePosteeL3 = $BddAdressePosteeL3.replaceAll($RegexA, 'a').replaceAll($RegexE, 'e').replaceAll($RegexI, 'i').replaceAll($RegexO, 'o').replaceAll($RegexU, 'u').replaceAll($RegexY, 'y').replaceAll($RegexC, 'c').replaceAll($RegexN, 'n'))
-                #set($BddAdressePosteeL4 = $BddAdressePosteeL4.replaceAll($RegexA, 'a').replaceAll($RegexE, 'e').replaceAll($RegexI, 'i').replaceAll($RegexO, 'o').replaceAll($RegexU, 'u').replaceAll($RegexY, 'y').replaceAll($RegexC, 'c').replaceAll($RegexN, 'n'))
-                #set($BddAdressePosteeL5 = $BddAdressePosteeL5.replaceAll($RegexA, 'a').replaceAll($RegexE, 'e').replaceAll($RegexI, 'i').replaceAll($RegexO, 'o').replaceAll($RegexU, 'u').replaceAll($RegexY, 'y').replaceAll($RegexC, 'c').replaceAll($RegexN, 'n'))
-                #set($BddAdressePosteeL6 = $BddAdressePosteeL6.replaceAll($RegexA, 'a').replaceAll($RegexE, 'e').replaceAll($RegexI, 'i').replaceAll($RegexO, 'o').replaceAll($RegexU, 'u').replaceAll($RegexY, 'y').replaceAll($RegexC, 'c').replaceAll($RegexN, 'n'))
-                #set($BddAdressePosteeL7 = $BddAdressePosteeL7.replaceAll($RegexA, 'a').replaceAll($RegexE, 'e').replaceAll($RegexI, 'i').replaceAll($RegexO, 'o').replaceAll($RegexU, 'u').replaceAll($RegexY, 'y').replaceAll($RegexC, 'c').replaceAll($RegexN, 'n'))
                 
                 <!-- ZONE ADRESSE -->
-                <fo:block-container absolute-position="absolute" left="100mm" top="50mm" width="82mm" height="31.5mm" overflow="hidden" font-size="10pt" display-align="after">
-                    <fo:block font-family="Lucida Console" text-transform="uppercase">
+                <fo:block-container absolute-position="absolute" left="100mm" top="50mm" width="82mm" height="25.5mm" overflow="hidden" font-size="10pt" display-align="after">
+                    <fo:block font-family="Lucida Console">
                         <fo:inline-container margin="0mm">
-                            <fo:block>
-                                $BddAdressePosteeL1
-                            </fo:block>
-                            <fo:block>
-                                $!BddAdressePosteeL2
-                            </fo:block>
-                            <fo:block>
-                                $!BddAdressePosteeL3
-                            </fo:block>
-                            <fo:block>
-                                $BddAdressePosteeL4
-                            </fo:block>
-                            <fo:block>
-                                $!BddAdressePosteeL5
-                            </fo:block>
-                            <fo:block>
-                                $BddAdressePosteeL6
-                            </fo:block>
-                            <fo:block>
-                                $BddAdressePosteeL7
-                            </fo:block>
+                            <fo:block line-height="10pt" text-transform="uppercase">${BddAdressePosteeL1}</fo:block>
+                            <fo:block line-height="10pt" text-transform="uppercase">$!{BddAdressePosteeL2}</fo:block>
+                            <fo:block line-height="10pt" text-transform="uppercase">$!{BddAdressePosteeL3}</fo:block>
+                            <fo:block line-height="10pt" text-transform="uppercase">$!{BddAdressePosteeL4}</fo:block>
+                            <fo:block line-height="10pt" text-transform="uppercase">$!{BddAdressePosteeL5}</fo:block>
+                            <fo:block line-height="10pt" text-transform="uppercase">${BddAdressePosteeL6}</fo:block>
+                            <fo:block line-height="10pt" text-transform="uppercase">${BddAdressePosteeL7}</fo:block>                       
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
@@ -131,18 +90,27 @@
                 <fo:block-container absolute-position="absolute" left="187mm" top="75mm" width="13mm" height="22mm" overflow="hidden" font-size="10pt">
                     <fo:block/>
                 </fo:block-container>
+                
+                <!-- ZONE DATAMATRIX MODE LIVRET -->
+                <fo:block-container absolute-position="absolute" right="182mm" top="237mm" width="16mm" height="16mm" overflow="hidden" font-size="10pt">
+                    <fo:block/>
+                </fo:block-container>  
 
                 <!-- ZONE TITRE COURRIER -->
-                <fo:block-container absolute-position="absolute" left="1mm" top="38mm" width="78mm" height="6mm" overflow="hidden" font-size="10pt">
+                <fo:block-container absolute-position="absolute" left="1mm" top="30mm" width="78mm" height="6mm" overflow="hidden" font-size="10pt">
                     <fo:block color="white">$!{InitAccuseReception}</fo:block>
                 </fo:block-container>
                 
+                <!-- Insensible à la casse ${Enq_SVI} -->
+                #set($Modif_Enq_SVI = ${Enq_SVI})
+                #set($Modif_Enq_SVI = $Modif_Enq_SVI.toLowerCase())
+                
                 <!-- ZONE REFERENCES -->
-                <fo:block-container absolute-position="absolute" left="5mm" top="40mm" width="74mm" height="47mm" overflow="hidden" font-size="10pt">
+                <fo:block-container absolute-position="absolute" left="5mm" top="36.2mm" width="74mm" height="51mm" overflow="hidden" font-size="10pt">
                     <fo:block>
                         <fo:inline-container>
-                            <fo:block font-size="11pt" font-weight="bold"> 
-                                Nous contacter&#160;:&#160; <fo:inline><fo:external-graphic src="coleman/${Enq_ImageContact}" width="5mm" content-height="scale-to-fit" scaling="uniform"/></fo:inline>
+                            <fo:block font-size="11pt" font-weight="bold">Nous contacter&#160;:&#160;
+                                <fo:inline><fo:external-graphic src="coleman/${Enq_ImageContact}" width="5mm" content-height="scale-to-fit" scaling="uniform"/></fo:inline>
                             </fo:block>
                             <fo:block margin-top="1mm">                        
                                 <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
@@ -157,20 +125,40 @@
                                             </fo:table-cell>
                                             <fo:table-cell>
                                                 <fo:block>
-                                                    ${Ue_TelAssistance}
-                                                </fo:block>   
+                                                    ${Enq_TelAssistance} #if($Modif_Enq_SVI=="non")(de 9h à 17h)#end         
+                                                </fo:block>
+                                                <fo:block>                                                  
+                                                    #if($Modif_Enq_SVI=="oui")Code enquête&#160;: ${Enq_CodeEnquete}#end
+                                                </fo:block>
                                             </fo:table-cell>
-                                        </fo:table-row>       
+                                        </fo:table-row>                                        
                                         <fo:table-row>
-                                            <fo:table-cell>
-                                                <fo:block margin-top="1mm">
+                                            <fo:table-cell display-align="before">
+                                                <fo:block margin-top="2mm">
                                                     <fo:external-graphic src="coleman/${Enq_ImageArobase}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                                                 </fo:block>
                                             </fo:table-cell>
                                             <fo:table-cell>                                                
-                                                <fo:block margin-top="1mm">
-                                                    ${Ue_MailAssistance}
+                                                <fo:block margin-top="2mm">${Enq_MailAssistance}</fo:block>
+                                            </fo:table-cell>
+                                        </fo:table-row>
+                                        <fo:table-row>
+                                            <fo:table-cell>
+                                                <fo:block margin-top="2mm">
+                                                    <fo:external-graphic src="coleman/${Enq_ImageEnveloppe}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
                                                 </fo:block>
+                                            </fo:table-cell>
+                                            <fo:table-cell number-rows-spanned="2">                                                
+                                                <fo:block margin-top="2mm">$!{Enq_AdresseAssistanceL1}</fo:block>
+                                                <fo:block>$!{Enq_AdresseAssistanceL2}</fo:block>
+                                                <fo:block>$!{Enq_AdresseAssistanceL3}</fo:block>
+                                                <fo:block>$!{Enq_AdresseAssistanceL4}</fo:block>
+                                                <fo:block>$!{Enq_AdresseAssistanceL5}</fo:block>
+                                            </fo:table-cell>
+                                        </fo:table-row>
+                                        <fo:table-row>
+                                            <fo:table-cell>
+                                                <fo:block></fo:block>
                                             </fo:table-cell>
                                         </fo:table-row>
                                     </fo:table-body>
@@ -181,17 +169,10 @@
                 </fo:block-container>
                 
                 <!-- ZONE LIEU ET DATE -->
-                <fo:block-container absolute-position="absolute" left="96mm" top="84.5mm" width="89mm" height="100%" overflow="hidden" text-align="right" font-size="10pt">
-                    <fo:block>${Enq_Ville}, le ${Enq_DateEditionRelance}</fo:block>
+                <fo:block-container absolute-position="absolute" left="75mm" top="84.5mm" width="110mm" height="100%" overflow="hidden" text-align="right" font-size="10pt">
+                    <fo:block>${Enq_Ville}, le ${Enq_DateEditionOuverture}</fo:block>
                 </fo:block-container>
-                
-                <!-- RAPPEL -->
-                <fo:block-container absolute-position="absolute" left="5mm" top="88mm" width="16.5mm" overflow="hidden" font-size="10pt">
-                    <fo:block margin="1pt" font-weight="bold" border-style="solid" padding="1pt">
-                        RAPPEL
-                    </fo:block>
-                </fo:block-container>
-                
+                              
                 <!-- ZONE OBJET -->
                 <fo:block-container absolute-position="absolute" left="5mm" top="96mm" width="180mm" overflow="hidden" font-size="11pt">
                     <fo:block font-weight="bold">
@@ -200,96 +181,45 @@
                 </fo:block-container>                               
                 
                 <!-- ZONE COURRIER -->
-                
-                <!-- Insensible à la casse: variable mis en minuscule -->
-                #set($Modif_Enq_QualiteStatistique = ${Enq_QualiteStatistique})
-                #set($Modif_Enq_QualiteStatistique = $Modif_Enq_QualiteStatistique.toLowerCase()) 
-                
-                #set($Modif_Enq_InteretGeneral = ${Enq_InteretGeneral})
-                #set($Modif_Enq_InteretGeneral = $Modif_Enq_InteretGeneral.toLowerCase())
                
-                #set($Modif_Enq_CaractereObligatoire = ${Enq_CaractereObligatoire})
-                #set($Modif_Enq_CaractereObligatoire = $Modif_Enq_CaractereObligatoire.toLowerCase())
-                
-                #set($Modif_Enq_TestNonLabellise = ${Enq_TestNonLabellise})
-                #set($Modif_Enq_TestNonLabellise = $Modif_Enq_TestNonLabellise.toLowerCase())
-                
-                #set($Modif_Enq_Archivage = ${Enq_Archivage})
-                #set($Modif_Enq_Archivage = $Modif_Enq_Archivage.toLowerCase())
-                
-                #set($Modif_Enq_Prestataire = ${Enq_Prestataire})
-                #set($Modif_Enq_Prestataire = $Modif_Enq_Prestataire.toLowerCase())
-                
-                #set($Modif_Enq_RespTraitementIdentiFem = ${Enq_RespTraitementIdentiFem})
-                #set($Modif_Enq_RespTraitementIdentiFem = $Modif_Enq_RespTraitementIdentiFem.toLowerCase()) 
-                
-                #set($Modif_Enq_PartieDeroulementEnquete = ${Enq_PartieDeroulementEnquete})
-                #set($Modif_Enq_PartieDeroulementEnquete = $Modif_Enq_PartieDeroulementEnquete.toLowerCase())
-                
-                <!-- Première lettre forçé en minuscule  -->             
-                #set($Init_Enq_LibelleEnquete = ${Enq_LibelleEnquete})                              
-                #set($Modif_Enq_LibelleEnquete = $Init_Enq_LibelleEnquete.substring(0, 1).toLowerCase() + $Init_Enq_LibelleEnquete.substring(1, $Init_Enq_LibelleEnquete.length()))
-                
-                
-                <fo:block-container absolute-position="absolute" left="5mm" top="100mm" width="180mm" height="177mm" overflow="hidden" text-align="justify" font-size="10pt">
+               <!-- Insensible à la casse variable minuscule  -->        
+               #set($Modif_Enq_QualiteStatistique = ${Enq_QualiteStatistique})
+               #set($Modif_Enq_QualiteStatistique = $Modif_Enq_QualiteStatistique.toLowerCase())
+               <!-- Mise en minuscule de la premiere lettre  -->  
+               #set($initial_Enq_LibelleEnquete = ${Enq_LibelleEnquete})
+               #set($modif_Enq_LibelleEnquete = $initial_Enq_LibelleEnquete.substring(0, 1).toLowerCase() + $initial_Enq_LibelleEnquete.substring(1, $initial_Enq_LibelleEnquete.length()))             
+
+                <fo:block-container absolute-position="absolute" left="5mm" top="101mm" width="180mm" height="100%" overflow="hidden" text-align="justify" font-size="10pt">
                     <fo:block>
                         <fo:inline-container>
-                            <fo:block margin-top="3mm">
+                                                   
+                            <fo:block margin-top="2.5mm">
                                 Madame, Monsieur,
+                            </fo:block>                            
+                            <fo:block margin-top="2.5mm">
+                                ${Enq_MoisEditionOuvertureTelephone}, ${Ue_AvisDebutParagraphe1} pour répondre par téléphone à l’$modif_Enq_LibelleEnquete de ${Enq_Commanditaire}.
+                                Notre enquêteur nous signale qu’il n’a pas été possible de réaliser l’enquête.
                             </fo:block>
-                            <fo:block margin-top="3mm">
-                                ${Enq_MoisEditionOuverture}, ${Ue_RelanceQuiSollicite} pour répondre à 
-                                #if(${Num_Sequence}=="1")#end
-                                #if(${Num_Sequence}=="2")la deuxième partie de #end
-                                #if(${Num_Sequence}=="3")la troisième partie de #end
-                                l’$Modif_Enq_LibelleEnquete de ${Enq_Commanditaire}.
+                            <fo:block margin-top="2.5mm"> 
+                                Cette enquête est essentielle pour ${Enq_ObjectifEnquete}. Elle est reconnue d’intérêt général#if($Modif_Enq_QualiteStatistique=="oui") et de qualité statistique#end 
+                                par le Conseil national de l’information statistique (Cnis).
                             </fo:block>
-                            <fo:block>  
-                            #if(${Enq_TypeRelance}=="IAJ")
-                                <fo:block margin-top="3mm">    
-                                   ${Ue_CiviliteEnqueteur} ${Ue_PrenomEnqueteur} ${Ue_NomEnqueteur}, 
-                                   #if(${Ue_CiviliteEnqueteur}=="Madame")enquêtrice de l’Insee,#end 
-                                   #if(${Ue_CiviliteEnqueteur}=="Monsieur")enquêteur de l’Insee,#end 
-                                   a tenté de vous joindre à plusieurs reprises sans succès.
-                                </fo:block>
-                            #end
+                            <fo:block margin-top="2.5mm">    
+                                Votre réponse est importante ${Enq_IncitationARepondre} : elle permet de prendre en compte la diversité 
+                                des situations et d’éclairer les décisions publiques.
                             </fo:block>
-                            <fo:block>  
-                                #if(${Enq_TypeRelance}=="REF")
-                                <fo:block margin-top="3mm">    
-                                    Vous n’avez pas souhaité vous entretenir avec notre 
-                                    #if(${Ue_CiviliteEnqueteur}=="Madame")enquêtrice#end 
-                                    #if(${Ue_CiviliteEnqueteur}=="Monsieur")enquêteur#end 
-                                    ${Ue_CiviliteEnqueteur} ${Ue_PrenomEnqueteur} ${Ue_NomEnqueteur} sur ce sujet.
-                                </fo:block>
-                                #end
-                            </fo:block>
-                            <fo:block margin-top="3mm">
-                                Votre participation à cette enquête #if($Modif_Enq_InteretGeneral=="oui") reconnue d’intérêt général
-                                #if($Modif_Enq_QualiteStatistique=="oui") et de qualité statistique#end 
-                                par le Conseil national de l’information statistique (Cnis)#end est essentielle ; 
-                                elle permet de prendre en compte la diversité des situations et d’éclairer les décisions publiques.
-                            </fo:block>
-                            <fo:block>
-                                #if(${Enq_CaractereObligatoire}=="oui")
-                                <fo:block margin-top="3mm">
-                                     La réponse à cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>.
-                                </fo:block>
-                                #end
-                            </fo:block>   
-                            <fo:block margin-top="3mm">
-                                Je vous remercie de contacter ${Ue_CiviliteEnqueteur} ${Ue_PrenomEnqueteur} ${Ue_NomEnqueteur} 
-                                afin de convenir d’un rendez-vous avant le <fo:inline font-weight="bold">${Enq_DateFinCollecte}</fo:inline>. 
+                            <fo:block margin-top="2.5mm">
+                                Vous avez jusqu’au <fo:inline font-weight="bold">${Enq_DateRetour}</fo:inline> pour remplir votre questionnaire ${Enq_TypeQuestionnaire}. 
+                                ${Ue_QuiRepond}  #if(${Enq_CaractereObligatoire}=="oui") La réponse à cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>.#end
                                 Les <fo:inline font-weight="bold">modalités pratiques</fo:inline> sont précisées <fo:inline font-weight="bold">au dos</fo:inline> de ce courrier.
-                            </fo:block>
-                            <fo:block margin-top="3mm">
-                                Vos réponses sont confidentielles et servent uniquement à établir des statistiques. 
+                            </fo:block>                
+                            <fo:block margin-top="2.5mm"> 
+                                Vos réponses sont confidentielles et servent uniquement à établir des statistiques.
                                 Tous vos droits sont rappelés dans l’encadré en bas de cette page.
                             </fo:block>
-                            <fo:block margin-top="3mm">
-                                En comptant sur votre participation, veuillez recevoir, Madame, Monsieur, mes respectueuses salutations.
+                            <fo:block margin-top="2.5mm">
+                                En vous remerciant de votre participation, veuillez recevoir, Madame, Monsieur, mes respectueuses salutations.
                             </fo:block>
-                            
                             <fo:block margin-top="1mm">                        
                                 <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center" text-align="center">
                                     <fo:table-column column-width="35%"/>
@@ -312,138 +242,80 @@
                                         </fo:table-row>
                                     </fo:table-body>
                                 </fo:table>
-                            </fo:block> 
-               
-                            <fo:block  margin-top="4mm" padding="1mm" margin="1mm" border="solid black 0.5pt" font-size="7pt">               
-                                <fo:block>
-                                #if($Modif_Enq_TestNonLabellise=="non")
-                                    <fo:block margin-top="0.5mm">
-                                    <!-- Insensible à la casse ${Enq_ParutionJo} -->
-                                    #set($Modif_Enq_ParutionJo = ${Enq_ParutionJo})
-                                    #set($Modif_Enq_ParutionJo = $Modif_Enq_ParutionJo.toLowerCase())
- 
-                                    Vu l'avis favorable du Conseil national de l'information statistique, 
-                                    cette enquête est <fo:inline font-weight="bold">reconnue d'intérêt général</fo:inline>#if($Modif_Enq_QualiteStatistique=="oui")<fo:inline font-weight="bold"> et de qualité statistique</fo:inline>#end, 
-                                    en application de la loi n° 51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques. 
-                                    Elle a obtenu le visa n°${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l’année ${Enq_AnneeVisa} – 
-                                    #if($Modif_Enq_ParutionJo=="oui") Arrêté en date du ${Enq_DateParutionJo}.#end
-                                    #if($Modif_Enq_ParutionJo=="non")Arrêté en cours de parution.#end
-                                    </fo:block>
-                                    <fo:block>
-                                        #if($Modif_Enq_CaractereObligatoire=="oui")
-                                            <fo:block margin-top="0.5mm">
-                                                Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. En cas de défaut de réponse, 
-                                                les personnes enquêtées peuvent être l’objet de l’amende prévue à l’article 131-13 du code pénal.
-                                            </fo:block>
-                                        #end
-                                    </fo:block>  
-                                #end
-                                </fo:block> 
-                                
-                                <fo:block>
-                                #if($Modif_Enq_TestNonLabellise=="oui")
-                                    <fo:block margin-top="0.5mm">
-                                    Cette enquête #if($Modif_Enq_CaractereObligatoire=="non") non obligatoire#end 
-                                    relève de l'exercice des missions de service public dont est investi l’Insee 
-                                    (articles 4, 5 et 5 bis du règlement 223/2009 relatif aux statistiques européennes, article 1 de la loi
-                                    n° 51-711 du 7 juin 1951 sur l’obligation, la coordination et le secret en matière de statistiques, décret
-                                    du 14 juin 1946 organisant l’Insee). ${Enq_ComplementOpportunite}
-                                    </fo:block>
-                                #end  
-                                </fo:block>
-                                <fo:block margin-top="0.5mm">
-                                    <!-- Insensible à la casse ${Enq_Appariement} -->
-                                    #set($Modif_Enq_Appariement = ${Enq_Appariement})
-                                    #set($Modif_Enq_Appariement = $Modif_Enq_Appariement.toLowerCase())
-                                    
-                                    Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${Enq_RespTraitement}. 
-                                    Ces réponses#if($Modif_Enq_Appariement=="oui"), ainsi que les données obtenues par appariement ${Enq_SourceAdmin},#end seront conservées 
-                                    pendant ${Enq_DureeConservation} à compter de la fin de la collecte pour les besoins de l’enquête. 
-                                    #if($Modif_Enq_Archivage=="oui")Elles seront archivées au-delà de cette durée. À tout moment, leur usage et leur accès 
-                                    seront strictement contrôlés et limités à l'élaboration de statistiques ou à des travaux de recherche scientifique ou historique.#end
-                                </fo:block>
-                                <fo:block margin-top="0.5mm">
-                                    #if($Modif_Enq_CaractereObligatoire=="non" and $Modif_Enq_TestNonLabellise=="non")Cette enquête n’est pas obligatoire.#end
-                                </fo:block>
-                                <fo:block margin-top="0.5mm">
-                                    Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n° 78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers 
-                                    et aux libertés s'appliquent à la présente enquête.
-                                </fo:block>
-                                
-                                <fo:block>
-                                    #if($Modif_Enq_Prestataire=="oui" and $Modif_Enq_Archivage=="oui")
-                                <fo:block margin-top="0.5mm">
-                                    ${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées), 
-                                    ainsi que son sous-traitant ${Enq_NomPrestataire}, habilité par le Comité du secret de la statistique publique, et les Archives de France, 
-                                    conformément aux dispositions de l’article L. 212-4 du code du patrimoine. Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
-                                </fo:block>
-                                    #end
-                                </fo:block>
-                                
-                                <fo:block>
-                                    <fo:block margin-top="0.5mm">
-                                        ${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées), 
-                                        ainsi que les Archives de France, conformément aux dispositions de l’article L. 212-4 du code du patrimoine. 
-                                        Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
-                                    </fo:block>
-                                   
-                                </fo:block>
-                                
-                                <fo:block>
-                                    #if($Modif_Enq_Prestataire=="non" and $Modif_Enq_Archivage=="non")
-                                    <fo:block margin-top="0.5mm">
-                                        ${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées). 
-                                        Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
-                                    </fo:block>
-                                    #end
-                                </fo:block>
-                                
-                                <fo:block>
-                                    <fo:block margin-top="0.5mm">
-                                        ${Enq_RespTraitementIdenti} est seul#if($Modif_Enq_RespTraitementIdentiFem=="oui")e#end destinataire des données d’identification (nom et coordonnées), 
-                                        ainsi que son sous-traitant ${Enq_NomPrestataire}, habilité par le Comité du secret de la statistique publique. 
-                                        Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
-                                    </fo:block>
-                                    
-                                </fo:block>
-                                <fo:block margin-top="0.5mm">
-                                    <!-- Insensible à la casse ${Enq_RepresentantLegal}, ${Enq_Mineur} et (${Enq_DPD} -->
-                                    #set($Modif_Enq_RepresentantLegal = ${Enq_RepresentantLegal})
-                                    #set($Modif_Enq_RepresentantLegal = $Modif_Enq_RepresentantLegal.toLowerCase())
-                                    #set($Modif_Enq_Mineur = ${Enq_Mineur})
-                                    #set($Modif_Enq_Mineur = $Modif_Enq_Mineur.toLowerCase())
-                                    #set($Modif_Enq_DPD = ${Enq_DPD})
-                                    #set($Modif_Enq_DPD = $Modif_Enq_DPD.toLowerCase())
-                                    
-                                    Les personnes enquêtées#if($Modif_Enq_RepresentantLegal=="oui"), ou leurs représentants légaux,#end peuvent exercer un droit d'accès, de rectification 
-                                    ou de limitation de traitement pour les données les concernant pendant la période de conservation des données d’identification. 
-                                    #if($Modif_Enq_Mineur=="oui")${Enq_MineurDroit}#end Ces droits peuvent être exercés auprès de ${Enq_RespOperationnel} 
-                                    (${Enq_MailRespOperationnel}) #if($Modif_Enq_DPD=="oui") ou de son délégué à la protection des données (${Enq_MailDPD})#end. 
-                                    Les personnes enquêtées peuvent, si elles l’estiment nécessaire, adresser une réclamation à la Cnil (<fo:inline text-decoration="underline">www.cnil.fr</fo:inline>).
-                                </fo:block>         
-                                </fo:block>   
+                            </fo:block>
+                            
                         </fo:inline-container>
                     </fo:block>
                 </fo:block-container>
-                <!-- Tournez la Page -->
-               
-                <fo:block-container absolute-position="absolute" left="158mm" top="270mm" width="100%" height="100%" overflow="hidden" font-size="10pt" text-align="justify">
-                    <fo:block>         
-                        <fo:external-graphic src="coleman/${Enq_ImageFleche}" width="100%" height="100%" scaling="uniform"/>
-                    </fo:block>
+                
+                <!-- ZONE CADRE LEGAL -->
+                <fo:block-container absolute-position="absolute" left="5mm" top="196mm" width="180mm" height="69mm" overflow="hidden" display-align="after">
+                    
+                    <fo:block-container width="177mm" margin-left="1mm">
+                        
+                        <fo:block height="100%" font-size="6.5pt" text-align="justify" border="solid black 0.5pt" padding="1mm">
+                            
+                            <fo:block>
+                               Vu l'avis favorable du Conseil national de l'information statistique, cette enquête est <fo:inline font-weight="bold">reconnue d'intérêt général</fo:inline><fo:inline font-weight="bold">#if($Modif_Enq_QualiteStatistique=="oui") et de qualité statistique#end</fo:inline>, 
+                               en application de la loi n<fo:inline font-size="0.1pt">&#160;</fo:inline>°&#160;51-711 du 7 juin 1951 sur l'obligation, la coordination et le secret en matière de statistiques. 
+                               Elle a obtenu le visa n<fo:inline font-size="0.1pt">&#160;</fo:inline>°&#160;${Enq_NumeroVisa} du Ministre ${Enq_MinistereTutelle}, valable pour l’année ${Enq_AnneeVisa} – #if(${Enq_ParutionJo}=="oui") Arrêté en date du ${Enq_DateParutionJo}.#end
+                               #if(${Enq_ParutionJo}=="non") Arrêté en cours de parution.#end     
+                            </fo:block>
+                            <fo:block margin-top="0.5mm">
+                                #if(${Enq_CaractereObligatoire}=="oui")Cette enquête est <fo:inline font-weight="bold">obligatoire</fo:inline>. En cas de défaut de réponse, les personnes enquêtées 
+                                peuvent être l’objet de l’amende prévue à l’article 131-13 du code pénal.#end
+                            </fo:block>
+                            <fo:block margin-top="0.5mm">
+                                Les réponses à ce questionnaire sont protégées par le secret statistique et destinées à ${Enq_RespTraitement}. Ces réponses#if(${Enq_Appariement}=="oui"), ainsi que les données obtenues par appariement ${Enq_SourceAdmin},#end seront
+                                conservées pendant ${Enq_DureeConservation} 
+                                à compter de la fin de la collecte pour les besoins de l’enquête. Elles seront archivées au-delà de cette durée. À tout moment, leur usage et leur accès 
+                                seront strictement contrôlés et limités à l'élaboration de statistiques ou à des travaux de recherche scientifique ou historique.
+                                #if(${Enq_CaractereObligatoire}=="non")
+                            </fo:block>
+                            <fo:block margin-top="0.5mm">
+                                Cette enquête n’est pas obligatoire.#end
+                            </fo:block>
+                            <fo:block margin-top="0.5mm">
+                                Le règlement général 2016/679 du 27 avril 2016 sur la protection des données (RGPD) ainsi que la loi n<fo:inline font-size="0.1pt">&#160;</fo:inline>°&#160;78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers 
+                                et aux libertés s'appliquent à la présente enquête.
+                            </fo:block>
+                            <fo:block margin-top="0.5mm">
+                                ${Enq_RespTraitementIdenti} est seul#if(${Enq_RespTraitementIdentiFem}=="oui")e#end destinataire des données d’identification (nom et coordonnées), 
+                                ainsi que #if(${Enq_Prestataire}=="oui") son sous-traitant ${Enq_NomPrestataire}, habilité par le Comité du secret de la statistique publique, et#end 
+                                les Archives de France, conformément aux dispositions de l’article L. 212-4 du code du patrimoine. Elles seront conservées par le service producteur ${Enq_DureeConservationIdenti}.
+                            </fo:block>
+                            <fo:block margin-top="0.5mm">
+                                Les personnes enquêtées#if(${Enq_RepresentantLegal}=="oui"), ou leurs représentants légaux,#end peuvent exercer un droit d'accès, de rectification ou de limitation
+                                de traitement pour les données les concernant pendant la période de conservation des données d’identification. 
+                                #if(${Enq_Mineur}=="oui")${Enq_MineurDroit}#end Ces droits peuvent être exercés auprès de 
+                                ${Enq_RespOperationnel} (${Enq_MailRespOperationnel})#if(${Enq_DPD}=="oui") ou de son délégué à la protection des données (${Enq_MailDPD})#end. 
+                                Les personnes enquêtées peuvent, si elles l’estiment nécessaire, adresser une réclamation à la Cnil (www.cnil.fr).
+                            </fo:block>
+                            
+                        </fo:block>
+                        
+                    </fo:block-container>
+                    
                 </fo:block-container>
-                             
+                
+               <!-- Tournez la page -->
+               <fo:block-container absolute-position="absolute" left="158mm" top="270mm" width="100%" height="100%" overflow="hidden" font-size="10pt" text-align="justify">
+                  <fo:block>         
+                     <fo:external-graphic src="coleman/${Enq_ImageFleche}" width="100%" height="100%" scaling="uniform"/>
+                  </fo:block>
+               </fo:block-container>
+                     
             </fo:block>
             
             <!-- PAGE COURRIER VERSO -->
-                
+            
             <!-- ZONE COURRIER (SUITE) -->
             
             <fo:block-container absolute-position="absolute" left="1mm" top="1mm" width="188mm" height="40mm"  font-size="10pt" text-align="justify">
                 
-                <!-- POURQUOI VOUS ? -->
-
-                <fo:block margin-top="2mm">                        
+                <!-- Qui doit répondre ? -->
+                
+                <fo:block>                        
                     <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
                         <fo:table-column column-width="3%"/>
                         <fo:table-column column-width="97%"/>
@@ -455,304 +327,243 @@
                                     </fo:block>
                                 </fo:table-cell>
                                 <fo:table-cell>
-                                    <fo:block font-size="12pt" font-weight="bold">
-                                        POURQUOI VOUS ?
-                                    </fo:block>
+                                    <fo:block font-size="12pt" font-weight="bold">QUI DOIT RÉPONDRE ?</fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
                         </fo:table-body>
                     </fo:table>
                 </fo:block>
-                <fo:block margin-top="2mm" margin-left="6mm">
-                    Pour disposer de résultats représentatifs de l'ensemble des personnes, il n'est pas nécessaire de toutes les interroger. 
-                    Un échantillon de personnes a été sélectionné à partir de fichiers administratifs. 
-                    Il permet de décrire la population dans son ensemble. Vous faites partie de cet échantillon.                    
+                <fo:block margin-top="1mm" margin-left="6mm">
+                    ${Ue_QuiRepond1}                        
+                </fo:block>  
+                <fo:block margin-top="0.8mm" margin-left="6mm">
+                    ${Ue_QuiRepond2}                        
+                </fo:block>   
+                <fo:block margin-top="0.8mm" margin-left="6mm">
+                    ${Ue_QuiRepond3}                        
                 </fo:block> 
             </fo:block-container>
             
-            <!-- COMMENT RÉPONDRE À L’ENQUÊTE ?  -->
-           <fo:block-container absolute-position="absolute" left="1mm" top="28mm" width="188mm" height="10mm"  font-size="10pt" text-align="justify">
-                <fo:block margin-top="5mm">                        
-                    <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
-                        <fo:table-column column-width="3%"/>
-                        <fo:table-column column-width="97%"/>
-                        <fo:table-body>
-                            <fo:table-row>
-                                <fo:table-cell>
-                                    <fo:block>
-                                        <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
-                                    </fo:block>
-                                </fo:table-cell>
-                                <fo:table-cell>
-                                    <fo:block font-size="12pt" font-weight="bold">COMMENT RÉPONDRE À L’ENQUÊTE ?</fo:block>
-                                </fo:table-cell>
-                            </fo:table-row>
-                        </fo:table-body>
-                    </fo:table>
-                </fo:block>  
-            </fo:block-container>  
-   
-            <fo:block-container absolute-position="absolute" left="1mm" top="41mm" width="188mm" height="100%"  font-size="10pt" text-align="justify">
-                <fo:block> 
-                    <fo:external-graphic src="coleman/${Enq_ImageCommentRepondre}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>  
-                </fo:block>
-            </fo:block-container>
+            <!-- Comment répondre -->
             
-            <!-- variables positionnées bloc container superposé à comment répondre -->
+            <!-- Répondre Internet -->
             
-            <fo:block-container absolute-position="absolute" left="1mm" top="85mm" width="188mm" height="100%"  font-size="8pt" text-align="justify">              
-            <fo:block>                        
-                <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
-                    <fo:table-column column-width="5%"/>                
-                    <fo:table-column column-width="30.7%"/>
-                    <fo:table-column column-width="30.4%"/>
-                    <fo:table-column column-width="33.9%"/>
-                    <fo:table-body>
-                        <fo:table-row>
-                            <fo:table-cell>
-                                <fo:block>
-                                </fo:block>  
-                            </fo:table-cell>
-                            <fo:table-cell>
-                                <fo:block font-size="8pt" font-weight="bold">
-                                    ${Ue_TelEnqueteur}                
-                                </fo:block>               
-                            </fo:table-cell>
-                            <fo:table-cell>
-                                <fo:block font-size="8pt" font-weight="bold">
-                                    ${Enq_DateFinCollecte}
-                                </fo:block>    
-                            </fo:table-cell>
-                            <fo:table-cell>
-                                <fo:block font-size="8pt" font-weight="bold">
-                                    ${Enq_DureeQuestionnaire}
-                                </fo:block>
-                            </fo:table-cell>
-                        </fo:table-row>
-                    </fo:table-body>
-                </fo:table>
-            </fo:block>        
-                <fo:block margin-top="0.5mm" margin-left="9.3mm" font-size="8pt" font-weight="bold">
-                    ${Ue_MailEnqueteur}                
-             </fo:block>    
-            </fo:block-container> 
-              
-            <!-- COMMENT SE DÉROULE L’ENQUÊTE ? -->
             <fo:block>
                 
-            <fo:block-container absolute-position="absolute" left="1mm" top="122mm" width="187mm" height="100%"  font-size="10pt" text-align="justify">           
                 <fo:block>
-                    <fo:external-graphic src="coleman/${Enq_ImageDeroulementEnquete}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>  
+                    <!-- Cas 1: image COLEM_RepondreInternetMDP.jpg(${Enq_ImageRepondreInternet}) si Enq_RepondreCourrier à oui -->
+                    #if(${Enq_RepondreCourrier}=="oui")           
+                <fo:block-container absolute-position="absolute" left="1mm" top="27mm" width="188mm" height="100%" text-align="justify">
+                    <fo:block>
+                        <fo:external-graphic src="coleman/${Enq_ImageRepondreInternet}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>  
+                    </fo:block>
+                </fo:block-container>
+                
+                <!-- Variables positionnées bloc container superposé à comment répondre internet -->
+                
+                <fo:block-container absolute-position="absolute" left="1mm" top="37mm" width="188mm" height="100%"  font-size="8pt" text-align="justify">       
+                    <fo:block margin-top="20.1mm" margin-left="13mm" font-size="11pt" font-weight="bold">
+                        ${Enq_UrlEnquete}
+                    </fo:block>
+                    <fo:block margin-top="23.7mm" margin-left="56.5mm" font-size="11pt" font-weight="bold">
+                        ${Ue_CalcIdentifiant}
+                    </fo:block>
+                    <fo:block margin-top="1.5mm" margin-left="62.7mm" font-size="11pt" font-weight="bold">
+                        ${Ue_CalcMotDePasse}
+                    </fo:block>
+                    <fo:block margin-top="47.2mm" margin-left="35mm" font-size="8.5pt" font-style="italic">
+                        ${Enq_DureeQuestionnaire}
+                    </fo:block>
+                    <fo:block margin-top="1mm" margin-left="12.7mm" font-size="8.5pt" font-style="italic">
+                        ${Enq_CourrierConsigneWeb1}&#160;
+                    </fo:block>
+                    <fo:block margin-top="1mm" margin-left="12.7mm" font-size="8.5pt" font-style="italic">
+                        ${Enq_CourrierConsigneWeb2}&#160;
+                    </fo:block>                 
+                </fo:block-container> 
+                    #end
                 </fo:block>
-            </fo:block-container>
+                
+                
+                <fo:block>
+                    <!-- Cas 2: image COLEM_CommentRepondreWeb.jpg (${Enq_ImageRepondreInternet}) si Enq_RepondreCourrier à non -->
+                    #if(${Enq_RepondreCourrier}=="non")
+                    
+                    <fo:block-container absolute-position="absolute" left="1mm" top="27mm" width="188mm" height="100%" text-align="justify">
+                        <fo:block>
+                            <fo:external-graphic src="coleman/${Enq_ImageRepondreInternet}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>  
+                        </fo:block>
+                    </fo:block-container>
+                    
+                    <!-- Variables positionnées bloc container superposé à comment répondre internet -->
+                    
+                    <fo:block-container absolute-position="absolute" left="1mm" top="37mm" width="188mm" height="100%"  font-size="8pt" text-align="justify">         
+                        <fo:block margin-top="19mm" margin-left="13.8mm" font-size="11pt" font-weight="bold">
+                            ${Enq_UrlEnquete}
+                        </fo:block>
+                        <fo:block margin-top="24.5mm" margin-left="57mm" font-size="11pt" font-weight="bold">
+                            ${Ue_CalcIdentifiant}
+                        </fo:block>
+                        <fo:block margin-top="1.5mm" margin-left="63.3mm" font-size="11pt" font-weight="bold">
+                            ${Ue_CalcMotDePasse}
+                        </fo:block>
+                        <fo:block margin-top="47.5mm" margin-left="35.5mm" font-size="8.5pt" font-style="italic">
+                            ${Enq_DureeQuestionnaire}                
+                        </fo:block>
+                        <fo:block margin-top="1mm" margin-left="12.7mm" font-size="8.5pt" font-style="italic">
+                            ${Enq_CourrierConsigneWeb1}                
+                        </fo:block>
+                        <fo:block margin-top="1mm" margin-left="12.7mm" font-size="8.5pt" font-style="italic">
+                            ${Enq_CourrierConsigneWeb2}                
+                        </fo:block>
+                    </fo:block-container>   
+                    #end
+                </fo:block>
+                
+            </fo:block>
             
-            <fo:block-container absolute-position="absolute" left="1mm" top="103mm" width="188mm" height="10mm"  font-size="10pt" text-align="justify">
-                <fo:block margin-top="5mm">                        
-                    <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
-                        <fo:table-column column-width="3%"/>
-                        <fo:table-column column-width="97%"/>
+            <!-- Répondre Courrier -->
+            
+            <fo:block>
+                #if(${Enq_RepondreCourrier}=="oui")
+                
+                <fo:block-container absolute-position="absolute" left="1mm" top="167mm" width="188mm" height="100%" text-align="justify">
+                    <fo:block>
+                        <fo:external-graphic src="coleman/${Enq_ImageRepondreCourrier}" width="100%" height="100%" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>  
+                    </fo:block>
+                </fo:block-container>
+                
+                <!-- Variables positionnées bloc container superposé à comment répondre courrier -->
+                
+                <fo:block-container absolute-position="absolute" left="1mm" top="190.6mm" width="188mm" height="100%" text-align="justify">
+                    
+                    <fo:block margin-left="71.2mm" font-weight="bold" font-size="10pt">
+                        ${Enq_PapierNombre}&#160;
+                    </fo:block>
+                    
+                    <fo:table margin-top="7.2mm" inline-progression-dimension="auto" table-layout="fixed" display-align="center" font-style="italic" font-size="8.5pt">
+                        <fo:table-column column-width="13.5mm"/>
+                        <fo:table-column column-width="95.7mm"/>
+                        <fo:table-column column-width="25mm"/>
+                        <fo:table-column column-width="53.8mm"/>
                         <fo:table-body>
                             <fo:table-row>
+                                <fo:table-cell><fo:block/></fo:table-cell>
                                 <fo:table-cell>
-                                    <fo:block>
-                                        <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                                    <fo:block padding-left="1mm">
+                                        ${Enq_PapierConsigne}
                                     </fo:block>
                                 </fo:table-cell>
-                                <fo:table-cell>
-                                    <fo:block font-size="12pt" font-weight="bold">COMMENT SE DÉROULE L'ENQUÊTE ?</fo:block>
+                                <fo:table-cell><fo:block/></fo:table-cell>
+                                <fo:table-cell display-align="before">
+                                    <fo:block padding-left="1mm">
+                                        ${Enq_PapierNombreQuest}
+                                    </fo:block>
                                 </fo:table-cell>
                             </fo:table-row>
                         </fo:table-body>
                     </fo:table>
-                </fo:block>
-                <fo:block margin-top="2mm" margin-left="6mm">
-                    ${Enq_DeroulementEnquete}                        
-                </fo:block>  
-            </fo:block-container> 
-                
-            </fo:block>
-               
-               
-            <!-- Cas 1: Position À QUOI SERVENT LES INFORMATIONS COLLECTÉES et POUR EN SAVOIR PLUS... si COMMENT SE DÉROULE L’ENQUÊTE existe  -->               
-            <fo:block>
-                
-                <fo:block-container absolute-position="absolute" left="1mm" top="175mm" width="188mm" height="100%"  font-size="10pt" text-align="justify">
                     
-                    <!-- À QUOI SERVENT LES INFORMATIONS COLLECTÉES ? -->          
-                    <fo:block margin-top="3mm">
-                        <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
-                            <fo:table-column column-width="3%"/>
-                            <fo:table-column column-width="97%"/>
-                            <fo:table-body>
-                                <fo:table-row>
-                                    <fo:table-cell>
-                                        <fo:block>
-                                            <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell>
-                                        <fo:block font-size="12pt" font-weight="bold">À QUOI SERVENT LES INFORMATIONS COLLECTÉES ?</fo:block>
-                                    </fo:table-cell>
-                                </fo:table-row>
-                            </fo:table-body>
-                        </fo:table>
-                    </fo:block>
-                    <fo:block margin-top="1mm" margin-left="6mm">
-                        ${Enq_UtilisationInfo} ${Enq_UtilisationInfoExemple}
-                    </fo:block>			
-                    
-                    <!-- POUR EN SAVOIR PLUS... -->
-                    
-                    <fo:block margin-top="11mm">
-                        <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
-                            <fo:table-column column-width="3%"/>
-                            <fo:table-column column-width="46%"/>
-                            <fo:table-column column-width="23%"/>
-                            <fo:table-column column-width="28%"/>
-                            <fo:table-body>
-                                <fo:table-row>
-                                    <fo:table-cell>
-                                        <fo:block>
-                                            <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell>
-                                        <fo:block font-size="12pt" font-weight="bold">POUR EN SAVOIR PLUS...</fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell number-rows-spanned="2" display-align="before">
-                                        <fo:block text-align="left" padding-left="10mm">
-                                            <fo:external-graphic src="coleman/${Enq_ImageQrCode}" width="15mm" height="15mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell><fo:block/></fo:table-cell>
-                                </fo:table-row>
-                                <fo:table-row>
-                                    <fo:table-cell>
-                                        <fo:block>
-                                            <!--Ajout d'une majuscule en début de phrase -->
-                                            #set($initial_Enq_RespOperationnel = ${Enq_RespOperationnel})
-                                            #set($modif_Enq_RespOperationnel = $initial_Enq_RespOperationnel.substring(0, 1).toUpperCase() + $initial_Enq_RespOperationnel.substring(1, $initial_Enq_RespOperationnel.length()))
-                                            #if(${Enq_Prestataire}=="oui")
-                                            #set($initial_Enq_NomPrestataire = ${Enq_NomPrestataire})
-                                            #set($modif_Enq_NomPrestataire = $initial_Enq_NomPrestataire.substring(0, 1).toUpperCase() + $initial_Enq_NomPrestataire.substring(1, $initial_Enq_NomPrestataire.length()))
-                                            #end
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell display-align="before" padding-top="1mm" text-align="left">
-                                        <fo:block>
-                                            Sur l'enquête&#160;: ${Enq_UrlEnquete}
-                                        </fo:block>
-                                        <fo:block margin-top="0.8mm">
-                                            Sur ${Enq_RespOperationnel}&#160;: ${Enq_UrlRespTraitement}
-                                        </fo:block>
-                                        <fo:block margin-top="0.8mm">
-                                            <!-- Insensible à la casse ${Enq_Prestataire} -->
-                                            #set($Modif_Enq_Prestataire = ${Enq_Prestataire})
-                                            #set($Modif_Enq_Prestataire = $Modif_Enq_Prestataire.toLowerCase())
-                                            
-                                            #if($Modif_Enq_Prestataire=="oui") Sur ${Enq_NomPrestataire}&#160;: ${Enq_UrlPrestataire} #end
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell><fo:block/></fo:table-cell>
-                                </fo:table-row>
-                            </fo:table-body>
-                        </fo:table>
-                    </fo:block> 
-                </fo:block-container>    
-                
-            </fo:block>
-            
-            <!-- Cas 2: Position À QUOI SERVENT LES INFORMATIONS COLLECTÉES et POUR EN SAVOIR PLUS... si COMMENT SE DÉROULE L’ENQUÊTE n'existe pas  -->               
-            <fo:block>
-                #if($Modif_Enq_PartieDeroulementEnquete=="non")
-                <fo:block-container absolute-position="absolute" left="1mm" top="105mm" width="188mm" height="100%"  font-size="10pt" text-align="justify">
-                    
-                    <!-- À QUOI SERVENT LES INFORMATIONS COLLECTÉES ? -->          
-                    <fo:block margin-top="3mm">
-                        <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
-                            <fo:table-column column-width="3%"/>
-                            <fo:table-column column-width="97%"/>
-                            <fo:table-body>
-                                <fo:table-row>
-                                    <fo:table-cell>
-                                        <fo:block>
-                                            <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell>
-                                        <fo:block font-size="12pt" font-weight="bold">À QUOI SERVENT LES INFORMATIONS COLLECTÉES ?</fo:block>
-                                    </fo:table-cell>
-                                </fo:table-row>
-                            </fo:table-body>
-                        </fo:table>
-                    </fo:block>
-                    <fo:block margin-top="1mm" margin-left="6mm">
-                        ${Enq_UtilisationInfo} ${Enq_UtilisationInfoExemple}
-                    </fo:block>			
-                    
-                    <!-- POUR EN SAVOIR PLUS... -->
-                    
-                    <fo:block margin-top="11mm">
-                        <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
-                            <fo:table-column column-width="3%"/>
-                            <fo:table-column column-width="46%"/>
-                            <fo:table-column column-width="23%"/>
-                            <fo:table-column column-width="28%"/>
-                            <fo:table-body>
-                                <fo:table-row>
-                                    <fo:table-cell>
-                                        <fo:block>
-                                            <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell>
-                                        <fo:block font-size="12pt" font-weight="bold">POUR EN SAVOIR PLUS...</fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell number-rows-spanned="2" display-align="after">
-                                        <fo:block text-align="left" padding-left="10mm">
-                                            <fo:external-graphic src="coleman/${Enq_ImageQrCode}" width="15mm" height="15mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell><fo:block/></fo:table-cell>
-                                </fo:table-row>
-                                <fo:table-row>
-                                    <fo:table-cell>
-                                        <fo:block>
-                                            <!--Ajout d'une majuscule en début de phrase -->
-                                            #set($initial_Enq_RespOperationnel = ${Enq_RespOperationnel})
-                                            #set($modif_Enq_RespOperationnel = $initial_Enq_RespOperationnel.substring(0, 1).toUpperCase() + $initial_Enq_RespOperationnel.substring(1, $initial_Enq_RespOperationnel.length()))
-                                            #if(${Enq_Prestataire}=="oui")
-                                            #set($initial_Enq_NomPrestataire = ${Enq_NomPrestataire})
-                                            #set($modif_Enq_NomPrestataire = $initial_Enq_NomPrestataire.substring(0, 1).toUpperCase() + $initial_Enq_NomPrestataire.substring(1, $initial_Enq_NomPrestataire.length()))
-                                            #end
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell display-align="before" padding-top="1mm" text-align="left">
-                                        <fo:block>
-                                            Sur l'enquête&#160;: ${Enq_UrlEnquete}
-                                        </fo:block>
-                                        <fo:block margin-top="0.8mm">
-                                            Sur ${Enq_RespOperationnel}&#160;: ${Enq_UrlRespTraitement}
-                                        </fo:block>
-                                        <fo:block margin-top="0.8mm">
-                                            <!-- Insensible à la casse ${Enq_Prestataire} -->
-                                            #set($Modif_Enq_Prestataire = ${Enq_Prestataire})
-                                            #set($Modif_Enq_Prestataire = $Modif_Enq_Prestataire.toLowerCase())
-                                            
-                                            #if($Modif_Enq_Prestataire=="oui") Sur ${Enq_NomPrestataire}&#160;: ${Enq_UrlPrestataire} #end
-                                        </fo:block>
-                                    </fo:table-cell>
-                                    <fo:table-cell><fo:block/></fo:table-cell>
-                                </fo:table-row>
-                            </fo:table-body>
-                        </fo:table>
-                    </fo:block> 
-                </fo:block-container>    
+                </fo:block-container>
                 #end
             </fo:block>
             
-        </fo:flow>    
-</fo:page-sequence>
+            <!-- À quoi servent les informations collectées -->
+            
+            <fo:block-container absolute-position="absolute" left="1mm" top="175.5mm" width="188mm" height="100%"  font-size="10pt" text-align="justify">
+                
+                <fo:block margin-top="3.8mm">
+                    #if(${Enq_RepondreCourrier}=="oui")
+                    <fo:block margin-top="49mm"></fo:block>
+                    #end
+                    <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
+                        <fo:table-column column-width="3%"/>
+                        <fo:table-column column-width="97%"/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell>
+                                    <fo:block>
+                                        <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt" font-weight="bold">À QUOI SERVENT LES INFORMATIONS COLLECTÉES ?</fo:block>
+                                </fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
+                </fo:block>
+                <fo:block margin-top="1mm" margin-left="6mm">
+                    ${Enq_UtilisationInfo} ${Enq_UtilisationInfoExemple}
+                </fo:block>
+                
+                <!-- Pour en savoir plus sur l’enquête -->
+                
+                <fo:block margin-top="7mm">
+                    <fo:table inline-progression-dimension="auto" table-layout="fixed" display-align="center">
+                        <fo:table-column column-width="3%"/>
+                        <fo:table-column column-width="46%"/>
+                        <fo:table-column column-width="23%"/>
+                        <fo:table-column column-width="28%"/>
+                        <fo:table-body>
+                            <fo:table-row>
+                                <fo:table-cell>
+                                    <fo:block>
+                                        <fo:external-graphic src="coleman/${Enq_ImagePuce}" width="4mm" height="4mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell>
+                                    <fo:block font-size="12pt" font-weight="bold">POUR EN SAVOIR PLUS...</fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell number-rows-spanned="2" display-align="after">
+                                    <fo:block text-align="left" padding-left="10mm">
+                                        <fo:external-graphic src="coleman/${Enq_ImageQrCode}" width="15mm" height="15mm" content-height="scale-to-fit" content-width="scale-to-fit" scaling="uniform"/>
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell><fo:block/></fo:table-cell>
+                            </fo:table-row>
+                            <fo:table-row>
+                                <fo:table-cell>
+                                    <fo:block></fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell display-align="before" padding-top="1mm" text-align="left">
+                                    <fo:block>
+                                       Sur l'enquête&#160;: ${Enq_UrlEnquete}
+                                    </fo:block>
+                                    <fo:block margin-top="0.8mm">
+                                       Sur ${Enq_RespOperationnel}&#160;: ${Enq_UrlRespTraitement}
+                                    </fo:block>
+                                    <fo:block margin-top="0.8mm">
+                                       #if(${Enq_Prestataire}=="oui") Sur ${Enq_NomPrestataire}&#160;: ${Enq_UrlPrestataire} #end
+                                    </fo:block>
+                                </fo:table-cell>
+                                <fo:table-cell><fo:block/></fo:table-cell>
+                            </fo:table-row>
+                        </fo:table-body>
+                    </fo:table>
+                </fo:block>
+                
+            </fo:block-container>   
+            
+            <!-- Date retour -->
+            <fo:block-container absolute-position="absolute" left="159mm" top="250mm" width="100%" height="100%" text-align="justify">
+                <fo:block>
+                    <fo:external-graphic src=" coleman/${Enq_ImageDateRetour}" width="30mm" content-height="scale-to-fit"/>
+                </fo:block>
+            </fo:block-container>
+            
+            <!-- Variable positionnée bloc container superposé à "Date retour" -->
+            
+            <fo:block-container absolute-position="absolute" left="161mm" top="267mm" width="24.5mm" height="100%" font-size="11pt" text-align="center">
+                <fo:block font-weight="bold">
+                    ${Enq_CalendrierDateRetour}
+                </fo:block>    
+            </fo:block-container>
+            
+        </fo:flow>
+        
+    </fo:page-sequence>
+    
 </fo:root>
-    </xsl:template>
+</xsl:template>
 </xsl:stylesheet>

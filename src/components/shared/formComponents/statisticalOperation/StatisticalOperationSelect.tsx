@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { useState, useEffect } from 'react';
 import {
@@ -13,6 +14,9 @@ import { useTranslation } from 'react-i18next';
 import { transformLabels } from '@/lib/utils/magmaUtils';
 import { getSerieOperation } from '@/lib/api/mock/mockSeries';
 import { getQualityReport } from '@/lib/api/remote/dataCollectionApiFetch';
+import CodeList from '@/lib/model/codeList';
+import Rapport2088 from '@/assets/mockData/rapport2088.json';
+import LanguageRecord from '@/lib/model/languageRecord';
 import StatisticalSeries from '../../../../lib/model/statisticalSeries';
 import {
   GroupReference,
@@ -27,12 +31,16 @@ interface StatisticalOperationSelectProps {
   series: StatisticalSeries[];
   submitAttempt: boolean;
   setRapport: (rapport: string) => void;
+  setQualityReport: (qualityReport: string) => void;
+  setSurveyStatus: (surveyStatus: CodeList) => void;
+  setVisaNumber: (visaNumber: string) => void;
 }
 
 const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
   const { t, i18n } = useTranslation(['dataCollectionForm', 'form']);
+
   const [operationDisabled, setOperationDisabled] = useState(true);
-  const [addInfo, setAddInfo] = useState<boolean>(false);
+  // const [addInfo, setAddInfo] = useState<boolean>(false);
   const [serieId, setSerieId] = useState<string>(
     props.groupReference.id.length > 0 ? props.groupReference.id : 's1002'
   );
@@ -66,6 +74,22 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
         enabled: false,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
+        onSuccess: (data: any): void => {
+          console.log('data : ', data);
+          const rapportData = data.length > 10 ? JSON.parse(data) : Rapport2088;
+          const i63 = rapportData.rubriques.find((r: any) => r.id === 'I.6.3');
+
+          const i64 = rapportData.rubriques.find((r: any) => r.id === 'I.6.4');
+          props.setQualityReport(rapportData.label[0].contenu);
+          props.setSurveyStatus({
+            label: i63.codes[0].label[0].contenu,
+            code: i63.codes[0].id,
+          });
+          props.setVisaNumber(i64?.label[0].contenu.replace(/<\/?p>/g, ''));
+
+          props.setRapport(rapportData);
+          console.log('Rapport:', rapportData);
+        },
       },
     ],
   });
@@ -88,13 +112,6 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       setOperationDisabled(false);
     }
   }, [operationSerie.isSuccess, operationSerie.data, props.submitAttempt]);
-
-  useEffect(() => {
-    if (qualityReportSerie.isSuccess) {
-      setIsLoading(false);
-      props.setRapport(qualityReportSerie.data);
-    }
-  }, [qualityReportSerie.isSuccess, qualityReportSerie.data, props]);
 
   const handlegroupReferenceChange = (event: any, newValue: any) => {
     const {
@@ -130,17 +147,13 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       groupReference: props.groupReference,
     } as unknown as StudyUnitReference);
 
-    console.log(
-      'Assembled StudyUnitReference Object : ',
-      props.studyUnitReference
-    );
     qualityReportSerie.refetch();
   };
 
   return (
     <Stack spacing={1}>
       <Box
-        component="form"
+        component="div"
         className="CollectionForm"
         sx={{
           paddingTop: 2,
@@ -163,7 +176,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           options={props.series}
           onChange={handlegroupReferenceChange}
           getOptionLabel={(option) => {
-            return `${option.label[i18n.language]}`;
+            return `${option.label[i18n.language as keyof LanguageRecord]}`;
           }}
           value={
             {
@@ -183,7 +196,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
                 sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                 {...pr}
               >
-                {option.label[i18n.language]}
+                {`${option.label[i18n.language as keyof LanguageRecord]}`}
               </Box>
             );
           }}
@@ -198,8 +211,12 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
                 props.studyUnitReference.groupReference.id.length < 1
               }
               value={
-                props.groupReference.label[i18n.language]
-                  ? props.groupReference.label[i18n.language]
+                props.groupReference.label[
+                  i18n.language as keyof LanguageRecord
+                ]
+                  ? props.groupReference.label[
+                      i18n.language as keyof LanguageRecord
+                    ]
                   : ''
               }
             />
@@ -207,7 +224,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
         />
       </FormControl>
       <Box
-        component="form"
+        component="div"
         className="CollectionForm"
         sx={{
           paddingTop: 2,
@@ -232,7 +249,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           options={operations}
           onChange={handleStudyUnitReferenceChange}
           getOptionLabel={(option) => {
-            return `${option.label[i18n.language]}`;
+            return `${option.label[i18n.language as keyof LanguageRecord]}`;
           }}
           value={
             {
@@ -251,7 +268,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
                 sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
                 {...pr}
               >
-                {option.label[i18n.language]}
+                {`${option.label[i18n.language as keyof LanguageRecord]}`}
               </Box>
             );
           }}

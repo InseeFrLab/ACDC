@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { CollectionRow } from '../model/communicationCollectionEvent';
 import InstrumentReference from '../model/instrumentReference';
 import LanguageRecord from '../model/languageRecord';
+import CollectionRow from '../model/collectionRow';
 
 export const createIntlRecord = (
   input: {
@@ -10,10 +10,13 @@ export const createIntlRecord = (
     value: string;
   }[]
 ): LanguageRecord => {
-  return input.reduce((map, { language, value }) => {
-    map[language] = value;
-    return map;
-  }, {} as LanguageRecord);
+  const intlRecord = new LanguageRecord('', '');
+
+  input.forEach(({ language, value }) => {
+    (intlRecord as any)[language] = value;
+  });
+
+  return intlRecord;
 };
 export type CommunicationMode = {
   id: number;

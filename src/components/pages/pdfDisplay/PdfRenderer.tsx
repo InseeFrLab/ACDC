@@ -44,7 +44,7 @@ const PdfDisplay = () => {
             {t('title')}
           </Typography>
           <Typography variant="h2" fontWeight="xl">
-            Loading...
+            Chargement des données...
           </Typography>
         </Box>
       </Main>

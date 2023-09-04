@@ -133,6 +133,11 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
       id: dataCollection.id,
       json: dataCollectionUpdated,
     };
+    updatedDataCollection.json.userAttributePair[
+      updatedDataCollection.json.userAttributePair.findIndex(
+        (pair) => pair.attributeKey === 'extension:surveyStatus'
+      )
+    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
     mutate(updatedDataCollection);
     setDataCollectionState(dataCollectionUpdated);
     handleClickOpen();

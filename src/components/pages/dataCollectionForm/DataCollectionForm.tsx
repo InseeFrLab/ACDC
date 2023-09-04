@@ -3,22 +3,14 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  Typography,
-  FormControl,
-  Button,
-  Box,
-  TextField,
-  Stack,
-  Checkbox,
-} from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
+import { Typography, FormControl, Button, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
 import OtherInfo from '@/components/shared/formComponents/otherInformations/OtherInfo';
-import { set } from 'date-fns';
+import CodeList from '@/lib/model/codeList';
+import LanguageRecord from '@/lib/model/languageRecord';
 import CreateDataCollectionDialog from './CreateDataCollectionDialog';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
@@ -99,6 +91,12 @@ const CollectionForm = (props: CollectionFormProps) => {
   const [mailResponsableOperationel, setMailResponsableOperationel] =
     useState('');
   const [rapport, setRapport] = useState('');
+  const [qualityReport, setQualityReport] = useState('');
+  const [surveyStatus, setSurveyStatus] = useState<CodeList>({
+    label: '',
+    code: '',
+  });
+  const [visaNumber, setVisaNumber] = useState('');
 
   const [submitAttempt, setSubmitAttempt] = useState(false);
 
@@ -134,7 +132,13 @@ const CollectionForm = (props: CollectionFormProps) => {
     const id = uuidv4();
     const label = createIntlRecord(labelArray);
     const description = createIntlRecord(descriptionArray);
+    const dateJO = new Date(dateParutionJO);
+    const formatedJO = `${dateJO.getFullYear()}/${(dateJO.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}/${dateJO.getDate().toString().padStart(2, '0')}`;
 
+    const dateVisa = new Date(anneeVisa);
+    const formatedVisa = `${dateVisa.getFullYear()}`;
     const data: DataCollection = {
       id,
       agency: 'fr.insee',
@@ -150,7 +154,7 @@ const CollectionForm = (props: CollectionFormProps) => {
         },
         {
           attributeKey: 'extension:anneeVisa',
-          attributeValue: anneeVisa,
+          attributeValue: formatedVisa,
         },
         {
           attributeKey: 'extension:ministereTutelle',
@@ -162,7 +166,7 @@ const CollectionForm = (props: CollectionFormProps) => {
         },
         {
           attributeKey: 'extension:dateParutionJO',
-          attributeValue: dateParutionJO,
+          attributeValue: formatedJO,
         },
         {
           attributeKey: 'extension:serviceCollecteurSignataireNom',
@@ -176,10 +180,23 @@ const CollectionForm = (props: CollectionFormProps) => {
           attributeKey: 'extension:mailResponsableOperationel',
           attributeValue: mailResponsableOperationel,
         },
+        {
+          attributeKey: 'extension:qualityReport',
+          attributeValue: qualityReport,
+        },
+        {
+          attributeKey: 'extension:surveyStatus',
+          attributeValue: `{"code":"${surveyStatus.code.toString()}","label":"${
+            surveyStatus.label
+          }"}`,
+        },
+        {
+          attributeKey: 'extension:visaNumber',
+          attributeValue: visaNumber,
+        },
       ],
       studyUnitReference,
     };
-
     const dataCollection: DataCollectionApi = {
       id,
       json: data,
@@ -207,6 +224,9 @@ const CollectionForm = (props: CollectionFormProps) => {
           series={props.series}
           submitAttempt={submitAttempt}
           setRapport={setRapport}
+          setQualityReport={setQualityReport}
+          setSurveyStatus={setSurveyStatus}
+          setVisaNumber={setVisaNumber}
         />
         <Box
           component="form"
@@ -252,209 +272,32 @@ const CollectionForm = (props: CollectionFormProps) => {
           submitAttempt={false}
         />
 
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            marginTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('visaYear', { ns: 'dataCollectionForm' })} :
-          </Typography>
-        </Box>
-        <FormControl size="small" sx={{ marginTop: 1 }}>
-          <DatePicker
-            label={t('visaYear', { ns: 'dataCollectionForm' })}
-            openTo="year"
-            value={anneeVisa}
-            views={['year']}
-            onChange={(date) => date && setAnneeVisa(date.toString())}
-            renderInput={(params) => <TextField {...params} />}
-          />
-        </FormControl>
-
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            marginTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('ministry', { ns: 'dataCollectionForm' })} :
-          </Typography>
-        </Box>
-        <FormControl size="small" sx={{ marginTop: 1 }}>
-          <TextField
-            id="ministry"
-            name="ministry"
-            variant="outlined"
-            size="small"
-            fullWidth
-            value={ministereTutelle}
-            onChange={(e) => setMinistereTutelle(e.target.value)}
-          />
-        </FormControl>
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            marginTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          {' '}
-          <Stack
-            direction="row"
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <FormControl size="small">
-              <Checkbox
-                checked={parutionJO}
-                sx={{ '& .MuiSvgIcon-root': { fontSize: 25 } }}
-                onChange={(e) => setParutionJO(e.target.checked)}
-              />
-            </FormControl>
-            <Typography variant="h6">
-              {t('parutionJO', { ns: 'dataCollectionForm' })}
-            </Typography>
-          </Stack>
-        </Box>
-
-        {parutionJO && (
-          <FormControl size="small" sx={{ marginTop: 1 }}>
-            <DatePicker
-              label={t('dateParutionJO', { ns: 'dataCollectionForm' })}
-              disabled={!parutionJO}
-              openTo="year"
-              views={['year']}
-              value={dateParutionJO}
-              onChange={(date) => date && setDateParutionJO(date.toString())}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </FormControl>
-        )}
-
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            marginTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('serviceCollecteurSignataireName', { ns: 'dataCollectionForm' })}{' '}
-            :
-          </Typography>
-        </Box>
-        <FormControl size="small" sx={{ marginTop: 1 }}>
-          <TextField
-            id="serviceCollecteurSignataireName"
-            name="serviceCollecteurSignataireName"
-            variant="outlined"
-            size="small"
-            fullWidth
-            value={serviceCollecteurSignataireNom}
-            onChange={(e) => setServiceCollecteurSignataireNom(e.target.value)}
-          />
-        </FormControl>
-
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            marginTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('serviceCollecteurSignataireFunction', {
-              ns: 'dataCollectionForm',
-            })}{' '}
-            :
-          </Typography>
-        </Box>
-        <FormControl size="small" sx={{ marginTop: 1 }}>
-          <TextField
-            id="serviceCollecteurSignataireFonction"
-            name="serviceCollecteurSignataireFonction"
-            variant="outlined"
-            size="small"
-            fullWidth
-            value={serviceCollecteurSignataireFonction}
-            onChange={(e) =>
-              setServiceCollecteurSignataireFonction(e.target.value)
-            }
-          />
-        </FormControl>
-
-        <Box
-          component="form"
-          className="CollectionForm"
-          sx={{
-            paddingTop: 2,
-            marginTop: 2,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            borderTop: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Typography variant="h6">
-            {t('mailResponsableOperationnel', {
-              ns: 'dataCollectionForm',
-            })}{' '}
-            :
-          </Typography>
-        </Box>
-        <FormControl size="small" sx={{ marginTop: 1 }}>
-          <TextField
-            id="mailResponsableOperationel"
-            name="mailResponsableOperationel"
-            variant="outlined"
-            size="small"
-            fullWidth
-            value={mailResponsableOperationel}
-            onChange={(e) => setMailResponsableOperationel(e.target.value)}
-            error={submitAttempt && mailResponsableOperationel === ''}
-            label="Email"
-            type="email"
-            inputProps={{
-              pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$',
-              title: 'Please enter a valid email address',
-            }}
-          />
-        </FormControl>
-
-        <OtherInfo multiline rapport={rapport} />
+        <OtherInfo
+          multiline
+          rapport={rapport}
+          anneeVisa={anneeVisa}
+          setAnneeVisa={setAnneeVisa}
+          ministereTutelle={ministereTutelle}
+          setMinistereTutelle={setMinistereTutelle}
+          parutionJO={parutionJO}
+          setParutionJO={setParutionJO}
+          dateParutionJO={dateParutionJO}
+          setDateParutionJO={setDateParutionJO}
+          serviceCollecteurSignataireNom={serviceCollecteurSignataireNom}
+          setServiceCollecteurSignataireNom={setServiceCollecteurSignataireNom}
+          serviceCollecteurSignataireFonction={
+            serviceCollecteurSignataireFonction
+          }
+          setServiceCollecteurSignataireFonction={
+            setServiceCollecteurSignataireFonction
+          }
+          mailResponsableOperationel={mailResponsableOperationel}
+          setMailResponsableOperationel={setMailResponsableOperationel}
+          submitAttempt={submitAttempt}
+          qualityReport={qualityReport}
+          surveyStatus={surveyStatus}
+          visaNumber={visaNumber}
+        />
 
         <Box
           component="form"

@@ -22,3 +22,5 @@ export function isCollectionCommunication(
     value.every((item) => isCollectionCommunicationItem(item))
   );
 }
+
+export { CollectionRow };

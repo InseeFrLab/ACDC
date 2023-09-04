@@ -13,10 +13,8 @@ import CollectionEvent from '../model/collectionEvents';
 import { CollectionCommunication } from '../model/communicationCollectionEvent';
 import CollectionGroupValue from '../model/collectionGroupValue';
 
-export const flattenCollectionGroups = (
-  dataCollectionObject: DataCollection
-) => {
-  console.log('dataCollectionObject', dataCollectionObject);
+// eslint-disable-next-line prettier/prettier
+export const flattenCollectionGroups = (dataCollectionObject: DataCollection) => {
   const flattenedUserAttributePairs: UserAttributePair[] = [];
   let attributeKey = '';
   let attributeValue = '';
@@ -43,6 +41,7 @@ export const flattenCollectionGroups = (
       attributeKey,
       attributeValue,
     });
+
     if (Array.isArray(dataCollectionObject.userAttributePair)) {
       const filteredUserAttributePairs =
         dataCollectionObject.userAttributePair.filter(
@@ -112,6 +111,23 @@ export const flattenUserAttributeFromDataCollectionApi = (
     ...dataCollectionFlattenGroup,
     collectionEvents: dataCollectionFlattenCommunication,
   };
+  const surveyStatusIndex =
+    flattenedDataCollectionObject.userAttributePair.findIndex(
+      (userAttribute) => userAttribute.attributeKey === 'extension:surveyStatus'
+    );
+  if (surveyStatusIndex !== -1) {
+    const surveyStatusAttribute =
+      flattenedDataCollectionObject.userAttributePair[surveyStatusIndex];
+    if (typeof surveyStatusAttribute.attributeValue === 'string') {
+      flattenedDataCollectionObject.userAttributePair[
+        surveyStatusIndex
+      ].attributeValue = surveyStatusAttribute.attributeValue.replace(
+        /\\\\/g,
+        ''
+      );
+    }
+  }
+  console.log('Flattened dataCollection: ', flattenedDataCollectionObject);
   const response: DataCollectionApi = {
     ...dataCollectionApi,
     json: flattenedDataCollectionObject,
