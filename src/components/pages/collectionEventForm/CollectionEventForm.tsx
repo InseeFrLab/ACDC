@@ -1,55 +1,87 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import { DatePicker } from '@mui/x-date-pickers';
 import { formatISO } from 'date-fns';
 import {
   Typography,
-  FormControl,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   Button,
   Stack,
-  TextField,
-  Select,
-  MenuItem,
   Box,
   DialogTitle,
-  SelectChangeEvent,
+  CircularProgress,
 } from '@mui/material';
+import {
+  createIntlRecord,
+  createCollectionCommunicationMode,
+  createInstrumentReference,
+  CommunicationMode,
+} from '@/lib/utils/dataTransformation';
+import getCurrentDate from '@/lib/utils/otherUtils';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
+import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
+import CollectionCommunicationSelect from '../../shared/formComponents/collectionCommunication/collectionCommunication';
+import CollectionModeSelect from '../../shared/formComponents/collectionMode/collectionModeSelect';
+import QuestionnaireModelSelect from '../../shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
 import CollectionEvent from '../../../lib/model/collectionEvents';
-import TypeOfModeOfCollection from '../../../lib/model/typeOfModeOfCollection';
-import InstrumentReference from '../../../lib/model/instrumentReference';
 
+import {
+  TypeOfModeOfCollection,
+  typeMode,
+} from '../../../lib/model/typeOfModeOfCollection';
+
+import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';
+import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
+import { CollectionCommunication } from '../../../lib/model/communicationCollectionEvent';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;
+  questionnaires?: PoguesQuestionnaire[];
 }
 const EventForm = (props: DataCollectionProps) => {
   // TODO: Refactor tout ça pour que ce soit plus propre
-  const { t } = useTranslation(['collectionEventForm']);
+  const { t } = useTranslation(['collectionEvent', 'form']);
   const navigate = useNavigate();
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
+  const [dataCollectionState, setDataCollectionState] =
+    useState<DataCollectionApi>(props.DataCollectionApi);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const [modeCollection, setModeCollection] = useState([
+  const [modeCollectionCheck, setModeCollectionCheck] = useState(
+    typeMode.map((item) => {
+      return { label: item.type, checked: false };
+    })
+  );
+  const [questionnaire, setQuestionnaire] = useState<string>('');
+  const [questionnaireLabel, setQuestionnaireLabel] = useState<string>('');
+  const [userAttributePairArray, setUserAttributePairArray] = useState<
+    CommunicationMode[]
+  >([
     {
       id: 1,
-      type: 'CAPI',
+      type: '',
+      media: '',
+      paperQuestionnaire: '',
     },
   ]);
   const [collectionEventNameArray, setCollectionEventNameArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 2,
       language: 'en-IE',
       value: '',
     },
@@ -57,6 +89,11 @@ const EventForm = (props: DataCollectionProps) => {
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 2,
       language: 'en-IE',
       value: '',
     },
@@ -64,85 +101,68 @@ const EventForm = (props: DataCollectionProps) => {
   const [descriptionArray, setDescriptionArray] = useState([
     {
       id: 1,
+      language: 'fr-FR',
+      value: '',
+    },
+    {
+      id: 2,
       language: 'en-IE',
       value: '',
     },
   ]);
   const [open, setOpen] = useState(false);
+  const [textError, setTextError] = useState(false);
 
-  const addModeCollection = () => {
-    const lastModeCollectionId = modeCollection[modeCollection.length - 1].id;
-    return setModeCollection([
-      ...modeCollection,
-      {
-        id: lastModeCollectionId + 1,
-        type: 'CAPI',
-      },
-    ]);
-  };
-
-  const handleModeCollectionChange = (e: SelectChangeEvent, index: number) => {
-    e.preventDefault();
-    setModeCollection((s) => {
-      const newLabel = s.slice();
-      newLabel[index].type = e.target.value;
-      return newLabel;
-    });
-  };
+  const [submitAttempt, setSubmitAttempt] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
-    console.log('Start date: ', startDate);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    navigate(-1);
-  };
-
-  const handleSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const instrument: InstrumentReference = {
-      id: '493f8b38-1198-4e45-99d2-531ac8a48a48',
-      agency: 'fr.insee',
-      version: 1,
-      typeOfObject: 'Instrument',
-    };
-
-    const modeOfCollection: TypeOfModeOfCollection[] = [];
-    modeCollection.forEach((mode) => {
-      modeOfCollection.push({
-        type: mode.type,
-      });
-    });
-    const collectionEventName: Record<'fr-FR' | 'en-IE' | string, string> =
-      collectionEventNameArray.reduce(
-        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-          map[obj.language] = obj.value;
-          return map;
-        },
-        {}
-      );
-    const label: Record<'fr-FR' | 'en-IE' | string, string> = labelArray.reduce(
-      (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-        map[obj.language] = obj.value;
-        return map;
-      },
-      {}
+  const checkValidation = () => {
+    const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
+    const collectionEventNameArrayFiltered = collectionEventNameArray.filter(
+      (obj) => obj.value !== ''
     );
 
-    const description: Record<'fr-FR' | 'en-IE' | string, string> =
-      descriptionArray.reduce(
-        (map: Record<'fr-FR' | 'en-IE' | string, string>, obj) => {
-          map[obj.language] = obj.value;
-          return map;
-        },
-        {}
-      );
+    const isValid =
+      labelArrayFiltered.length === 2 &&
+      collectionEventNameArrayFiltered.length === 2;
 
-    const dates: Map<string, string> = new Map();
-    dates.set('startDate', formatISO(startDate) || '');
-    dates.set('endDate', formatISO(endDate) || '');
+    setTextError(!isValid);
+
+    return isValid;
+  };
+
+  const createCollectionEventObject = () => {
+    const instrument: InstrumentReference = createInstrumentReference(
+      questionnaire,
+      questionnaireLabel
+    );
+    const modeOfCollection: TypeOfModeOfCollection[] =
+      modeCollectionCheck.reduce<TypeOfModeOfCollection[]>((acc, mode) => {
+        if (mode.checked) {
+          acc.push({ type: mode.label });
+        }
+        return acc;
+      }, []);
+
+    const collectionEventName = createIntlRecord(collectionEventNameArray);
+    const label = createIntlRecord(labelArray);
+    const description = createIntlRecord(descriptionArray);
+
+    const attributeValue = createCollectionCommunicationMode(
+      userAttributePairArray
+    );
+
+    const userAttributePairCollection: CollectionCommunication = {
+      attributeKey: 'extension:CollectionCommunicationSteps',
+      attributeValue,
+    };
+    const userAttributePairCollectionArray: CollectionCommunication[] = [];
+    userAttributePairCollectionArray.push(userAttributePairCollection);
+
+    console.log('attributeValue: ', userAttributePairCollectionArray);
     const data: CollectionEvent = {
       id: uuidv4(),
       agency: 'fr.insee',
@@ -152,18 +172,28 @@ const EventForm = (props: DataCollectionProps) => {
       description,
       instrumentReference: instrument,
       typeOfModeOfCollection: modeOfCollection,
-      dataCollectionDate: dates,
+      dataCollectionDate: {
+        startDate: formatISO(startDate),
+        endDate: formatISO(endDate),
+      },
+      userAttributePair: userAttributePairCollectionArray,
     };
     const now = Date.now();
-    const today: string = new Date(now).toISOString();
+    // const today: string = new Date(now).toISOString();
     props.DataCollectionApi.json.collectionEvents.push(data);
-    props.DataCollectionApi.json.version += 1;
-    props.DataCollectionApi.json.versionDate = today;
+
+    props.DataCollectionApi.json.versionDate = getCurrentDate();
 
     const updatedDataCollection: DataCollectionApi = {
       id: props.DataCollectionApi?.id,
       json: props.DataCollectionApi.json,
     };
+
+    updatedDataCollection.json.userAttributePair[
+      updatedDataCollection.json.userAttributePair.findIndex(
+        (pair) => pair.attributeKey === 'extension:surveyStatus'
+      )
+    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
 
     console.log(
       'Updated Data Collection with new Collection Event: ',
@@ -171,176 +201,170 @@ const EventForm = (props: DataCollectionProps) => {
     );
 
     mutate(updatedDataCollection);
-
+    setDataCollectionState(updatedDataCollection);
     handleClickOpen();
   };
+  const handleSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setSubmitAttempt(true);
+    checkValidation()
+      ? createCollectionEventObject()
+      : console.log('Field Validation Error');
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setOpen(false);
+      navigate(`/`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <>
-      <FormControl size="small" fullWidth sx={{ marginTop: 3 }}>
-        <Stack spacing={2}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
+      <Stack spacing={1}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <Typography variant="h6">{t('name', { ns: 'form' })}*:</Typography>
+        </Box>
+        <IntlTextInput
+          textArray={collectionEventNameArray}
+          setTextArray={setCollectionEventNameArray}
+          multiline={false}
+          submitAttempt={submitAttempt}
+        />
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
+        </Box>
+        <IntlTextInput
+          textArray={labelArray}
+          setTextArray={setLabelArray}
+          submitAttempt={submitAttempt}
+        />
+        <Box
+          sx={{
+            paddingTop: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="h6">
+            {t('descriptionField', { ns: 'form' })}:
+          </Typography>
+        </Box>
+        <IntlTextInput
+          textArray={descriptionArray}
+          setTextArray={setDescriptionArray}
+          multiline
+          submitAttempt={false}
+        />
+        <CollectionModeSelect
+          modeCollectionCheck={modeCollectionCheck}
+          setModeCollectionCheck={setModeCollectionCheck}
+          textError={textError}
+        />{' '}
+        <QuestionnaireModelSelect
+          questionnaires={props.questionnaires}
+          setQuestionnaire={setQuestionnaire}
+          questionnaireLabel={questionnaireLabel}
+          setQuestionnaireLabel={setQuestionnaireLabel}
+          submitAttempt={submitAttempt}
+        />
+        <CollectionDatePicker
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+        />
+        <CollectionCommunicationSelect
+          userAttributePair={userAttributePairArray}
+          setUserAttributePair={setUserAttributePairArray}
+        />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            paddingTop: 2,
+            borderColor: 'divider',
+            alignItems: 'baseline',
+          }}
+        >
+          <Button
+            variant="outlined"
+            sx={{ marginRight: 2 }}
+            onClick={() => {
+              navigate(-1);
             }}
           >
-            <Typography variant="h6">{t('name')}:</Typography>
-          </Box>
-          <IntlTextInput
-            textArray={collectionEventNameArray}
-            setTextArray={setCollectionEventNameArray}
-          />
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">{t('label')}:</Typography>
-          </Box>
-          <IntlTextInput textArray={labelArray} setTextArray={setLabelArray} />
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">{t('descriptionField')}:</Typography>
-          </Box>
-
-          <IntlTextInput
-            textArray={descriptionArray}
-            setTextArray={setDescriptionArray}
-          />
-
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">{t('dataCollectionDate')}:</Typography>
-          </Box>
-          <Stack spacing={2} direction="row">
-            <DatePicker
-              label={t('collectionStartDate')}
-              value={startDate}
-              onChange={(date) => date && setStartDate(date)}
-              renderInput={(params) => <TextField {...params} />}
-            />
-            <DatePicker
-              label={t('collectionEndDate')}
-              value={endDate}
-              minDate={startDate}
-              onChange={(date) => date && setEndDate(date)}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </Stack>
-
-          <Box
-            sx={{
-              paddingTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
-            }}
-          >
-            <Typography variant="h6">{t('modeOfCollection')}:</Typography>
-          </Box>
-
-          {modeCollection.map((mode, index) => {
-            return (
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'flex-start',
-                }}
-                key={mode.id}
-              >
-                <Select
-                  color="primary"
-                  labelId="select-mode-collection"
-                  label={t('modeOfCollection')}
-                  displayEmpty
-                  value={mode.type}
-                  onChange={(e) => handleModeCollectionChange(e, index)}
-                  sx={{
-                    '& legend': { display: 'none' },
-                    '& fieldset': { top: 0 },
-                  }}
-                  notched
-                >
-                  <MenuItem value="CAPI">CAPI</MenuItem>
-                  <MenuItem value="CATI">CATI</MenuItem>
-                  <MenuItem value="CAWI">CAWI</MenuItem>
-                  <MenuItem value="PAPI">PAPI</MenuItem>
-                </Select>
-              </Box>
-            );
-          })}
-
-          <Box
-            component="form"
-            className="CollectionForm"
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-            }}
-          >
-            <Button variant="outlined" size="small" onClick={addModeCollection}>
-              <Typography>{t('addModeCollection')}</Typography>
-            </Button>
-          </Box>
-
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              paddingTop: 2,
-              borderColor: 'divider',
-            }}
-          >
-            <Button
-              variant="outlined"
-              sx={{ marginRight: 2 }}
-              onClick={handleClose}
+            <Typography variant="subtitle1">
+              {t('cancel', { ns: 'form' })}
+            </Typography>
+          </Button>
+          <Button variant="customContained" onClick={handleSubmit}>
+            <Typography variant="subtitle1">
+              {t('submit', { ns: 'form' })}
+            </Typography>
+          </Button>
+          {textError && (
+            <Typography
+              variant="subtitle1"
+              marginLeft={2}
+              fontWeight="bold"
+              color="error"
             >
-              <Typography variant="subtitle1">{t('cancel')}</Typography>
-            </Button>
-            <Button variant="contained" onClick={handleSubmit}>
-              <Typography variant="subtitle1">{t('submit')}</Typography>
-            </Button>
-          </Box>
-        </Stack>
-      </FormControl>
+              {t('textFieldError', { ns: 'collectionEvent' })}
+            </Typography>
+          )}
+        </Box>
+      </Stack>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <DialogTitle>
-          <Typography variant="h5">{t('submitmessage')}</Typography>
+          <Typography variant="h5">{t('descriptionForm')}</Typography>
         </DialogTitle>
-        <DialogContent>
+        <DialogContent
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <DialogContentText>
-            {isSuccess ? t('success') : ''}
-            {isLoading ? t('loading') : ''}
-            {isError ? t('error') : ''}
+            {isLoading ? <CircularProgress /> : ''}
+            {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose} autoFocus>
-            {t('close')}
+          <Button
+            variant="customContained"
+            onClick={() => {
+              setOpen(false);
+            }}
+            autoFocus
+          >
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>

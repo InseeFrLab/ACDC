@@ -1,0 +1,148 @@
+[
+  {
+    "altLabel": [
+      {
+        "langue": "fr"
+      },
+      {
+        "langue": "en"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête Histoire de vie et Patrimoine 2020"
+      },
+      {
+        "langue": "en",
+        "contenu": "Household Wealth Survey 2020"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1527",
+    "serie": {
+      "id": "s1005",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête Patrimoine"
+        },
+        {
+          "langue": "en",
+          "contenu": "Household Wealth Survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1005"
+    },
+    "id": "s1527"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "Patrimoine 2017"
+      },
+      {
+        "langue": "en",
+        "contenu": "Household Wealth 2017"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête Histoire de vie et patrimoine 2017-2018"
+      },
+      {
+        "langue": "en",
+        "contenu": "Household Wealth Survey 2017-2018"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1370",
+    "serie": {
+      "id": "s1005",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête Patrimoine"
+        },
+        {
+          "langue": "en",
+          "contenu": "Household Wealth Survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1005"
+    },
+    "id": "s1370"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr"
+      },
+      {
+        "langue": "en"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête Patrimoine 2009-2010"
+      },
+      {
+        "langue": "en",
+        "contenu": "Household Wealth Survey 2009-2010"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1363",
+    "serie": {
+      "id": "s1005",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête Patrimoine"
+        },
+        {
+          "langue": "en",
+          "contenu": "Household Wealth Survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1005"
+    },
+    "id": "s1363"
+  },
+  {
+    "altLabel": [
+      {
+        "langue": "fr"
+      },
+      {
+        "langue": "en"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête Patrimoine 2014-2015"
+      },
+      {
+        "langue": "en",
+        "contenu": "Household Wealth Survey 2014-2015"
+      }
+    ],
+    "uri": "http://bauhaus/operations/operation/s1282",
+    "serie": {
+      "id": "s1005",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête Patrimoine"
+        },
+        {
+          "langue": "en",
+          "contenu": "Household Wealth Survey"
+        }
+      ],
+      "uri": "http://bauhaus/operations/serie/s1005"
+    },
+    "id": "s1282"
+  }
+]

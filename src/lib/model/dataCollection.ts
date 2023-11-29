@@ -1,18 +1,33 @@
 import CollectionEvent from './collectionEvents';
+import { CollectionGroup } from './collectionGroups';
+import { StudyUnitReference } from './studyUnitReference';
+import LanguageRecord from './languageRecord';
+import { UserAttributePair } from './userAttributePair';
 
-export interface DataCollection {
+export class DataCollection {
   id: string;
+
   agency: string;
+
   version: number;
+
   versionDate: string;
-  label: Record<'fr-FR' | 'en-IE' | string, string>;
-  description: Record<'fr-FR' | 'en-IE' | string, string>;
+
+  studyUnitReference: StudyUnitReference;
+
+  label: LanguageRecord;
+
+  description: LanguageRecord;
+
   collectionEvents?: CollectionEvent[];
+
+  userAttributePair?: (CollectionGroup | UserAttributePair)[];
 }
 
 export interface DataCollectionRow {
-  id: string;
   label: string | (() => string);
+  studyUnitReference: string | (() => string);
+  groupReference: string | (() => string);
   version: number;
   versionDate: string;
   action: DataCollection;

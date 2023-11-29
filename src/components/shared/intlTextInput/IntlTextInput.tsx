@@ -1,29 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
   TextField,
   Select,
   MenuItem,
-  Button,
-  Typography,
   SelectChangeEvent,
+  FormControl,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 const IntlTextInput = (props: any) => {
-  const { t } = useTranslation(['dataCollectionForm']);
   const { textArray } = props;
-  const addTextLabel = () => {
-    const lastTextId: number = textArray[textArray.length - 1].id;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return props.setTextArray([
-      ...textArray,
-      {
-        id: lastTextId + 1,
-        language: 'en-IE',
-        value: '',
-      },
-    ]);
-  };
 
   const handleTextChange = (e: any): void => {
     e.preventDefault();
@@ -57,46 +43,42 @@ const IntlTextInput = (props: any) => {
               }}
               key={label.id}
             >
-              <TextField
-                required
-                size="small"
-                label={t('label')}
-                value={label.value}
-                sx={{ marginRight: 2, width: '100%' }}
-                onChange={handleTextChange}
-                id={index.toString()}
-              />
-              <Select
-                color="primary"
-                value={label.language}
-                onChange={(e) => handleTextLanguageChange(e, index)}
-                id={index.toString()}
-                sx={{
-                  '& legend': { display: 'none' },
-                  '& fieldset': { top: 0 },
-                }}
-                notched
-              >
-                <MenuItem value="fr-FR">🇫🇷</MenuItem>
-                <MenuItem value="en-IE">🇬🇧</MenuItem>
-              </Select>
+              <FormControl fullWidth size="small">
+                <TextField
+                  required
+                  error={label.value === '' && props.submitAttempt}
+                  size="small"
+                  multiline={props.multiline}
+                  value={label.value}
+                  sx={{ paddingRight: 2, width: '99%', marginTop: 1 }}
+                  onChange={handleTextChange}
+                  id={index.toString()}
+                />
+              </FormControl>
+              <FormControl size="small">
+                <Select
+                  color="primary"
+                  disabled
+                  value={label.language}
+                  onChange={(e) => handleTextLanguageChange(e, index)}
+                  id={index.toString()}
+                  sx={{
+                    '& legend': { display: 'none' },
+                    '& fieldset': { top: 0 },
+                    width: 70,
+                    marginLeft: 1,
+                    marginTop: 1,
+                  }}
+                  notched
+                >
+                  <MenuItem value="fr-FR">🇫🇷</MenuItem>
+                  <MenuItem value="en-IE">🇬🇧</MenuItem>
+                </Select>
+              </FormControl>
             </Box>
           );
         }
       )}
-
-      <Box
-        component="form"
-        className="CollectionForm"
-        sx={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-        }}
-      >
-        <Button variant="outlined" size="small" onClick={addTextLabel}>
-          <Typography>{t('addLanguage')}</Typography>
-        </Button>
-      </Box>
     </>
   );
 };

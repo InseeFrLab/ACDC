@@ -10,3 +10,9 @@ cd ACDC
 yarn
 yarn run dev
 ```
+
+You'll have to create a `.env` file in the root directory of the project, with the following content:
+
+```bash
+VITE_API_BASE_URL=https://acdc-back-office.demo.insee.io/ (or any other URL)
+```

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -25,10 +25,12 @@ jobs:
       - name: Install dependencies
         run: |
           npm install --force
-      # build and test the apps
+      # build and test the apps (temp env variable for API_BASE_URL as there is no need)
       - name: build
         run: |
-          npm run build
+          npm run build --noEmitOnErrorx
+        env:
+          VITE_API_BASE_URL: 'https://acdc-back-office.demo.insee.io/'
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4
         with:

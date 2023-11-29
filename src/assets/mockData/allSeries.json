@@ -1,0 +1,127 @@
+[
+  {
+    "altLabel": [
+      {
+        "langue": "fr",
+        "contenu": "CIS"
+      },
+      {
+        "langue": "en",
+        "contenu": "CIS"
+      }
+    ],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête innovation"
+      },
+      {
+        "langue": "en",
+        "contenu": "Innovation survey"
+      }
+    ],
+    "type": {
+      "id": "S",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête"
+        },
+        {
+          "langue": "en",
+          "contenu": "Survey"
+        }
+      ],
+      "uri": "http://dvrmessncglht02/codes/categorieSource/S"
+    },
+    "series": "http://dvrmessncglht02/operations/serie/s1001",
+    "id": "s1001",
+    "frequence": {
+      "id": "U",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Pluriannuelle"
+        },
+        {
+          "langue": "en",
+          "contenu": "Multiannual"
+        }
+      ],
+      "uri": "http://dvrmessncglht02/codes/frequence/U"
+    },
+    "nbOperation": "0",
+    "famille": {
+      "id": "s15",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Innovation"
+        },
+        {
+          "langue": "en",
+          "contenu": "Innovation"
+        }
+      ],
+      "uri": "http://dvrmessncglht02/operations/famille/s15"
+    }
+  },
+  {
+    "altLabel": [],
+    "label": [
+      {
+        "langue": "fr",
+        "contenu": "Enquête auprès des sans-domicile"
+      },
+      {
+        "langue": "en",
+        "contenu": "Survey about homeless"
+      }
+    ],
+    "type": {
+      "id": "S",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Enquête"
+        },
+        {
+          "langue": "en",
+          "contenu": "Survey"
+        }
+      ],
+      "uri": "http://dvrmessncglht02/codes/categorieSource/S"
+    },
+    "series": "http://dvrmessncglht02/operations/serie/s1002",
+    "id": "s1002",
+    "frequence": {
+      "id": "P",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Ponctuelle ou apériodique"
+        },
+        {
+          "langue": "en",
+          "contenu": "Punctual or aperiodic"
+        }
+      ],
+      "uri": "http://dvrmessncglht02/codes/frequence/P"
+    },
+    "nbOperation": "2",
+    "famille": {
+      "id": "s81",
+      "label": [
+        {
+          "langue": "fr",
+          "contenu": "Sans domicile"
+        },
+        {
+          "langue": "en",
+          "contenu": "Homeless people"
+        }
+      ],
+      "uri": "http://dvrmessncglht02/operations/famille/s81"
+    }
+  }
+]

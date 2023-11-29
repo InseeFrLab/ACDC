@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 import {
   GridToolbarContainer,
@@ -7,15 +8,23 @@ import {
   GridColDef,
   GridRenderCellParams,
 } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
+import { Box, IconButton, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FiChevronRight } from 'react-icons/fi';
-import { DataCollectionRow } from '../../../lib/model/dataCollection';
+import { FiChevronRight, FiCopy } from 'react-icons/fi';
+import moment from 'moment';
+import { duplicateDataCollection } from '@/lib/utils/dataCollectionUtils';
+import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import DataCollectionApi from '@/lib/model/dataCollectionApi';
+import { useEffect } from 'react';
+import {
+  DataCollection,
+  DataCollectionRow,
+} from '../../../lib/model/dataCollection';
 
 interface DataGridHomePageProps {
   rows: DataCollectionRow[];
-  heightTable: number;
 }
 
 const CustomToolbar = () => {
@@ -29,36 +38,96 @@ const CustomToolbar = () => {
 
 const DataGridHomePage = (props: DataGridHomePageProps) => {
   const { t } = useTranslation(['common']);
+  const { isSuccess, mutate } = useMutation(updateDataCollection);
+
+  const handleDuplicate = (dataCollection: DataCollection) => {
+    const duplicatedDataCollection = duplicateDataCollection(dataCollection);
+    const duplicatedDCApi: DataCollectionApi = {
+      id: duplicatedDataCollection.id,
+      json: duplicatedDataCollection,
+    };
+    mutate(duplicatedDCApi);
+  };
   const columns: GridColDef[] = [
     {
-      field: 'id',
-      headerName: t('id').toString(),
+      field: 'label',
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
+          {t('statisticalProgram').toString()}
+        </Typography>
+      ),
       headerClassName: 'columns--header',
-      flex: 0.3,
-      description: t('id').toString(),
+      flex: 0.22,
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily="Lato">{params.value}</Typography>
+      ),
+      description: t('label', { ns: 'form' }).toString(),
     },
     {
-      field: 'label',
-      headerName: t('statisticalProgram').toString(),
+      field: 'studyUnitReference',
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
+          {t('statisticalOperation', {
+            ns: 'dataCollectionForm',
+          }).toString()}
+        </Typography>
+      ),
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily="Lato">{params.value}</Typography>
+      ),
       headerClassName: 'columns--header',
-      flex: 0.3,
+      flex: 0.33,
       description: t('statisticalProgram').toString(),
     },
     {
+      field: 'groupReference',
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
+          {t('statisticalOperationSeries', {
+            ns: 'dataCollectionForm',
+          }).toString()}
+        </Typography>
+      ),
+      headerClassName: 'columns--header',
+      flex: 0.25,
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily="Lato">{params.value}</Typography>
+      ),
+      description: t('statisticalOperationSeries', {
+        ns: 'dataCollectionForm',
+      }).toString(),
+    },
+    {
       field: 'versionDate',
-      headerName: t('lastUpdate').toString(),
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
+          {t('lastUpdate').toString()}
+        </Typography>
+      ),
+      // type: 'date',
+
       headerClassName: 'columns--header',
       flex: 0.2,
-
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily="Lato">
+          {moment(params.value).format('DD/MM/YYYY HH:mm')}
+        </Typography>
+      ),
       description: t('lastUpdate').toString(),
     },
     {
       field: 'version',
-      headerName: t('version').toString(),
+      renderHeader: () => (
+        <Typography variant="h6" fontFamily="Oswald" fontWeight={600}>
+          {t('version').toString()}
+        </Typography>
+      ),
       headerClassName: 'columns--header',
       flex: 0.1,
-
       description: t('version').toString(),
+      renderCell: (params: GridRenderCellParams) => (
+        <Typography fontFamily="Lato">{params.value}</Typography>
+      ),
     },
     {
       field: 'action',
@@ -68,30 +137,51 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
       align: 'center',
       description: t('goToCollection').toString(),
       renderCell: (params: GridRenderCellParams) => (
-        <Link
-          to={`/collection/${params.value.id}`}
-          style={{ textDecoration: 'none' }}
-          state={{ dataCollection: params.value }}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'baseline',
+          }}
         >
-          <FiChevronRight />
-        </Link>
+          <IconButton
+            sx={{
+              mr: 2,
+            }}
+            onClick={() => {
+              handleDuplicate(params.value);
+            }}
+          >
+            <FiCopy fontSize={19} />
+          </IconButton>
+          <Link
+            to={`/collection/${params.value.id}`}
+            style={{ textDecoration: 'none' }}
+          >
+            <FiChevronRight fontSize={21} />
+          </Link>
+        </Box>
       ),
     },
   ];
+  useEffect(() => {
+    if (isSuccess) {
+      window.location.reload();
+    }
+  }, [isSuccess]);
+
   return (
     <Box
       sx={{
-        width: '100%',
+        width: '97%',
         '& .columns--header': {
           fontWeight: '700',
         },
         p: 2,
-        height: props.heightTable,
       }}
     >
       <DataGrid
-        components={{
-          Toolbar: CustomToolbar,
+        slots={{
+          toolbar: CustomToolbar,
         }}
         localeText={{
           toolbarFilters: t('filter'),
@@ -99,11 +189,11 @@ const DataGridHomePage = (props: DataGridHomePageProps) => {
         }}
         rows={props.rows}
         columns={columns}
-        // getRowHeight={() => 'auto'}
-        autoPageSize
+        // pageSizeOptions={[10, 20, 50]}
+        autoHeight
         pagination
         getRowClassName={() => 'row--style'}
-        disableSelectionOnClick
+        disableRowSelectionOnClick
       />
     </Box>
   );
