@@ -68,9 +68,6 @@ const DataCollectionDetails = () => {
             setDataCollection(parsedData.json);
           },
           refetchOnWindowFocus: true,
-          staleTime: 0,
-          cacheTime: 0,
-          refetchInterval: 0,
         },
         {
           queryKey: ['allQuestionnaires'],
@@ -87,11 +84,9 @@ const DataCollectionDetails = () => {
               };
             });
             setQuestionnaires(questionnairesResult);
+            console.log('got questionnaires from Pogues');
           },
-          refetchOnWindowFocus: true,
-          staleTime: 0,
-          cacheTime: 0,
-          refetchInterval: 0,
+          refetchOnWindowFocus: false,
         },
         {
           queryKey: ['allSeries'],
@@ -114,10 +109,7 @@ const DataCollectionDetails = () => {
               }
             );
           },
-          refetchOnWindowFocus: true,
-          staleTime: 0,
-          cacheTime: 0,
-          refetchInterval: 0,
+          refetchOnWindowFocus: false,
         },
         {
           queryKey: ['publishDataCollectionQuery', idDataCollection],
