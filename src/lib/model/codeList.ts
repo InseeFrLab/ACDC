@@ -29,3 +29,8 @@ export default class CodeList {
     }
   }
 }
+export interface CodeListValue {
+	label: string;
+
+	code: string;
+}

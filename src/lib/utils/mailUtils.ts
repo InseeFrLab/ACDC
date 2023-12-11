@@ -1,9 +1,8 @@
 import { DataCollection } from '@/lib/model/dataCollection';
 /* eslint-disable no-template-curly-in-string */
 import { XMLSerializer } from 'xmldom';
-import MailVariables from '../model/mailVariables';
 import { CollectionGroup } from '../model/collectionGroups';
-import Mail from '../model/mail';
+import Mail, { MailVariables } from '../model/mail';
 
 const getMockCourrier = async () => {
   try {

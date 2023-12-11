@@ -1,26 +1,32 @@
-import CollectionRow from './collectionRow';
-
 export class CollectionCommunication {
-  attributeKey: string;
+	attributeKey: string;
 
-  attributeValue: CollectionRow[];
+	attributeValue: CollectionRow[];
 }
 
 function isCollectionCommunicationItem(value: unknown): boolean {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    'attributeKey' in value &&
-    'attributeValue' in value
-  );
+	return (
+		typeof value === 'object' &&
+		value !== null &&
+		'attributeKey' in value &&
+		'attributeValue' in value
+	);
 }
 export function isCollectionCommunication(
-  value: unknown
+	value: unknown
 ): value is CollectionRow[] {
-  return (
-    Array.isArray(value) &&
-    value.every((item) => isCollectionCommunicationItem(item))
-  );
+	return (
+		Array.isArray(value) &&
+		value.every((item) => isCollectionCommunicationItem(item))
+	);
 }
 
-export { CollectionRow };
+export default interface CollectionRow {
+	id: string;
+
+	type: string;
+
+	media: string;
+
+	paperQuestionnaire: boolean;
+}

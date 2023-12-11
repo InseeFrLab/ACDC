@@ -3,8 +3,8 @@ import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Edge, Node } from 'reactflow';
 import { createNodeFromCollectionGroup } from '@/lib/utils/visualizationUtils';
-import CollectionGroupValue from '@/lib/model/collectionGroupValue';
 import LanguageRecord from '@/lib/model/languageRecord';
+import CollectionGroupValue from '@/lib/model/collectionGroups';
 
 interface SelectGroupProps {
   collectionGroupValue: CollectionGroupValue[];

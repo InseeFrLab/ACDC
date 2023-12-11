@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import InstrumentReference from '../model/instrumentReference';
 import LanguageRecord from '../model/languageRecord';
-import CollectionRow from '../model/collectionRow';
+import CollectionRow from '../model/communicationCollectionEvent';
 
 export const createIntlRecord = (
   input: {

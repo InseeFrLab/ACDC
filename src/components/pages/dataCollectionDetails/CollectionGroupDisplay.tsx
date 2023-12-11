@@ -16,10 +16,10 @@ import { FiChevronDown, FiTrash, FiEdit, FiCopy } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
 import ExpandMore from '@/components/shared/styled/ExpandMore';
-import CollectionGroupValue from '@/lib/model/collectionGroupValue';
 import LanguageRecord from '@/lib/model/languageRecord';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
+import CollectionGroupValue from '@/lib/model/collectionGroups';
 
 interface CollectionGroupDisplayProps {
   attributeValue: CollectionGroupValue;

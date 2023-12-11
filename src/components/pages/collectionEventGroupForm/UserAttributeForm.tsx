@@ -18,14 +18,17 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
-import { CollectionGroup } from '@/lib/model/collectionGroups';
+import CollectionGroupValue, {
+	CollectionGroup,
+} from '@/lib/model/collectionGroups';
 import getCurrentDate from '@/lib/utils/otherUtils';
-import CollectionGroupValue from '@/lib/model/collectionGroupValue';
-import { DataCollection } from '../../../lib/model/dataCollection';
+import {
+	DataCollection,
+	DataCollectionApi,
+} from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionEventCheckBox from '../../shared/formComponents/collectionGroup/CollectionEventCheckbox';
-import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 
 interface CollectionGroupFormProps {
   dataCollection: DataCollection;

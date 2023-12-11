@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import StatisticalSeries from '@/lib/model/statisticalSeries';
-import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import { PoguesQuestionnaireResponse } from '@/lib/model/poguesQuestionnaire';
 import { transformLabels } from '@/lib/utils/magmaUtils';
 import LanguageRecord from '@/lib/model/languageRecord';
 import {
-  getRequest,
-  postRequest,
-  putRequest,
-  deleteRequest,
+	getRequest,
+	postRequest,
+	putRequest,
+	deleteRequest,
 } from '../fetch/requests';
+import { DataCollectionApi } from '@/lib/model/dataCollection';
 
 const createApiClient = (baseUrl: string) => {
   return {

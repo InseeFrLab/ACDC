@@ -12,9 +12,11 @@ import OtherInfo from '@/components/shared/formComponents/otherInformations/Othe
 import CodeList from '@/lib/model/codeList';
 import LanguageRecord from '@/lib/model/languageRecord';
 import CreateDataCollectionDialog from './CreateDataCollectionDialog';
-import { DataCollection } from '../../../lib/model/dataCollection';
+import {
+	DataCollection,
+	DataCollectionApi,
+} from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
-import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import {
   GroupReference,

@@ -39,9 +39,9 @@ import {
 
 import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
-import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 import { CollectionCommunication } from '../../../lib/model/communicationCollectionEvent';
+import { DataCollectionApi } from '@/lib/model/dataCollection';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;

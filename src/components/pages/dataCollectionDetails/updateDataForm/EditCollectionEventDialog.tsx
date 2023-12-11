@@ -15,8 +15,10 @@ import {
 import QuestionnaireModelSelect from '@/components/shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
 import { PoguesQuestionnaire } from '@/lib/model/poguesQuestionnaire';
 import CollectionCommunicationSelect from '@/components/shared/formComponents/collectionCommunication/collectionCommunication';
-import { CollectionCommunication } from '@/lib/model/communicationCollectionEvent';
-import CollectionRow from '@/lib/model/collectionRow';
+import CollectionRow, {
+	CollectionCommunication,
+} from '@/lib/model/communicationCollectionEvent';
+
 import {
   createIntlRecord,
   createCollectionCommunicationMode,

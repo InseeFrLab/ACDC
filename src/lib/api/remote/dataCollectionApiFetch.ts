@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Params } from 'react-router-dom';
 import { flattenUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
-import DataCollectionApi from '../../model/dataCollectionApi';
+import { DataCollectionApi } from '@/lib/model/dataCollection';
 
 export function getDataCollection(
   id: Readonly<Params<string>>

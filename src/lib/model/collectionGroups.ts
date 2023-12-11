@@ -1,22 +1,29 @@
-import CollectionGroupValue from './collectionGroupValue';
 import LanguageRecord from './languageRecord';
 
 export class CollectionGroup {
-  attributeKey: string;
+	attributeKey: string;
 
-  attributeValue: CollectionGroupValue[];
+	attributeValue: CollectionGroupValue[];
 }
 
 function isCollectionGroupItem(value: unknown): boolean {
-  return (
-    typeof value === 'object' &&
-    value !== null &&
-    'attributeKey' in value &&
-    'attributeValue' in value
-  );
+	return (
+		typeof value === 'object' &&
+		value !== null &&
+		'attributeKey' in value &&
+		'attributeValue' in value
+	);
 }
 export function isCollectionGroup(value: unknown): value is CollectionGroup[] {
-  return (
-    Array.isArray(value) && value.every((item) => isCollectionGroupItem(item))
-  );
+	return (
+		Array.isArray(value) && value.every((item) => isCollectionGroupItem(item))
+	);
+}
+
+export default interface CollectionGroupValue {
+	collectionEventReference?: { id: string }[];
+
+	id?: string;
+
+	label?: LanguageRecord;
 }

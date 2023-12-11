@@ -32,3 +32,10 @@ export interface DataCollectionRow {
   versionDate: string;
   action: DataCollection;
 }
+
+// TODO: Find better implementation?
+export interface DataCollectionApi {
+	id: string;
+
+	json: DataCollection;
+}

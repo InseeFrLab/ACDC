@@ -12,9 +12,9 @@ import { useTranslation } from 'react-i18next';
 import { FiFilter } from 'react-icons/fi';
 import { DataCollection } from '@/lib/model/dataCollection';
 import { Edge, Node } from 'reactflow';
-import CollectionGroupValue from '@/lib/model/collectionGroupValue';
 import BottomBar from '../../shared/layout/BottomBar';
 import SelectGroup from './SelectGroupComponent';
+import CollectionGroupValue from '@/lib/model/collectionGroups';
 
 interface BottomVisualizationBarProps {
   handleReset: () => void;

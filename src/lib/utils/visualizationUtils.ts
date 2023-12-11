@@ -1,6 +1,6 @@
 import { Node, Edge, Position } from 'reactflow';
 import { DataCollection } from '../model/dataCollection';
-import CollectionGroupValue from '../model/collectionGroupValue';
+import CollectionGroupValue from '../model/collectionGroups';
 
 export const createTreeFromDataCollection = (
   dataCollection: DataCollection
