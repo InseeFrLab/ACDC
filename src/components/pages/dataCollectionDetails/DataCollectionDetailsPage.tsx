@@ -34,11 +34,9 @@ const DataCollectionDetails = () => {
   ]);
   const navigate = useNavigate();
   const { idDataCollection } = useParams();
-  const [dataCollection, setDataCollection] = useState<DataCollection>(
-    {} as DataCollection
-  );
+  const [dataCollection, setDataCollection] = useState<DataCollection>();
   const [dataCollectionState, setDataCollectionState] =
-    useState<DataCollection>({} as DataCollection);
+    useState<DataCollection>();
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
   const [openPublish, setOpenPublish] = useState(false);
@@ -62,12 +60,14 @@ const DataCollectionDetails = () => {
           queryKey: ["dataCollection", idDataCollection],
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           queryFn: () => getDataCollection(idDataCollection),
+          refetchOnMount: true,
           onSuccess: (data: DataCollectionApi) => {
             const parsedData = parseUserAttributeFromDataCollectionApi(data);
             setDataCollectionState(parsedData.json);
             setDataCollection(parsedData.json);
           },
           refetchOnWindowFocus: true,
+          cacheTime: 1000 * 60 * 30,
         },
         {
           queryKey: ["allQuestionnaires"],
@@ -233,7 +233,7 @@ const DataCollectionDetails = () => {
       </Main>
     );
   }
-  if (dataCollectionQuery.isSuccess) {
+  if (dataCollection) {
     return (
       <Main sx={{ justifyContent: "flex-start" }}>
         <DataCollectionDisplay
