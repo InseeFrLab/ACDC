@@ -2,14 +2,14 @@ export default function generateMailFromXml(xmlString: string) {
   return fetch(
     `${import.meta.env.VITE_API_BASE_URL}api/external/mail/generate/fo`,
     {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: xmlString,
     }
   ).then((response) => {
-    console.log('Response', response);
+    console.log("Response", response);
     return response.blob();
   });
 }

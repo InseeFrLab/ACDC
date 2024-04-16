@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dialog,
   Button,
@@ -8,19 +8,19 @@ import {
   DialogActions,
   Typography,
   Box,
-} from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
-import IntlTextInput from '@/components/shared/intlTextInput/IntlTextInput';
-import { createIntlRecord } from '@/lib/utils/dataTransformation';
-import { CollectionGroup } from '@/lib/model/collectionGroups';
-import { UserAttributePair } from '@/lib/model/userAttributePair';
-import OtherInfo from '@/components/shared/formComponents/otherInformations/OtherInfo';
-import CodeList from '@/lib/model/codeList';
-import { DataCollection } from '../../../../lib/model/dataCollection';
-import StatisticalOperationSelect from '../../../shared/formComponents/statisticalOperation/StatisticalOperationSelect';
-import StatisticalSeries from '../../../../lib/model/statisticalSeries';
+} from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
+import IntlTextInput from "@/components/shared/intlTextInput/IntlTextInput";
+import { createIntlRecord } from "@/lib/utils/dataTransformation";
+import { CollectionGroup } from "@/lib/model/collectionGroups";
+import { UserAttributePair } from "@/lib/model/userAttributePair";
+import OtherInfo from "@/components/shared/formComponents/otherInformations/OtherInfo";
+import CodeList from "@/lib/model/codeList";
+import { DataCollection } from "../../../../lib/model/dataCollection";
+import StatisticalOperationSelect from "../../../shared/formComponents/statisticalOperation/StatisticalOperationSelect";
+import StatisticalSeries from "../../../../lib/model/statisticalSeries";
 
 interface DataCollectionDetailsDialogProps {
   open: boolean;
@@ -33,31 +33,31 @@ interface DataCollectionDetailsDialogProps {
 const DataCollectionDetailsDialog = (
   props: DataCollectionDetailsDialogProps
 ) => {
-  const { t } = useTranslation(['dataCollectionDetails', 'form']);
+  const { t } = useTranslation(["dataCollectionDetails", "form"]);
   const navigate = useNavigate();
   const { open, dataCollectionState, series } = props;
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
-      language: 'fr-FR',
-      value: dataCollectionState.label['fr-FR'],
+      language: "fr-FR",
+      value: dataCollectionState.label["fr-FR"],
     },
     {
       id: 2,
-      language: 'en-IE',
-      value: dataCollectionState.label['en-IE'],
+      language: "en-IE",
+      value: dataCollectionState.label["en-IE"],
     },
   ]);
   const [descriptionArray, setDescriptionArray] = useState([
     {
       id: 1,
-      language: 'fr-FR',
-      value: dataCollectionState.description['fr-FR'],
+      language: "fr-FR",
+      value: dataCollectionState.description["fr-FR"],
     },
     {
       id: 2,
-      language: 'en-IE',
-      value: dataCollectionState.description['en-IE'],
+      language: "en-IE",
+      value: dataCollectionState.description["en-IE"],
     },
   ]);
   const [studyUnitReference, setStudyUnitReference] = useState(
@@ -71,13 +71,13 @@ const DataCollectionDetailsDialog = (
   const [anneeVisa, setAnneeVisa] = useState(() => {
     const result = dataCollectionState.userAttributePair.find(
       (userAttributeValue) =>
-        userAttributeValue.attributeKey === 'extension:anneeVisa'
+        userAttributeValue.attributeKey === "extension:anneeVisa"
     );
 
     if (result) {
       const attributeValue = result.attributeValue as string;
 
-      if (attributeValue !== 'NaN') {
+      if (attributeValue !== "NaN") {
         const date = new Date(attributeValue);
 
         if (!Number.isNaN(date.getTime())) {
@@ -86,34 +86,34 @@ const DataCollectionDetailsDialog = (
       }
     }
 
-    return '';
+    return "";
   });
   const [ministereTutelle, setMinistereTutelle] = useState(
     dataCollectionState.userAttributePair[
       dataCollectionState.userAttributePair.findIndex(
         (userAttribute) =>
-          userAttribute.attributeKey === 'extension:ministereTutelle'
+          userAttribute.attributeKey === "extension:ministereTutelle"
       )
     ]
       ? dataCollectionState.userAttributePair[
           dataCollectionState.userAttributePair.findIndex(
             (userAttribute) =>
-              userAttribute.attributeKey === 'extension:ministereTutelle'
+              userAttribute.attributeKey === "extension:ministereTutelle"
           )
         ].attributeValue
-      : ''
+      : ""
   );
   const [parutionJO, setParutionJO] = useState<boolean>(
     dataCollectionState.userAttributePair[
       dataCollectionState.userAttributePair.findIndex(
-        (userAttribute) => userAttribute.attributeKey === 'extension:parutionJO'
+        (userAttribute) => userAttribute.attributeKey === "extension:parutionJO"
       )
     ]
       ? (JSON.parse(
           dataCollectionState.userAttributePair[
             dataCollectionState.userAttributePair.findIndex(
               (userAttribute) =>
-                userAttribute.attributeKey === 'extension:parutionJO'
+                userAttribute.attributeKey === "extension:parutionJO"
             )
           ].attributeValue.toString()
         ) as boolean)
@@ -122,7 +122,7 @@ const DataCollectionDetailsDialog = (
   const [dateParutionJO, setDateParutionJO] = useState(() => {
     const result = dataCollectionState.userAttributePair.find(
       (userAttribute) =>
-        userAttribute.attributeKey === 'extension:dateParutionJO'
+        userAttribute.attributeKey === "extension:dateParutionJO"
     );
 
     if (result) {
@@ -133,7 +133,7 @@ const DataCollectionDetailsDialog = (
       }
     }
 
-    return '';
+    return "";
   });
   const [serviceCollecteurSignataireNom, setServiceCollecteurSignataireNom] =
     useState(
@@ -141,17 +141,17 @@ const DataCollectionDetailsDialog = (
         dataCollectionState.userAttributePair.findIndex(
           (userAttribute) =>
             userAttribute.attributeKey ===
-            'extension:serviceCollecteurSignataireNom'
+            "extension:serviceCollecteurSignataireNom"
         )
       ]
         ? dataCollectionState.userAttributePair[
             dataCollectionState.userAttributePair.findIndex(
               (userAttribute) =>
                 userAttribute.attributeKey ===
-                'extension:serviceCollecteurSignataireNom'
+                "extension:serviceCollecteurSignataireNom"
             )
           ].attributeValue
-        : ''
+        : ""
     );
   const [
     serviceCollecteurSignataireFonction,
@@ -161,40 +161,40 @@ const DataCollectionDetailsDialog = (
       dataCollectionState.userAttributePair.findIndex(
         (userAttribute) =>
           userAttribute.attributeKey ===
-          'extension:serviceCollecteurSignataireFonction'
+          "extension:serviceCollecteurSignataireFonction"
       )
     ]
       ? dataCollectionState.userAttributePair[
           dataCollectionState.userAttributePair.findIndex(
             (userAttribute) =>
               userAttribute.attributeKey ===
-              'extension:serviceCollecteurSignataireFonction'
+              "extension:serviceCollecteurSignataireFonction"
           )
         ].attributeValue
-      : ''
+      : ""
   );
   const [mailResponsableOperationel, setMailResponsableOperationel] = useState(
     dataCollectionState.userAttributePair[
       dataCollectionState.userAttributePair.findIndex(
         (userAttribute) =>
-          userAttribute.attributeKey === 'extension:mailResponsableOperationel'
+          userAttribute.attributeKey === "extension:mailResponsableOperationel"
       )
     ]
       ? dataCollectionState.userAttributePair[
           dataCollectionState.userAttributePair.findIndex(
             (userAttribute) =>
               userAttribute.attributeKey ===
-              'extension:mailResponsableOperationel'
+              "extension:mailResponsableOperationel"
           )
         ].attributeValue
-      : ''
+      : ""
   );
 
   const [qualityReport, setQualityReport] = useState(
     dataCollectionState.userAttributePair[
       dataCollectionState.userAttributePair.findIndex(
         (userAttribute) =>
-          userAttribute.attributeKey === 'extension:qualityReport'
+          userAttribute.attributeKey === "extension:qualityReport"
       )
     ].attributeValue
   );
@@ -205,7 +205,7 @@ const DataCollectionDetailsDialog = (
       dataCollectionState.userAttributePair[
         dataCollectionState.userAttributePair.findIndex(
           (userAttribute) =>
-            userAttribute.attributeKey === 'extension:surveyStatus'
+            userAttribute.attributeKey === "extension:surveyStatus"
         )
       ].attributeValue as string
     )
@@ -214,7 +214,7 @@ const DataCollectionDetailsDialog = (
   const [visaNumber, setVisaNumber] = useState(
     dataCollectionState.userAttributePair[
       dataCollectionState.userAttributePair.findIndex(
-        (userAttribute) => userAttribute.attributeKey === 'extension:visaNumber'
+        (userAttribute) => userAttribute.attributeKey === "extension:visaNumber"
       )
     ].attributeValue
   );
@@ -223,25 +223,25 @@ const DataCollectionDetailsDialog = (
     setLabelArray([
       {
         id: 1,
-        language: 'fr-FR',
-        value: dataCollectionState.label['fr-FR'],
+        language: "fr-FR",
+        value: dataCollectionState.label["fr-FR"],
       },
       {
         id: 2,
-        language: 'en-IE',
-        value: dataCollectionState.label['en-IE'],
+        language: "en-IE",
+        value: dataCollectionState.label["en-IE"],
       },
     ]);
     setDescriptionArray([
       {
         id: 1,
-        language: 'fr-FR',
-        value: dataCollectionState.description['fr-FR'],
+        language: "fr-FR",
+        value: dataCollectionState.description["fr-FR"],
       },
       {
         id: 2,
-        language: 'en-IE',
-        value: dataCollectionState.description['en-IE'],
+        language: "en-IE",
+        value: dataCollectionState.description["en-IE"],
       },
     ]);
     setStudyUnitReference(dataCollectionState.studyUnitReference);
@@ -256,45 +256,45 @@ const DataCollectionDetailsDialog = (
     const dateJO = new Date(dateParutionJO);
     const formatedJO = `${dateJO.getFullYear()}/${(dateJO.getMonth() + 1)
       .toString()
-      .padStart(2, '0')}/${dateJO.getDate().toString().padStart(2, '0')}`;
-    console.log('DurveyStatus: ', surveyStatus);
+      .padStart(2, "0")}/${dateJO.getDate().toString().padStart(2, "0")}`;
+    console.log("DurveyStatus: ", surveyStatus);
     const dateVisa = new Date(anneeVisa);
     const formatedVisa = `${dateVisa.getFullYear()}`;
     const userAttributePair: (CollectionGroup | UserAttributePair)[] = [
       {
-        attributeKey: 'extension:anneeVisa',
+        attributeKey: "extension:anneeVisa",
         attributeValue: formatedVisa,
       } as UserAttributePair,
       {
-        attributeKey: 'extension:ministereTutelle',
+        attributeKey: "extension:ministereTutelle",
         attributeValue: ministereTutelle,
       } as UserAttributePair,
       {
-        attributeKey: 'extension:parutionJO',
+        attributeKey: "extension:parutionJO",
         attributeValue: parutionJO.toString(),
       } as UserAttributePair,
       {
-        attributeKey: 'extension:dateParutionJO',
+        attributeKey: "extension:dateParutionJO",
         attributeValue: formatedJO,
       } as UserAttributePair,
       {
-        attributeKey: 'extension:serviceCollecteurSignataireNom',
+        attributeKey: "extension:serviceCollecteurSignataireNom",
         attributeValue: serviceCollecteurSignataireNom,
       } as UserAttributePair,
       {
-        attributeKey: 'extension:serviceCollecteurSignataireFonction',
+        attributeKey: "extension:serviceCollecteurSignataireFonction",
         attributeValue: serviceCollecteurSignataireFonction,
       } as UserAttributePair,
       {
-        attributeKey: 'extension:mailResponsableOperationel',
+        attributeKey: "extension:mailResponsableOperationel",
         attributeValue: mailResponsableOperationel,
       } as UserAttributePair,
       {
-        attributeKey: 'extension:qualityReport',
+        attributeKey: "extension:qualityReport",
         attributeValue: qualityReport.toString(),
       } as UserAttributePair,
       {
-        attributeKey: 'extension:visaNumber',
+        attributeKey: "extension:visaNumber",
         attributeValue: visaNumber.toString(),
       } as UserAttributePair,
       ...dataCollectionState.userAttributePair,
@@ -303,7 +303,7 @@ const DataCollectionDetailsDialog = (
     const collectionGroupIndex =
       dataCollectionState.userAttributePair?.findIndex(
         (userAttribute) =>
-          userAttribute.attributeKey === 'extension:CollectionEventGroup'
+          userAttribute.attributeKey === "extension:CollectionEventGroup"
       );
     if (collectionGroupIndex !== undefined && collectionGroupIndex !== -1) {
       userAttributePair.unshift(
@@ -311,7 +311,7 @@ const DataCollectionDetailsDialog = (
       );
     } else {
       userAttributePair.unshift({
-        attributeKey: 'extension:CollectionEventGroup',
+        attributeKey: "extension:CollectionEventGroup",
         attributeValue: [],
       } as CollectionGroup);
     }
@@ -322,7 +322,7 @@ const DataCollectionDetailsDialog = (
       userAttributePair,
       studyUnitReference,
     };
-    console.log('updatedDataCollection: ', updatedDataCollection);
+    console.log("updatedDataCollection: ", updatedDataCollection);
     props.setDataCollectionState(updatedDataCollection);
     props.setNotSavedState(true);
     const dataCollectionLink = dataCollectionState;
@@ -343,22 +343,22 @@ const DataCollectionDetailsDialog = (
       fullWidth
       maxWidth="md"
       sx={{
-        '& .MuiDialog-paper': {
-          width: '100%',
+        "& .MuiDialog-paper": {
+          width: "100%",
         },
       }}
     >
       <DialogTitle>
         <Typography variant="h4" color="text.secondary" fontWeight="bold">
-          {t('dataCollectionDetails')}
+          {t("dataCollectionDetails")}
         </Typography>
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
+              display: "flex",
+              flexDirection: "row",
             }}
           >
             <Typography
@@ -366,15 +366,15 @@ const DataCollectionDetailsDialog = (
               fontWeight="bold"
               sx={{ marginRight: 1 }}
             >
-              ID:{' '}
+              ID:{" "}
             </Typography>
             <Typography variant="body1">{dataCollectionState.id}</Typography>
           </Box>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              flexWrap: 'wrap',
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "wrap",
               marginTop: 1,
             }}
           >
@@ -396,16 +396,16 @@ const DataCollectionDetailsDialog = (
             component="div"
             className="LabelForm"
             sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
+              display: "flex",
+              justifyContent: "flex-start",
               paddingTop: 2,
               marginTop: 2,
-              borderTop: '1px solid',
-              borderColor: 'divider',
+              borderTop: "1px solid",
+              borderColor: "divider",
             }}
           >
             <Typography variant="h6">
-              {t('label', { ns: 'form' })}* :
+              {t("label", { ns: "form" })}* :
             </Typography>
           </Box>
           <IntlTextInput
@@ -419,14 +419,14 @@ const DataCollectionDetailsDialog = (
             sx={{
               paddingTop: 2,
               marginTop: 2,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              borderTop: '1px solid',
-              borderColor: 'divider',
+              display: "flex",
+              justifyContent: "flex-start",
+              borderTop: "1px solid",
+              borderColor: "divider",
             }}
           >
             <Typography variant="h6">
-              {t('descriptionField', { ns: 'form' })} :
+              {t("descriptionField", { ns: "form" })} :
             </Typography>
           </Box>
 
@@ -463,12 +463,12 @@ const DataCollectionDetailsDialog = (
           />
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
+              display: "flex",
+              flexDirection: "row",
               marginTop: 1,
               paddingTop: 1,
-              borderTop: '1px solid',
-              borderColor: 'divider',
+              borderTop: "1px solid",
+              borderColor: "divider",
             }}
           >
             <Typography
@@ -476,7 +476,7 @@ const DataCollectionDetailsDialog = (
               fontWeight="bold"
               sx={{ marginRight: 1 }}
             >
-              {t('version', { ns: 'form' })}:{' '}
+              {t("version", { ns: "form" })}:{" "}
             </Typography>
             <Typography variant="body1">
               {dataCollectionState.version}
@@ -484,8 +484,8 @@ const DataCollectionDetailsDialog = (
           </Box>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
+              display: "flex",
+              flexDirection: "row",
               marginTop: 1,
             }}
           >
@@ -494,11 +494,11 @@ const DataCollectionDetailsDialog = (
               fontWeight="bold"
               sx={{ marginRight: 1 }}
             >
-              {t('lastUpdate', { ns: 'form' })}:{' '}
+              {t("lastUpdate", { ns: "form" })}:{" "}
             </Typography>
             <Typography variant="body1">
               {moment(dataCollectionState.versionDate).format(
-                'DD/MM/YYYYHH:mm'
+                "DD/MM/YYYYHH:mm"
               )}
             </Typography>
           </Box>
@@ -506,10 +506,10 @@ const DataCollectionDetailsDialog = (
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" onClick={handleCloseCancel} autoFocus>
-          {t('cancel', { ns: 'form' })}
+          {t("cancel", { ns: "form" })}
         </Button>
         <Button variant="customContained" onClick={handleClose} autoFocus>
-          {t('submit', { ns: 'form' })}
+          {t("submit", { ns: "form" })}
         </Button>
       </DialogActions>
     </Dialog>

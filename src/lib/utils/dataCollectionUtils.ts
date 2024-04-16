@@ -1,27 +1,27 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-syntax */
 
-import { v4 as uuidv4 } from 'uuid';
-import DataCollectionApi from '../model/dataCollectionApi';
-import { DataCollection } from '../model/dataCollection';
+import { v4 as uuidv4 } from "uuid";
+import DataCollectionApi from "../model/dataCollectionApi";
+import { DataCollection } from "../model/dataCollection";
 import {
   UserAttributePair,
   isUserAttributePair,
-} from '../model/userAttributePair';
-import { CollectionGroup } from '../model/collectionGroups';
-import CollectionEvent from '../model/collectionEvents';
-import { CollectionCommunication } from '../model/communicationCollectionEvent';
-import CollectionGroupValue from '../model/collectionGroupValue';
+} from "../model/userAttributePair";
+import { CollectionGroup } from "../model/collectionGroups";
+import CollectionEvent from "../model/collectionEvents";
+import { CollectionCommunication } from "../model/communicationCollectionEvent";
+import CollectionGroupValue from "../model/collectionGroupValue";
 
 // eslint-disable-next-line prettier/prettier
 export const flattenCollectionGroups = (dataCollectionObject: DataCollection) => {
   const flattenedUserAttributePairs: UserAttributePair[] = [];
-  let attributeKey = '';
-  let attributeValue = '';
+  let attributeKey = "";
+  let attributeValue = "";
   const collectionGroupIndex =
     dataCollectionObject.userAttributePair?.findIndex(
       (userAttribute) =>
-        userAttribute.attributeKey === 'extension:CollectionEventGroup'
+        userAttribute.attributeKey === "extension:CollectionEventGroup"
     );
 
   if (collectionGroupIndex !== undefined && collectionGroupIndex !== -1) {
@@ -32,7 +32,7 @@ export const flattenCollectionGroups = (dataCollectionObject: DataCollection) =>
       for (let i = 0; i < collectionGroup.attributeValue.length; i++) {
         attributeValue += JSON.stringify(collectionGroup.attributeValue[i]);
         if (i < collectionGroup.attributeValue.length - 1) {
-          attributeValue += ',';
+          attributeValue += ",";
         }
       }
     }
@@ -47,14 +47,14 @@ export const flattenCollectionGroups = (dataCollectionObject: DataCollection) =>
         dataCollectionObject.userAttributePair.filter(
           (userAttribute, index) =>
             index !== collectionGroupIndex &&
-            userAttribute.attributeKey !== 'extension:CollectionEventGroup'
+            userAttribute.attributeKey !== "extension:CollectionEventGroup"
         );
       flattenedUserAttributePairs.push(
         ...filteredUserAttributePairs.map((userAttribute) => ({
           attributeKey: userAttribute.attributeKey,
           attributeValue: JSON.stringify(userAttribute.attributeValue).replace(
             /"/g,
-            ''
+            ""
           ),
         }))
       );
@@ -70,8 +70,8 @@ export const flattenCollectionCommunication = (
   collectionEventObject: CollectionEvent
 ) => {
   const flattenedUserAttributePairs: UserAttributePair[] = [];
-  let attributeKey = '';
-  let attributeValue = '';
+  let attributeKey = "";
+  let attributeValue = "";
   // eslint-disable-next-line no-restricted-syntax
   for (const userAttribute of collectionEventObject.userAttributePair || []) {
     if (Array.isArray(userAttribute.attributeValue)) {
@@ -79,7 +79,7 @@ export const flattenCollectionCommunication = (
       for (let i = 0; i < userAttribute.attributeValue.length; i++) {
         attributeValue += JSON.stringify(userAttribute.attributeValue[i]);
         if (i < userAttribute.attributeValue.length - 1) {
-          attributeValue += ',';
+          attributeValue += ",";
         }
       }
     }
@@ -113,21 +113,21 @@ export const flattenUserAttributeFromDataCollectionApi = (
   };
   const surveyStatusIndex =
     flattenedDataCollectionObject.userAttributePair.findIndex(
-      (userAttribute) => userAttribute.attributeKey === 'extension:surveyStatus'
+      (userAttribute) => userAttribute.attributeKey === "extension:surveyStatus"
     );
   if (surveyStatusIndex !== -1) {
     const surveyStatusAttribute =
       flattenedDataCollectionObject.userAttributePair[surveyStatusIndex];
-    if (typeof surveyStatusAttribute.attributeValue === 'string') {
+    if (typeof surveyStatusAttribute.attributeValue === "string") {
       flattenedDataCollectionObject.userAttributePair[
         surveyStatusIndex
       ].attributeValue = surveyStatusAttribute.attributeValue.replace(
         /\\\\/g,
-        ''
+        ""
       );
     }
   }
-  console.log('Flattened dataCollection: ', flattenedDataCollectionObject);
+  console.log("Flattened dataCollection: ", flattenedDataCollectionObject);
   const response: DataCollectionApi = {
     ...dataCollectionApi,
     json: flattenedDataCollectionObject,
@@ -140,7 +140,7 @@ export const parseCollectionGroups = (dataCollectionObject: DataCollection) => {
   const collectionGroupIndex =
     dataCollectionObject.userAttributePair?.findIndex(
       (userAttribute) =>
-        userAttribute.attributeKey === 'extension:CollectionEventGroup'
+        userAttribute.attributeKey === "extension:CollectionEventGroup"
     );
   if (collectionGroupIndex !== undefined && collectionGroupIndex !== -1) {
     const collectionGroup =
@@ -150,7 +150,7 @@ export const parseCollectionGroups = (dataCollectionObject: DataCollection) => {
         collectionGroup.attributeValue
       );
       collectionGroups.push({
-        attributeKey: 'extension:CollectionEventGroup',
+        attributeKey: "extension:CollectionEventGroup",
         attributeValue: collectionGroupValue,
       } as CollectionGroup);
     }
@@ -158,7 +158,7 @@ export const parseCollectionGroups = (dataCollectionObject: DataCollection) => {
   const parsedCollectionGroup: (CollectionGroup | UserAttributePair)[] =
     dataCollectionObject.userAttributePair?.filter(
       (userAttribute) =>
-        userAttribute.attributeKey !== 'extension:CollectionEventGroup'
+        userAttribute.attributeKey !== "extension:CollectionEventGroup"
     ) || [];
   collectionGroups.push(...parsedCollectionGroup);
 
@@ -222,9 +222,9 @@ const duplicateCollectionEvent = (
       const newId = duplicatedCollectionEvent.id;
 
       dataCollection.userAttributePair?.map((userAttribute) => {
-        if (userAttribute.attributeKey === 'extension:CollectionEventGroup') {
+        if (userAttribute.attributeKey === "extension:CollectionEventGroup") {
           const collectionEventGroup: CollectionGroupValue[] =
-            typeof userAttribute.attributeValue === 'string'
+            typeof userAttribute.attributeValue === "string"
               ? []
               : userAttribute.attributeValue;
 
@@ -247,7 +247,7 @@ const duplicateCollectionEvent = (
   );
 
   console.log(
-    'Duplicate collection event & Assign collection reference groupID: ',
+    "Duplicate collection event & Assign collection reference groupID: ",
     dataCollection
   );
   return dataCollection;
@@ -269,16 +269,16 @@ export const duplicateDataCollection = (
     ...dataCollection,
     id: uuidv4(),
     label: {
-      'fr-FR': `${dataCollection.label['fr-FR']} (copie)`,
-      'en-IE': `${dataCollection.label['en-IE']} (copy)`,
+      "fr-FR": `${dataCollection.label["fr-FR"]} (copie)`,
+      "en-IE": `${dataCollection.label["en-IE"]} (copy)`,
     },
   };
   duplicateCollectionEvent(duplicatedDataCollection);
 
   duplicatedDataCollection.userAttributePair?.map((userAttribute) => {
-    if (userAttribute.attributeKey === 'extension:CollectionEventGroup') {
+    if (userAttribute.attributeKey === "extension:CollectionEventGroup") {
       const collectionEventGroup: CollectionGroupValue[] =
-        typeof userAttribute.attributeValue === 'string'
+        typeof userAttribute.attributeValue === "string"
           ? []
           : userAttribute.attributeValue;
 
@@ -289,6 +289,6 @@ export const duplicateDataCollection = (
     }
     return userAttribute;
   });
-  console.log('Duplicated dataCollection: ', duplicatedDataCollection);
+  console.log("Duplicated dataCollection: ", duplicatedDataCollection);
   return duplicatedDataCollection;
 };

@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import StatisticalSeries from '@/lib/model/statisticalSeries';
-import DataCollectionApi from '@/lib/model/dataCollectionApi';
-import { PoguesQuestionnaireResponse } from '@/lib/model/poguesQuestionnaire';
-import { transformLabels } from '@/lib/utils/magmaUtils';
-import LanguageRecord from '@/lib/model/languageRecord';
+import StatisticalSeries from "@/lib/model/statisticalSeries";
+import DataCollectionApi from "@/lib/model/dataCollectionApi";
+import { PoguesQuestionnaireResponse } from "@/lib/model/poguesQuestionnaire";
+import { transformLabels } from "@/lib/utils/magmaUtils";
+import LanguageRecord from "@/lib/model/languageRecord";
 import {
   getRequest,
   postRequest,
   putRequest,
   deleteRequest,
-} from '../fetch/requests';
+} from "../fetch/requests";
 
 const createApiClient = (baseUrl: string) => {
   return {
@@ -25,7 +25,7 @@ const createApiClient = (baseUrl: string) => {
           jsonBody.forEach((operation: any) => {
             const altLabel: LanguageRecord = operation.altlabel
               ? transformLabels(operation.altlabel)
-              : { 'fr-FR': '', 'en-IE': '' };
+              : { "fr-FR": "", "en-IE": "" };
             operations.push({
               id: operation.id,
               label: transformLabels(operation.label),

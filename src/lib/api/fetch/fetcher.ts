@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fetcher = (url: string, method: string, body: any) => {
   const headers = {
-    Accept: 'application/json, text/plain, */*',
-    'Content-Type': 'application/json',
+    Accept: "application/json, text/plain, */*",
+    "Content-Type": "application/json",
   };
   return fetch(url, {
     headers,

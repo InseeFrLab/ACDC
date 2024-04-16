@@ -1,6 +1,6 @@
-import { getAllDataCollections, getDataCollection } from './mockDataCollection';
-import getQuestionnaires from './mockQuestionnaires';
-import { getAllSeries, getSerieOperation } from './mockSeries';
+import { getAllDataCollections, getDataCollection } from "./mockDataCollection";
+import getQuestionnaires from "./mockQuestionnaires";
+import { getAllSeries, getSerieOperation } from "./mockSeries";
 
 const createApiMockClient = () => {
   return {

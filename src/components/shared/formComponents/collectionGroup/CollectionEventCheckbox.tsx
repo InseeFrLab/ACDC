@@ -1,7 +1,7 @@
-import { Box, Card, Checkbox, Divider, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import LanguageRecord from '@/lib/model/languageRecord';
-import CollectionEvent from '../../../../lib/model/collectionEvents';
+import { Box, Card, Checkbox, Divider, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import LanguageRecord from "@/lib/model/languageRecord";
+import CollectionEvent from "../../../../lib/model/collectionEvents";
 
 interface CollectionEventCheckBoxProps {
   collectionEvents: CollectionEvent[];
@@ -10,28 +10,28 @@ interface CollectionEventCheckBoxProps {
 }
 
 const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
-  const { t, i18n } = useTranslation(['userAttributeForm', 'form']);
+  const { t, i18n } = useTranslation(["userAttributeForm", "form"]);
   const { collectionEvents } = props;
 
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        borderTop: '1px solid',
-        borderColor: 'divider',
+        display: "flex",
+        flexDirection: "column",
+        borderTop: "1px solid",
+        borderColor: "divider",
       }}
     >
-      {' '}
+      {" "}
       <Box
         sx={{
           paddingTop: 2,
-          display: 'flex',
-          justifyContent: 'flex-start',
+          display: "flex",
+          justifyContent: "flex-start",
         }}
       >
         <Typography variant="h6">
-          {t('collectionEventReference', { ns: 'userAttributeForm' })}:
+          {t("collectionEventReference", { ns: "userAttributeForm" })}:
         </Typography>
       </Box>
       {collectionEvents.map((item, index) => (
@@ -45,22 +45,22 @@ const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
         >
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <Box
               sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
               }}
             >
               <Checkbox
                 checked={props.collectionEventCheck[index][item.id]}
-                sx={{ '& .MuiSvgIcon-root': { fontSize: 25 } }}
+                sx={{ "& .MuiSvgIcon-root": { fontSize: 25 } }}
                 onChange={(e) => {
                   const newCollectionEventCheck = [
                     ...props.collectionEventCheck,
@@ -68,7 +68,7 @@ const CollectionEventCheckBox = (props: CollectionEventCheckBoxProps) => {
                   newCollectionEventCheck[index][item.id] = e.target.checked;
                   props.setCollectionEventCheck(newCollectionEventCheck);
                   console.log(
-                    'collectionEventCheck',
+                    "collectionEventCheck",
                     props.collectionEventCheck
                   );
                 }}

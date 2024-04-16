@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { Params } from 'react-router-dom';
-import { flattenUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
-import DataCollectionApi from '../../model/dataCollectionApi';
+import { flattenUserAttributeFromDataCollectionApi } from "@/lib/utils/dataCollectionUtils";
+import DataCollectionApi from "../../model/dataCollectionApi";
 
-export function getDataCollection(
-  id: Readonly<Params<string>>
-): Promise<DataCollectionApi> {
+export function getDataCollection(id: string): Promise<DataCollectionApi> {
   return fetch(
     `${import.meta.env.VITE_API_BASE_URL}api/data-collections/${id}`
   ).then((response) => response.json());
@@ -30,9 +27,9 @@ export async function createDataCollection(
   const flattenDataCollection: DataCollectionApi =
     flattenUserAttributeFromDataCollectionApi(dataCollectionApi);
   return fetch(`${import.meta.env.VITE_API_BASE_URL}api/data-collections`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(flattenDataCollection),
   }).then((response) => response.json());
@@ -44,9 +41,9 @@ export function updateDataCollection(
   const flattenDataCollection: DataCollectionApi =
     flattenUserAttributeFromDataCollectionApi(dataCollectionApi);
   return fetch(`${import.meta.env.VITE_API_BASE_URL}api/data-collections`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(flattenDataCollection),
   }).then((response) => response.json());
@@ -57,11 +54,11 @@ export function deleteDataCollection(id: string) {
     return fetch(
       `${import.meta.env.VITE_API_BASE_URL}api/data-collections/${id}`,
       {
-        method: 'DELETE',
+        method: "DELETE",
       }
     );
   } catch (error) {
-    console.error('Error while deleting data collection: ', error);
+    console.error("Error while deleting data collection: ", error);
     throw error;
   }
 }
@@ -71,11 +68,11 @@ export function publishDataCollection(id: string) {
     return fetch(
       `${import.meta.env.VITE_API_BASE_URL}api/external/publish/${id}`,
       {
-        method: 'GET',
+        method: "GET",
       }
     ).then((response) => response.json());
   } catch (error) {
-    console.error('Error while publishing data collection: ', error);
+    console.error("Error while publishing data collection: ", error);
     throw error;
   }
 }
@@ -85,11 +82,11 @@ export function getQualityReport(id: string) {
     return fetch(
       `${import.meta.env.VITE_API_BASE_URL}api/external/quality/${id}`,
       {
-        method: 'GET',
+        method: "GET",
       }
     ).then((response) => response.json());
   } catch (error) {
-    console.error('Error while getting quality report: ', error);
+    console.error("Error while getting quality report: ", error);
     throw error;
   }
 }
