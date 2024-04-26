@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React, { useContext } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
@@ -12,7 +13,7 @@ import { transformLabels } from '../../../lib/utils/magmaUtils';
 const CreateDataCollection = () => {
   const { t } = useTranslation(['dataCollectionForm']);
   const { getAllSeries } = useContext(ApiContext);
-  const { isLoading, isError, isSuccess, data } = useQuery(
+  const { isLoading, isError, isSuccess, data, error } = useQuery(
     ['allSeries'],
     getAllSeries
   );
@@ -52,13 +53,14 @@ const CreateDataCollection = () => {
   }
 
   if (isError) {
+    console.log('Error: ', error);
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
           {t('title')}
         </Typography>
         <Typography variant="h2" fontWeight="xl">
-          Error message to be translated
+          Le serveur n'est pas parvenu à récuperer les données
         </Typography>
       </Main>
     );

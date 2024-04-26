@@ -39,9 +39,9 @@ import {
 
 import InstrumentReference from '../../../lib/model/instrumentReference';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
+import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 import { CollectionCommunication } from '../../../lib/model/communicationCollectionEvent';
-import { DataCollectionApi } from '@/lib/model/dataCollection';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;
@@ -193,7 +193,8 @@ const EventForm = (props: DataCollectionProps) => {
       updatedDataCollection.json.userAttributePair.findIndex(
         (pair) => pair.attributeKey === 'extension:surveyStatus'
       )
-    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
+    ].attributeValue =
+      `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
 
     console.log(
       'Updated Data Collection with new Collection Event: ',

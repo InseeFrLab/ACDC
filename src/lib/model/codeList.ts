@@ -18,7 +18,7 @@ export default class CodeList {
       .replace(/\\/g, '"')
       .replace(/'/g, "\\'")
       .replace(/\\/g, '\\\\');
-    console.log('escapedValue', escapedValue);
+    // console.log("escapedValue", escapedValue);
     try {
       const { label, code }: { label: string; code: string } =
         JSON.parse(escapedValue);
@@ -28,9 +28,4 @@ export default class CodeList {
       return new CodeList('', '');
     }
   }
-}
-export interface CodeListValue {
-	label: string;
-
-	code: string;
 }

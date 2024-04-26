@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { Params } from 'react-router-dom';
 import { flattenUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
-import { DataCollectionApi } from '@/lib/model/dataCollection';
+import DataCollectionApi from '../../model/dataCollectionApi';
 
-export function getDataCollection(
-  id: Readonly<Params<string>>
-): Promise<DataCollectionApi> {
+export function getDataCollection(id: string): Promise<DataCollectionApi> {
   return fetch(
     `${import.meta.env.VITE_API_BASE_URL}api/data-collections/${id}`
   ).then((response) => response.json());

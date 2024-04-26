@@ -2,19 +2,21 @@
 /* eslint-disable no-restricted-syntax */
 
 import { v4 as uuidv4 } from 'uuid';
-import { DataCollection, DataCollectionApi } from '../model/dataCollection';
+import DataCollectionApi from '../model/dataCollectionApi';
+import { DataCollection } from '../model/dataCollection';
 import {
-	UserAttributePair,
-	isUserAttributePair,
+  UserAttributePair,
+  isUserAttributePair,
 } from '../model/userAttributePair';
-import CollectionGroupValue, {
-	CollectionGroup,
-} from '../model/collectionGroups';
+import { CollectionGroup } from '../model/collectionGroups';
 import CollectionEvent from '../model/collectionEvents';
 import { CollectionCommunication } from '../model/communicationCollectionEvent';
+import CollectionGroupValue from '../model/collectionGroupValue';
 
 // eslint-disable-next-line prettier/prettier
-export const flattenCollectionGroups = (dataCollectionObject: DataCollection) => {
+export const flattenCollectionGroups = (
+  dataCollectionObject: DataCollection
+) => {
   const flattenedUserAttributePairs: UserAttributePair[] = [];
   let attributeKey = '';
   let attributeValue = '';

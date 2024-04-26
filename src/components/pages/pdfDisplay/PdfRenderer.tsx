@@ -9,8 +9,13 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import Main from '@/components/shared/layout/Main';
 import { Box, Typography } from '@mui/material';
 import GeneratedPdf from '@/assets/mockData/generatedPdf.pdf';
-import { useLocation } from 'react-router-dom';
+// import { useLocation, useParams } from "react-router-dom";
 import generateMailFromXml from '@/lib/api/remote/mailGeneration';
+import { useLocation } from 'react-router-dom';
+// import { getDataCollection } from "@/lib/api/remote/dataCollectionApiFetch";
+// import DataCollectionApi from "@/lib/model/dataCollectionApi";
+// import { parseUserAttributeFromDataCollectionApi } from "@/lib/utils/dataCollectionUtils";
+// import { generateMailData } from "@/lib/utils/mailUtils";
 
 const PdfDisplay = () => {
   const { t } = useTranslation(['mailRender']);
@@ -24,7 +29,23 @@ const PdfDisplay = () => {
     useMutation(generateMailFromXml);
   const [pdfState, setPdfState] = useState(GeneratedPdf);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
-
+  // const params = useParams();
+  // const { id } = params;
+  // const [dataCollection, setDataCollection] = useState({});
+  // const [mailData, setMailData] = useState("");
+  // useQuery([
+  //   {
+  //     queryKey: ["dataCollection", locationState.id],
+  //     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  //     queryFn: () => getDataCollection(id),
+  //     onSuccess: async (res: DataCollectionApi) => {
+  //       const parsedData = parseUserAttributeFromDataCollectionApi(res);
+  //       setDataCollection(parsedData.json);
+  //       setMailData(await generateMailData(parsedData.json));
+  //     },
+  //     refetchOnWindowFocus: true,
+  //   },
+  // ]);
   useEffect(() => {
     if (locationState && locationState.xmlString) {
       mutate(location.toString());
@@ -54,7 +75,7 @@ const PdfDisplay = () => {
   return (
     <Main>
       <Box sx={{ marginTop: 3 }}>
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.7.107/build/pdf.worker.min.js">
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
           <Viewer
             fileUrl={pdfState}
             plugins={[defaultLayoutPluginInstance]}

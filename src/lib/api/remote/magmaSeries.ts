@@ -9,6 +9,7 @@ export function getAllSeries(): Promise<any[]> {
   return fetch(
     `${import.meta.env.VITE_API_BASE_URL}api/external/magma/series`
   ).then((response) => {
+    console.log('series: ', response);
     if (response.ok) {
       return response.json();
     }

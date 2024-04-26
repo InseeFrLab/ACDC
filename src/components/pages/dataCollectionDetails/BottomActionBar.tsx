@@ -1,11 +1,7 @@
 import { Button, Typography, Alert, Box } from '@mui/material';
-import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { publishDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
-import { ContactSupport } from '@mui/icons-material';
 import { generateMailData } from '@/lib/utils/mailUtils';
-import Mail from '@/lib/model/mail';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import BottomBar from '../../shared/layout/BottomBar';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';

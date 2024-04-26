@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -12,7 +12,8 @@ import StatisticalSeries from '@/lib/model/statisticalSeries';
 import { downloadFile } from '@/lib/utils/dataTransformation';
 import getCurrentDate from '@/lib/utils/otherUtils';
 import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
-import { DataCollection, DataCollectionApi } from '@/lib/model/dataCollection';
+import { DataCollection } from '@/lib/model/dataCollection';
+import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
 import { transformLabels } from '@/lib/utils/magmaUtils';
 import Main from '../../shared/layout/Main';
@@ -33,11 +34,9 @@ const DataCollectionDetails = () => {
   ]);
   const navigate = useNavigate();
   const { idDataCollection } = useParams();
-  const [dataCollection, setDataCollection] = useState<DataCollection>(
-    {} as DataCollection
-  );
+  const [dataCollection, setDataCollection] = useState<DataCollection>();
   const [dataCollectionState, setDataCollectionState] =
-    useState<DataCollection>({} as DataCollection);
+    useState<DataCollection>();
   const [openDelete, setOpenDelete] = useState(false);
   const [openSave, setOpenSave] = useState(false);
   const [openPublish, setOpenPublish] = useState(false);
@@ -61,12 +60,14 @@ const DataCollectionDetails = () => {
           queryKey: ['dataCollection', idDataCollection],
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           queryFn: () => getDataCollection(idDataCollection),
+          refetchOnMount: true,
           onSuccess: (data: DataCollectionApi) => {
             const parsedData = parseUserAttributeFromDataCollectionApi(data);
             setDataCollectionState(parsedData.json);
             setDataCollection(parsedData.json);
           },
           refetchOnWindowFocus: true,
+          cacheTime: 1000 * 60 * 30,
         },
         {
           queryKey: ['allQuestionnaires'],
@@ -148,10 +149,6 @@ const DataCollectionDetails = () => {
       ...dataCollectionState,
       collectionEvents: updatedCollectionEvents,
     });
-    const updatedDataCollection: DataCollectionApi = {
-      id: dataCollectionState?.id,
-      json: dataCollectionState,
-    };
     // mutate(updatedDataCollection);
     setNotSavedState(true);
     setOpenDelete(true);
@@ -196,7 +193,8 @@ const DataCollectionDetails = () => {
       updatedDataCollection.json.userAttributePair.findIndex(
         (pair) => pair.attributeKey === 'extension:surveyStatus'
       )
-    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
+    ].attributeValue =
+      `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
     // const now = Date.now();
     updatedDataCollection.json.versionDate = getCurrentDate();
 
@@ -236,7 +234,7 @@ const DataCollectionDetails = () => {
       </Main>
     );
   }
-  if (dataCollectionQuery.isSuccess) {
+  if (dataCollection) {
     return (
       <Main sx={{ justifyContent: 'flex-start' }}>
         <DataCollectionDisplay

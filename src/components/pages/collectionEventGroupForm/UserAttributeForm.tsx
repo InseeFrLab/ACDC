@@ -18,17 +18,14 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { createIntlRecord } from '@/lib/utils/dataTransformation';
-import CollectionGroupValue, {
-	CollectionGroup,
-} from '@/lib/model/collectionGroups';
+import { CollectionGroup } from '@/lib/model/collectionGroups';
 import getCurrentDate from '@/lib/utils/otherUtils';
-import {
-	DataCollection,
-	DataCollectionApi,
-} from '../../../lib/model/dataCollection';
+import CollectionGroupValue from '@/lib/model/collectionGroupValue';
+import { DataCollection } from '../../../lib/model/dataCollection';
 import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
 import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
 import CollectionEventCheckBox from '../../shared/formComponents/collectionGroup/CollectionEventCheckbox';
+import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 
 interface CollectionGroupFormProps {
   dataCollection: DataCollection;
@@ -140,7 +137,8 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
       updatedDataCollection.json.userAttributePair.findIndex(
         (pair) => pair.attributeKey === 'extension:surveyStatus'
       )
-    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
+    ].attributeValue =
+      `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
     mutate(updatedDataCollection);
     setDataCollectionState(dataCollectionUpdated);
     handleClickOpen();

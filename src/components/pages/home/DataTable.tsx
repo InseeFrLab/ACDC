@@ -16,11 +16,11 @@ import { FiChevronRight, FiCopy } from 'react-icons/fi';
 import moment from 'moment';
 import { duplicateDataCollection } from '@/lib/utils/dataCollectionUtils';
 import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import DataCollectionApi from '@/lib/model/dataCollectionApi';
 import { useEffect } from 'react';
 import {
-	DataCollection,
-	DataCollectionApi,
-	DataCollectionRow,
+  DataCollection,
+  DataCollectionRow,
 } from '../../../lib/model/dataCollection';
 
 interface DataGridHomePageProps {

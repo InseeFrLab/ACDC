@@ -4,10 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import Main from '../../shared/layout/Main';
 import EventForm from './CollectionEventForm';
-import {
-	DataCollection,
-	DataCollectionApi,
-} from '../../../lib/model/dataCollection';
+import DataCollectionApi from '../../../lib/model/dataCollectionApi';
+import { DataCollection } from '../../../lib/model/dataCollection';
 import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 
 const CreateCollectionEvent = () => {

@@ -8,10 +8,8 @@ import LanguageRecord from '@/lib/model/languageRecord';
 import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
 import Main from '../../shared/layout/Main';
 import DataGridHomePage from './DataTable';
-import {
-	DataCollection,
-	DataCollectionApi,
-} from '../../../lib/model/dataCollection';
+import { DataCollection } from '../../../lib/model/dataCollection';
+import DataCollectionApi from '../../../lib/model/dataCollectionApi';
 
 const Home = () => {
   const { t, i18n } = useTranslation();
