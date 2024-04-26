@@ -1,6 +1,6 @@
-import { Node, Edge, Position } from "reactflow";
-import { DataCollection } from "../model/dataCollection";
-import CollectionGroupValue from "../model/collectionGroupValue";
+import { Node, Edge, Position } from 'reactflow';
+import { DataCollection } from '../model/dataCollection';
+import CollectionGroupValue from '../model/collectionGroupValue';
 
 export const createTreeFromDataCollection = (
   dataCollection: DataCollection
@@ -14,52 +14,52 @@ export const createTreeFromDataCollection = (
   let initialY = 100;
   initialNodes.push(
     {
-      id: "dataCollectionSeries",
+      id: 'dataCollectionSeries',
       data: {
-        label: dataCollection.studyUnitReference.groupReference.label["fr-FR"],
+        label: dataCollection.studyUnitReference.groupReference.label['fr-FR'],
       },
       position: { x: 250, y: 200 },
-      type: "input",
-      style: { background: "#739ED0" },
+      type: 'input',
+      style: { background: '#739ED0' },
       ...nodeDefaults,
     },
     {
-      id: "dataCollectionOperation",
+      id: 'dataCollectionOperation',
       data: {
-        label: dataCollection.studyUnitReference.label["fr-FR"],
+        label: dataCollection.studyUnitReference.label['fr-FR'],
       },
       position: { x: 450, y: 200 },
       style: {
-        background: "#B5C7DD",
+        background: '#B5C7DD',
       },
       ...nodeDefaults,
     },
     {
-      id: "dataCollectionOperationCollection",
+      id: 'dataCollectionOperationCollection',
       data: {
-        label: `${dataCollection.label["fr-FR"]}`,
+        label: `${dataCollection.label['fr-FR']}`,
       },
       position: { x: 650, y: 200 },
-      style: { background: "#E5EAF0" },
+      style: { background: '#E5EAF0' },
       ...nodeDefaults,
     }
   );
 
   initialEdges.push(
     {
-      id: "dataCollectionSeries-dataCollectionOperation",
-      source: "dataCollectionSeries",
-      target: "dataCollectionOperation",
+      id: 'dataCollectionSeries-dataCollectionOperation',
+      source: 'dataCollectionSeries',
+      target: 'dataCollectionOperation',
     },
     {
-      id: "dataCollectionOperation-dataCollectionOperationCollection",
-      source: "dataCollectionOperation",
-      target: "dataCollectionOperationCollection",
+      id: 'dataCollectionOperation-dataCollectionOperationCollection',
+      source: 'dataCollectionOperation',
+      target: 'dataCollectionOperationCollection',
     },
     {
-      id: "dataCollectionOperationCollection-dataCollection",
-      source: "dataCollectionOperationCollection",
-      target: "dataCollection",
+      id: 'dataCollectionOperationCollection-dataCollection',
+      source: 'dataCollectionOperationCollection',
+      target: 'dataCollection',
     }
   );
 
@@ -68,15 +68,15 @@ export const createTreeFromDataCollection = (
     initialNodes.push({
       id: collectionEvent.id,
       data: {
-        label: collectionEvent.collectionEventName["fr-FR"],
+        label: collectionEvent.collectionEventName['fr-FR'],
       },
       position: { x: 850, y: initialY },
-      style: { background: "#FFFF80" },
+      style: { background: '#FFFF80' },
       ...nodeDefaults,
     });
     initialEdges.push({
       id: `${collectionEvent.id}-dataCollectionOperationCollection`,
-      source: "dataCollectionOperationCollection",
+      source: 'dataCollectionOperationCollection',
       target: collectionEvent.id,
     });
     initialNodes.push({
@@ -85,8 +85,8 @@ export const createTreeFromDataCollection = (
         label: collectionEvent.instrumentReference.label,
       },
       position: { x: 1050, y: initialY },
-      type: "output",
-      style: { background: "#F6D595" },
+      type: 'output',
+      style: { background: '#F6D595' },
       ...nodeDefaults,
     });
     initialEdges.push({
@@ -114,52 +114,52 @@ export const createFullTreeFromDataCollection = (
   let initialY = 100;
   initialNodes.push(
     {
-      id: "dataCollectionSeries",
+      id: 'dataCollectionSeries',
       data: {
-        label: dataCollection.studyUnitReference.groupReference.label["fr-FR"],
+        label: dataCollection.studyUnitReference.groupReference.label['fr-FR'],
       },
       position: { x: 250, y: 200 },
-      type: "input",
-      style: { background: "#739ED0" },
+      type: 'input',
+      style: { background: '#739ED0' },
       ...nodeDefaults,
     },
     {
-      id: "dataCollectionOperation",
+      id: 'dataCollectionOperation',
       data: {
-        label: dataCollection.studyUnitReference.label["fr-FR"],
+        label: dataCollection.studyUnitReference.label['fr-FR'],
       },
       position: { x: 450, y: 200 },
       style: {
-        background: "#B5C7DD",
+        background: '#B5C7DD',
       },
       ...nodeDefaults,
     },
     {
-      id: "dataCollectionOperationCollection",
+      id: 'dataCollectionOperationCollection',
       data: {
-        label: `${dataCollection.label["fr-FR"]}`,
+        label: `${dataCollection.label['fr-FR']}`,
       },
       position: { x: 650, y: 200 },
-      style: { background: "#E5EAF0" },
+      style: { background: '#E5EAF0' },
       ...nodeDefaults,
     }
   );
 
   initialEdges.push(
     {
-      id: "dataCollectionSeries-dataCollectionOperation",
-      source: "dataCollectionSeries",
-      target: "dataCollectionOperation",
+      id: 'dataCollectionSeries-dataCollectionOperation',
+      source: 'dataCollectionSeries',
+      target: 'dataCollectionOperation',
     },
     {
-      id: "dataCollectionOperation-dataCollectionOperationCollection",
-      source: "dataCollectionOperation",
-      target: "dataCollectionOperationCollection",
+      id: 'dataCollectionOperation-dataCollectionOperationCollection',
+      source: 'dataCollectionOperation',
+      target: 'dataCollectionOperationCollection',
     },
     {
-      id: "dataCollectionOperationCollection-dataCollection",
-      source: "dataCollectionOperationCollection",
-      target: "dataCollection",
+      id: 'dataCollectionOperationCollection-dataCollection',
+      source: 'dataCollectionOperationCollection',
+      target: 'dataCollection',
     }
   );
 
@@ -168,15 +168,15 @@ export const createFullTreeFromDataCollection = (
     initialNodes.push({
       id: collectionEvent.id,
       data: {
-        label: collectionEvent.collectionEventName["fr-FR"],
+        label: collectionEvent.collectionEventName['fr-FR'],
       },
       position: { x: 870, y: initialY },
-      style: { background: "#FFFF80" },
+      style: { background: '#FFFF80' },
       ...nodeDefaults,
     });
     initialEdges.push({
       id: `${collectionEvent.id}-dataCollectionOperationCollection`,
-      source: "dataCollectionOperationCollection",
+      source: 'dataCollectionOperationCollection',
       target: collectionEvent.id,
     });
     initialNodes.push({
@@ -190,8 +190,8 @@ export const createFullTreeFromDataCollection = (
           initialNodes.findIndex((node) => node.id === collectionEvent.id)
         ].position.y,
       },
-      type: "output",
-      style: { background: "#F6D595" },
+      type: 'output',
+      style: { background: '#F6D595' },
       ...nodeDefaults,
     });
     initialEdges.push({
@@ -204,19 +204,19 @@ export const createFullTreeFromDataCollection = (
   // eslint-disable-next-line no-restricted-syntax
   for (const collectionGroup of dataCollection.userAttributePair[0]
     .attributeValue || []) {
-    console.log("collectionGroup", collectionGroup);
+    console.log('collectionGroup', collectionGroup);
     if (
       collectionGroup &&
-      typeof collectionGroup === "object" &&
-      "collectionEventReference" in collectionGroup &&
+      typeof collectionGroup === 'object' &&
+      'collectionEventReference' in collectionGroup &&
       Array.isArray(collectionGroup.collectionEventReference)
     ) {
       const { collectionEventReference } = collectionGroup;
       initialNodes.unshift({
         id: collectionGroup.id,
-        type: "input",
+        type: 'input',
         data: {
-          label: collectionGroup.label["fr-FR"],
+          label: collectionGroup.label['fr-FR'],
         },
 
         // TODO: position should be calculated
@@ -231,13 +231,13 @@ export const createFullTreeFromDataCollection = (
         style: {
           width: 170,
           height: collectionEventReference.length * 70 + 30,
-          background: "rgba(0, 0, 255, 0.1)",
+          background: 'rgba(0, 0, 255, 0.1)',
         },
       });
       let initialYGroup = 40;
       initialEdges.push({
         id: `${collectionGroup.id}-collectionGroup`,
-        source: "dataCollectionOperationCollection",
+        source: 'dataCollectionOperationCollection',
         target: collectionGroup.id,
       });
       collectionEventReference.forEach((collectionEvent) => {
@@ -246,7 +246,7 @@ export const createFullTreeFromDataCollection = (
         );
         if (indexNode !== -1) {
           initialNodes[indexNode].parentNode = collectionGroup.id;
-          initialNodes[indexNode].extent = "parent";
+          initialNodes[indexNode].extent = 'parent';
           initialNodes[indexNode].position = { x: 10, y: initialYGroup };
           initialYGroup += 70;
         }
@@ -265,13 +265,13 @@ export const createNodeFromCollectionGroup = (
   edges: Edge[]
 ) => {
   const oldNodes = [...nodes];
-  console.log("collectionGroup", collectionGroup);
+  console.log('collectionGroup', collectionGroup);
   const { collectionEventReference } = collectionGroup;
   nodes.unshift({
     id: collectionGroup.id,
-    type: "input",
+    type: 'input',
     data: {
-      label: collectionGroup.label["fr-FR"],
+      label: collectionGroup.label['fr-FR'],
     },
 
     // TODO: position should be calculated
@@ -284,20 +284,20 @@ export const createNodeFromCollectionGroup = (
     style: {
       width: 170,
       height: collectionEventReference.length * 70 + 30,
-      background: "rgba(0, 0, 255, 0.1)",
+      background: 'rgba(0, 0, 255, 0.1)',
     },
   });
   let initialY = 40;
   edges.push({
     id: `${collectionGroup.id}-collectionGroup`,
-    source: "dataCollectionOperationCollection",
+    source: 'dataCollectionOperationCollection',
     target: collectionGroup.id,
   });
   collectionEventReference.forEach((collectionEvent) => {
     const indexNode = nodes.findIndex((node) => node.id === collectionEvent.id);
     if (indexNode !== -1) {
       nodes[indexNode].parentNode = collectionGroup.id;
-      nodes[indexNode].extent = "parent";
+      nodes[indexNode].extent = 'parent';
       nodes[indexNode].position = { x: 10, y: initialY };
       initialY += 70;
     }
@@ -338,7 +338,7 @@ export const deleteCollectionGroupNode = (
     // }
   });
   const newNodes = nodes.filter((node) => node.id !== collectionGroup.id);
-  console.log("newNodes", newNodes);
+  console.log('newNodes', newNodes);
   return {
     nodes: newNodes,
     edges: edges.filter(

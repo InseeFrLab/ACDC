@@ -17,7 +17,7 @@ export default class CodeList {
     const escapedValue = jsonString
       .replace(/\\/g, '"')
       .replace(/'/g, "\\'")
-      .replace(/\\/g, "\\\\");
+      .replace(/\\/g, '\\\\');
     // console.log("escapedValue", escapedValue);
     try {
       const { label, code }: { label: string; code: string } =
@@ -25,7 +25,7 @@ export default class CodeList {
       return new CodeList(label, code);
     } catch (error) {
       console.error(error);
-      return new CodeList("", "");
+      return new CodeList('', '');
     }
   }
 }

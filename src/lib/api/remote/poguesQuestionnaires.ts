@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { PoguesQuestionnaireResponse } from "../../model/poguesQuestionnaire";
+import { PoguesQuestionnaireResponse } from '../../model/poguesQuestionnaire';
 
 export default function getQuestionnaires(): Promise<
   PoguesQuestionnaireResponse[]

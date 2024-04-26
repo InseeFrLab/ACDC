@@ -1,4 +1,4 @@
-import MailVariables from "./mailVariables";
+import MailVariables from './mailVariables';
 
 export default class Mail {
   xml: string;

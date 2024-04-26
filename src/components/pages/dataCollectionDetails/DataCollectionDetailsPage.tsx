@@ -1,36 +1,36 @@
-import { useContext, useState, useEffect } from "react";
-import ApiContext from "@/lib/api/context/apiContext";
-import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQueries } from "@tanstack/react-query";
-import { Typography, Box } from "@mui/material";
+import { useContext, useState, useEffect } from 'react';
+import ApiContext from '@/lib/api/context/apiContext';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useMutation, useQueries } from '@tanstack/react-query';
+import { Typography, Box } from '@mui/material';
 import {
   PoguesQuestionnaire,
   PoguesQuestionnaireResponse,
-} from "@/lib/model/poguesQuestionnaire";
-import StatisticalSeries from "@/lib/model/statisticalSeries";
-import { downloadFile } from "@/lib/utils/dataTransformation";
-import getCurrentDate from "@/lib/utils/otherUtils";
-import { parseUserAttributeFromDataCollectionApi } from "@/lib/utils/dataCollectionUtils";
-import { DataCollection } from "@/lib/model/dataCollection";
-import DataCollectionApi from "@/lib/model/dataCollectionApi";
-import { updateDataCollection } from "@/lib/api/remote/dataCollectionApiFetch";
-import { transformLabels } from "@/lib/utils/magmaUtils";
-import Main from "../../shared/layout/Main";
-import CollectionEventDisplay from "./CollectionEvent";
-import BottomActionBar from "./BottomActionBar";
-import CollectionGroupDisplay from "./CollectionGroupDisplay";
-import DataCollectionDisplay from "./DataCollectionDisplay";
-import SaveDialog from "./dialogs/SaveDialog";
-import DeleteDialog from "./dialogs/DeleteDialog";
-import PublishDialog from "./dialogs/PublishDialog";
+} from '@/lib/model/poguesQuestionnaire';
+import StatisticalSeries from '@/lib/model/statisticalSeries';
+import { downloadFile } from '@/lib/utils/dataTransformation';
+import getCurrentDate from '@/lib/utils/otherUtils';
+import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollectionUtils';
+import { DataCollection } from '@/lib/model/dataCollection';
+import DataCollectionApi from '@/lib/model/dataCollectionApi';
+import { updateDataCollection } from '@/lib/api/remote/dataCollectionApiFetch';
+import { transformLabels } from '@/lib/utils/magmaUtils';
+import Main from '../../shared/layout/Main';
+import CollectionEventDisplay from './CollectionEvent';
+import BottomActionBar from './BottomActionBar';
+import CollectionGroupDisplay from './CollectionGroupDisplay';
+import DataCollectionDisplay from './DataCollectionDisplay';
+import SaveDialog from './dialogs/SaveDialog';
+import DeleteDialog from './dialogs/DeleteDialog';
+import PublishDialog from './dialogs/PublishDialog';
 
 const DataCollectionDetails = () => {
   const { t } = useTranslation([
-    "DataCollectionDetails",
-    "Form",
-    "userAttributeForm",
-    "CollectionEvent",
+    'DataCollectionDetails',
+    'Form',
+    'userAttributeForm',
+    'CollectionEvent',
   ]);
   const navigate = useNavigate();
   const { idDataCollection } = useParams();
@@ -57,7 +57,7 @@ const DataCollectionDetails = () => {
     useQueries({
       queries: [
         {
-          queryKey: ["dataCollection", idDataCollection],
+          queryKey: ['dataCollection', idDataCollection],
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
           queryFn: () => getDataCollection(idDataCollection),
           refetchOnMount: true,
@@ -70,7 +70,7 @@ const DataCollectionDetails = () => {
           cacheTime: 1000 * 60 * 30,
         },
         {
-          queryKey: ["allQuestionnaires"],
+          queryKey: ['allQuestionnaires'],
           queryFn: getQuestionnaires,
           onSuccess: () => {
             const questionnairesResult = (
@@ -84,12 +84,12 @@ const DataCollectionDetails = () => {
               };
             });
             setQuestionnaires(questionnairesResult);
-            console.log("got questionnaires from Pogues");
+            console.log('got questionnaires from Pogues');
           },
           refetchOnWindowFocus: false,
         },
         {
-          queryKey: ["allSeries"],
+          queryKey: ['allSeries'],
           queryFn: getAllSeries,
           onSuccess: () => {
             series = (seriesQuery.data as StatisticalSeries[]).map(
@@ -102,8 +102,8 @@ const DataCollectionDetails = () => {
                     ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                       transformLabels(serie.altLabel)
                     : {
-                        "fr-FR": "",
-                        "en-IE": "",
+                        'fr-FR': '',
+                        'en-IE': '',
                       },
                 };
               }
@@ -112,7 +112,7 @@ const DataCollectionDetails = () => {
           refetchOnWindowFocus: false,
         },
         {
-          queryKey: ["publishDataCollectionQuery", idDataCollection],
+          queryKey: ['publishDataCollectionQuery', idDataCollection],
           queryFn: () => {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             return publishDataCollection(idDataCollection);
@@ -121,11 +121,11 @@ const DataCollectionDetails = () => {
           refetchOnMount: false,
           refetchOnWindowFocus: false,
           onSuccess(data: unknown) {
-            console.log("Fetching json with ddi success: ", data);
+            console.log('Fetching json with ddi success: ', data);
             downloadFile(
               JSON.stringify(data),
-              "export.json",
-              "application/json"
+              'export.json',
+              'application/json'
             );
             setOpenPublish(false);
           },
@@ -141,7 +141,7 @@ const DataCollectionDetails = () => {
   };
 
   const handleDeleteCollectionEvent = (id: string) => {
-    console.log("Delete Collection Event: ", id);
+    console.log('Delete Collection Event: ', id);
     const updatedCollectionEvents = dataCollectionState.collectionEvents.filter(
       (event) => event.id !== id
     );
@@ -155,7 +155,7 @@ const DataCollectionDetails = () => {
   };
 
   const handleDeleteCollectionGroup = (id: string) => {
-    console.log("Delete Collection Group: ", id);
+    console.log('Delete Collection Group: ', id);
     const { attributeValue } = dataCollectionState.userAttributePair[0];
     if (!Array.isArray(attributeValue)) {
       return;
@@ -176,7 +176,7 @@ const DataCollectionDetails = () => {
     });
 
     console.log(
-      "Updated Data Collection deleting Collection Group: ",
+      'Updated Data Collection deleting Collection Group: ',
       dataCollectionState
     );
     setNotSavedState(true);
@@ -191,13 +191,14 @@ const DataCollectionDetails = () => {
     // TEMPORARY FIX
     updatedDataCollection.json.userAttributePair[
       updatedDataCollection.json.userAttributePair.findIndex(
-        (pair) => pair.attributeKey === "extension:surveyStatus"
+        (pair) => pair.attributeKey === 'extension:surveyStatus'
       )
-    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
+    ].attributeValue =
+      `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
     // const now = Date.now();
     updatedDataCollection.json.versionDate = getCurrentDate();
 
-    console.log("Updated Data Collection: ", updatedDataCollection);
+    console.log('Updated Data Collection: ', updatedDataCollection);
     mutate(updatedDataCollection);
     setDataCollectionState(updatedDataCollection.json);
     setNotSavedState(false);
@@ -205,12 +206,12 @@ const DataCollectionDetails = () => {
   };
 
   const handlePublish = () => {
-    console.log("Publish Data Collection: ", dataCollectionState.id);
+    console.log('Publish Data Collection: ', dataCollectionState.id);
     publishQuery.refetch();
     setOpenPublish(true);
 
     publishQuery.isError ? console.log(publishQuery.error) : null;
-    publishQuery.isLoading ? console.log("publish loading") : null;
+    publishQuery.isLoading ? console.log('publish loading') : null;
   };
 
   useEffect(() => {
@@ -235,7 +236,7 @@ const DataCollectionDetails = () => {
   }
   if (dataCollection) {
     return (
-      <Main sx={{ justifyContent: "flex-start" }}>
+      <Main sx={{ justifyContent: 'flex-start' }}>
         <DataCollectionDisplay
           dataCollectionState={dataCollectionState}
           setDataCollectionState={setDataCollectionState}
@@ -248,14 +249,14 @@ const DataCollectionDetails = () => {
               sx={{
                 paddingTop: 2,
                 marginTop: 2,
-                display: "flex",
-                justifyContent: "flex-start",
-                borderTop: "2px solid",
-                borderColor: "divider",
+                display: 'flex',
+                justifyContent: 'flex-start',
+                borderTop: '2px solid',
+                borderColor: 'divider',
               }}
             >
               <Typography variant="h5" fontWeight="bold" color="text.secondary">
-                {t("title", { ns: "collectionEvent" })}
+                {t('title', { ns: 'collectionEvent' })}
               </Typography>
             </Box>
             <Box>
@@ -279,14 +280,14 @@ const DataCollectionDetails = () => {
             sx={{
               paddingTop: 2,
               my: 2,
-              display: "flex",
-              justifyContent: "center",
-              borderTop: "2px solid",
-              borderColor: "divider",
+              display: 'flex',
+              justifyContent: 'center',
+              borderTop: '2px solid',
+              borderColor: 'divider',
             }}
           >
             <Typography variant="h2">
-              {t("noEvent", { ns: "collectionEvent" })}
+              {t('noEvent', { ns: 'collectionEvent' })}
             </Typography>
           </Box>
         )}
@@ -301,14 +302,14 @@ const DataCollectionDetails = () => {
               sx={{
                 paddingTop: 2,
                 my: 2,
-                display: "flex",
-                justifyContent: "flex-start",
-                borderTop: "1px solid",
-                borderColor: "divider",
+                display: 'flex',
+                justifyContent: 'flex-start',
+                borderTop: '1px solid',
+                borderColor: 'divider',
               }}
             >
               <Typography variant="h5" fontWeight="bold" color="text.secondary">
-                {t("title", { ns: "userAttributeForm" })}
+                {t('title', { ns: 'userAttributeForm' })}
               </Typography>
             </Box>
             <Box

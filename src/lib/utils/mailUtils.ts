@@ -1,18 +1,18 @@
-import { DataCollection } from "@/lib/model/dataCollection";
+import { DataCollection } from '@/lib/model/dataCollection';
 /* eslint-disable no-template-curly-in-string */
-import { XMLSerializer } from "xmldom";
-import MailVariables from "../model/mailVariables";
-import Mail from "../model/mail";
+import { XMLSerializer } from 'xmldom';
+import MailVariables from '../model/mailVariables';
+import Mail from '../model/mail';
 
 const getMockCourrier = async () => {
   try {
-    const response = await fetch("../courrier.xml").then((res) => res.text());
+    const response = await fetch('../courrier.xml').then((res) => res.text());
     const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(response, "text/xml");
+    const xmlDoc = parser.parseFromString(response, 'text/xml');
     // console.log('XML document', xmlDoc);
     return xmlDoc;
   } catch (error) {
-    console.error("Error fetching or parsing XML:", error);
+    console.error('Error fetching or parsing XML:', error);
     throw error;
   }
 };
@@ -21,15 +21,15 @@ export const createMailVariable = (
   dataCollection: DataCollection
 ): MailVariables => {
   const mailVariables: MailVariables = {
-    Enq_AnneeVisa: "2024",
-    Enq_MinistereTutelle: "Sinegard",
-    Enq_ParutionJo: "non",
-    Enq_DateParutionJo: "",
-    Enq_ServiceCollecteurSignataireNom: "Runnin Fang",
-    Enq_ServiceCollecteurSignataireFonction: "Pi",
-    Enq_MailRespOperationnel: "nicodemus@oxenfurt.com",
-    Enq_LibelleEnquete: "",
-    Enq_CaractereObligatoire: "oui",
+    Enq_AnneeVisa: '2024',
+    Enq_MinistereTutelle: 'Sinegard',
+    Enq_ParutionJo: 'non',
+    Enq_DateParutionJo: '',
+    Enq_ServiceCollecteurSignataireNom: 'Runnin Fang',
+    Enq_ServiceCollecteurSignataireFonction: 'Pi',
+    Enq_MailRespOperationnel: 'nicodemus@oxenfurt.com',
+    Enq_LibelleEnquete: '',
+    Enq_CaractereObligatoire: 'oui',
   };
 
   // const { userAttributePair = [] } = dataCollection;
@@ -84,8 +84,8 @@ export const createMailVariable = (
   //   }
   // });
   mailVariables.Enq_LibelleEnquete =
-    dataCollection.studyUnitReference.label["fr-FR"];
-  console.log("MailVariables : ", mailVariables);
+    dataCollection.studyUnitReference.label['fr-FR'];
+  console.log('MailVariables : ', mailVariables);
   return mailVariables;
 };
 

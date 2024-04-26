@@ -1,20 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import React, { useContext } from "react";
-import ApiContext from "@/lib/api/context/apiContext";
-import { CircularProgress, Typography } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
-import StatisticalSeries from "@/lib/model/statisticalSeries";
-import Main from "../../shared/layout/Main";
-import CollectionForm from "./DataCollectionForm";
-import { transformLabels } from "../../../lib/utils/magmaUtils";
+import React, { useContext } from 'react';
+import ApiContext from '@/lib/api/context/apiContext';
+import { CircularProgress, Typography } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
+import StatisticalSeries from '@/lib/model/statisticalSeries';
+import Main from '../../shared/layout/Main';
+import CollectionForm from './DataCollectionForm';
+import { transformLabels } from '../../../lib/utils/magmaUtils';
 
 const CreateDataCollection = () => {
-  const { t } = useTranslation(["dataCollectionForm"]);
+  const { t } = useTranslation(['dataCollectionForm']);
   const { getAllSeries } = useContext(ApiContext);
   const { isLoading, isError, isSuccess, data, error } = useQuery(
-    ["allSeries"],
+    ['allSeries'],
     getAllSeries
   );
 
@@ -22,7 +22,7 @@ const CreateDataCollection = () => {
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
-          {t("title")}
+          {t('title')}
         </Typography>
         <CircularProgress />
       </Main>
@@ -36,16 +36,16 @@ const CreateDataCollection = () => {
         altLabel: serie.altLabel
           ? transformLabels(serie.altLabel)
           : {
-              "fr-FR": "",
-              "en-IE": "",
+              'fr-FR': '',
+              'en-IE': '',
             },
       };
       return dataSerie;
     });
     return (
-      <Main sx={{ justifyContent: "flex-start" }}>
+      <Main sx={{ justifyContent: 'flex-start' }}>
         <Typography variant="h2" fontWeight="xl">
-          {t("title")}
+          {t('title')}
         </Typography>
         <CollectionForm series={series} />
       </Main>
@@ -53,11 +53,11 @@ const CreateDataCollection = () => {
   }
 
   if (isError) {
-    console.log("Error: ", error);
+    console.log('Error: ', error);
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
-          {t("title")}
+          {t('title')}
         </Typography>
         <Typography variant="h2" fontWeight="xl">
           Le serveur n'est pas parvenu à récuperer les données
@@ -66,9 +66,9 @@ const CreateDataCollection = () => {
     );
   }
   return (
-    <Main sx={{ justifyContent: "flex-start" }}>
+    <Main sx={{ justifyContent: 'flex-start' }}>
       <Typography variant="h2" fontWeight="xl">
-        {t("title")}
+        {t('title')}
       </Typography>
       <CollectionForm series={[]} />
     </Main>

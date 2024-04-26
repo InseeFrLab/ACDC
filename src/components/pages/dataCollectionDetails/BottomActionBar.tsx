@@ -1,10 +1,10 @@
-import { Button, Typography, Alert, Box } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { generateMailData } from "@/lib/utils/mailUtils";
-import { DataCollection } from "../../../lib/model/dataCollection";
-import BottomBar from "../../shared/layout/BottomBar";
-import { PoguesQuestionnaire } from "../../../lib/model/poguesQuestionnaire";
+import { Button, Typography, Alert, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { generateMailData } from '@/lib/utils/mailUtils';
+import { DataCollection } from '../../../lib/model/dataCollection';
+import BottomBar from '../../shared/layout/BottomBar';
+import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
 
 interface BottomActionBarProps {
   dataCollection: DataCollection;
@@ -15,12 +15,12 @@ interface BottomActionBarProps {
 }
 const BottomActionBar = (props: BottomActionBarProps) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(["dataCollectionDetails"]);
+  const { t } = useTranslation(['dataCollectionDetails']);
   const { dataCollection, questionnaires } = props;
 
   const handleClick = () => {
     console.log(
-      "Create New CollectionGroup with questionnaires:",
+      'Create New CollectionGroup with questionnaires:',
       questionnaires
     );
     navigate(`/collection/new/${dataCollection.id}`, {
@@ -33,7 +33,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
     });
   };
   const handleClickVisualize = () => {
-    window.open(`/collection/${dataCollection.id}/visualize`, "_blank");
+    window.open(`/collection/${dataCollection.id}/visualize`, '_blank');
   };
   const handleClickSave = () => {
     props.handleSave();
@@ -56,7 +56,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
             mr: 2,
           }}
         >
-          {t("unsavedChanges")}
+          {t('unsavedChanges')}
         </Alert>
       ) : null}
       <Box>
@@ -68,7 +68,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
             mx: 1,
           }}
         >
-          <Typography variant="subtitle1">{t("createButton")}</Typography>
+          <Typography variant="subtitle1">{t('createButton')}</Typography>
         </Button>
         <Button
           variant="customContained"
@@ -78,7 +78,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
           }}
         >
           <Typography variant="subtitle1">
-            {t("createUserAttribute")}
+            {t('createUserAttribute')}
           </Typography>
         </Button>
         <Button
@@ -89,7 +89,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
             mx: 1,
           }}
         >
-          <Typography variant="subtitle1">{t("save")}</Typography>
+          <Typography variant="subtitle1">{t('save')}</Typography>
         </Button>
         <Button
           variant="customContained"
@@ -98,7 +98,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
             mx: 1,
           }}
         >
-          <Typography variant="subtitle1">{t("visualize")}</Typography>
+          <Typography variant="subtitle1">{t('visualize')}</Typography>
         </Button>
         <Button
           variant="customContained"
@@ -108,7 +108,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
             mx: 1,
           }}
         >
-          <Typography variant="subtitle1">{t("publish")}</Typography>
+          <Typography variant="subtitle1">{t('publish')}</Typography>
         </Button>
         <Button
           variant="customContained"
@@ -117,7 +117,7 @@ const BottomActionBar = (props: BottomActionBarProps) => {
             mx: 1,
           }}
         >
-          <Typography variant="subtitle1">{t("mail")}</Typography>
+          <Typography variant="subtitle1">{t('mail')}</Typography>
         </Button>
       </Box>
     </BottomBar>

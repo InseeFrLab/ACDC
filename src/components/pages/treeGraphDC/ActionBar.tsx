@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Button,
   Typography,
@@ -7,14 +7,14 @@ import {
   MenuItem,
   Divider,
   Avatar,
-} from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { FiFilter } from "react-icons/fi";
-import { DataCollection } from "@/lib/model/dataCollection";
-import { Edge, Node } from "reactflow";
-import CollectionGroupValue from "@/lib/model/collectionGroupValue";
-import BottomBar from "../../shared/layout/BottomBar";
-import SelectGroup from "./SelectGroupComponent";
+} from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { FiFilter } from 'react-icons/fi';
+import { DataCollection } from '@/lib/model/dataCollection';
+import { Edge, Node } from 'reactflow';
+import CollectionGroupValue from '@/lib/model/collectionGroupValue';
+import BottomBar from '../../shared/layout/BottomBar';
+import SelectGroup from './SelectGroupComponent';
 
 interface BottomVisualizationBarProps {
   handleReset: () => void;
@@ -26,7 +26,7 @@ interface BottomVisualizationBarProps {
   setEdges: (edges: Edge[]) => void;
 }
 const BottomVisualizationBar = (props: BottomVisualizationBarProps) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(['common']);
   const { handleReset, dataCollection } = props;
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const collectionGroupValue: CollectionGroupValue[] = useMemo(() => {
@@ -55,18 +55,18 @@ const BottomVisualizationBar = (props: BottomVisualizationBarProps) => {
             }}
             startIcon={<FiFilter />}
           >
-            <Typography variant="subtitle1">{t("filter")}</Typography>
+            <Typography variant="subtitle1">{t('filter')}</Typography>
           </Button>
           <Button
             variant="outlined"
             onClick={() => {
-              console.log("User Attribute Button");
+              console.log('User Attribute Button');
             }}
             sx={{
               mx: 1,
             }}
           >
-            <Typography variant="subtitle1">{t("reset")}</Typography>
+            <Typography variant="subtitle1">{t('reset')}</Typography>
           </Button>
         </Box>
       </BottomBar>
@@ -78,27 +78,27 @@ const BottomVisualizationBar = (props: BottomVisualizationBarProps) => {
         PaperProps={{
           elevation: 0,
           sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mb: 1.5,
-            "&:before": {
+            '&:before': {
               content: '""',
-              display: "block",
-              bgcolor: "background.paper",
+              display: 'block',
+              bgcolor: 'background.paper',
               zIndex: 0,
             },
           },
         }}
-        transformOrigin={{ horizontal: "left", vertical: "top" }}
-        anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+        transformOrigin={{ horizontal: 'left', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
       >
-        <MenuItem disabled>{t("selectGroups")}</MenuItem>
+        <MenuItem disabled>{t('selectGroups')}</MenuItem>
         <Divider />
         <MenuItem
           disabled={selectedIds.length === 2}
           sx={{
-            "&:hover": {
-              backgroundColor: "transparent",
+            '&:hover': {
+              backgroundColor: 'transparent',
             },
           }}
         >

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
-import { formatISO } from "date-fns";
+import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { formatISO } from 'date-fns';
 import {
   Typography,
   Dialog,
@@ -17,31 +17,31 @@ import {
   Box,
   DialogTitle,
   CircularProgress,
-} from "@mui/material";
+} from '@mui/material';
 import {
   createIntlRecord,
   createCollectionCommunicationMode,
   createInstrumentReference,
   CommunicationMode,
-} from "@/lib/utils/dataTransformation";
-import getCurrentDate from "@/lib/utils/otherUtils";
-import IntlTextInput from "../../shared/intlTextInput/IntlTextInput";
-import CollectionDatePicker from "../../shared/formComponents/collectionDatePicker/CollectionDatePicker";
-import CollectionCommunicationSelect from "../../shared/formComponents/collectionCommunication/collectionCommunication";
-import CollectionModeSelect from "../../shared/formComponents/collectionMode/collectionModeSelect";
-import QuestionnaireModelSelect from "../../shared/formComponents/questionnaireModel/questionnaireModelAutoComplete";
-import CollectionEvent from "../../../lib/model/collectionEvents";
+} from '@/lib/utils/dataTransformation';
+import getCurrentDate from '@/lib/utils/otherUtils';
+import IntlTextInput from '../../shared/intlTextInput/IntlTextInput';
+import CollectionDatePicker from '../../shared/formComponents/collectionDatePicker/CollectionDatePicker';
+import CollectionCommunicationSelect from '../../shared/formComponents/collectionCommunication/collectionCommunication';
+import CollectionModeSelect from '../../shared/formComponents/collectionMode/collectionModeSelect';
+import QuestionnaireModelSelect from '../../shared/formComponents/questionnaireModel/questionnaireModelAutoComplete';
+import CollectionEvent from '../../../lib/model/collectionEvents';
 
 import {
   TypeOfModeOfCollection,
   typeMode,
-} from "../../../lib/model/typeOfModeOfCollection";
+} from '../../../lib/model/typeOfModeOfCollection';
 
-import InstrumentReference from "../../../lib/model/instrumentReference";
-import { updateDataCollection } from "../../../lib/api/remote/dataCollectionApiFetch";
-import DataCollectionApi from "../../../lib/model/dataCollectionApi";
-import { PoguesQuestionnaire } from "../../../lib/model/poguesQuestionnaire";
-import { CollectionCommunication } from "../../../lib/model/communicationCollectionEvent";
+import InstrumentReference from '../../../lib/model/instrumentReference';
+import { updateDataCollection } from '../../../lib/api/remote/dataCollectionApiFetch';
+import DataCollectionApi from '../../../lib/model/dataCollectionApi';
+import { PoguesQuestionnaire } from '../../../lib/model/poguesQuestionnaire';
+import { CollectionCommunication } from '../../../lib/model/communicationCollectionEvent';
 
 interface DataCollectionProps {
   DataCollectionApi?: DataCollectionApi;
@@ -49,7 +49,7 @@ interface DataCollectionProps {
 }
 const EventForm = (props: DataCollectionProps) => {
   // TODO: Refactor tout ça pour que ce soit plus propre
-  const { t } = useTranslation(["collectionEvent", "form"]);
+  const { t } = useTranslation(['collectionEvent', 'form']);
   const navigate = useNavigate();
   const { isLoading, isError, isSuccess, mutate } =
     useMutation(updateDataCollection);
@@ -62,52 +62,52 @@ const EventForm = (props: DataCollectionProps) => {
       return { label: item.type, checked: false };
     })
   );
-  const [questionnaire, setQuestionnaire] = useState<string>("");
-  const [questionnaireLabel, setQuestionnaireLabel] = useState<string>("");
+  const [questionnaire, setQuestionnaire] = useState<string>('');
+  const [questionnaireLabel, setQuestionnaireLabel] = useState<string>('');
   const [userAttributePairArray, setUserAttributePairArray] = useState<
     CommunicationMode[]
   >([
     {
       id: 1,
-      type: "",
-      media: "",
-      paperQuestionnaire: "",
+      type: '',
+      media: '',
+      paperQuestionnaire: '',
     },
   ]);
   const [collectionEventNameArray, setCollectionEventNameArray] = useState([
     {
       id: 1,
-      language: "fr-FR",
-      value: "",
+      language: 'fr-FR',
+      value: '',
     },
     {
       id: 2,
-      language: "en-IE",
-      value: "",
+      language: 'en-IE',
+      value: '',
     },
   ]);
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
-      language: "fr-FR",
-      value: "",
+      language: 'fr-FR',
+      value: '',
     },
     {
       id: 2,
-      language: "en-IE",
-      value: "",
+      language: 'en-IE',
+      value: '',
     },
   ]);
   const [descriptionArray, setDescriptionArray] = useState([
     {
       id: 1,
-      language: "fr-FR",
-      value: "",
+      language: 'fr-FR',
+      value: '',
     },
     {
       id: 2,
-      language: "en-IE",
-      value: "",
+      language: 'en-IE',
+      value: '',
     },
   ]);
   const [open, setOpen] = useState(false);
@@ -120,9 +120,9 @@ const EventForm = (props: DataCollectionProps) => {
   };
 
   const checkValidation = () => {
-    const labelArrayFiltered = labelArray.filter((obj) => obj.value !== "");
+    const labelArrayFiltered = labelArray.filter((obj) => obj.value !== '');
     const collectionEventNameArrayFiltered = collectionEventNameArray.filter(
-      (obj) => obj.value !== ""
+      (obj) => obj.value !== ''
     );
 
     const isValid =
@@ -156,16 +156,16 @@ const EventForm = (props: DataCollectionProps) => {
     );
 
     const userAttributePairCollection: CollectionCommunication = {
-      attributeKey: "extension:CollectionCommunicationSteps",
+      attributeKey: 'extension:CollectionCommunicationSteps',
       attributeValue,
     };
     const userAttributePairCollectionArray: CollectionCommunication[] = [];
     userAttributePairCollectionArray.push(userAttributePairCollection);
 
-    console.log("attributeValue: ", userAttributePairCollectionArray);
+    console.log('attributeValue: ', userAttributePairCollectionArray);
     const data: CollectionEvent = {
       id: uuidv4(),
-      agency: "fr.insee",
+      agency: 'fr.insee',
       version: 1,
       collectionEventName,
       label,
@@ -191,12 +191,13 @@ const EventForm = (props: DataCollectionProps) => {
 
     updatedDataCollection.json.userAttributePair[
       updatedDataCollection.json.userAttributePair.findIndex(
-        (pair) => pair.attributeKey === "extension:surveyStatus"
+        (pair) => pair.attributeKey === 'extension:surveyStatus'
       )
-    ].attributeValue = `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
+    ].attributeValue =
+      `{"code":"T","label":"Enquête d'intérêt général et de qualité statistique à caractère obligatoire"}`;
 
     console.log(
-      "Updated Data Collection with new Collection Event: ",
+      'Updated Data Collection with new Collection Event: ',
       updatedDataCollection
     );
 
@@ -209,7 +210,7 @@ const EventForm = (props: DataCollectionProps) => {
     setSubmitAttempt(true);
     checkValidation()
       ? createCollectionEventObject()
-      : console.log("Field Validation Error");
+      : console.log('Field Validation Error');
   };
 
   useEffect(() => {
@@ -225,11 +226,11 @@ const EventForm = (props: DataCollectionProps) => {
       <Stack spacing={1}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
+            display: 'flex',
+            justifyContent: 'flex-start',
           }}
         >
-          <Typography variant="h6">{t("name", { ns: "form" })}*:</Typography>
+          <Typography variant="h6">{t('name', { ns: 'form' })}*:</Typography>
         </Box>
         <IntlTextInput
           textArray={collectionEventNameArray}
@@ -240,13 +241,13 @@ const EventForm = (props: DataCollectionProps) => {
         <Box
           sx={{
             paddingTop: 2,
-            display: "flex",
-            justifyContent: "flex-start",
-            borderTop: "1px solid",
-            borderColor: "divider",
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
           }}
         >
-          <Typography variant="h6">{t("label", { ns: "form" })}*:</Typography>
+          <Typography variant="h6">{t('label', { ns: 'form' })}*:</Typography>
         </Box>
         <IntlTextInput
           textArray={labelArray}
@@ -256,14 +257,14 @@ const EventForm = (props: DataCollectionProps) => {
         <Box
           sx={{
             paddingTop: 2,
-            display: "flex",
-            justifyContent: "flex-start",
-            borderTop: "1px solid",
-            borderColor: "divider",
+            display: 'flex',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
+            borderColor: 'divider',
           }}
         >
           <Typography variant="h6">
-            {t("descriptionField", { ns: "form" })}:
+            {t('descriptionField', { ns: 'form' })}:
           </Typography>
         </Box>
         <IntlTextInput
@@ -276,7 +277,7 @@ const EventForm = (props: DataCollectionProps) => {
           modeCollectionCheck={modeCollectionCheck}
           setModeCollectionCheck={setModeCollectionCheck}
           textError={textError}
-        />{" "}
+        />{' '}
         <QuestionnaireModelSelect
           questionnaires={props.questionnaires}
           setQuestionnaire={setQuestionnaire}
@@ -296,13 +297,13 @@ const EventForm = (props: DataCollectionProps) => {
         />
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            borderTop: "1px solid",
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            borderTop: '1px solid',
             paddingTop: 2,
-            borderColor: "divider",
-            alignItems: "baseline",
+            borderColor: 'divider',
+            alignItems: 'baseline',
           }}
         >
           <Button
@@ -313,12 +314,12 @@ const EventForm = (props: DataCollectionProps) => {
             }}
           >
             <Typography variant="subtitle1">
-              {t("cancel", { ns: "form" })}
+              {t('cancel', { ns: 'form' })}
             </Typography>
           </Button>
           <Button variant="customContained" onClick={handleSubmit}>
             <Typography variant="subtitle1">
-              {t("submit", { ns: "form" })}
+              {t('submit', { ns: 'form' })}
             </Typography>
           </Button>
           {textError && (
@@ -328,7 +329,7 @@ const EventForm = (props: DataCollectionProps) => {
               fontWeight="bold"
               color="error"
             >
-              {t("textFieldError", { ns: "collectionEvent" })}
+              {t('textFieldError', { ns: 'collectionEvent' })}
             </Typography>
           )}
         </Box>
@@ -341,19 +342,19 @@ const EventForm = (props: DataCollectionProps) => {
         }}
       >
         <DialogTitle>
-          <Typography variant="h5">{t("descriptionForm")}</Typography>
+          <Typography variant="h5">{t('descriptionForm')}</Typography>
         </DialogTitle>
         <DialogContent
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           <DialogContentText>
-            {isLoading ? <CircularProgress /> : ""}
-            {isError ? t("error", { ns: "form" }) : ""}
+            {isLoading ? <CircularProgress /> : ''}
+            {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -364,7 +365,7 @@ const EventForm = (props: DataCollectionProps) => {
             }}
             autoFocus
           >
-            {t("close", { ns: "form" })}
+            {t('close', { ns: 'form' })}
           </Button>
         </DialogActions>
       </Dialog>

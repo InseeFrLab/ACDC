@@ -1,24 +1,24 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import Main from "@/components/shared/layout/Main";
-import { Box, Typography } from "@mui/material";
-import GeneratedPdf from "@/assets/mockData/generatedPdf.pdf";
+import { useState, useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
+import { Viewer, Worker } from '@react-pdf-viewer/core';
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import Main from '@/components/shared/layout/Main';
+import { Box, Typography } from '@mui/material';
+import GeneratedPdf from '@/assets/mockData/generatedPdf.pdf';
 // import { useLocation, useParams } from "react-router-dom";
-import generateMailFromXml from "@/lib/api/remote/mailGeneration";
-import { useLocation } from "react-router-dom";
+import generateMailFromXml from '@/lib/api/remote/mailGeneration';
+import { useLocation } from 'react-router-dom';
 // import { getDataCollection } from "@/lib/api/remote/dataCollectionApiFetch";
 // import DataCollectionApi from "@/lib/model/dataCollectionApi";
 // import { parseUserAttributeFromDataCollectionApi } from "@/lib/utils/dataCollectionUtils";
 // import { generateMailData } from "@/lib/utils/mailUtils";
 
 const PdfDisplay = () => {
-  const { t } = useTranslation(["mailRender"]);
+  const { t } = useTranslation(['mailRender']);
   const locationState = useLocation().state;
 
   const location: string =
@@ -62,7 +62,7 @@ const PdfDisplay = () => {
       <Main>
         <Box sx={{ marginTop: 3 }}>
           <Typography variant="h2" fontWeight="xl">
-            {t("title")}
+            {t('title')}
           </Typography>
           <Typography variant="h2" fontWeight="xl">
             Chargement des données...

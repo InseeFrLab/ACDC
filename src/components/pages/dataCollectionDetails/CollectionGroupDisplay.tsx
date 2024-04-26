@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Typography,
   Box,
@@ -10,16 +10,16 @@ import {
   Collapse,
   CardContent,
   Stack,
-} from "@mui/material";
-import ConfirmationDeleteDialog from "@/components/shared/dialogs/ConfirmationDeleteDialog";
-import { FiChevronDown, FiTrash, FiEdit, FiCopy } from "react-icons/fi";
-import { useTranslation } from "react-i18next";
-import StyledCardActionArea from "@/components/shared/styled/CardActionArea";
-import ExpandMore from "@/components/shared/styled/ExpandMore";
-import CollectionGroupValue from "@/lib/model/collectionGroupValue";
-import LanguageRecord from "@/lib/model/languageRecord";
-import { DataCollection } from "../../../lib/model/dataCollection";
-import EditCollectionGroupDialog from "./updateDataForm/EditCollectionGroup";
+} from '@mui/material';
+import ConfirmationDeleteDialog from '@/components/shared/dialogs/ConfirmationDeleteDialog';
+import { FiChevronDown, FiTrash, FiEdit, FiCopy } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
+import StyledCardActionArea from '@/components/shared/styled/CardActionArea';
+import ExpandMore from '@/components/shared/styled/ExpandMore';
+import CollectionGroupValue from '@/lib/model/collectionGroupValue';
+import LanguageRecord from '@/lib/model/languageRecord';
+import { DataCollection } from '../../../lib/model/dataCollection';
+import EditCollectionGroupDialog from './updateDataForm/EditCollectionGroup';
 
 interface CollectionGroupDisplayProps {
   attributeValue: CollectionGroupValue;
@@ -31,9 +31,9 @@ interface CollectionGroupDisplayProps {
 
 const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
   const { t, i18n } = useTranslation([
-    "dataCollectionDetails",
-    "userAttributeForm",
-    "form",
+    'dataCollectionDetails',
+    'userAttributeForm',
+    'form',
   ]);
   const {
     attributeValue,
@@ -59,13 +59,13 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
     handleDeleteUserAttribute(attributeValue.id);
   };
   const handleDuplicateClick = () => {
-    console.log("Duplicate CollectionGroup with id: ", attributeValue.id);
+    console.log('Duplicate CollectionGroup with id: ', attributeValue.id);
     const duplicateCollectionGroup = {
       ...attributeValue,
       id: uuidv4(),
       label: {
-        "fr-FR": `${attributeValue.label["fr-FR"]} (copie)`,
-        "en-IE": `${attributeValue.label["en-IE"]} (copy)`,
+        'fr-FR': `${attributeValue.label['fr-FR']} (copie)`,
+        'en-IE': `${attributeValue.label['en-IE']} (copy)`,
       },
     } as CollectionGroupValue;
     const newDataCollectionState = dataCollectionState;
@@ -93,26 +93,26 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
           disableRipple
           disableTouchRipple
           sx={{
-            "& .MuiCardActionArea-focusHighlight": {
-              background: "transparent",
-              border: "transparent",
-              outline: "transparent",
+            '& .MuiCardActionArea-focusHighlight': {
+              background: 'transparent',
+              border: 'transparent',
+              outline: 'transparent',
             },
           }}
         >
           <Box
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
               }}
             >
               <Typography
@@ -151,8 +151,8 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
             <CardContent>
               <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: "row",
+                  display: 'flex',
+                  flexDirection: 'row',
                 }}
               >
                 <Typography
@@ -160,7 +160,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                   fontWeight="bold"
                   sx={{ marginRight: 1 }}
                 >
-                  ID:{" "}
+                  ID:{' '}
                 </Typography>
                 <Typography variant="body1">
                   {attributeValueState.id}
@@ -168,8 +168,8 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
               </Box>
               <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: "row",
+                  display: 'flex',
+                  flexDirection: 'row',
                 }}
               >
                 <Typography
@@ -177,13 +177,13 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                   fontWeight="bold"
                   sx={{ marginRight: 1 }}
                 >
-                  {t("collectionEventReference", {
-                    ns: "userAttributeForm",
+                  {t('collectionEventReference', {
+                    ns: 'userAttributeForm',
                   })}
-                  :{" "}
+                  :{' '}
                 </Typography>
               </Box>
-              <Stack sx={{ alignItems: "flex-start" }}>
+              <Stack sx={{ alignItems: 'flex-start' }}>
                 {attributeValueState.collectionEventReference.map((event) => {
                   return (
                     <Typography
@@ -191,7 +191,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                       key={event.id}
                       sx={{ marginRight: 1 }}
                     >
-                      •{" "}
+                      •{' '}
                       {`${
                         collectionEvents.find(
                           (collectionEvent) => collectionEvent.id === event.id
@@ -206,9 +206,9 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
 
               <Box
                 sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-end",
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
                 }}
               >
                 <Button
@@ -219,7 +219,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                   startIcon={<FiTrash />}
                 >
                   <Typography variant="body1" fontWeight="xl">
-                    {t("delete", { ns: "form" })}
+                    {t('delete', { ns: 'form' })}
                   </Typography>
                 </Button>
                 <Button
@@ -230,7 +230,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                   startIcon={<FiCopy />}
                 >
                   <Typography variant="body1" fontWeight="xl">
-                    {t("duplicate", { ns: "dataCollectionDetails" })}
+                    {t('duplicate', { ns: 'dataCollectionDetails' })}
                   </Typography>
                 </Button>
                 <Button
@@ -241,7 +241,7 @@ const CollectionGroupDisplay = (props: CollectionGroupDisplayProps) => {
                   startIcon={<FiEdit />}
                 >
                   <Typography variant="body1" fontWeight="xl">
-                    {t("edit", { ns: "dataCollectionDetails" })}
+                    {t('edit', { ns: 'dataCollectionDetails' })}
                   </Typography>
                 </Button>
               </Box>

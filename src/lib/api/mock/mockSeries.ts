@@ -1,13 +1,13 @@
 /* eslint-disable import/no-unresolved */
-import allSeries from "@/assets/mockData/allSeries.json";
-import s1001 from "@/assets/mockData/s1001.json";
-import s1004 from "@/assets/mockData/s1004.json";
-import s1005 from "@/assets/mockData/s1005.json";
+import allSeries from '@/assets/mockData/allSeries.json';
+import s1001 from '@/assets/mockData/s1001.json';
+import s1004 from '@/assets/mockData/s1004.json';
+import s1005 from '@/assets/mockData/s1005.json';
 
 export enum SeriesId {
-  S1001 = "s1001",
-  S1004 = "s1004",
-  S1005 = "s1005",
+  S1001 = 's1001',
+  S1004 = 's1004',
+  S1005 = 's1005',
 }
 
 export const getAllSeries = (): Promise<unknown[]> => {
