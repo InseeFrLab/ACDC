@@ -55,17 +55,15 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
           options={props.questionnaires}
           onChange={handleQuestionnaireChange}
           getOptionLabel={(option) => option.label}
-          renderOption={(pr, option) => {
-            return (
-              <Box
-                component="li"
-                sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                {...pr}
-              >
-                {option.label} - ({option.date})
-              </Box>
-            );
-          }}
+          renderOption={(pr, option) => (
+            <Box
+              component="li"
+              sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+              {...pr}
+            >
+              {option.label} - ({option.date})
+            </Box>
+          )}
           renderInput={(params) => (
             <TextField
               error={props.questionnaireLabel.length < 1 && props.submitAttempt}
@@ -73,13 +71,8 @@ const QuestionnaireModelSelect = (props: QuestionnaireModelSelectProps) => {
               label={t('questionnaireModel', { ns: 'collectionEvent' })}
             />
           )}
-          value={
-            {
-              id: '',
-              date: null,
-              label: props.questionnaireLabel,
-            } as PoguesQuestionnaire
-          }
+          value={props.questionnaires.find(q => q.label === props.questionnaireLabel) || null}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
         />
       </FormControl>
     </>

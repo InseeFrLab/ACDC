@@ -51,16 +51,16 @@ const EventForm = (props: DataCollectionProps) => {
   // TODO: Refactor tout ça pour que ce soit plus propre
   const { t } = useTranslation(['collectionEvent', 'form']);
   const navigate = useNavigate();
-  const { isLoading, isError, isSuccess, mutate } =
-    useMutation(updateDataCollection);
+  const { isPending, isError, isSuccess, mutate } =
+    useMutation({
+      mutationFn: updateDataCollection,
+    });
   const [dataCollectionState, setDataCollectionState] =
     useState<DataCollectionApi>(props.DataCollectionApi);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [modeCollectionCheck, setModeCollectionCheck] = useState(
-    typeMode.map((item) => {
-      return { label: item.type, checked: false };
-    })
+    typeMode.map((item) => ({ label: item.type, checked: false }))
   );
   const [questionnaire, setQuestionnaire] = useState<string>('');
   const [questionnaireLabel, setQuestionnaireLabel] = useState<string>('');
@@ -178,7 +178,6 @@ const EventForm = (props: DataCollectionProps) => {
       },
       userAttributePair: userAttributePairCollectionArray,
     };
-    const now = Date.now();
     // const today: string = new Date(now).toISOString();
     props.DataCollectionApi.json.collectionEvents.push(data);
 
@@ -353,7 +352,7 @@ const EventForm = (props: DataCollectionProps) => {
           }}
         >
           <DialogContentText>
-            {isLoading ? <CircularProgress /> : ''}
+            {isPending ? <CircularProgress /> : ''}
             {isError ? t('error', { ns: 'form' }) : ''}
           </DialogContentText>
         </DialogContent>

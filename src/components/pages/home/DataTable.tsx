@@ -27,18 +27,20 @@ interface DataGridHomePageProps {
   rows: DataCollectionRow[];
 }
 
-const CustomToolbar = () => {
-  return (
+const CustomToolbar = () => (
     <GridToolbarContainer>
       <GridToolbarFilterButton />
       <GridToolbarExport printOptions={{ disableToolbarButton: true }} />
     </GridToolbarContainer>
-  );
-};
+);
 
 const DataGridHomePage = (props: DataGridHomePageProps) => {
   const { t } = useTranslation(['common']);
-  const { isSuccess, mutate } = useMutation(updateDataCollection);
+  const { isSuccess, mutate } = useMutation(
+    {
+      mutationFn: updateDataCollection,
+    }
+  );
 
   const handleDuplicate = (dataCollection: DataCollection) => {
     const duplicatedDataCollection = duplicateDataCollection(dataCollection);

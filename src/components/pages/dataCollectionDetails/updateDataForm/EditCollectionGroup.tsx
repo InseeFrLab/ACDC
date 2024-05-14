@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Button,
@@ -51,13 +51,11 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
   ]);
 
   const [collectionEventCheck, setCollectionEventCheck] = useState(
-    props.collectionEvents.map((item) => {
-      return props.attributeValueState.collectionEventReference.some(
+    props.collectionEvents.map((item) => props.attributeValueState.collectionEventReference.some(
         (ref) => ref.id === item.id
       )
         ? { [item.id]: true }
-        : { [item.id]: false };
-    })
+      : { [item.id]: false })
   );
 
   const resetState = () => {
@@ -74,13 +72,11 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
       },
     ]);
     setCollectionEventCheck(
-      props.collectionEvents.map((item) => {
-        return props.attributeValueState.collectionEventReference.some(
+      props.collectionEvents.map((item) => props.attributeValueState.collectionEventReference.some(
           (ref) => ref.id === item.id
         )
           ? { [item.id]: true }
-          : { [item.id]: false };
-      })
+        : { [item.id]: false })
     );
   };
 
@@ -95,9 +91,7 @@ const EditCollectionGroupDialog = (props: EditCollectionGroupDialogProps) => {
     );
 
     const collectionEventReference: Record<'id', string>[] =
-      collectionEventsChecked.map((obj) => {
-        return { id: Object.keys(obj)[0] };
-      });
+      collectionEventsChecked.map((obj) => ({ id: Object.keys(obj)[0] }));
     const userAttributePairValue: CollectionGroupValue = {
       ...props.attributeValueState,
       label,

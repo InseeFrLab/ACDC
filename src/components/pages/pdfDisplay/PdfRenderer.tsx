@@ -25,8 +25,10 @@ const PdfDisplay = () => {
     locationState && locationState.xmlString
       ? locationState.xmlString.toString()
       : GeneratedPdf;
-  const { data, error, isLoading, isSuccess, mutate } =
-    useMutation(generateMailFromXml);
+  const { data, error, isPending, isSuccess, mutate } =
+    useMutation({
+      mutationFn: generateMailFromXml,
+    });
   const [pdfState, setPdfState] = useState(GeneratedPdf);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   // const params = useParams();
@@ -57,7 +59,7 @@ const PdfDisplay = () => {
       setPdfState(URL.createObjectURL(data));
     }
   }, [isSuccess, data]);
-  if (error || isLoading) {
+  if (error || isPending) {
     return (
       <Main>
         <Box sx={{ marginTop: 3 }}>

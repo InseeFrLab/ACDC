@@ -15,13 +15,13 @@ interface CreateDataCollectionDialogProps {
   open: boolean;
   handleClose: () => void;
   isSuccess: boolean;
-  isLoading: boolean;
+  isPending: boolean;
   isError: boolean;
 }
 
 const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
   const { t } = useTranslation(['dataCollectionForm', 'form']);
-  const { open, handleClose, isSuccess, isLoading, isError } = props;
+  const { open, handleClose, isSuccess, isPending, isError } = props;
 
   useEffect(() => {
     if (isSuccess) {
@@ -51,7 +51,7 @@ const CreateDataCollectionDialog = (props: CreateDataCollectionDialogProps) => {
         ) : (
           <DialogContentText> </DialogContentText>
         )}
-        {isLoading ? (
+        {isPending ? (
           <DialogContentText>
             <CircularProgress />{' '}
           </DialogContentText>

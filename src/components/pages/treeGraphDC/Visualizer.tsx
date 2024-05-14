@@ -5,20 +5,17 @@ import { parseUserAttributeFromDataCollectionApi } from '@/lib/utils/dataCollect
 import { createFullTreeFromDataCollection } from '@/lib/utils/visualizationUtils';
 import { useQuery } from '@tanstack/react-query';
 import { getDataCollectionById } from '@/lib/api/remote/dataCollectionApiFetch';
-import { init } from 'i18next';
 import Main from '../../shared/layout/Main';
 import { DataCollection } from '../../../lib/model/dataCollection';
 import FlowTree from './FlowTree';
-import BottomVisualizationBar from './ActionBar';
 
 const Visualizer = () => {
   const { t } = useTranslation(['visualizer', 'form']);
   const { id } = useParams<{ id: string }>();
-  const { data, error, isLoading, isSuccess } = useQuery(
-    ['dataCollectionById', id],
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    () => getDataCollectionById(id)
-  );
+  const { data, error, isPending, isSuccess } = useQuery({
+    queryKey: ['dataCollectionById', id],
+    queryFn: () => getDataCollectionById(id),
+  });
 
   if (error)
     return (
@@ -26,7 +23,7 @@ const Visualizer = () => {
         Request Failed
       </Typography>
     );
-  if (isLoading)
+  if (isPending)
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">

@@ -13,7 +13,7 @@ import {
 interface SaveDialogProps {
   openSave: boolean;
   setOpenSave: (open: boolean) => void;
-  isLoading: boolean;
+  isPending: boolean;
   isError: boolean;
 }
 
@@ -35,7 +35,7 @@ const SaveDialog = (props: SaveDialogProps) => {
         }}
       >
         <DialogContentText>
-          {props.isLoading ? <CircularProgress /> : ''}
+          {props.isPending ? <CircularProgress /> : ''}
           {props.isError ? t('error', { ns: 'form' }) : ''}
         </DialogContentText>
       </DialogContent>

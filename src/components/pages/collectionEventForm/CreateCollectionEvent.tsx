@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
 import Main from '../../shared/layout/Main';
 import EventForm from './CollectionEventForm';
 import DataCollectionApi from '../../../lib/model/dataCollectionApi';

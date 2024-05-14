@@ -62,43 +62,43 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
     queries: [
       {
         queryKey: ['operationSerie', serieId],
-        queryFn: () => {
-          return getSerieOperation(serieId);
-        },
+        queryFn: () => getSerieOperation(serieId),
       },
       {
         queryKey: ['qualitySerie', serieId],
-        queryFn: () => {
-          return getQualityReport('2088');
+        queryFn: async () => {
+          const data = await getQualityReport('2088');
+          console.log('data : ', data);
+          const rapportData = data.length > 10 ? JSON.parse(data) : Rapport2088;
+          const i63 = rapportData.rubriques.find((r: any) => r.id === 'I.6.3');
+          const i64 = rapportData.rubriques.find((r: any) => r.id === 'I.6.4');
+
+          // Processed data to be used for state updates
+          const processedData = {
+            qualityReportLabel: rapportData.label[0].contenu,
+            surveyStatus: {
+              label: i63.codes[0].label[0].contenu,
+              code: i63.codes[0].id,
+            },
+            visaNumber: i64?.label[0].contenu.replace(/<\/?p>/g, ''),
+            rapportData,
+          };
+
+          console.log('Rapport:', rapportData);
+          return processedData;
         },
         enabled: false,
         refetchOnMount: false,
         refetchOnWindowFocus: false,
-        onSuccess: (data: any): void => {
-          console.log('data : ', data);
-          const rapportData = data.length > 10 ? JSON.parse(data) : Rapport2088;
-          const i63 = rapportData.rubriques.find((r: any) => r.id === 'I.6.3');
-
-          const i64 = rapportData.rubriques.find((r: any) => r.id === 'I.6.4');
-          props.setQualityReport(rapportData.label[0].contenu);
-          props.setSurveyStatus({
-            label: i63.codes[0].label[0].contenu,
-            code: i63.codes[0].id,
-          });
-          props.setVisaNumber(i64?.label[0].contenu.replace(/<\/?p>/g, ''));
-
-          props.setRapport(rapportData);
-          console.log('Rapport:', rapportData);
-        },
-      },
+      }
     ],
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isPending, setisPending] = useState(false);
 
   useEffect(() => {
     if (operationSerie.isSuccess) {
-      setIsLoading(false);
+      setisPending(false);
       const newOperations: StatisticalSeries[] = operationSerie.data.map(
         (serie: any) => ({
           id: serie.id,
@@ -123,7 +123,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
       typeOfObject: 'Group',
     } as GroupReference);
     setSerieId(newValue.id);
-    setIsLoading(true);
+    setisPending(true);
     // reset Statistical Operation
     props.setStudyUnitReference({
       id: '',
@@ -175,9 +175,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           id="select-statistical-operation-series"
           options={props.series}
           onChange={handlegroupReferenceChange}
-          getOptionLabel={(option) => {
-            return `${option.label[i18n.language as keyof LanguageRecord]}`;
-          }}
+          getOptionLabel={(option) => `${option.label[i18n.language as keyof LanguageRecord]}`}
           value={
             {
               id: '',
@@ -188,8 +186,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
               },
             } as StatisticalSeries
           }
-          renderOption={(pr, option) => {
-            return (
+          renderOption={(pr, option) => (
               <Box
                 component="li"
                 key={option.id}
@@ -198,8 +195,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
               >
                 {`${option.label[i18n.language as keyof LanguageRecord]}`}
               </Box>
-            );
-          }}
+          )}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -243,14 +239,12 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
           disablePortal
           blurOnSelect
           disabled={operationDisabled}
-          loading={isLoading}
+          loading={isPending}
           size="small"
           id="select-statistical-operation"
           options={operations}
           onChange={handleStudyUnitReferenceChange}
-          getOptionLabel={(option) => {
-            return `${option.label[i18n.language as keyof LanguageRecord]}`;
-          }}
+          getOptionLabel={(option) => `${option.label[i18n.language as keyof LanguageRecord]}`}
           value={
             {
               id: '',
@@ -261,8 +255,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
               },
             } as StatisticalSeries
           }
-          renderOption={(pr, option) => {
-            return (
+          renderOption={(pr, option) => (
               <Box
                 component="li"
                 sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
@@ -270,8 +263,7 @@ const StatisticalOperationSelect = (props: StatisticalOperationSelectProps) => {
               >
                 {`${option.label[i18n.language as keyof LanguageRecord]}`}
               </Box>
-            );
-          }}
+          )}
           renderInput={(params) => (
             <TextField
               error={

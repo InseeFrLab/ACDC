@@ -54,12 +54,17 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
     setExpanded(!expanded);
   };
 
-  const { isLoading, isError, isSuccess, mutate } = useMutation(
-    deleteDataCollection,
+  const { isPending, isError, isSuccess, mutate } = useMutation(
     {
-      onError: (error) => {
-        console.log('Error:', error);
+      mutationFn: deleteDataCollection,
+      onSuccess: () => {
+        console.log('Data collection deleted successfully');
       },
+      onError: (error) => {
+        // Log or display the error
+        console.error('Error:', error);
+      },
+
     }
   );
 
@@ -307,7 +312,7 @@ const DataCollectionDisplay = (props: DataCollectionDisplayProps) => {
         >
           <DialogContentText>
             {isSuccess ? t('successEventDC') : ''}
-            {isLoading ? <CircularProgress /> : ''}
+            {isPending ? <CircularProgress /> : ''}
             {isError ? t('error') : ''}
           </DialogContentText>
         </DialogContent>

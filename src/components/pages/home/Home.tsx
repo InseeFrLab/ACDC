@@ -20,11 +20,10 @@ const Home = () => {
   };
   const { getAllDataCollections } = useContext(ApiContext);
 
-  const { data, error, isLoading, isSuccess } = useQuery(
-    ['allDataCollection'],
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    getAllDataCollections
-  );
+  const { data, error, isPending, isSuccess } = useQuery({
+    queryKey: ['allDataCollection'],
+    queryFn: getAllDataCollections
+  });
 
   if (error)
     return (
@@ -32,7 +31,7 @@ const Home = () => {
         Request Failed
       </Typography>
     );
-  if (isLoading)
+  if (isPending)
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
@@ -44,9 +43,7 @@ const Home = () => {
   if (isSuccess) {
     const dataArray = data as DataCollectionApi[];
     const parseUserAttribute = dataArray.map(
-      (dataCollectionApi: DataCollectionApi) => {
-        return parseUserAttributeFromDataCollectionApi(dataCollectionApi);
-      }
+      (dataCollectionApi: DataCollectionApi) => parseUserAttributeFromDataCollectionApi(dataCollectionApi)
     );
     const rows = parseUserAttribute.map(
       (dataCollectionApi: DataCollectionApi) => {

@@ -40,12 +40,12 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
     useState<DataCollection>(dataCollection);
 
   const [collectionEventCheck, setCollectionEventCheck] = useState(
-    collectionEvents.map((item) => {
-      return { [item.id]: false };
-    })
+    collectionEvents.map((item) => ({ [item.id]: false }))
   );
-  const { isLoading, isError, isSuccess, mutate } =
-    useMutation(updateDataCollection);
+  const { isPending, isError, isSuccess, mutate } =
+    useMutation({
+      mutationFn: updateDataCollection,
+    });
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
@@ -93,9 +93,7 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
     );
 
     const collectionEventReference: Record<'id', string>[] =
-      collectionEventsChecked.map((obj) => {
-        return { id: Object.keys(obj)[0] };
-      });
+      collectionEventsChecked.map((obj) => ({ id: Object.keys(obj)[0] }));
 
     console.log('collectionEventReferences', collectionEventReference);
 
@@ -240,7 +238,7 @@ const CollectionGroupForm = (props: CollectionGroupFormProps) => {
             alignItems: 'center',
           }}
         >
-          {isLoading ? (
+          {isPending ? (
             <DialogContentText>
               <CircularProgress />{' '}
             </DialogContentText>

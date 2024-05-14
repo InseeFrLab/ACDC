@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useQuery } from 'react-query';
 import StatisticalSeries from '../model/statisticalSeries';
 import ApiContext from '../api/context/apiContext';

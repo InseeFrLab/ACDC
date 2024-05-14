@@ -54,5 +54,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'global-require': 0,
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': 'warn',
   },
 };

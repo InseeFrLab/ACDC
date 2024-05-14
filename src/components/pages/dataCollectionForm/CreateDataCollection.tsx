@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
 import { CircularProgress, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
@@ -13,12 +13,12 @@ import { transformLabels } from '../../../lib/utils/magmaUtils';
 const CreateDataCollection = () => {
   const { t } = useTranslation(['dataCollectionForm']);
   const { getAllSeries } = useContext(ApiContext);
-  const { isLoading, isError, isSuccess, data, error } = useQuery(
-    ['allSeries'],
-    getAllSeries
-  );
+  const { isPending, isError, isSuccess, data, error } = useQuery({
+    queryKey: ['allSeries'],
+    queryFn: getAllSeries
+  });
 
-  if (isLoading)
+  if (isPending)
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">

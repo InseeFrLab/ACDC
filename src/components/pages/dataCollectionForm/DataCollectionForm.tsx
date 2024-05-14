@@ -30,8 +30,10 @@ const CollectionForm = (props: CollectionFormProps) => {
   const { t } = useTranslation(['dataCollectionForm', 'form']);
   const navigate = useNavigate();
 
-  const { isLoading, isError, isSuccess, mutate } =
-    useMutation(updateDataCollection);
+  const { isPending, isError, isSuccess, mutate } =
+    useMutation({
+      mutationFn: updateDataCollection,
+    });
   const [labelArray, setLabelArray] = useState([
     {
       id: 1,
@@ -345,7 +347,7 @@ const CollectionForm = (props: CollectionFormProps) => {
         handleClose={handleClose}
         isError={isError}
         isSuccess={isSuccess}
-        isLoading={isLoading}
+        isPending={isPending}
       />
     </>
   );

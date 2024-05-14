@@ -13,7 +13,7 @@ import {
 interface PublishDialogProps {
   openPublish: boolean;
   setOpenPublish: (open: boolean) => void;
-  isLoading: boolean;
+  isPending: boolean;
   isError: boolean;
 }
 
@@ -35,7 +35,7 @@ const PublishDialog = (props: PublishDialogProps) => {
         }}
       >
         <DialogContentText>
-          {props.isLoading ? <CircularProgress /> : ''}
+          {props.isPending ? <CircularProgress /> : ''}
           {props.isError ? t('error', { ns: 'form' }) : ''}
         </DialogContentText>
       </DialogContent>

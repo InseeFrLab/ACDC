@@ -1,6 +1,6 @@
 import './App.css';
 import 'regenerator-runtime/runtime';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { fr } from 'date-fns/locale';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={fr}>
-      <QueryClientProvider client={queryClient} contextSharing>
+      <QueryClientProvider client={queryClient}>
         <ApiContext.Provider value={apiClient}>
           <ThemeProvider theme={customTheme}>
             <Root

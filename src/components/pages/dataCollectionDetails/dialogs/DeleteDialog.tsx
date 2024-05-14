@@ -14,7 +14,7 @@ interface DeleteDialogProps {
   openDelete: boolean;
   handleCloseDelete: () => void;
   isSuccess: boolean;
-  isLoading: boolean;
+  isPending: boolean;
   isError: boolean;
 }
 
@@ -35,7 +35,7 @@ const DeleteDialog = (props: DeleteDialogProps) => {
       >
         <DialogContentText>
           {props.isSuccess ? t('deleteSuccess', { ns: 'form' }) : ''}
-          {props.isLoading ? <CircularProgress /> : ''}
+          {props.isPending ? <CircularProgress /> : ''}
           {props.isError ? t('error', { ns: 'form' }) : ''}
         </DialogContentText>
       </DialogContent>

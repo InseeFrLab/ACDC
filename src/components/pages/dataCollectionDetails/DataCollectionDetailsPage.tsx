@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { useContext, useState, useEffect } from 'react';
 import ApiContext from '@/lib/api/context/apiContext';
 import { useTranslation } from 'react-i18next';
@@ -44,7 +45,7 @@ const DataCollectionDetails = () => {
   const [questionnaires, setQuestionnaires] = useState<PoguesQuestionnaire[]>(
     []
   );
-  let series: StatisticalSeries[] = [];
+  const series: StatisticalSeries[] = [];
 
   const {
     getAllSeries,
@@ -58,24 +59,21 @@ const DataCollectionDetails = () => {
       queries: [
         {
           queryKey: ['dataCollection', idDataCollection],
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          queryFn: () => getDataCollection(idDataCollection),
-          refetchOnMount: true,
-          onSuccess: (data: DataCollectionApi) => {
-            const parsedData = parseUserAttributeFromDataCollectionApi(data);
-            setDataCollectionState(parsedData.json);
+          queryFn: async () => {
+            const dataCollectionApiResponse = await getDataCollection(idDataCollection);
+            const parsedData = parseUserAttributeFromDataCollectionApi(dataCollectionApiResponse);
+            setDataCollectionState(parsedData.json); 
             setDataCollection(parsedData.json);
+            return parsedData.json; 
           },
+          refetchOnMount: true,
           refetchOnWindowFocus: true,
-          cacheTime: 1000 * 60 * 30,
         },
         {
           queryKey: ['allQuestionnaires'],
-          queryFn: getQuestionnaires,
-          onSuccess: () => {
-            const questionnairesResult = (
-              questionnaireQuery.data as PoguesQuestionnaireResponse[]
-            ).map((questionnaire: PoguesQuestionnaireResponse) => {
+          queryFn: async () => {
+            const data = await getQuestionnaires();
+            const questionnairesResult = data.map((questionnaire: PoguesQuestionnaireResponse) => {
               const dateQuestionnaire = new Date(questionnaire.lastUpdatedDate);
               return {
                 id: questionnaire.id,
@@ -83,44 +81,35 @@ const DataCollectionDetails = () => {
                 date: dateQuestionnaire.toLocaleDateString(),
               };
             });
-            setQuestionnaires(questionnairesResult);
             console.log('got questionnaires from Pogues');
+            setQuestionnaires(questionnairesResult);
+            return questionnairesResult;
+
           },
           refetchOnWindowFocus: false,
         },
         {
           queryKey: ['allSeries'],
-          queryFn: getAllSeries,
-          onSuccess: () => {
-            series = (seriesQuery.data as StatisticalSeries[]).map(
-              (serie: any) => {
-                return {
-                  id: serie.id,
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                  label: transformLabels(serie.label),
-                  altLabel: serie.altLabel
-                    ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-                      transformLabels(serie.altLabel)
-                    : {
-                        'fr-FR': '',
-                        'en-IE': '',
-                      },
-                };
-              }
-            );
+          queryFn: async () => {
+            const seriesData = await getAllSeries();
+            const processedSeries = seriesData.map((serie: StatisticalSeries) => ({
+              id: serie.id,
+              label: transformLabels(serie.label),
+              altLabel: serie.altLabel
+                ? transformLabels(serie.altLabel)
+                : {
+                  'fr-FR': '',
+                  'en-IE': '',
+                },
+            }));
+            return processedSeries;
           },
           refetchOnWindowFocus: false,
         },
         {
           queryKey: ['publishDataCollectionQuery', idDataCollection],
-          queryFn: () => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-            return publishDataCollection(idDataCollection);
-          },
-          enabled: false,
-          refetchOnMount: false,
-          refetchOnWindowFocus: false,
-          onSuccess(data: unknown) {
+          queryFn: async () => {
+            const data = await publishDataCollection(idDataCollection);
             console.log('Fetching json with ddi success: ', data);
             downloadFile(
               JSON.stringify(data),
@@ -128,13 +117,19 @@ const DataCollectionDetails = () => {
               'application/json'
             );
             setOpenPublish(false);
+            return data; 
           },
-        },
+          enabled: false,
+          refetchOnMount: false,
+          refetchOnWindowFocus: false,
+        }
       ],
     });
   // TODO : Loading & error indicator somewhere in the page
-  const { isLoading, isError, isSuccess, mutate } =
-    useMutation(updateDataCollection);
+  const { isPending, isError, isSuccess, mutate } =
+    useMutation({
+      mutationFn: updateDataCollection,
+    });
 
   const handleCloseDelete = () => {
     setOpenDelete(false);
@@ -211,7 +206,7 @@ const DataCollectionDetails = () => {
     setOpenPublish(true);
 
     publishQuery.isError ? console.log(publishQuery.error) : null;
-    publishQuery.isLoading ? console.log('publish loading') : null;
+    publishQuery.isPending ? console.log('publish loading') : null;
   };
 
   useEffect(() => {
@@ -225,7 +220,7 @@ const DataCollectionDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
-  if (dataCollectionQuery.isLoading) {
+  if (dataCollectionQuery.isPending) {
     return (
       <Main>
         <Typography variant="h2" fontWeight="xl">
@@ -260,8 +255,7 @@ const DataCollectionDetails = () => {
               </Typography>
             </Box>
             <Box>
-              {dataCollectionState.collectionEvents.map((event) => {
-                return (
+              {dataCollectionState.collectionEvents.map((event) => (
                   <CollectionEventDisplay
                     key={event.id}
                     collectionEvent={event}
@@ -271,8 +265,7 @@ const DataCollectionDetails = () => {
                     questionnaires={questionnaires}
                     setNotSavedState={setNotSavedState}
                   />
-                );
-              })}
+              ))}
             </Box>
           </>
         ) : (
@@ -337,20 +330,20 @@ const DataCollectionDetails = () => {
           openDelete={openDelete}
           handleCloseDelete={handleCloseDelete}
           isError={isError}
-          isLoading={isLoading}
+          isPending={isPending}
           isSuccess={isSuccess}
         />
         <SaveDialog
           openSave={openSave}
           setOpenSave={setOpenSave}
           isError={isError}
-          isLoading={isLoading}
+          isPending={isPending}
         />
         <PublishDialog
           openPublish={openPublish}
           setOpenPublish={setOpenPublish}
           isError={publishQuery.isError}
-          isLoading={publishQuery.isLoading}
+          isPending={publishQuery.isPending}
         />
         <BottomActionBar
           dataCollection={dataCollection}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { formatISO } from 'date-fns';
 import {
@@ -44,7 +44,7 @@ interface EditCollectionEventDialogProps {
 }
 
 const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
-  const { t, i18n } = useTranslation([
+  const { t } = useTranslation([
     'dataCollectionDetails',
     'collectionEvent',
     'form',
@@ -57,14 +57,12 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
     new Date(props.collectionEventState.dataCollectionDate.endDate)
   );
   const [modeCollectionCheck, setModeCollectionCheck] = useState(
-    typeMode.map((label) => {
-      return {
+    typeMode.map((label) => ({
         label: label.type,
         checked: props.collectionEventState.typeOfModeOfCollection.some(
           (i) => i.type === label.type
         ),
-      };
-    })
+    }))
   );
   const [collectionEventNameArray, setCollectionEventNameArray] = useState([
     {
@@ -116,13 +114,11 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
         props.collectionEventState.userAttributePair[0].attributeValue
       )
       ? props.collectionEventState.userAttributePair[0].attributeValue.map(
-          (pair, index) => {
-            return {
+        (pair, index) => ({
               ...pair,
               id: index + 1,
               paperQuestionnaire: JSON.stringify(pair.paperQuestionnaire),
-            };
-          }
+        })
         )
       : []
   );
@@ -157,14 +153,12 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
     );
     setEndDate(new Date(props.collectionEventState.dataCollectionDate.endDate));
     setModeCollectionCheck(
-      typeMode.map((label) => {
-        return {
+      typeMode.map((label) => ({
           label: label.type,
           checked: props.collectionEventState.typeOfModeOfCollection.some(
             (i) => i.type === label.type
           ),
-        };
-      })
+      }))
     );
     setQuestionnaire(props.collectionEventState.instrumentReference.id);
     setQuestionnaireLabel(props.collectionEventState.instrumentReference.label);
@@ -174,13 +168,11 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
           props.collectionEventState.userAttributePair[0].attributeValue
         )
         ? props.collectionEventState.userAttributePair[0].attributeValue.map(
-            (pair, index) => {
-              return {
+          (pair, index) => ({
                 ...pair,
                 id: index + 1,
                 paperQuestionnaire: JSON.stringify(pair.paperQuestionnaire),
-              };
-            }
+          })
           )
         : []
     );
@@ -193,9 +185,7 @@ const EditCollectionEventDialog = (props: EditCollectionEventDialogProps) => {
   const handleSave = () => {
     const modeOfCollection: TypeOfModeOfCollection[] = modeCollectionCheck
       .filter((mode) => mode.checked === true)
-      .map((mode) => {
-        return { type: mode.label };
-      });
+      .map((mode) => ({ type: mode.label }));
 
     const collectionEventName = createIntlRecord(collectionEventNameArray);
     const label = createIntlRecord(labelArray);
